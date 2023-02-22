@@ -1,0 +1,21 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wal_dev?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        jdbc:
+          time_zone: Asia/Seoul
+        default_batch_fetch_size: 1000
