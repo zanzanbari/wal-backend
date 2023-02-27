@@ -11,7 +11,7 @@ spring:
   jpa:
     database: mysql
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     properties:
       hibernate:
         show_sql: true
@@ -19,3 +19,8 @@ spring:
         jdbc:
           time_zone: Asia/Seoul
         default_batch_fetch_size: 1000
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
