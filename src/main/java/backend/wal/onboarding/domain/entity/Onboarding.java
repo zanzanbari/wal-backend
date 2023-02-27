@@ -1,6 +1,7 @@
-package backend.wal.app.onboarding.domain.entity;
+package backend.wal.onboarding.domain.entity;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class Onboarding {
 
     @Id
@@ -42,7 +44,7 @@ public class Onboarding {
 
     private void addCategory(WalCategoryType categoryType) {
         OnboardingCategory onboardingCategory = OnboardingCategory.newInstance(this, categoryType);
-        this.categories.add(onboardingCategory);
+        categories.add(onboardingCategory);
     }
 
     public void addTimes(Set<WalTimeType> timeTypes) {
@@ -53,6 +55,6 @@ public class Onboarding {
 
     private void addTime(WalTimeType timeType) {
         OnboardingTime onboardingTime = OnboardingTime.newInstance(this, timeType);
-        this.times.add(onboardingTime);
+        times.add(onboardingTime);
     }
 }
