@@ -1,4 +1,4 @@
-package backend.wal.app.user.domain.entity;
+package backend.wal.user.domain.entity;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

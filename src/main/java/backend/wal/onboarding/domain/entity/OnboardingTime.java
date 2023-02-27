@@ -19,5 +19,14 @@ public class OnboardingTime {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private WalTimeType type;
+    private WalTimeType walTimeType;
+
+    private OnboardingTime(final Onboarding onboarding, final WalTimeType walTimeType) {
+        this.onboarding = onboarding;
+        this.walTimeType = walTimeType;
+    }
+
+    public static OnboardingTime newInstance(final Onboarding onboarding, final WalTimeType walTimeType) {
+        return new OnboardingTime(onboarding, walTimeType);
+    }
 }

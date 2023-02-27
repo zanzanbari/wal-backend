@@ -1,13 +1,15 @@
-package backend.wal.app.user.domain.entity;
+package backend.wal.user.domain.entity;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
-public enum UserRole {
+public enum SocialType {
 
-    ADMIN("관리자"),
-    USER("일반 유저"),
+    APPLE("애플"),
+    KAKAO("카카오"),
     ;
 
     private final String value;

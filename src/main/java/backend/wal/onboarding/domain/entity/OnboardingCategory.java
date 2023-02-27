@@ -19,5 +19,14 @@ public class OnboardingCategory {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private WalCategoryType type;
+    private WalCategoryType categoryType;
+
+    private OnboardingCategory(final Onboarding onboarding, final WalCategoryType categoryType) {
+        this.onboarding = onboarding;
+        this.categoryType = categoryType;
+    }
+
+    public static OnboardingCategory newInstance(final Onboarding onboarding, final WalCategoryType categoryType) {
+        return new OnboardingCategory(onboarding, categoryType);
+    }
 }
