@@ -1,6 +1,7 @@
-package backend.wal.app.wal.domain.entity;
+package backend.wal.wal.domain.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +16,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -27,4 +28,12 @@ public class Item {
 
     @Column(nullable = false)
     private double categoryItemNumber; // 카테고리별 유니크한 번호
+
+    @Builder
+    private Item(final Category category, final String contents, final String imageUrl, final double currentItemSize) {
+        this.category = category;
+        this.contents = contents;
+        this.imageUrl = imageUrl;
+        this.categoryItemNumber = currentItemSize + 1;
+    }
 }
