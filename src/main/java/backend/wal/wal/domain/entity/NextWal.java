@@ -1,6 +1,6 @@
-package backend.wal.app.wal.domain.entity;
+package backend.wal.wal.domain.entity;
 
-import backend.wal.app.onboarding.domain.entity.WalCategoryType;
+import backend.wal.onboarding.domain.entity.WalCategoryType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
