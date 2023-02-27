@@ -1,7 +1,8 @@
-package backend.wal.app.wal.domain.entity;
+package backend.wal.wal.domain.entity;
 
-import backend.wal.app.onboarding.domain.entity.WalCategoryType;
+import backend.wal.onboarding.domain.entity.WalCategoryType;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,10 +11,11 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class Category {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -22,4 +24,8 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private List<Item> items = new ArrayList<>();
+
+    public void addItem(Item item) {
+        items.add(item);
+    }
 }
