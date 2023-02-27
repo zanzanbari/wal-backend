@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.8'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'backend.wal'
@@ -22,15 +23,86 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'com.mysql:mysql-connector-j'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
+
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation group: 'com.google.guava', name: 'guava', version: '30.1.1-jre'
+
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation("com.querydsl:querydsl-apt")
+
+    compileOnly 'org.jetbrains:annotations:23.0.0'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2020.0.4"
+    }
+}
+
+jar {
+    enabled = false
+}
+
+test {
+    useJUnitPlatform()
+}
+
+def querydslDir = "$buildDir/generated/querydsl"
+//def querydslDir = "src/main/generated"
+
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+    main{
+        java{
+            srcDirs = ['src/main/java', querydslDir]
+        }
+    }
+}
+
+configurations {
+    compileOnly{
+        extendsFrom annotationProcessor
+    }
+    querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+    if(file(querydslDir)){
+        delete(file(querydslDir))
+    }
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+project.afterEvaluate {
+    project.tasks.compileQuerydsl.options.compilerArgs = [
+            "-proc:only",
+            "-processor", project.querydsl.processors() +
+                    ',lombok.launch.AnnotationProcessorHider$AnnotationProcessor'
+    ]
+}
+
+tasks.withType(JavaCompile){
+    options.generatedSourceOutputDirectory = file(querydslDir)
+}
+
+clean.doLast{
+    delete file(querydslDir)
 }
