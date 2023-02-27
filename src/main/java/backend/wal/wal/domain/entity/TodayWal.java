@@ -1,8 +1,8 @@
-package backend.wal.app.wal.domain.entity;
+package backend.wal.wal.domain.entity;
 
-import backend.wal.app.onboarding.domain.entity.WalCategoryType;
-import backend.wal.app.onboarding.domain.entity.WalTimeType;
-import backend.wal.app.reservation.domain.entity.ShowStatus;
+import backend.wal.onboarding.domain.entity.WalCategoryType;
+import backend.wal.onboarding.domain.entity.WalTimeType;
+import backend.wal.reservation.domain.entity.ShowStatus;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
