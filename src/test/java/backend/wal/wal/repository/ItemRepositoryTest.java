@@ -1,23 +1,18 @@
 package backend.wal.wal.repository;
 
-import backend.wal.config.querydsl.QuerydslConfig;
+import backend.wal.config.JpaRepositoryTestConfig;
 import backend.wal.wal.domain.entity.Category;
 import backend.wal.wal.domain.entity.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.transaction.annotation.Transactional;
 
 import static backend.wal.onboarding.domain.entity.WalCategoryType.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
-@Transactional
-@Import(QuerydslConfig.class)
+@JpaRepositoryTestConfig
 class ItemRepositoryTest {
 
     @Autowired

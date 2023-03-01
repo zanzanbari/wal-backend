@@ -29,4 +29,8 @@ public class OnboardingCategory {
     public static OnboardingCategory newInstance(final Onboarding onboarding, final WalCategoryType categoryType) {
         return new OnboardingCategory(onboarding, categoryType);
     }
+
+    public WalCategoryType getCategoryType() {
+        return categoryType;
+    }
 }

@@ -1,5 +1,6 @@
 package backend.wal.wal.service;
 
+import backend.wal.onboarding.domain.WalTimeTypes;
 import backend.wal.onboarding.domain.entity.WalCategoryType;
 import backend.wal.onboarding.domain.entity.WalTimeType;
 import backend.wal.wal.domain.NextWals;
@@ -11,6 +12,7 @@ import backend.wal.wal.repository.ItemRepository;
 import backend.wal.wal.repository.NextWalRepository;
 import backend.wal.wal.repository.TodayWalRepository;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,5 +60,49 @@ public class WalSettingService {
         Item nextItem = itemRepository.findByCategoryCategoryTypeAndCategoryItemNumber(categoryType, nextItemId);
         randomNextWal.updateItemToNextItem(nextItem);
         nextWals.updateNextWalInfo(randomNextWal);
+    }
+
+    public void updateTodayWalByCancelTimeTypes(WalTimeTypes willCancelAfterNow, Long userId) {
+        deleteTodayWalsByWillCancelAfterNow(willCancelAfterNow, userId);
+    }
+
+    public void updateTodayWalByAddTimeTypes(WalTimeTypes willAddAfterNow, Long userId) {
+        NextWals nextWals = new NextWals(nextWalRepository.findNextWalsByUserId(userId));
+        setTodayWals(willAddAfterNow.getValues(), userId, nextWals);
+    }
+
+    public Set<WalTimeType> updateWalInfoByCancelCategoryTypes(Set<WalCategoryType> canceledCategoryTypes,
+                                                               Long userId) {
+        deleteNextWalsByCanceledCategoryTypes(canceledCategoryTypes, userId);
+        WalTimeTypes willCancelAfterNow = extractAfterNow(canceledCategoryTypes, userId);
+        deleteTodayWalsByWillCancelAfterNow(willCancelAfterNow, userId);
+        return willCancelAfterNow.getValues();
+    }
+
+    private void deleteNextWalsByCanceledCategoryTypes(Set<WalCategoryType> canceledCategoryTypes, Long userId) {
+        nextWalRepository.deleteAllInBatch(
+                nextWalRepository.findNextWalsByCategoryTypeInAndUserId(canceledCategoryTypes, userId));
+    }
+
+    @NotNull
+    private WalTimeTypes extractAfterNow(Set<WalCategoryType> canceledCategoryTypes, Long userId) {
+        return WalTimeTypes.createCompareAfterNow(
+                todayWalRepository.findTodayWalsByCategoryTypeInAndUserId(canceledCategoryTypes, userId));
+    }
+
+    private void deleteTodayWalsByWillCancelAfterNow(WalTimeTypes willCancelAfterNow, Long userId) {
+        todayWalRepository.deleteAllInBatch(
+                todayWalRepository.findTodayWalsByTimeTypeInAndUserId(willCancelAfterNow.getValues(), userId));
+        if (willCancelAfterNow.isExist()) {
+            todayWalRepository.deleteAllInBatch(
+                    todayWalRepository.findTodayWalsByTimeTypeInAndUserId(willCancelAfterNow.getValues(), userId));
+        }
+    }
+
+    public void updateWalInfoByAddCategoryTypesInEmptyTimeTypes(Set<WalTimeType> emptiedTimeTypes,
+                                                                Set<WalCategoryType> addedCategoryTypes,
+                                                                Long userId) {
+        NextWals nextWals = setNextWals(addedCategoryTypes, userId);
+        setTodayWals(emptiedTimeTypes, userId, nextWals);
     }
 }

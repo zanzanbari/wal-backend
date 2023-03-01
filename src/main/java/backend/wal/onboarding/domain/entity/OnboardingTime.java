@@ -29,4 +29,8 @@ public class OnboardingTime {
     public static OnboardingTime newInstance(final Onboarding onboarding, final WalTimeType walTimeType) {
         return new OnboardingTime(onboarding, walTimeType);
     }
+
+    public WalTimeType getTimeType() {
+        return walTimeType;
+    }
 }
