@@ -1,6 +1,6 @@
 package backend.wal.config;
 
-import backend.wal.config.querydsl.JPAConfig;
+import backend.wal.config.jpa.JPAConfig;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
