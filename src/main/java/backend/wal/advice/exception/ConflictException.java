@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 public class ConflictException extends WalException {
 
-    protected ConflictException(final String message) {
+    public ConflictException(final String message) {
         super(message, HttpStatus.CONFLICT);
     }
 }
