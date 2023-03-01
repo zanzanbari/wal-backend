@@ -2,6 +2,7 @@ package backend.wal.user.domain.entity;
 
 import backend.wal.onboarding.domain.entity.Onboarding;
 import backend.wal.reservation.domain.entity.Reservation;
+import backend.wal.user.dto.request.CreateUserDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,8 +45,32 @@ public class User {
     @OneToMany(mappedBy = "user")
     private final List<Reservation> reservations = new ArrayList<>();
 
+    private User(final String nickname, final SocialInfo socialInfo, final UserStatus status, final UserRole userRole) {
+        this.nickname = nickname;
+        this.socialInfo = socialInfo;
+        this.status = status;
+        this.userRole = userRole;
+    }
+
+    public static User createGeneral(final CreateUserDto createUserDto) {
+        return new User(
+                createUserDto.getNickname(),
+                SocialInfo.newInstance(createUserDto.getSocialId(), createUserDto.getSocialType()),
+                UserStatus.ACTIVE,
+                UserRole.USER
+        );
+    }
+
+    public static User createManager(final String nickname, final String socialId, SocialType socialType) {
+        return new User(nickname, SocialInfo.newInstance(socialId, socialType), UserStatus.ACTIVE, UserRole.ADMIN);
+    }
+
     public void changeNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public void setTokenInfo(Token token) {
+        this.token = token;
     }
 
     public void setOnboardInfo(Onboarding onboarding) {
