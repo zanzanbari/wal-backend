@@ -1,6 +1,6 @@
 package backend.wal.wal.repository;
 
-import backend.wal.config.querydsl.QuerydslConfig;
+import backend.wal.config.jpa.JPAConfig;
 import backend.wal.wal.domain.NextWals;
 import backend.wal.wal.domain.entity.NextWal;
 import backend.wal.wal.service.WalSettingService;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-@Import(QuerydslConfig.class)
+@Import(JPAConfig.class)
 class NextWalRepositoryTest {
 
     private static final Long USER_ID = 1L;
