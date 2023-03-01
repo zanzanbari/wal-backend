@@ -40,4 +40,8 @@ public class NextWals {
     public int getSize() {
         return values.size();
     }
+
+    public List<NextWal> getValues() {
+        return values;
+    }
 }
