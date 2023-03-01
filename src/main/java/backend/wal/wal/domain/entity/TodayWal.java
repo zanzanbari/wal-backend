@@ -43,4 +43,8 @@ public class TodayWal {
         this.timeType = timeType;
         this.showStatus = ShowStatus.CLOSED;
     }
+
+    public WalTimeType getTimeType() {
+        return timeType;
+    }
 }
