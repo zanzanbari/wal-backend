@@ -20,6 +20,15 @@ public class SocialInfo {
     @Column(name = "social_type", nullable = false, length = 20)
     private SocialType socialType;
 
+    private SocialInfo(final String socialId, final SocialType socialType) {
+        this.socialId = socialId;
+        this.socialType = socialType;
+    }
+
+    public static SocialInfo newInstance(final String socialId, final SocialType socialType) {
+        return new SocialInfo(socialId, socialType);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

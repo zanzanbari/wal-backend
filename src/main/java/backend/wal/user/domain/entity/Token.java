@@ -18,4 +18,13 @@ public class Token {
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String fcmToken;
+
+    private Token(final Long userId, final String fcmToken) {
+        this.userId = userId;
+        this.fcmToken = fcmToken;
+    }
+
+    public static Token newInstance(final Long userId, final String fcmToken) {
+        return new Token(userId, fcmToken);
+    }
 }
