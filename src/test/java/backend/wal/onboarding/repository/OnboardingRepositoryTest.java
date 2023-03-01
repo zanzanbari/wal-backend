@@ -1,14 +1,11 @@
 package backend.wal.onboarding.repository;
 
-import backend.wal.config.querydsl.QuerydslConfig;
+import backend.wal.config.JpaRepositoryTestConfig;
 import backend.wal.onboarding.domain.entity.Onboarding;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
@@ -16,9 +13,7 @@ import static backend.wal.onboarding.domain.entity.WalCategoryType.*;
 import static backend.wal.onboarding.domain.entity.WalTimeType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
-@Transactional
-@Import(QuerydslConfig.class)
+@JpaRepositoryTestConfig
 class OnboardingRepositoryTest {
 
     private static final Long USER_ID = 1L;
