@@ -1,5 +1,6 @@
-package backend.wal.user.domain.entity;
+package backend.wal.user.domain.vo;
 
+import backend.wal.user.domain.entity.SocialType;
 import com.google.common.base.Objects;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,7 @@ public class SocialInfo {
         this.socialType = socialType;
     }
 
-    public static SocialInfo newInstance(final String socialId, final SocialType socialType) {
+    public static SocialInfo of(final String socialId, final SocialType socialType) {
         return new SocialInfo(socialId, socialType);
     }
 
