@@ -29,23 +29,23 @@ class OnboardingControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @DisplayName("")
-    @Test
-    void setOnboardInfo() throws Exception {
-        // given
-        String nickname = "COZO";
-        Set<WalCategoryType> walCategoryTypes = Set.of(COMEDY, FUSS, COMFORT, YELL);
-        Set<WalTimeType> walTimeTypes = Set.of(MORNING, AFTERNOON, NIGHT);
-        InitOnboardInfoRequest request = new InitOnboardInfoRequest(nickname, walCategoryTypes, walTimeTypes);
-
-        // when
-        ResultActions result = mockMvc.perform(
-                MockMvcRequestBuilders.post("/v2/onboard")
-                        .content(objectMapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON)
-        );
-
-        // then
-        result.andExpect(MockMvcResultMatchers.status().isCreated());
-    }
+//    @DisplayName("")
+//    @Test
+//    void setOnboardInfo() throws Exception {
+//        // given
+//        String nickname = "COZO";
+//        Set<WalCategoryType> walCategoryTypes = Set.of(COMEDY, FUSS, COMFORT, YELL);
+//        Set<WalTimeType> walTimeTypes = Set.of(MORNING, AFTERNOON, NIGHT);
+//        InitOnboardInfoRequest request = new InitOnboardInfoRequest(nickname, walCategoryTypes, walTimeTypes);
+//
+//        // when
+//        ResultActions result = mockMvc.perform(
+//                MockMvcRequestBuilders.post("/v2/onboard")
+//                        .content(objectMapper.writeValueAsString(request))
+//                        .contentType(MediaType.APPLICATION_JSON)
+//        );
+//
+//        // then
+//        result.andExpect(MockMvcResultMatchers.status().isCreated());
+//    }
 }

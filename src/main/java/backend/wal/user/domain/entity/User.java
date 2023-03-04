@@ -2,6 +2,7 @@ package backend.wal.user.domain.entity;
 
 import backend.wal.onboarding.domain.entity.Onboarding;
 import backend.wal.reservation.domain.entity.Reservation;
+import backend.wal.user.domain.vo.SocialInfo;
 import backend.wal.user.dto.request.CreateUserDto;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -35,10 +36,6 @@ public class User {
     private UserRole userRole;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "token_id")
-    private Token token;
-
-    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "onboarding_id")
     private Onboarding onboarding;
 
@@ -55,22 +52,18 @@ public class User {
     public static User createGeneral(final CreateUserDto createUserDto) {
         return new User(
                 createUserDto.getNickname(),
-                SocialInfo.newInstance(createUserDto.getSocialId(), createUserDto.getSocialType()),
+                SocialInfo.of(createUserDto.getSocialId(), createUserDto.getSocialType()),
                 UserStatus.ACTIVE,
                 UserRole.USER
         );
     }
 
     public static User createManager(final String nickname, final String socialId, SocialType socialType) {
-        return new User(nickname, SocialInfo.newInstance(socialId, socialType), UserStatus.ACTIVE, UserRole.ADMIN);
+        return new User(nickname, SocialInfo.of(socialId, socialType), UserStatus.ACTIVE, UserRole.ADMIN);
     }
 
     public void changeNickname(String nickname) {
         this.nickname = nickname;
-    }
-
-    public void setTokenInfo(Token token) {
-        this.token = token;
     }
 
     public void setOnboardInfo(Onboarding onboarding) {
