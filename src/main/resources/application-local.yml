@@ -24,3 +24,4 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
+    backend.wal.auth.config: debug
