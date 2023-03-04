@@ -2,6 +2,7 @@ package backend.wal.user.domain.entity;
 
 import backend.wal.onboarding.domain.entity.Onboarding;
 import backend.wal.reservation.domain.entity.Reservation;
+import backend.wal.token.domain.Token;
 import backend.wal.user.dto.request.CreateUserDto;
 import lombok.AccessLevel;
 import lombok.Getter;

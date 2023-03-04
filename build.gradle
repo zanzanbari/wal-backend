@@ -22,6 +22,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'junit:junit:4.13.1'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -35,11 +37,15 @@ dependencies {
 
     implementation group: 'com.google.guava', name: 'guava', version: '30.1.1-jre'
 
-    implementation 'com.querydsl:querydsl-jpa'
-    implementation("com.querydsl:querydsl-apt")
-
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     compileOnly 'org.jetbrains:annotations:23.0.0'
+
+    implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 }
 
 tasks.named('test') {
@@ -48,7 +54,7 @@ tasks.named('test') {
 
 dependencyManagement {
     imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2020.0.4"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2021.0.4"
     }
 }
 
