@@ -3,6 +3,7 @@ package backend.wal.wal.repository;
 import backend.wal.config.jpa.JPAConfig;
 import backend.wal.wal.domain.NextWals;
 import backend.wal.wal.domain.entity.NextWal;
+import backend.wal.wal.domain.repository.NextWalRepository;
 import backend.wal.wal.service.WalSettingService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

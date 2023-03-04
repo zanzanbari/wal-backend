@@ -3,7 +3,7 @@ package backend.wal.user.domain.entity;
 import backend.wal.onboarding.domain.entity.Onboarding;
 import backend.wal.reservation.domain.entity.Reservation;
 import backend.wal.user.domain.vo.SocialInfo;
-import backend.wal.user.dto.request.CreateUserDto;
+import backend.wal.user.app.dto.request.CreateUserDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

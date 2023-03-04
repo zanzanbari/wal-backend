@@ -2,6 +2,7 @@ package backend.wal.onboarding.repository;
 
 import backend.wal.config.JpaRepositoryTestConfig;
 import backend.wal.onboarding.domain.entity.Onboarding;
+import backend.wal.onboarding.domain.repository.OnboardingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

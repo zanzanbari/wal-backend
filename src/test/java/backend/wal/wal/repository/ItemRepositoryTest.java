@@ -3,6 +3,8 @@ package backend.wal.wal.repository;
 import backend.wal.config.JpaRepositoryTestConfig;
 import backend.wal.wal.domain.entity.Category;
 import backend.wal.wal.domain.entity.Item;
+import backend.wal.wal.domain.repository.CategoryRepository;
+import backend.wal.wal.domain.repository.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
