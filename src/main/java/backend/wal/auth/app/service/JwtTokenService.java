@@ -32,7 +32,7 @@ public class JwtTokenService {
     private RefreshToken findByRefreshtoken(String validRefreshToken) {
         RefreshToken refreshToken = refreshTokenRepository.findRefreshTokenByValue(validRefreshToken);
         if (refreshToken == null) {
-            throw new NotFoundException("존재하지 않는 refreshToken (%s) 입니다");
+            throw new NotFoundException("존재하지 않는 refreshToken 입니다");
         }
         return refreshToken;
     }
