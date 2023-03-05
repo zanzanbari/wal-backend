@@ -1,14 +1,17 @@
 package backend.wal.user.app.dto.request;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
 @Getter
-public final class ModifyNicknameRequest {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class ModifyNicknameRequest {
 
     @NotBlank(message = "새로운 닉네임을 입력하세요")
-    private final String nickname;
+    private String nickname;
 
     public ModifyNicknameRequest(final String nickname) {
         this.nickname = nickname;
