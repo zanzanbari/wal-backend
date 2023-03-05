@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AppleAuthService implements AuthService {
     @Override
-    public Long login(final LoginRequestDto requestDto) {
+    public Long login(LoginRequestDto requestDto) {
         return null;
     }
 }
