@@ -4,14 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public final class KakaoUserInfoResponse {
+public class KakaoUserInfoResponse {
 
-    private final String id;
-    private final KakaoAccount kakaoAccount;
+    private String id;
+    private KakaoAccount kakaoAccount;
 
     public KakaoUserInfoResponse(final String id, final KakaoAccount kakaoAccount) {
         this.id = id;
@@ -23,15 +24,6 @@ public final class KakaoUserInfoResponse {
     }
 
     public String getNickname() {
-        return kakaoAccount.profile.nickname;
-    }
-
-    @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-    private static class KakaoAccount {
-        private final Profile profile;
-        @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-        private static class Profile {
-            private final String nickname;
-        }
+        return kakaoAccount.getProfileNickname();
     }
 }

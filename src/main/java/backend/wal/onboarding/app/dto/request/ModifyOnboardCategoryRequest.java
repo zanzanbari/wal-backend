@@ -1,12 +1,15 @@
 package backend.wal.onboarding.app.dto.request;
 
 import backend.wal.onboarding.domain.entity.WalCategoryType;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-public final class ModifyOnboardCategoryRequest {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class ModifyOnboardCategoryRequest {
 
-    private final Set<WalCategoryType> categoryTypes;
+    private Set<WalCategoryType> categoryTypes;
 
     public ModifyOnboardCategoryRequest(final Set<WalCategoryType> categoryTypes) {
         this.categoryTypes = categoryTypes;
