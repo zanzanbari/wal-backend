@@ -1,6 +1,6 @@
 package backend.wal.auth.app.dto.request;
 
-import backend.wal.user.domain.entity.SocialType;
+import backend.wal.user.domain.aggregate.entity.SocialType;
 import backend.wal.user.app.dto.request.CreateUserDto;
 import lombok.Getter;
 

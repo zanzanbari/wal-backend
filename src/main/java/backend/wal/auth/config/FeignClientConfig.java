@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableFeignClients("backend.wal.auth.external")
+@EnableFeignClients("backend.wal.auth.infrastructure")
 public class FeignClientConfig {
 
     @Bean

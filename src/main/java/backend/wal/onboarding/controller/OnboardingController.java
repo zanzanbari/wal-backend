@@ -1,10 +1,10 @@
-package backend.wal.onboarding.app.controller;
+package backend.wal.onboarding.controller;
 
 import backend.wal.onboarding.app.dto.response.OnboardInfoResponse;
 import backend.wal.onboarding.app.service.OnboardingService;
-import backend.wal.onboarding.app.dto.request.InitOnboardInfoRequest;
-import backend.wal.onboarding.app.dto.request.ModifyOnboardCategoryRequest;
-import backend.wal.onboarding.app.dto.request.ModifyOnboardTimeRequest;
+import backend.wal.onboarding.controller.dto.InitOnboardInfoRequest;
+import backend.wal.onboarding.controller.dto.ModifyOnboardCategoryRequest;
+import backend.wal.onboarding.controller.dto.ModifyOnboardTimeRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

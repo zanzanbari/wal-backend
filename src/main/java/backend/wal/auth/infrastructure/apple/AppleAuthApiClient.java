@@ -1,4 +1,4 @@
-package backend.wal.auth.external.apple;
+package backend.wal.auth.infrastructure.apple;
 
 import org.springframework.cloud.openfeign.FeignClient;
 

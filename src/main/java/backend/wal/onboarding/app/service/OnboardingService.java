@@ -11,7 +11,7 @@ import backend.wal.onboarding.app.dto.request.ModifyOnboardCategoryRequestDto;
 import backend.wal.onboarding.app.dto.request.ModifyOnboardTimeRequestDto;
 import backend.wal.onboarding.domain.repository.OnboardingRepository;
 import backend.wal.user.domain.repository.UserRepository;
-import backend.wal.user.domain.entity.User;
+import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.user.app.service.UserServiceUtils;
 import backend.wal.wal.domain.NextWals;
 import backend.wal.wal.service.WalSettingService;

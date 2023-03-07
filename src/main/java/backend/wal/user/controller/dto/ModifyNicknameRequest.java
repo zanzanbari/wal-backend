@@ -1,4 +1,4 @@
-package backend.wal.user.app.dto.request;
+package backend.wal.user.controller.dto;
 
 import lombok.AccessLevel;
 import lombok.Getter;

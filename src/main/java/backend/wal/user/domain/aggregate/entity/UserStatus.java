@@ -1,4 +1,4 @@
-package backend.wal.user.domain.entity;
+package backend.wal.user.domain.aggregate.entity;
 
 public enum UserStatus {
     ACTIVE,

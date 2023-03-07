@@ -1,14 +1,14 @@
 package backend.wal.auth.app.service;
 
 import backend.wal.auth.app.dto.request.LoginRequestDto;
-import backend.wal.auth.external.kakao.KakaoApiClient;
-import backend.wal.auth.external.kakao.dto.KakaoAccount;
-import backend.wal.auth.external.kakao.dto.KakaoUserInfoResponse;
-import backend.wal.auth.external.kakao.dto.Profile;
+import backend.wal.auth.infrastructure.kakao.KakaoApiClient;
+import backend.wal.auth.infrastructure.kakao.dto.KakaoAccount;
+import backend.wal.auth.infrastructure.kakao.dto.KakaoUserInfoResponse;
+import backend.wal.auth.infrastructure.kakao.dto.Profile;
 import backend.wal.notification.service.FcmTokenService;
 import backend.wal.user.app.service.UserService;
-import backend.wal.user.domain.entity.SocialType;
-import backend.wal.user.domain.entity.User;
+import backend.wal.user.domain.aggregate.entity.SocialType;
+import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.user.domain.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

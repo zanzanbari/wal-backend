@@ -1,4 +1,4 @@
-package backend.wal.auth.external.kakao.dto;
+package backend.wal.auth.infrastructure.kakao.dto;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

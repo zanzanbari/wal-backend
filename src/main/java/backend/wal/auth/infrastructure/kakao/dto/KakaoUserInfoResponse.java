@@ -1,4 +1,4 @@
-package backend.wal.auth.external.kakao.dto;
+package backend.wal.auth.infrastructure.kakao.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;

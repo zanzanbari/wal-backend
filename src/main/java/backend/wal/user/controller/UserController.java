@@ -1,6 +1,6 @@
-package backend.wal.user.app.controller;
+package backend.wal.user.controller;
 
-import backend.wal.user.app.dto.request.ModifyNicknameRequest;
+import backend.wal.user.controller.dto.ModifyNicknameRequest;
 import backend.wal.user.app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

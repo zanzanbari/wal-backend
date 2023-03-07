@@ -1,6 +1,6 @@
 package backend.wal.user.app.service;
 
-import backend.wal.user.domain.entity.User;
+import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.user.app.dto.request.CreateUserDto;
 import backend.wal.user.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,5 +1,6 @@
-package backend.wal.onboarding.app.dto.request;
+package backend.wal.onboarding.controller.dto;
 
+import backend.wal.onboarding.app.dto.request.ModifyOnboardCategoryRequestDto;
 import backend.wal.onboarding.domain.entity.WalCategoryType;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

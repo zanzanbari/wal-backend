@@ -1,5 +1,6 @@
-package backend.wal.onboarding.app.dto.request;
+package backend.wal.onboarding.controller.dto;
 
+import backend.wal.onboarding.app.dto.request.ModifyOnboardTimeRequestDto;
 import backend.wal.onboarding.domain.entity.WalTimeType;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

@@ -2,8 +2,8 @@ package backend.wal.user.app.service;
 
 import backend.wal.advice.exception.ConflictException;
 import backend.wal.advice.exception.NotFoundException;
-import backend.wal.user.domain.entity.SocialType;
-import backend.wal.user.domain.entity.User;
+import backend.wal.user.domain.aggregate.entity.SocialType;
+import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.user.domain.repository.UserRepository;
 import org.jetbrains.annotations.NotNull;
 

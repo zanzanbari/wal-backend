@@ -1,6 +1,6 @@
-package backend.wal.user.domain.vo;
+package backend.wal.user.domain.aggregate.vo;
 
-import backend.wal.user.domain.entity.SocialType;
+import backend.wal.user.domain.aggregate.entity.SocialType;
 import com.google.common.base.Objects;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

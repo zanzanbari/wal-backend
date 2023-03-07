@@ -1,8 +1,8 @@
-package backend.wal.user.domain.entity;
+package backend.wal.user.domain.aggregate.entity;
 
 import backend.wal.onboarding.domain.entity.Onboarding;
 import backend.wal.reservation.domain.entity.Reservation;
-import backend.wal.user.domain.vo.SocialInfo;
+import backend.wal.user.domain.aggregate.vo.SocialInfo;
 import backend.wal.user.app.dto.request.CreateUserDto;
 import lombok.AccessLevel;
 import lombok.Getter;

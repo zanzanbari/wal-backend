@@ -1,6 +1,6 @@
-package backend.wal.auth.external.kakao;
+package backend.wal.auth.infrastructure.kakao;
 
-import backend.wal.auth.external.kakao.dto.KakaoUserInfoResponse;
+import backend.wal.auth.infrastructure.kakao.dto.KakaoUserInfoResponse;
 import backend.wal.utils.HttpHeaderUtils;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

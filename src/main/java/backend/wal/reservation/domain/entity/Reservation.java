@@ -1,6 +1,6 @@
 package backend.wal.reservation.domain.entity;
 
-import backend.wal.user.domain.entity.User;
+import backend.wal.user.domain.aggregate.entity.User;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
