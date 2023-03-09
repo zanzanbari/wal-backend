@@ -1,8 +1,8 @@
-package backend.wal.auth.controller;
+package backend.wal.auth.adapter.input.web;
 
+import backend.wal.auth.adapter.input.web.dto.LoginRequest;
 import backend.wal.auth.app.dto.response.TokenResponse;
 import backend.wal.auth.app.service.AuthService;
-import backend.wal.auth.controller.dto.LoginRequest;
 import backend.wal.auth.app.service.JwtTokenService;
 import backend.wal.auth.app.service.provider.AuthServiceProvider;
 import backend.wal.auth.support.ExtractValidRefreshToken;

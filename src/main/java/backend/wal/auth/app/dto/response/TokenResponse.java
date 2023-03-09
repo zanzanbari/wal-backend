@@ -1,4 +1,4 @@
-package backend.wal.auth.app.dto.response;
+package backend.wal.auth.application.dto.response;
 
 import lombok.Getter;
 

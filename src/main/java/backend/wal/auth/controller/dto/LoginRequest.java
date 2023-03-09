@@ -1,4 +1,4 @@
-package backend.wal.auth.controller.dto;
+package backend.wal.auth.adapter.input.web.dto;
 
 import backend.wal.auth.app.dto.request.LoginRequestDto;
 import backend.wal.user.domain.aggregate.entity.SocialType;

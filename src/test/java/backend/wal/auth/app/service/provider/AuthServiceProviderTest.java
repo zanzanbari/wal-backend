@@ -1,8 +1,8 @@
-package backend.wal.auth.app.service.provider;
+package backend.wal.auth.application.service.provider;
 
-import backend.wal.auth.app.service.AppleAuthService;
-import backend.wal.auth.app.service.AuthService;
-import backend.wal.auth.app.service.KakaoAuthService;
+import backend.wal.auth.application.service.AppleAuthService;
+import backend.wal.auth.application.service.AuthService;
+import backend.wal.auth.application.service.KakaoAuthService;
 import backend.wal.user.domain.aggregate.entity.SocialType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
