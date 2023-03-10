@@ -28,4 +28,8 @@ public class FcmToken {
     public static FcmToken newInstance(final Long userId, final String value) {
         return new FcmToken(userId, value);
     }
+
+    public String getValue() {
+        return value;
+    }
 }
