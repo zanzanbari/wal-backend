@@ -20,17 +20,26 @@ import java.io.IOException;
         ignoreResourceNotFound = true)
 public class FCMConfig {
 
+    private static final String FIREBASE_APP_NAME = "WAL_BACKEND";
+
     @Value("${firebase.fcm.config.path}")
     private String firebaseConfigPath;
 
     @Bean
-    public FirebaseMessaging firebaseMessaging() throws IOException {
+    public FirebaseApp firebaseApp() throws IOException {
         ClassPathResource firebaseResource = new ClassPathResource(firebaseConfigPath);
         GoogleCredentials credentials = GoogleCredentials.fromStream(firebaseResource.getInputStream());
         FirebaseOptions options = FirebaseOptions.builder()
                 .setCredentials(credentials)
                 .build();
-        FirebaseApp firebaseApp = FirebaseApp.initializeApp(options);
-        return FirebaseMessaging.getInstance(firebaseApp);
+        if (FirebaseApp.getApps().isEmpty()) {
+            return FirebaseApp.initializeApp(options, FIREBASE_APP_NAME);
+        }
+        return FirebaseApp.getInstance(FIREBASE_APP_NAME);
+    }
+
+    @Bean
+    public FirebaseMessaging firebaseMessaging() throws IOException {
+        return FirebaseMessaging.getInstance(firebaseApp());
     }
 }
