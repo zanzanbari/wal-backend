@@ -1,6 +1,6 @@
-package backend.wal.auth.application.service;
+package backend.wal.auth.app.service;
 
-import backend.wal.auth.application.dto.request.LoginRequestDto;
+import backend.wal.auth.app.dto.request.LoginRequestDto;
 import backend.wal.auth.infrastructure.kakao.KakaoApiClient;
 import backend.wal.auth.infrastructure.kakao.dto.KakaoAccount;
 import backend.wal.auth.infrastructure.kakao.dto.KakaoUserInfoResponse;

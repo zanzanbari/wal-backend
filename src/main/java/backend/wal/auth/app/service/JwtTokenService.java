@@ -1,7 +1,7 @@
-package backend.wal.auth.application.service;
+package backend.wal.auth.app.service;
 
 import backend.wal.advice.exception.NotFoundException;
-import backend.wal.auth.application.dto.response.TokenResponse;
+import backend.wal.auth.app.dto.response.TokenResponse;
 import backend.wal.auth.domain.entity.RefreshToken;
 import backend.wal.auth.domain.repository.RefreshTokenRepository;
 import backend.wal.auth.support.token.JwtManager;
