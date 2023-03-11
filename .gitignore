@@ -36,5 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-### firebase admoin ###
+### firebase admin ###
 src/main/resources/firebase

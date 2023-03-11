@@ -1,0 +1,4 @@
+firebase:
+  fcm:
+    config:
+      path: firebase/wal-firebase-adminsdk.json

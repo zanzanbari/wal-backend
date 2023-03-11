@@ -19,4 +19,8 @@ public class FcmTokenService {
             fcmTokenRepository.save(FcmToken.newInstance(requestDto.getUserId(), requestDto.getFcmToken()));
         }
     }
+
+    public FcmToken findToken(Long userId) {
+        return fcmTokenRepository.findFcmTokenByUserId(userId);
+    }
 }
