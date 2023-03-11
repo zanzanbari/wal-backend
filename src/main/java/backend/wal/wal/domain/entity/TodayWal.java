@@ -47,4 +47,12 @@ public class TodayWal {
     public WalTimeType getTimeType() {
         return timeType;
     }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }
