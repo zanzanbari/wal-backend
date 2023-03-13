@@ -1,4 +1,4 @@
-package backend.wal.reservation.domain.entity;
+package backend.wal.reservation.domain.aggregate.vo;
 
 public enum SendStatus {
     DONE,

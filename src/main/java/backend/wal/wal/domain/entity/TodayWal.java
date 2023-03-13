@@ -2,7 +2,7 @@ package backend.wal.wal.domain.entity;
 
 import backend.wal.onboarding.domain.entity.WalCategoryType;
 import backend.wal.onboarding.domain.entity.WalTimeType;
-import backend.wal.reservation.domain.entity.ShowStatus;
+import backend.wal.reservation.domain.aggregate.vo.ShowStatus;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,6 @@
 package backend.wal.user.domain.aggregate.entity;
 
 import backend.wal.onboarding.domain.entity.Onboarding;
-import backend.wal.reservation.domain.entity.Reservation;
 import backend.wal.user.domain.aggregate.vo.SocialInfo;
 import backend.wal.user.app.dto.request.CreateUserDto;
 import lombok.AccessLevel;
@@ -9,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -38,9 +35,6 @@ public class User {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "onboarding_id")
     private Onboarding onboarding;
-
-    @OneToMany(mappedBy = "user")
-    private final List<Reservation> reservations = new ArrayList<>();
 
     private User(final String nickname, final SocialInfo socialInfo, final UserStatus status, final UserRole userRole) {
         this.nickname = nickname;
