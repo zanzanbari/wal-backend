@@ -2,6 +2,8 @@ package backend.wal.reservation.controller;
 
 import backend.wal.auth.support.Authentication;
 import backend.wal.auth.support.LoginUser;
+import backend.wal.rabbitmq.producer.ReservationProducer;
+import backend.wal.reservation.app.dto.RegisterReservationResponseDto;
 import backend.wal.reservation.controller.dto.AddReservationRequest;
 import backend.wal.reservation.app.service.ReservationService;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +20,13 @@ import java.net.URI;
 public class ReservationController {
 
     private final ReservationService reservationService;
+    private final ReservationProducer reservationProducer;
 
     @Authentication
     @PostMapping("/v2/reservation")
     public ResponseEntity<Void> register(@Valid @RequestBody AddReservationRequest request, @LoginUser Long userId) {
-        reservationService.register(request.toServiceDto(userId));
+        RegisterReservationResponseDto responseDto = reservationService.register(request.toServiceDto(userId));
+        reservationProducer.publishToReservationQueue(responseDto.toPublishRequestDto());
         return ResponseEntity.created(URI.create("/reservation")).build();
     }
 }

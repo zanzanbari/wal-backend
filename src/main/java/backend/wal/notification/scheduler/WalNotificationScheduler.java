@@ -43,6 +43,6 @@ public class WalNotificationScheduler implements NotificationScheduler {
         List<Long> userIds = onboardingTimeRepository.findUserIdsByTimeType(timeType);
         List<TodayWal> todayWals = todayWalRepository.findTodayWalByUserIdInAndTimeType(userIds, timeType);
         todayWals.forEach(todayWal -> notificationService
-                .sendDefaultTimeMessage(todayWal.getUserId(), todayWal.getMessage()));
+                .sendMessage(todayWal.getUserId(), todayWal.getMessage()));
     }
 }
