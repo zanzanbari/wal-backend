@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -61,5 +62,10 @@ public class Reservation {
     public boolean isToday(LocalDate today) {
         return sendDueDate.toLocalDate()
                 .isEqual(today);
+    }
+
+    public long getDelayTimeAboutNow(LocalDateTime now) {
+        return Duration.between(now, sendDueDate)
+                .toMillis();
     }
 }
