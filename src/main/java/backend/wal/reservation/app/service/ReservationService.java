@@ -1,6 +1,7 @@
 package backend.wal.reservation.app.service;
 
 import backend.wal.reservation.app.dto.AddReservationRequestDto;
+import backend.wal.reservation.app.dto.RegisterReservationResponseDto;
 import backend.wal.reservation.domain.ReservationTime;
 import backend.wal.reservation.domain.aggregate.entity.Reservation;
 import backend.wal.reservation.domain.repository.ReservationRepository;
@@ -23,11 +24,17 @@ public class ReservationService {
     private final Clock clock;
 
     @Transactional
-    public void register(AddReservationRequestDto requestDto) {
+    public RegisterReservationResponseDto register(AddReservationRequestDto requestDto) {
         ReservationTime reservationTime = ReservationTime.startDayFrom(requestDto.getSendDate());
         validateReservationDate(reservationTime, requestDto.getUserId());
         Reservation reservation = reservationRepository.save(Reservation.newInstance(requestDto));
         registerTodayWalIfToday(reservation);
+        return new RegisterReservationResponseDto(
+                reservation.getUserId(),
+                reservation.getMessage(),
+                reservation.getSendDueDate(),
+                reservation.getDelayTimeAboutNow(LocalDateTime.now(clock))
+        );
     }
 
     private void validateReservationDate(ReservationTime reservationTime, Long userId) {
