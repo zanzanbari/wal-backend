@@ -41,7 +41,7 @@ public class ReservationService {
         LocalDateTime startDay = reservationTime.getReservationDate();
         LocalDateTime endDay = reservationTime.getNextDate();
         if (reservationRepository.existsReservationBySendDueDateBetweenAndUserId(startDay, endDay, userId)) {
-            throw ConflictReservationException.already(startDay.toLocalDate());
+            throw ConflictReservationException.alreadyExistDate(startDay.toLocalDate());
         }
     }
 
