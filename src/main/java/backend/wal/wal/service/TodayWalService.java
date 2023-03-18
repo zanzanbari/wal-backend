@@ -4,6 +4,7 @@ import backend.wal.onboarding.domain.entity.WalCategoryType;
 import backend.wal.onboarding.domain.entity.WalTimeType;
 import backend.wal.wal.domain.entity.TodayWal;
 import backend.wal.wal.domain.repository.TodayWalRepository;
+import backend.wal.wal.exception.NotFoundTodayWalException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,5 +24,18 @@ public class TodayWalService {
                 .timeType(WalTimeType.RESERVATION)
                 .build();
         todayWalRepository.save(todayWal);
+    }
+
+    @Transactional
+    public void updateShowStatus(Long todayWalId, Long userId) {
+        TodayWal todayWal = todayWalRepository.findTodayWalByIdAndUserId(todayWalId, userId);
+        validateExists(todayWalId, userId, todayWal);
+        todayWal.updateShowStatus();
+    }
+
+    private void validateExists(Long todayWalId, Long userId, TodayWal todayWal) {
+        if (todayWal == null) {
+            throw NotFoundTodayWalException.notExist(todayWalId, userId);
+        }
     }
 }
