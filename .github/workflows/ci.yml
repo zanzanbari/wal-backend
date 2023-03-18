@@ -21,15 +21,6 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
-    - name: Setup MySQL
-      uses: mirromutth/mysql-action@v1.1
-      with:
-        mysql version: 8.0.31
-        mysql root password: cozomysql
-        mysql database: wal_dev
-        mysql user: root
-        mysql password: cozomysql
-
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
