@@ -8,8 +8,8 @@ permissions:
   contents: read
 
 env:
+  RESOURCE_LOCAL_PATH: ./src/main/resources/application-local.yml
   WAL_TEST_DATASOURCE_URL: jdbc:mysql://mysql:3306/wal_dev?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
-  WAL_TEST_DATASOURCE_DATABASE: wal_dev
   WAL_TEST_DATASOURCE_USERNAME: root
   WAL_TEST_DATASOURCE_PASSWORD: cozomysql
 
@@ -27,30 +27,16 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
-    - name: Setup MySQL
-      run: |
-        docker run --name mysql -p 3306:3306 
-        -e MYSQL_ROOT_PASSWORD=${{ env.WAL_TEST_DATASOURCE_PASSWORD }} 
-        -e MYSQL_DATABASE=${{ env.WAL_TEST_DATASOURCE_DATABASE }} 
-        -e MYSQL_USER=${{ env.WAL_TEST_DATASOURCE_USERNAME }} 
-        -d mysql:8.0.31
+    - name: Set up LOCAL YML
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: ${{ env.RESOURCE_LOCAL_PATH }}
+      env:
+        spring.datasource.url: ${{ env.WAL_TEST_DATASOURCE_URL }}
+        spring.datasource.username: ${{ env.WAL_TEST_DATASOURCE_USERNAME }}
+        spring.datasource.password: ${{ env.WAL_TEST_DATASOURCE_PASSWORD }}
 
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
         arguments: build
-      env:
-        DB_URL: ${{ env.RESOURCE_JWT_PATH }}
-        WAL_TEST_DATASOURCE_DATABASE: ${{ env.WAL_TEST_DATASOURCE_DATABASE }}
-        WAL_TEST_DATASOURCE_USERNAME: ${{ env.WAL_TEST_DATASOURCE_USERNAME }}
-        WAL_TEST_DATASOURCE_PASSWORD: ${{ env.WAL_TEST_DATASOURCE_PASSWORD }}
-      services:
-        mysql:
-          image: mysql:8.0.31
-          options: |
-            --health-cmd="mysqladmin ping" 
-            --health-interval=10s 
-            --health-timeout=5s 
-            --health-retries=3
-          networks:
-            - ci-network
