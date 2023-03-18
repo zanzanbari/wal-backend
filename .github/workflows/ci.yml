@@ -29,6 +29,7 @@ jobs:
         character set server: utf8mb4
         collation server: utf8mb4_general_ci
         mysql version: 8.0.31
+        mysql root password: cozomysql
         mysql database: wal_dev
         mysql user: root
         mysql password: cozomysql
