@@ -19,9 +19,11 @@ public enum WalTimeType {
     private final LocalTime sendTime;
 
     public WalTimeType findAfterNow(LocalDateTime now) {
+        return isAfterNow(now) ? this : null;
+    }
+
+    public boolean isAfterNow(LocalDateTime now) {
         LocalDateTime sendDateTime = LocalDateTime.of(now.toLocalDate(), this.sendTime);
-        return sendDateTime.isAfter(now)
-                ? this
-                : null;
+        return sendDateTime.isAfter(now);
     }
 }
