@@ -138,4 +138,18 @@ class TodayWalRepositoryTest {
                 Arguments.of(Set.of(COMEDY, FUSS, COMFORT, YELL), 3)
         );
     }
+
+    @DisplayName("todayWalId 와 userId 로 해당 TodayWal 을 가져온다")
+    @Test
+    void findTodayWalByIdAndUserId() {
+        // given
+        TodayWal save = todayWalRepository.save(
+                TodayWal.builder().userId(USER_ID).categoryType(COMEDY).timeType(MORNING).message("").build());
+
+        // when
+        TodayWal todayWal = todayWalRepository.findTodayWalByIdAndUserId(1L, USER_ID);
+
+        // then
+        assertThat(todayWal).isEqualTo(save);
+    }
 }

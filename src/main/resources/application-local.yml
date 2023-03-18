@@ -21,10 +21,10 @@ spring:
         default_batch_fetch_size: 1000
 
   rabbitmq:
-    host: ${RABBIT_MQ_LOCAL_HOST}
-    port: ${RABBIT_MQ_LOCAL_PORT}
-    username: ${RABBIT_MQ_LOCAL_USERNAME}
-    password: ${RABBIT_MQ_LOCAL_PASSWORD}
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 logging:
   level:

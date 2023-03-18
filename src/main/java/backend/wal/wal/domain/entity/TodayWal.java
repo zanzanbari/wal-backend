@@ -5,12 +5,14 @@ import backend.wal.onboarding.domain.entity.WalTimeType;
 import backend.wal.reservation.domain.aggregate.vo.ShowStatus;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class TodayWal {
 
     @Id
@@ -44,15 +46,7 @@ public class TodayWal {
         this.showStatus = ShowStatus.CLOSED;
     }
 
-    public WalTimeType getTimeType() {
-        return timeType;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public String getMessage() {
-        return message;
+    public void updateShowStatus() {
+        this.showStatus = ShowStatus.OPEN;
     }
 }
