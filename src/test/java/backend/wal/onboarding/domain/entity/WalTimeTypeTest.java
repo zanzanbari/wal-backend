@@ -13,6 +13,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WalTimeTypeTest {
 
+    @DisplayName("WalTimeType 의 정해진 시간을 받아온 시간과 비교해 이후이면 해당 true 를 반환하고, 이전이면 false 를 반환한다")
+    @ParameterizedTest
+    @MethodSource("provideWalTimeTypeAndDateTimeTextAndIsAfterNowExpect")
+    void isAfterNow(WalTimeType timeType, CharSequence dateTimeText, boolean expect) {
+        // when
+        boolean actual = timeType.isAfterNow(LocalDateTime.parse(dateTimeText));
+
+        // then
+        assertThat(actual).isEqualTo(expect);
+    }
+
+    private static Stream<Arguments> provideWalTimeTypeAndDateTimeTextAndIsAfterNowExpect() {
+        return Stream.of(
+                Arguments.of(MORNING, "1998-04-02T07:59:59", true),
+                Arguments.of(MORNING, "1998-04-02T08:00:01", false),
+                Arguments.of(AFTERNOON, "1998-04-02T13:59:59", true),
+                Arguments.of(AFTERNOON, "1998-04-02T14:00:01", false),
+                Arguments.of(NIGHT, "1998-04-02T19:59:59", true),
+                Arguments.of(NIGHT, "1998-04-02T20:00:01", false)
+        );
+    }
+
     @DisplayName("WalTimeType 의 정해진 시간을 받아온 시간과 비교해 이후이면 해당 WalTimeType 을 반환하고, 이전이면 null 을 반환한다")
     @ParameterizedTest
     @MethodSource("provideWalTimeTypeAndDateTimeTextAndExpect")
