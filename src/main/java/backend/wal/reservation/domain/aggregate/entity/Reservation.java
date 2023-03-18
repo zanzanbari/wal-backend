@@ -1,5 +1,6 @@
 package backend.wal.reservation.domain.aggregate.entity;
 
+import backend.wal.reservation.app.dto.ReservationHistoryResponseDto;
 import backend.wal.reservation.domain.aggregate.vo.SendStatus;
 import backend.wal.reservation.domain.aggregate.vo.ShowStatus;
 import backend.wal.reservation.app.dto.AddReservationRequestDto;
@@ -11,6 +12,9 @@ import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -67,5 +71,52 @@ public class Reservation {
     public long getDelayTimeAboutNow(LocalDateTime now) {
         return Duration.between(now, sendDueDate)
                 .toMillis();
+    }
+
+    public void finish() {
+        this.sendStatus = SendStatus.DONE;
+    }
+
+    public boolean isDone() {
+        return sendStatus == SendStatus.DONE;
+    }
+
+    public boolean isNotDone() {
+        return sendStatus == SendStatus.NOT_DONE;
+    }
+
+    public ReservationHistoryResponseDto getDetailSendDateInfo() {
+        String monthDate = sendDueDate.format(DateTimeFormatter.ofPattern("MM. dd"));
+        String time = sendDueDate.format(DateTimeFormatter.ofPattern(":mm"));
+
+        int hour = sendDueDate.getHour();
+        if (hour > 12) {
+            time = "오후 " + (hour - 12) + time;
+        } else {
+            time = "오전 " + hour + time;
+        }
+
+        String dayOfWeek = sendDueDate.getDayOfWeek()
+                .getDisplayName(TextStyle.FULL, Locale.KOREAN);
+
+        String detailMessage = makeDetailMessage(monthDate, time, dayOfWeek);
+
+        return toHistoryResponseDto(detailMessage);
+    }
+
+    private String makeDetailMessage(String monthDate, String time, String dayOfWeek) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(monthDate)
+                .append(" ")
+                .append(time)
+                .append(" ")
+                .append(dayOfWeek)
+                .append(" • ")
+                .append(sendStatus.getValue());
+        return stringBuilder.toString();
+    }
+
+    private ReservationHistoryResponseDto toHistoryResponseDto(String detailMessage) {
+        return new ReservationHistoryResponseDto(id, message, detailMessage, showStatus);
     }
 }
