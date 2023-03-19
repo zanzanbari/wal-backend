@@ -36,19 +36,6 @@ jobs:
         spring.datasource.username: ${{ env.WAL_TEST_DATASOURCE_USERNAME }}
         spring.datasource.password: ${{ env.WAL_TEST_DATASOURCE_PASSWORD }}
 
-    - name: Set up MySQL
-      uses: mirromutth/mysql-action@v1.1
-      with:
-        host port: 3306
-        container port: 3306
-        character set server: utf8mb4
-        collation server: utf8mb4_general_ci
-        mysql version: 8.0.31
-        mysql root password: ${{ env.WAL_TEST_DATASOURCE_PASSWORD }}
-        mysql database: wal_dev
-        mysql user: root
-        mysql password: ${{ env.WAL_TEST_DATASOURCE_PASSWORD }}
-
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
