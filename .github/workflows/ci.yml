@@ -45,7 +45,7 @@ jobs:
         collation server: utf8mb4_general_ci
         mysql version: 8.0.31
         mysql root password: ${{ env.WAL_TEST_DATASOURCE_PASSWORD }}
-        mysql database: test
+        mysql database: wal_dev
         mysql user: root
         mysql password: ${{ env.WAL_TEST_DATASOURCE_PASSWORD }}
 
