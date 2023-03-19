@@ -9,7 +9,7 @@ permissions:
 
 env:
   RESOURCE_LOCAL_PATH: ./src/main/resources/application-local.yml
-  WAL_TEST_DATASOURCE_URL: jdbc:mysql://mysql:3306/wal_dev?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+  WAL_TEST_DATASOURCE_URL: jdbc:mysql://localhost:3306/wal_dev?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
   WAL_TEST_DATASOURCE_USERNAME: root
   WAL_TEST_DATASOURCE_PASSWORD: cozomysql
 
