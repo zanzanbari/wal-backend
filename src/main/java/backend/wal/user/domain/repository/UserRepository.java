@@ -1,6 +1,6 @@
 package backend.wal.user.domain.repository;
 
-import backend.wal.user.domain.aggregate.entity.SocialType;
+import backend.wal.user.domain.aggregate.vo.SocialType;
 import backend.wal.user.domain.aggregate.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

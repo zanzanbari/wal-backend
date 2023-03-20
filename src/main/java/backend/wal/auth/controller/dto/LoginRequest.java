@@ -1,7 +1,7 @@
 package backend.wal.auth.controller.dto;
 
 import backend.wal.auth.app.dto.request.LoginRequestDto;
-import backend.wal.user.domain.aggregate.entity.SocialType;
+import backend.wal.user.domain.aggregate.vo.SocialType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
