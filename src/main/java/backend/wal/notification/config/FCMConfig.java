@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @Configuration
 @PropertySource(
-        value = "classpath:application-firebase.yml",
+        value = "classpath:wal-backend-config/application-firebase.yml",
         factory = YamlPropertySourceFactory.class,
         ignoreResourceNotFound = true)
 public class FCMConfig {
