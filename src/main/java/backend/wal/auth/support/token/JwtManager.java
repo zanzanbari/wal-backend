@@ -18,7 +18,7 @@ import java.util.Date;
 @Slf4j
 @Component
 @PropertySource(
-        value = "classpath:application-jwt.yml",
+        value = "classpath:wal-backend-config/application-jwt.yml",
         factory = YamlPropertySourceFactory.class,
         ignoreResourceNotFound = true)
 public class JwtManager {

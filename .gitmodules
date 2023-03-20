@@ -1,0 +1,3 @@
+[submodule "src/main/resources/wal-backend-config"]
+	path = src/main/resources/wal-backend-config
+	url = https://github.com/zanzanbari/Server-Secruity.git
