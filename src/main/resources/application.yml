@@ -7,5 +7,6 @@ server:
     context-path: /api
 
 spring:
-  profiles:
-    default: local
+  config:
+    import:
+      - classpath:/wal-backend-config/application.yml
