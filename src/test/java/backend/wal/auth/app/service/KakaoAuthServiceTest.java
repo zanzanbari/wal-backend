@@ -7,7 +7,7 @@ import backend.wal.auth.infrastructure.kakao.dto.KakaoUserInfoResponse;
 import backend.wal.auth.infrastructure.kakao.dto.Profile;
 import backend.wal.notification.service.FcmTokenService;
 import backend.wal.user.app.service.UserService;
-import backend.wal.user.domain.aggregate.entity.SocialType;
+import backend.wal.user.domain.aggregate.vo.SocialType;
 import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.user.domain.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;

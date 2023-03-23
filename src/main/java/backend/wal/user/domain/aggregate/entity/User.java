@@ -3,6 +3,9 @@ package backend.wal.user.domain.aggregate.entity;
 import backend.wal.onboarding.domain.entity.Onboarding;
 import backend.wal.user.domain.aggregate.vo.SocialInfo;
 import backend.wal.user.app.dto.request.CreateUserDto;
+import backend.wal.user.domain.aggregate.vo.SocialType;
+import backend.wal.user.domain.aggregate.vo.UserRole;
+import backend.wal.user.domain.aggregate.vo.UserStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -62,5 +65,13 @@ public class User {
 
     public void setOnboardInfo(Onboarding onboarding) {
         this.onboarding = onboarding;
+    }
+
+    public boolean isDeleted() {
+        return this.status == UserStatus.DELETED;
+    }
+
+    public void resign() {
+        this.status = UserStatus.DELETED;
     }
 }

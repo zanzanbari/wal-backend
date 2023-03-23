@@ -1,6 +1,6 @@
 package backend.wal.user.app.dto.request;
 
-import backend.wal.user.domain.aggregate.entity.SocialType;
+import backend.wal.user.domain.aggregate.vo.SocialType;
 import lombok.Builder;
 import lombok.Getter;
 
