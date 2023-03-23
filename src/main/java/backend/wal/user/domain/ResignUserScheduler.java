@@ -1,17 +1,27 @@
 package backend.wal.user.domain;
 
-import java.util.Date;
-import java.util.Timer;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+@Component
 public final class ResignUserScheduler {
 
-    private static final long MILLIS_OF_ONE_DAY = 1000 * 60 * 60 * 24;
+    private final ScheduledExecutorService scheduledExecutorService;
 
-    public void resignAfterDay(Runnable task) {
-        Timer timer = new Timer();
-        ResignUserTimerTask resignUserTimerTask = new ResignUserTimerTask(timer, task);
+    public ResignUserScheduler() {
+        this.scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+    }
 
-        long millisOneDayAfterNow = new Date().getTime() + MILLIS_OF_ONE_DAY;
-        timer.schedule(resignUserTimerTask, millisOneDayAfterNow);
+    public void resignAfterDay(long delayOneDayMillis, Runnable task) {
+        scheduledExecutorService.schedule(task, delayOneDayMillis, TimeUnit.MILLISECONDS);
+    }
+
+    @PreDestroy
+    public void shoutDown() {
+        scheduledExecutorService.shutdown();
     }
 }
