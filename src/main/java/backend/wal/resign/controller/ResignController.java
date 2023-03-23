@@ -4,7 +4,7 @@ import backend.wal.auth.support.Authentication;
 import backend.wal.auth.support.LoginUser;
 import backend.wal.resign.app.service.ResignService;
 import backend.wal.resign.controller.dto.RegisterResignRequest;
-import backend.wal.user.app.service.UserService;
+import backend.wal.user.app.service.ResignUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,13 +18,13 @@ import javax.validation.Valid;
 public class ResignController {
 
     private final ResignService resignService;
-    private final UserService userService;
+    private final ResignUserService resignUserService;
 
     @Authentication
     @PostMapping("/v2/resign")
     public ResponseEntity<Void> register(@Valid @RequestBody RegisterResignRequest request, @LoginUser Long userId) {
         resignService.registerResignInfo(request.toServiceDto(userId));
-        userService.resign(userId);
+        resignUserService.resign(userId);
         return ResponseEntity.noContent().build();
     }
 }
