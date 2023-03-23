@@ -66,4 +66,12 @@ public class User {
     public void setOnboardInfo(Onboarding onboarding) {
         this.onboarding = onboarding;
     }
+
+    public boolean isDeleted() {
+        return this.status == UserStatus.DELETED;
+    }
+
+    public void resign() {
+        this.status = UserStatus.DELETED;
+    }
 }
