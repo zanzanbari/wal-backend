@@ -1,6 +1,7 @@
 package backend.wal.auth.app.service;
 
 import backend.wal.auth.app.dto.request.LoginRequestDto;
+import backend.wal.auth.exception.UnAuthorizedUserException;
 import backend.wal.auth.infrastructure.kakao.KakaoApiClient;
 import backend.wal.auth.infrastructure.kakao.dto.KakaoUserInfoResponse;
 import backend.wal.notification.service.FcmTokenService;
@@ -10,8 +11,7 @@ import backend.wal.user.app.service.UserService;
 import backend.wal.utils.HttpHeaderUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +33,9 @@ public class KakaoAuthService implements AuthService {
             Long newUserId = userService.signup(requestDto.toCreateUserDto(kakaoUserInfo.getNickname(), socialId));
             fcmTokenService.register(requestDto.toFcmTokenServiceDto(newUserId));
             return newUserId;
+        }
+        if (alreadyUser.isDeleted()) {
+            throw UnAuthorizedUserException.resignUser();
         }
         return alreadyUser.getId();
     }
