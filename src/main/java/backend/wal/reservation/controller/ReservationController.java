@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -17,16 +18,17 @@ import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/v2/reservation")
 public class ReservationController {
 
     private final ReservationService reservationService;
     private final ReservationProducer reservationProducer;
 
     @Authentication
-    @PostMapping("/v2/reservation")
+    @PostMapping
     public ResponseEntity<Void> register(@Valid @RequestBody AddReservationRequest request, @LoginUser Long userId) {
         RegisterReservationResponseDto responseDto = reservationService.register(request.toServiceDto(userId));
         reservationProducer.publishToReservationQueue(responseDto.toPublishRequestDto());
-        return ResponseEntity.created(URI.create("/reservation")).build();
+        return ResponseEntity.created(URI.create("/v2/reservation")).build();
     }
 }

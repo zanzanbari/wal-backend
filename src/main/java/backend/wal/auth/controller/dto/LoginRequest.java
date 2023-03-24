@@ -15,8 +15,10 @@ public class LoginRequest {
 
     @NotBlank(message = "apple idToken 또는 kakao accessToken 이 필요합니다")
     private String socialToken;
+
     @NotNull(message = "소셜 로그인할 타입을 입력하세요")
     private SocialType socialType;
+
     @NotBlank(message = "fcmToken 은 필수 입력값입니다")
     private String fcmToken;
 
