@@ -6,6 +6,7 @@ import backend.wal.wal.domain.entity.TodayWal;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface TodayWalRepository extends JpaRepository<TodayWal, Long> {
@@ -18,5 +19,5 @@ public interface TodayWalRepository extends JpaRepository<TodayWal, Long> {
 
     List<TodayWal> findTodayWalByUserIdInAndTimeType(List<Long> userIds, WalTimeType timeType);
 
-    TodayWal findTodayWalByIdAndUserId(Long todayWalId, Long userId);
+    Optional<TodayWal> findTodayWalByIdAndUserId(Long todayWalId, Long userId);
 }
