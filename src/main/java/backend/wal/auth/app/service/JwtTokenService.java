@@ -4,6 +4,7 @@ import backend.wal.advice.exception.NotFoundException;
 import backend.wal.auth.app.dto.response.TokenResponse;
 import backend.wal.auth.domain.entity.RefreshToken;
 import backend.wal.auth.domain.repository.RefreshTokenRepository;
+import backend.wal.auth.exception.NotFoundRefreshTokenException;
 import backend.wal.auth.support.token.JwtManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,10 +31,7 @@ public class JwtTokenService {
     }
 
     private RefreshToken findByRefreshtoken(String validRefreshToken) {
-        RefreshToken refreshToken = refreshTokenRepository.findRefreshTokenByValue(validRefreshToken);
-        if (refreshToken == null) {
-            throw new NotFoundException("존재하지 않는 refreshToken 입니다");
-        }
-        return refreshToken;
+        return refreshTokenRepository.findRefreshTokenByValue(validRefreshToken)
+                .orElseThrow(NotFoundRefreshTokenException::notExists);
     }
 }
