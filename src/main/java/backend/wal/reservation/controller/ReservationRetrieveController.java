@@ -8,24 +8,26 @@ import backend.wal.reservation.app.service.ReservationRetrieveService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/v2/reservation")
 public class ReservationRetrieveController {
 
     private final ReservationRetrieveService reservationRetrieveService;
 
     @Authentication
-    @GetMapping("/v2/reservation")
+    @GetMapping
     public ResponseEntity<ReservationHistoryResponse> retrieveHistory(@LoginUser Long userId) {
         return ResponseEntity.ok(reservationRetrieveService.retrieveReservationHistory(userId));
     }
 
     @Authentication
-    @GetMapping("/v2/reservation/calender")
+    @GetMapping("/calender")
     public ResponseEntity<List<ReservationCalendarResponse>> retrieveCalendar(@LoginUser Long userId) {
         return ResponseEntity.ok(reservationRetrieveService.retrieveReservationDate(userId));
     }

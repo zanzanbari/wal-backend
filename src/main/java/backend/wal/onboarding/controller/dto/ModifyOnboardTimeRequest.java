@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-
 public class ModifyOnboardTimeRequest {
 
     @NotNull(message = "변경할 시간대를 선택하세요")

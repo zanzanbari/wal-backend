@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Date;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,7 +64,7 @@ class JwtTokenServiceTest {
         // given
         refreshToken = RefreshToken.newInstance(USER_ID, REFRESH_TOKEN, new Date());
         when(refreshTokenRepository.findRefreshTokenByValue(REFRESH_TOKEN))
-                .thenReturn(refreshToken);
+                .thenReturn(Optional.of(refreshToken));
         when(jwtManager.createAccessToken(USER_ID))
                 .thenReturn("NEW_ACCESS_TOKEN");
 
@@ -79,7 +80,7 @@ class JwtTokenServiceTest {
     void test() {
         // given
         when(refreshTokenRepository.findRefreshTokenByValue(REFRESH_TOKEN))
-                .thenReturn(null);
+                .thenReturn(Optional.empty());
 
         // when, then
         assertThatThrownBy(() -> jwtTokenService.reissueToken(REFRESH_TOKEN))

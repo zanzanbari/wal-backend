@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
     private final RefreshTokenResolver refreshTokenResolver;
 
     @Override
-    public void addInterceptors(final InterceptorRegistry registry) {
+    public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/v2/auth/login")

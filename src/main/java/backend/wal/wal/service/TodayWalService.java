@@ -28,14 +28,8 @@ public class TodayWalService {
 
     @Transactional
     public void updateShowStatus(Long todayWalId, Long userId) {
-        TodayWal todayWal = todayWalRepository.findTodayWalByIdAndUserId(todayWalId, userId);
-        validateExists(todayWalId, userId, todayWal);
+        TodayWal todayWal = todayWalRepository.findTodayWalByIdAndUserId(todayWalId, userId)
+                .orElseThrow(() -> NotFoundTodayWalException.notExist(todayWalId, userId));
         todayWal.updateShowStatus();
-    }
-
-    private void validateExists(Long todayWalId, Long userId, TodayWal todayWal) {
-        if (todayWal == null) {
-            throw NotFoundTodayWalException.notExist(todayWalId, userId);
-        }
     }
 }

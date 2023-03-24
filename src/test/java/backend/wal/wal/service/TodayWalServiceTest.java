@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -32,7 +34,7 @@ class TodayWalServiceTest {
     void fail_updateShowStatus() {
         // given
         when(todayWalRepository.findTodayWalByIdAndUserId(TODAY_WAL_ID, USER_ID))
-                .thenReturn(null); // isNull() 하면 에러
+                .thenReturn(Optional.empty()); // isNull() 하면 에러
 
         // when, then
         assertThatThrownBy(() -> todayWalService.updateShowStatus(TODAY_WAL_ID, USER_ID))
@@ -46,7 +48,7 @@ class TodayWalServiceTest {
         // given
         TodayWal todayWal = TodayWal.builder().build();
         when(todayWalRepository.findTodayWalByIdAndUserId(TODAY_WAL_ID, USER_ID))
-                .thenReturn(todayWal);
+                .thenReturn(Optional.of(todayWal));
 
         // when
         todayWalService.updateShowStatus(TODAY_WAL_ID, USER_ID);
