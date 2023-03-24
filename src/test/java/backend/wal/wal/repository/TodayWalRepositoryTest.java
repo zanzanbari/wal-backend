@@ -147,7 +147,7 @@ class TodayWalRepositoryTest {
                 TodayWal.builder().userId(USER_ID).categoryType(COMEDY).timeType(MORNING).message("").build());
 
         // when
-        TodayWal todayWal = todayWalRepository.findTodayWalByIdAndUserId(1L, USER_ID);
+        TodayWal todayWal = todayWalRepository.findTodayWalByIdAndUserId(save.getId(), USER_ID).orElseThrow();
 
         // then
         assertThat(todayWal).isEqualTo(save);
