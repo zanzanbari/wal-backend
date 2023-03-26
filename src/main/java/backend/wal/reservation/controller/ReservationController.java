@@ -2,16 +2,13 @@ package backend.wal.reservation.controller;
 
 import backend.wal.auth.support.Authentication;
 import backend.wal.auth.support.LoginUser;
-import backend.wal.rabbitmq.producer.ReservationProducer;
 import backend.wal.reservation.app.dto.RegisterReservationResponseDto;
+import backend.wal.reservation.app.service.ReservationNotificationService;
 import backend.wal.reservation.controller.dto.AddReservationRequest;
 import backend.wal.reservation.app.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -22,13 +19,20 @@ import java.net.URI;
 public class ReservationController {
 
     private final ReservationService reservationService;
-    private final ReservationProducer reservationProducer;
+    private final ReservationNotificationService reservationNotificationService;
 
     @Authentication
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<Void> register(@Valid @RequestBody AddReservationRequest request, @LoginUser Long userId) {
         RegisterReservationResponseDto responseDto = reservationService.register(request.toServiceDto(userId));
-        reservationProducer.publishToReservationQueue(responseDto.toPublishRequestDto());
+        reservationNotificationService.send(responseDto.toPublishRequestDto());
         return ResponseEntity.created(URI.create("/v2/reservation")).build();
+    }
+
+    @Authentication
+    @PostMapping("/{reservationId}/cancel")
+    public ResponseEntity<Void> cancel(@PathVariable Long reservationId) {
+        reservationNotificationService.cancel(reservationId);
+        return ResponseEntity.noContent().build();
     }
 }
