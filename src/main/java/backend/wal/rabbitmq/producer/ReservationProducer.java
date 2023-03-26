@@ -2,7 +2,7 @@ package backend.wal.rabbitmq.producer;
 
 import backend.wal.rabbitmq.exception.InternalServerJsonException;
 import backend.wal.rabbitmq.producer.dto.DelayReservationMessage;
-import backend.wal.rabbitmq.producer.dto.PublishReservationRequestDto;
+import backend.wal.reservation.app.dto.ReservationNotificationRequestDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class ReservationProducer {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public void publishToReservationQueue(PublishReservationRequestDto requestDto) {
+    public void publishToReservationQueue(ReservationNotificationRequestDto requestDto) {
         MessageProperties messageProperties = new MessageProperties();
         messageProperties.setHeader(DELAY_HEADER, requestDto.getDelayTime());
 
