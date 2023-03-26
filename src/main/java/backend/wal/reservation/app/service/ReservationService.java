@@ -30,6 +30,7 @@ public class ReservationService {
         Reservation reservation = reservationRepository.save(Reservation.newInstance(requestDto));
         registerTodayWalIfToday(reservation);
         return new RegisterReservationResponseDto(
+                reservation.getId(),
                 reservation.getUserId(),
                 reservation.getMessage(),
                 reservation.getSendDueDate(),
