@@ -1,11 +1,11 @@
 package backend.wal.wal.service;
 
-import backend.wal.wal.common.domain.aggregate.WalCategoryType;
-import backend.wal.wal.common.domain.aggregate.WalTimeType;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.wal.nextwal.domain.NextWals;
 import backend.wal.wal.nextwal.domain.aggregate.Category;
 import backend.wal.wal.nextwal.domain.aggregate.Item;
-import backend.wal.wal.common.domain.WalSettingService;
+import backend.wal.wal.onboarding.adapter.WalSettingAdapter;
 import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
 import backend.wal.wal.nextwal.domain.repository.CategoryRepository;
 import backend.wal.wal.nextwal.domain.repository.ItemRepository;
@@ -24,19 +24,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static backend.wal.wal.common.domain.aggregate.WalCategoryType.*;
-import static backend.wal.wal.common.domain.aggregate.WalTimeType.*;
+import static backend.wal.wal.common.domain.WalCategoryType.*;
+import static backend.wal.wal.common.domain.WalTimeType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 @SpringBootTest
 @Transactional
-class WalSettingServiceTest {
+class WalSettingAdapterTest {
 
     private static final Long USER_ID = 1L;
 
     @Autowired
-    private WalSettingService walSettingService;
+    private WalSettingAdapter walSettingAdapter;
 
     @Autowired
     private TodayWalRepository todayWalRepository;
@@ -52,7 +52,7 @@ class WalSettingServiceTest {
     @MethodSource("provideCategoryTypesAndExpectSize")
     void setNextWals(Set<WalCategoryType> categoryTypes, int expectSize) {
         // when
-        NextWals setNextWals = walSettingService.setNextWals(categoryTypes, USER_ID);
+        NextWals setNextWals = walSettingAdapter.setNextWals(categoryTypes, USER_ID);
 
         // then
         assertThat(setNextWals.getSize()).isEqualTo(expectSize);
@@ -89,10 +89,10 @@ class WalSettingServiceTest {
         itemRepository.saveAll(List.of(comedyItem, fussItem, comfortItem, yellItem));
 
         Set<WalCategoryType> categoryTypes = Set.of(COMEDY, FUSS, COMFORT, YELL);
-        NextWals setNextWals = walSettingService.setNextWals(categoryTypes, USER_ID);
+        NextWals setNextWals = walSettingAdapter.setNextWals(categoryTypes, USER_ID);
 
         // when
-        walSettingService.setTodayWals(timeTypes, USER_ID, setNextWals);
+        walSettingAdapter.setTodayWals(timeTypes, USER_ID, setNextWals);
 
         // then
         List<TodayWal> todayWals = todayWalRepository.findTodayWalsByUserId(USER_ID);
@@ -125,7 +125,7 @@ class WalSettingServiceTest {
     void updateWalInfoByAddCategoryTypesInEmptyTimeTypes() {
         // when, then
         assertThatCode(() ->
-                walSettingService
+                walSettingAdapter
                         .updateWalInfoByAddCategoryTypesInEmptyTimeTypes(new HashSet<>(), new HashSet<>(), USER_ID)
         ).doesNotThrowAnyException();
     }

@@ -1,10 +1,10 @@
 package backend.wal.onboarding.domain.repository;
 
 import backend.wal.config.JpaRepositoryTestConfig;
-import backend.wal.onboard.domain.onboarding.aggregate.Onboarding;
-import backend.wal.onboard.domain.common.WalTimeType;
-import backend.wal.onboard.domain.onboarding.repository.OnboardingRepository;
-import backend.wal.onboard.domain.onboarding.repository.OnboardingTimeRepository;
+import backend.wal.wal.onboarding.domain.aggregate.Onboarding;
+import backend.wal.wal.common.domain.WalTimeType;
+import backend.wal.wal.onboarding.domain.repository.OnboardingRepository;
+import backend.wal.wal.onboarding.domain.repository.OnboardingTimeRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

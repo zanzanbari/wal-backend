@@ -1,16 +1,16 @@
 package backend.wal.wal.repository;
 
 import backend.wal.config.jpa.JPAConfig;
-import backend.wal.onboard.domain.common.WalCategoryType;
-import backend.wal.onboard.domain.common.WalTimeType;
-import backend.wal.onboard.domain.nextwal.NextWals;
-import backend.wal.onboard.domain.nextwal.aggregate.Category;
-import backend.wal.onboard.domain.nextwal.aggregate.Item;
-import backend.wal.onboard.domain.todaywal.aggregate.TodayWal;
-import backend.wal.onboard.domain.nextwal.repository.CategoryRepository;
-import backend.wal.onboard.domain.nextwal.repository.ItemRepository;
-import backend.wal.onboard.domain.todaywal.repository.TodayWalRepository;
-import backend.wal.onboard.domain.service.WalSettingService;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.common.domain.WalTimeType;
+import backend.wal.wal.nextwal.domain.NextWals;
+import backend.wal.wal.nextwal.domain.aggregate.Category;
+import backend.wal.wal.nextwal.domain.aggregate.Item;
+import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
+import backend.wal.wal.nextwal.domain.repository.CategoryRepository;
+import backend.wal.wal.nextwal.domain.repository.ItemRepository;
+import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
+import backend.wal.wal.onboarding.adapter.WalSettingAdapter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static backend.wal.onboard.domain.common.WalCategoryType.YELL;
+import static backend.wal.wal.common.domain.WalCategoryType.YELL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -45,7 +45,7 @@ class TodayWalRepositoryTest {
     private ItemRepository itemRepository;
 
     @Autowired
-    private WalSettingService walSettingService;
+    private WalSettingAdapter walSettingAdapter;
 
     @DisplayName("userId 로 해당 유저의 TodayWal 정보들을 가져온다")
     @Test
@@ -63,8 +63,8 @@ class TodayWalRepositoryTest {
 
         itemRepository.saveAll(List.of(comedyItem, fussItem, comfortItem, yellItem));
 
-        NextWals save = walSettingService.setNextWals(Set.of(COMEDY, FUSS, COMFORT, YELL), USER_ID);
-        walSettingService.setTodayWals(Set.of(MORNING, AFTERNOON, NIGHT), USER_ID, save);
+        NextWals save = walSettingAdapter.setNextWals(Set.of(COMEDY, FUSS, COMFORT, YELL), USER_ID);
+        walSettingAdapter.setTodayWals(Set.of(MORNING, AFTERNOON, NIGHT), USER_ID, save);
 
         // when
         List<TodayWal> find = todayWalRepository.findTodayWalsByUserId(USER_ID);
@@ -90,8 +90,8 @@ class TodayWalRepositoryTest {
 
         itemRepository.saveAll(List.of(comedyItem, fussItem, comfortItem, yellItem));
 
-        NextWals save = walSettingService.setNextWals(Set.of(COMEDY, FUSS, COMFORT, YELL), USER_ID);
-        walSettingService.setTodayWals(Set.of(MORNING, AFTERNOON, NIGHT), USER_ID, save);
+        NextWals save = walSettingAdapter.setNextWals(Set.of(COMEDY, FUSS, COMFORT, YELL), USER_ID);
+        walSettingAdapter.setTodayWals(Set.of(MORNING, AFTERNOON, NIGHT), USER_ID, save);
 
         // when
         List<TodayWal> find = todayWalRepository.findTodayWalsByTimeTypeInAndUserId(timeTypes, USER_ID);

@@ -1,6 +1,6 @@
 package backend.wal.onboarding.controller;
 
-import backend.wal.onboard.web.OnboardingController;
+import backend.wal.wal.onboarding.web.OnboardingController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

@@ -1,9 +1,9 @@
 package backend.wal.wal.domain;
 
-import backend.wal.onboard.domain.nextwal.aggregate.Item;
-import backend.wal.onboard.domain.nextwal.aggregate.NextWal;
-import backend.wal.onboard.domain.nextwal.NextWals;
-import backend.wal.onboard.domain.nextwal.support.RandomRangeGenerator;
+import backend.wal.wal.nextwal.domain.aggregate.Item;
+import backend.wal.wal.nextwal.domain.aggregate.NextWal;
+import backend.wal.wal.nextwal.domain.NextWals;
+import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

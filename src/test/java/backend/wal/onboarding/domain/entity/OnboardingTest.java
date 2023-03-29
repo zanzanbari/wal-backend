@@ -1,10 +1,10 @@
 package backend.wal.onboarding.domain.entity;
 
-import backend.wal.onboard.domain.onboarding.aggregate.Onboarding;
-import backend.wal.onboard.domain.onboarding.aggregate.OnboardingCategory;
-import backend.wal.onboard.domain.onboarding.aggregate.OnboardingTime;
-import backend.wal.onboard.domain.common.WalCategoryType;
-import backend.wal.onboard.domain.common.WalTimeType;
+import backend.wal.wal.onboarding.domain.aggregate.Onboarding;
+import backend.wal.wal.onboarding.domain.aggregate.OnboardingCategory;
+import backend.wal.wal.onboarding.domain.aggregate.OnboardingTime;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.common.domain.WalTimeType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

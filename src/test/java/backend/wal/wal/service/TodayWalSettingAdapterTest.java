@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class TodayWalSettingServiceTest {
+class TodayWalSettingAdapterTest {
 
     private static final Long TODAY_WAL_ID = 1L;
     private static final Long USER_ID = 1L;
