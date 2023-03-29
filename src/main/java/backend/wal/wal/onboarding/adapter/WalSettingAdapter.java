@@ -1,19 +1,18 @@
-package backend.wal.wal.common.adapter;
+package backend.wal.wal.onboarding.adapter;
 
-import backend.wal.wal.common.domain.WalTimeTypes;
-import backend.wal.wal.common.domain.aggregate.WalCategoryType;
-import backend.wal.wal.common.domain.aggregate.WalTimeType;
-import backend.wal.wal.onboarding.adapter.WalSettingPort;
+import backend.wal.wal.onboarding.application.port.out.WalSettingPort;
 import backend.wal.wal.todaywal.application.port.TodayWalSettingUseCase;
 import backend.wal.wal.nextwal.application.port.NextWalSettingUseCase;
 import backend.wal.wal.nextwal.domain.NextWals;
 import backend.wal.wal.nextwal.domain.aggregate.NextWal;
-import backend.wal.support.annotation.DomainService;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.common.domain.WalTimeType;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
-@DomainService
-public class WalSettingAdapter implements WalSettingPort {
+@Component
+public final class WalSettingAdapter implements WalSettingPort {
 
     private final NextWalSettingUseCase nextWalSettingUseCase;
     private final TodayWalSettingUseCase todayWalSettingUseCase;
@@ -40,21 +39,21 @@ public class WalSettingAdapter implements WalSettingPort {
     }
 
     @Override
-    public void updateTodayWalByAddTimeTypes(WalTimeTypes willAddAfterNow, Long userId) {
-        setTodayWals(willAddAfterNow.getValues(), userId, nextWalSettingUseCase.getNextWalsByUserId(userId));
+    public void updateTodayWalByAddTimeTypes(Set<WalTimeType> willAddAfterNow, Long userId) {
+        setTodayWals(willAddAfterNow, userId, nextWalSettingUseCase.getNextWalsByUserId(userId));
     }
 
     @Override
     public Set<WalTimeType> updateWalInfoByCancelCategoryTypes(Set<WalCategoryType> canceledCategoryTypes,
                                                                Long userId) {
         nextWalSettingUseCase.deleteNextWalsByCanceledCategoryTypes(canceledCategoryTypes, userId);
-        WalTimeTypes willCancelAfterNow = todayWalSettingUseCase.extractAfterNow(canceledCategoryTypes, userId);
+        Set<WalTimeType> willCancelAfterNow = todayWalSettingUseCase.extractAfterNow(canceledCategoryTypes, userId);
         todayWalSettingUseCase.deleteTodayWalsByWillCancelAfterNow(willCancelAfterNow, userId);
-        return willCancelAfterNow.getValues();
+        return willCancelAfterNow;
     }
 
     @Override
-    public void updateTodayWalByCancelTimeTypes(WalTimeTypes willCancelAfterNow, Long userId) {
+    public void updateTodayWalByCancelTimeTypes(Set<WalTimeType> willCancelAfterNow, Long userId) {
         todayWalSettingUseCase.deleteTodayWalsByWillCancelAfterNow(willCancelAfterNow, userId);
     }
 
