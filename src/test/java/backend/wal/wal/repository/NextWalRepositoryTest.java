@@ -1,10 +1,10 @@
 package backend.wal.wal.repository;
 
 import backend.wal.config.jpa.JPAConfig;
-import backend.wal.onboard.domain.nextwal.NextWals;
-import backend.wal.onboard.domain.nextwal.aggregate.NextWal;
-import backend.wal.onboard.domain.nextwal.repository.NextWalRepository;
-import backend.wal.onboard.domain.service.WalSettingService;
+import backend.wal.wal.nextwal.domain.NextWals;
+import backend.wal.wal.nextwal.domain.aggregate.NextWal;
+import backend.wal.wal.nextwal.domain.repository.NextWalRepository;
+import backend.wal.wal.onboarding.adapter.WalSettingAdapter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +29,13 @@ class NextWalRepositoryTest {
     private NextWalRepository nextWalRepository;
 
     @Autowired
-    private WalSettingService walSettingService;
+    private WalSettingAdapter walSettingAdapter;
 
     @DisplayName("userId 로 해당 유저의 NextWal 정보들을 가져온다")
     @Test
     void findNextWalsByUserId() {
         // given
-        NextWals save = walSettingService.setNextWals(Set.of(COMEDY, FUSS, COMFORT, YELL), USER_ID);
+        NextWals save = walSettingAdapter.setNextWals(Set.of(COMEDY, FUSS, COMFORT, YELL), USER_ID);
 
         // when
         List<NextWal> find = nextWalRepository.findNextWalsByUserId(USER_ID);
@@ -51,7 +51,7 @@ class NextWalRepositoryTest {
     @Test
     void findNextWalsByCategoryTypeInAndUserId() {
         // given
-        walSettingService.setNextWals(Set.of(COMEDY, FUSS, COMFORT, YELL), USER_ID);
+        walSettingAdapter.setNextWals(Set.of(COMEDY, FUSS, COMFORT, YELL), USER_ID);
 
         // when
         List<NextWal> find = nextWalRepository.findNextWalsByCategoryTypeInAndUserId(Set.of(COMEDY, YELL), USER_ID);

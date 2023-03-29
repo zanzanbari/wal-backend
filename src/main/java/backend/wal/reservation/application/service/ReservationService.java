@@ -1,6 +1,6 @@
 package backend.wal.reservation.application.service;
 
-import backend.wal.onboard.application.port.RegisterReservationTodayWalUseCase;
+import backend.wal.wal.todaywal.application.port.RegisterReservationTodayWalUseCase;
 import backend.wal.reservation.application.port.RegisterReservationUseCase;
 import backend.wal.reservation.application.port.dto.AddReservationRequestDto;
 import backend.wal.reservation.application.port.dto.RegisterReservationResponseDto;

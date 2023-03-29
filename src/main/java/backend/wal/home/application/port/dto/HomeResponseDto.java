@@ -3,9 +3,9 @@ package backend.wal.home.application.port.dto;
 import backend.wal.home.web.dto.HomeResponse;
 import backend.wal.home.domain.Home;
 import backend.wal.home.domain.OpenStatus;
-import backend.wal.onboard.domain.common.WalCategoryType;
-import backend.wal.onboard.domain.common.WalTimeType;
-import backend.wal.onboard.domain.todaywal.aggregate.ShowStatus;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.common.domain.WalTimeType;
+import backend.wal.wal.todaywal.domain.aggregate.ShowStatus;
 
 public final class HomeResponseDto {
 

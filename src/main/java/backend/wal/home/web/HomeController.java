@@ -2,7 +2,7 @@ package backend.wal.home.web;
 
 import backend.wal.home.application.port.RetrieveHomeUseCase;
 import backend.wal.home.web.dto.HomeResponse;
-import backend.wal.onboard.application.port.UpdateTodayWalShowStatusUseCase;
+import backend.wal.wal.todaywal.application.port.UpdateTodayWalShowStatusUseCase;
 import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.LoginUser;
 import lombok.RequiredArgsConstructor;

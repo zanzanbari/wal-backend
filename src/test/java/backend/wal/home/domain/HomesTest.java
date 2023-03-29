@@ -1,7 +1,7 @@
 package backend.wal.home.domain;
 
-import backend.wal.onboard.domain.common.WalCategoryType;
-import backend.wal.onboard.domain.common.WalTimeType;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.reservation.domain.aggregate.ShowStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

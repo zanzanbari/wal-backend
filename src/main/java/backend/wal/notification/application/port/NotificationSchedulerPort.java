@@ -1,6 +1,6 @@
 package backend.wal.notification.application.port;
 
-import backend.wal.onboard.domain.common.WalTimeType;
+import backend.wal.wal.common.domain.WalTimeType;
 
 public interface NotificationSchedulerPort {
 

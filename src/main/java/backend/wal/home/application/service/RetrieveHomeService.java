@@ -5,7 +5,7 @@ import backend.wal.home.application.port.dto.HomeResponseDto;
 import backend.wal.home.web.dto.HomeResponse;
 import backend.wal.home.domain.Homes;
 import backend.wal.home.domain.Home;
-import backend.wal.onboard.domain.todaywal.repository.TodayWalRepository;
+import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
 import backend.wal.support.annotation.AppService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
