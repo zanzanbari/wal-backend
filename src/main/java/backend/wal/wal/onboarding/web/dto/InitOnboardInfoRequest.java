@@ -1,8 +1,8 @@
-package backend.wal.onboard.onboarding.web.dto;
+package backend.wal.wal.onboarding.web.dto;
 
-import backend.wal.onboard.onboarding.application.port.dto.InitOnboardInfoRequestDto;
-import backend.wal.onboard.common.WalCategoryType;
-import backend.wal.onboard.common.WalTimeType;
+import backend.wal.wal.onboarding.application.port.in.dto.InitOnboardInfoRequestDto;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.common.domain.WalTimeType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,7 @@
-package backend.wal.onboard.onboarding.web.dto;
+package backend.wal.wal.onboarding.web.dto;
 
-import backend.wal.onboard.onboarding.application.port.dto.ModifyOnboardCategoryRequestDto;
-import backend.wal.onboard.common.WalCategoryType;
+import backend.wal.wal.onboarding.application.port.in.dto.ModifyOnboardCategoryRequestDto;
+import backend.wal.wal.common.domain.WalCategoryType;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

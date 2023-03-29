@@ -1,12 +1,12 @@
-package backend.wal.onboard.onboarding.web;
+package backend.wal.wal.onboarding.web;
 
-import backend.wal.onboard.onboarding.application.port.RegisterOnboardingUseCase;
-import backend.wal.onboard.onboarding.application.port.UpdateOnboardingCategoryUseCase;
-import backend.wal.onboard.onboarding.application.port.UpdateOnboardingTimeUseCase;
-import backend.wal.onboard.onboarding.web.dto.InitOnboardInfoRequest;
-import backend.wal.onboard.onboarding.web.dto.OnboardInfoResponse;
-import backend.wal.onboard.onboarding.web.dto.ModifyOnboardCategoryRequest;
-import backend.wal.onboard.onboarding.web.dto.ModifyOnboardTimeRequest;
+import backend.wal.wal.onboarding.application.port.in.RegisterOnboardingUseCase;
+import backend.wal.wal.onboarding.application.port.in.UpdateOnboardingCategoryUseCase;
+import backend.wal.wal.onboarding.application.port.in.UpdateOnboardingTimeUseCase;
+import backend.wal.wal.onboarding.web.dto.InitOnboardInfoRequest;
+import backend.wal.wal.onboarding.web.dto.OnboardInfoResponse;
+import backend.wal.wal.onboarding.web.dto.ModifyOnboardCategoryRequest;
+import backend.wal.wal.onboarding.web.dto.ModifyOnboardTimeRequest;
 import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.LoginUser;
 import backend.wal.user.application.port.ChangeUserInfoUseCase;

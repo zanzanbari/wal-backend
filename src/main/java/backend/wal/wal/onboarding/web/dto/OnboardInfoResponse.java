@@ -1,4 +1,4 @@
-package backend.wal.onboard.onboarding.web.dto;
+package backend.wal.wal.onboarding.web.dto;
 
 public class OnboardInfoResponse {
 

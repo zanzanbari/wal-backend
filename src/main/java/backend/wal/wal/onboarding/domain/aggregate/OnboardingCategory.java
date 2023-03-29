@@ -1,6 +1,6 @@
-package backend.wal.onboard.onboarding.domain.aggregate;
+package backend.wal.wal.onboarding.domain.aggregate;
 
-import backend.wal.onboard.common.WalCategoryType;
+import backend.wal.wal.common.domain.WalCategoryType;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

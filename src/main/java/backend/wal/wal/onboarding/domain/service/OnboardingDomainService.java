@@ -1,23 +1,23 @@
 package backend.wal.wal.onboarding.domain.service;
 
-import backend.wal.wal.onboarding.application.port.dto.WalCategoryTypesResponseDto;
-import backend.wal.wal.onboarding.application.port.dto.WalTimeTypesResponseDto;
-import backend.wal.wal.common.domain.aggregate.WalCategoryType;
-import backend.wal.wal.common.domain.aggregate.WalTimeType;
+import backend.wal.wal.onboarding.application.port.in.dto.WalCategoryTypesResponseDto;
+import backend.wal.wal.onboarding.application.port.in.dto.WalTimeTypesResponseDto;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.wal.onboarding.domain.aggregate.Onboarding;
 import backend.wal.wal.onboarding.domain.repository.OnboardingRepository;
-import backend.wal.wal.common.domain.WalTimeTypes;
+import backend.wal.wal.todaywal.domain.WalTimeTypes;
 import backend.wal.wal.onboarding.exception.NotFoundOnboardingException;
 import backend.wal.support.annotation.DomainService;
 
 import java.util.Set;
 
 @DomainService
-public class OnboardingService {
+public class OnboardingDomainService {
 
     private final OnboardingRepository onboardingRepository;
 
-    public OnboardingService(final OnboardingRepository onboardingRepository) {
+    public OnboardingDomainService(final OnboardingRepository onboardingRepository) {
         this.onboardingRepository = onboardingRepository;
     }
 

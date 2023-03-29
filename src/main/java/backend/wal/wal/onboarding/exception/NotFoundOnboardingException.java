@@ -1,4 +1,4 @@
-package backend.wal.onboard.onboarding.exception;
+package backend.wal.wal.onboarding.exception;
 
 import backend.wal.advice.exception.NotFoundException;
 

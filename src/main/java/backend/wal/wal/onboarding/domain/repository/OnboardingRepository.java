@@ -1,6 +1,6 @@
-package backend.wal.onboard.onboarding.domain.repository;
+package backend.wal.wal.onboarding.domain.repository;
 
-import backend.wal.onboard.onboarding.domain.aggregate.Onboarding;
+import backend.wal.wal.onboarding.domain.aggregate.Onboarding;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
