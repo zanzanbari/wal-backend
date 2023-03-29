@@ -1,5 +1,10 @@
 package backend.wal.onboarding.domain.entity;
 
+import backend.wal.onboard.domain.onboarding.aggregate.Onboarding;
+import backend.wal.onboard.domain.onboarding.aggregate.OnboardingCategory;
+import backend.wal.onboard.domain.onboarding.aggregate.OnboardingTime;
+import backend.wal.onboard.domain.common.WalCategoryType;
+import backend.wal.onboard.domain.common.WalTimeType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -9,8 +14,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static backend.wal.onboarding.domain.entity.WalCategoryType.*;
-import static backend.wal.onboarding.domain.entity.WalTimeType.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 

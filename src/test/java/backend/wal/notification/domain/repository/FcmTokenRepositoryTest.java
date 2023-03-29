@@ -1,7 +1,7 @@
 package backend.wal.notification.domain.repository;
 
 import backend.wal.config.JpaRepositoryTestConfig;
-import backend.wal.notification.domain.entity.FcmToken;
+import backend.wal.notification.domain.FcmToken;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -2,7 +2,7 @@ package backend.wal.auth.exception;
 
 import backend.wal.advice.exception.UnAuthorizedException;
 
-public class UnAuthorizedTokenException extends UnAuthorizedException {
+public final class UnAuthorizedTokenException extends UnAuthorizedException {
 
     private UnAuthorizedTokenException(final String message) {
         super(message);

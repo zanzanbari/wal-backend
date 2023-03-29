@@ -1,13 +1,14 @@
 package backend.wal.auth.app.service;
 
-import backend.wal.auth.app.dto.request.LoginRequestDto;
-import backend.wal.auth.infrastructure.kakao.KakaoApiClient;
-import backend.wal.auth.infrastructure.kakao.dto.KakaoAccount;
-import backend.wal.auth.infrastructure.kakao.dto.KakaoUserInfoResponse;
-import backend.wal.auth.infrastructure.kakao.dto.Profile;
-import backend.wal.notification.service.FcmTokenService;
-import backend.wal.user.app.service.UserService;
-import backend.wal.user.domain.aggregate.vo.SocialType;
+import backend.wal.auth.application.port.dto.LoginRequestDto;
+import backend.wal.auth.application.service.KakaoAuthService;
+import backend.wal.auth.adapter.oauth.kakao.KakaoApiClientCaller;
+import backend.wal.auth.adapter.oauth.kakao.dto.KakaoAccount;
+import backend.wal.auth.adapter.oauth.kakao.dto.KakaoUserInfoResponse;
+import backend.wal.auth.adapter.oauth.kakao.dto.Profile;
+import backend.wal.notification.application.service.RegisterFcmTokenService;
+import backend.wal.user.application.service.ChangeUserInfoService;
+import backend.wal.user.domain.aggregate.SocialType;
 import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.user.domain.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -30,16 +31,16 @@ class KakaoAuthServiceTest {
     private static final String NICKNAME = "nickname";
 
     @Mock
-    private KakaoApiClient kakaoApiClient;
+    private KakaoApiClientCaller kakaoApiClientCaller;
 
     @Mock
     private UserRepository userRepository;
 
     @Mock
-    private UserService userService;
+    private ChangeUserInfoService userService;
 
     @Mock
-    private FcmTokenService fcmTokenService;
+    private RegisterFcmTokenService registerFcmTokenService;
 
     @InjectMocks
     private KakaoAuthService kakaoAuthService;
@@ -51,7 +52,7 @@ class KakaoAuthServiceTest {
         LoginRequestDto requestDto = new LoginRequestDto(SOCIAL_ACCESS_TOKEN, SOCIAL_TYPE, FCM_TOKEN);
         KakaoUserInfoResponse kakaoResponse = new KakaoUserInfoResponse(SOCIAL_ID, new KakaoAccount(new Profile(NICKNAME)));
         User alreadyUser = User.createGeneral(requestDto.toCreateUserDto(kakaoResponse.getNickname(), kakaoResponse.getId()));
-        when(kakaoApiClient.getKakaoUserInfo("Bearer " + SOCIAL_ACCESS_TOKEN))
+        when(kakaoApiClientCaller.getKakaoUserInfo("Bearer " + SOCIAL_ACCESS_TOKEN))
                 .thenReturn(kakaoResponse);
         when(userRepository.findUserBySocialInfoSocialIdAndSocialInfoSocialType(kakaoResponse.getId(), SOCIAL_TYPE))
                 .thenReturn(alreadyUser);
@@ -70,7 +71,7 @@ class KakaoAuthServiceTest {
         Long newUserId = 2L;
         LoginRequestDto requestDto = new LoginRequestDto(SOCIAL_ACCESS_TOKEN, SOCIAL_TYPE, FCM_TOKEN);
         KakaoUserInfoResponse kakaoResponse = new KakaoUserInfoResponse(SOCIAL_ID, new KakaoAccount(new Profile(NICKNAME)));
-        when(kakaoApiClient.getKakaoUserInfo("Bearer " + SOCIAL_ACCESS_TOKEN))
+        when(kakaoApiClientCaller.getKakaoUserInfo("Bearer " + SOCIAL_ACCESS_TOKEN))
                 .thenReturn(kakaoResponse);
         when(userRepository.findUserBySocialInfoSocialIdAndSocialInfoSocialType(kakaoResponse.getId(), SOCIAL_TYPE))
                 .thenReturn(null);

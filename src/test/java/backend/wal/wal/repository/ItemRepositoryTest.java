@@ -1,16 +1,15 @@
 package backend.wal.wal.repository;
 
 import backend.wal.config.JpaRepositoryTestConfig;
-import backend.wal.wal.domain.entity.Category;
-import backend.wal.wal.domain.entity.Item;
-import backend.wal.wal.domain.repository.CategoryRepository;
-import backend.wal.wal.domain.repository.ItemRepository;
+import backend.wal.onboard.domain.nextwal.aggregate.Category;
+import backend.wal.onboard.domain.nextwal.aggregate.Item;
+import backend.wal.onboard.domain.nextwal.repository.CategoryRepository;
+import backend.wal.onboard.domain.nextwal.repository.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static backend.wal.onboarding.domain.entity.WalCategoryType.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 

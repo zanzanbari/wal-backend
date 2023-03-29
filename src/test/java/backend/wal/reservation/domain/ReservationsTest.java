@@ -1,10 +1,10 @@
 package backend.wal.reservation.domain;
 
-import backend.wal.reservation.app.dto.AddReservationRequestDto;
-import backend.wal.reservation.app.dto.ReservationCalendarResponseDto;
-import backend.wal.reservation.app.dto.ReservationHistoryResponseDto;
-import backend.wal.reservation.domain.aggregate.entity.Reservation;
-import backend.wal.reservation.domain.aggregate.vo.ShowStatus;
+import backend.wal.reservation.application.port.dto.AddReservationRequestDto;
+import backend.wal.reservation.application.port.dto.ReservationCalendarResponseDto;
+import backend.wal.reservation.application.port.dto.ReservationHistoryResponseDto;
+import backend.wal.reservation.domain.aggregate.Reservation;
+import backend.wal.reservation.domain.aggregate.ShowStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

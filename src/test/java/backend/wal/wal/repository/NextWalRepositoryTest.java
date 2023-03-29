@@ -1,10 +1,10 @@
 package backend.wal.wal.repository;
 
 import backend.wal.config.jpa.JPAConfig;
-import backend.wal.wal.domain.NextWals;
-import backend.wal.wal.domain.entity.NextWal;
-import backend.wal.wal.domain.repository.NextWalRepository;
-import backend.wal.wal.service.WalSettingService;
+import backend.wal.onboard.domain.nextwal.NextWals;
+import backend.wal.onboard.domain.nextwal.aggregate.NextWal;
+import backend.wal.onboard.domain.nextwal.repository.NextWalRepository;
+import backend.wal.onboard.domain.service.WalSettingService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Set;
 
-import static backend.wal.onboarding.domain.entity.WalCategoryType.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 

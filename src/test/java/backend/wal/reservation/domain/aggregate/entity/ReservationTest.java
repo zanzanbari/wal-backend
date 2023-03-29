@@ -1,7 +1,8 @@
 package backend.wal.reservation.domain.aggregate.entity;
 
-import backend.wal.reservation.app.dto.AddReservationRequestDto;
-import backend.wal.reservation.domain.aggregate.vo.ShowStatus;
+import backend.wal.reservation.application.port.dto.AddReservationRequestDto;
+import backend.wal.reservation.domain.aggregate.Reservation;
+import backend.wal.reservation.domain.aggregate.ShowStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

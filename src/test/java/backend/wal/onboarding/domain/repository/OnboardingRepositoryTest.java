@@ -1,7 +1,8 @@
 package backend.wal.onboarding.domain.repository;
 
 import backend.wal.config.JpaRepositoryTestConfig;
-import backend.wal.onboarding.domain.entity.Onboarding;
+import backend.wal.onboard.domain.onboarding.aggregate.Onboarding;
+import backend.wal.onboard.domain.onboarding.repository.OnboardingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
 
-import static backend.wal.onboarding.domain.entity.WalCategoryType.*;
-import static backend.wal.onboarding.domain.entity.WalTimeType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JpaRepositoryTestConfig
@@ -35,7 +34,7 @@ class OnboardingRepositoryTest {
     @Test
     void findByUserId() {
         // when
-        Onboarding find = onboardingRepository.findByUserId(USER_ID);
+        Onboarding find = onboardingRepository.findByUserId(USER_ID).orElseThrow();
 
         // then
         assertThat(find).isEqualTo(onboarding);
