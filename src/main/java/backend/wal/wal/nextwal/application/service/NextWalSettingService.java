@@ -1,28 +1,28 @@
-package backend.wal.wal.nextwal.domain.service;
+package backend.wal.wal.nextwal.application.service;
 
 import backend.wal.wal.nextwal.application.port.NextWalSettingUseCase;
+import backend.wal.wal.nextwal.domain.repository.NextWalRepository;
+import backend.wal.wal.nextwal.domain.repository.ItemRepository;
+import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
 import backend.wal.wal.nextwal.domain.NextWals;
 import backend.wal.wal.nextwal.domain.aggregate.Item;
 import backend.wal.wal.nextwal.domain.aggregate.NextWal;
-import backend.wal.wal.nextwal.domain.repository.ItemRepository;
-import backend.wal.wal.nextwal.domain.repository.NextWalRepository;
-import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
-import backend.wal.wal.common.domain.aggregate.WalCategoryType;
-import backend.wal.support.annotation.DomainService;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.support.annotation.AppService;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@DomainService
-public class NextWalService implements NextWalSettingUseCase {
+@AppService
+public class NextWalSettingService implements NextWalSettingUseCase {
 
     private final ItemRepository itemRepository;
     private final NextWalRepository nextWalRepository;
     private final RandomRangeGenerator randomRangeGenerator;
 
-    public NextWalService(final ItemRepository itemRepository, final NextWalRepository nextWalRepository,
-                          final RandomRangeGenerator randomRangeGenerator) {
+    public NextWalSettingService(final ItemRepository itemRepository, final NextWalRepository nextWalRepository,
+                                 final RandomRangeGenerator randomRangeGenerator) {
         this.itemRepository = itemRepository;
         this.nextWalRepository = nextWalRepository;
         this.randomRangeGenerator = randomRangeGenerator;
