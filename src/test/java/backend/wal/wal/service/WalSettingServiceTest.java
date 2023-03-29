@@ -1,14 +1,15 @@
 package backend.wal.wal.service;
 
-import backend.wal.onboarding.domain.entity.WalCategoryType;
-import backend.wal.onboarding.domain.entity.WalTimeType;
-import backend.wal.wal.domain.NextWals;
-import backend.wal.wal.domain.entity.Category;
-import backend.wal.wal.domain.entity.Item;
-import backend.wal.wal.domain.entity.TodayWal;
-import backend.wal.wal.domain.repository.CategoryRepository;
-import backend.wal.wal.domain.repository.ItemRepository;
-import backend.wal.wal.domain.repository.TodayWalRepository;
+import backend.wal.onboard.domain.service.WalSettingService;
+import backend.wal.onboard.domain.common.WalCategoryType;
+import backend.wal.onboard.domain.common.WalTimeType;
+import backend.wal.onboard.domain.nextwal.NextWals;
+import backend.wal.onboard.domain.nextwal.aggregate.Category;
+import backend.wal.onboard.domain.nextwal.aggregate.Item;
+import backend.wal.onboard.domain.todaywal.aggregate.TodayWal;
+import backend.wal.onboard.domain.nextwal.repository.CategoryRepository;
+import backend.wal.onboard.domain.nextwal.repository.ItemRepository;
+import backend.wal.onboard.domain.todaywal.repository.TodayWalRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,8 +24,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static backend.wal.onboarding.domain.entity.WalCategoryType.*;
-import static backend.wal.onboarding.domain.entity.WalTimeType.*;
+import static backend.wal.onboard.domain.common.WalCategoryType.*;
+import static backend.wal.onboard.domain.common.WalTimeType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 

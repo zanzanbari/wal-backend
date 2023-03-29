@@ -1,8 +1,6 @@
 package backend.wal.home.domain;
 
-import backend.wal.home.app.dto.HomeResponseDto;
-import backend.wal.home.domain.entity.Home;
-import backend.wal.home.domain.vo.OpenStatus;
+import backend.wal.home.application.port.dto.HomeResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.List;

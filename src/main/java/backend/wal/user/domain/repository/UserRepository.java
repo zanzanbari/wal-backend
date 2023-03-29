@@ -1,14 +1,14 @@
 package backend.wal.user.domain.repository;
 
-import backend.wal.user.domain.aggregate.vo.SocialType;
+import backend.wal.user.domain.aggregate.SocialType;
 import backend.wal.user.domain.aggregate.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findUserById(Long userId);
-
-    boolean existsUserBySocialInfoSocialIdAndSocialInfoSocialType(String socialId, SocialType socialType);
+    Optional<User> findUserById(Long userId);
 
     User findUserBySocialInfoSocialIdAndSocialInfoSocialType(String socialId, SocialType socialType);
 }

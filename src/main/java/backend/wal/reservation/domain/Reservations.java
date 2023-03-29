@@ -1,8 +1,8 @@
 package backend.wal.reservation.domain;
 
-import backend.wal.reservation.app.dto.ReservationCalendarResponseDto;
-import backend.wal.reservation.app.dto.ReservationHistoryResponseDto;
-import backend.wal.reservation.domain.aggregate.entity.Reservation;
+import backend.wal.reservation.application.port.dto.ReservationCalendarResponseDto;
+import backend.wal.reservation.application.port.dto.ReservationHistoryResponseDto;
+import backend.wal.reservation.domain.aggregate.Reservation;
 
 import java.util.List;
 import java.util.stream.Collectors;

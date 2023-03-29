@@ -1,9 +1,9 @@
 package backend.wal.config.web;
 
-import backend.wal.auth.support.interceptor.AuthenticationInterceptor;
-import backend.wal.auth.support.interceptor.ReissueTokenInterceptor;
-import backend.wal.auth.support.resolver.LoginUserResolver;
-import backend.wal.auth.support.resolver.RefreshTokenResolver;
+import backend.wal.auth.web.support.interceptor.AuthenticationInterceptor;
+import backend.wal.auth.web.support.interceptor.ReissueTokenInterceptor;
+import backend.wal.auth.web.support.resolver.LoginUserResolver;
+import backend.wal.auth.web.support.resolver.RefreshTokenResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;

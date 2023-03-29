@@ -1,8 +1,10 @@
 package backend.wal.onboarding.domain.repository;
 
 import backend.wal.config.JpaRepositoryTestConfig;
-import backend.wal.onboarding.domain.entity.Onboarding;
-import backend.wal.onboarding.domain.entity.WalTimeType;
+import backend.wal.onboard.domain.onboarding.aggregate.Onboarding;
+import backend.wal.onboard.domain.common.WalTimeType;
+import backend.wal.onboard.domain.onboarding.repository.OnboardingRepository;
+import backend.wal.onboard.domain.onboarding.repository.OnboardingTimeRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,7 +15,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import static backend.wal.onboarding.domain.entity.WalTimeType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JpaRepositoryTestConfig

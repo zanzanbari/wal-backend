@@ -1,11 +1,10 @@
 package backend.wal.user.domain.aggregate.entity;
 
-import backend.wal.onboarding.domain.entity.Onboarding;
-import backend.wal.user.domain.aggregate.vo.SocialInfo;
-import backend.wal.user.app.dto.request.CreateUserDto;
-import backend.wal.user.domain.aggregate.vo.SocialType;
-import backend.wal.user.domain.aggregate.vo.UserRole;
-import backend.wal.user.domain.aggregate.vo.UserStatus;
+import backend.wal.user.application.port.dto.CreateUserDto;
+import backend.wal.user.domain.aggregate.SocialInfo;
+import backend.wal.user.domain.aggregate.SocialType;
+import backend.wal.user.domain.aggregate.UserRole;
+import backend.wal.user.domain.aggregate.UserStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,10 +34,6 @@ public class User {
     @Column(nullable = false, length = 10)
     private UserRole userRole;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "onboarding_id")
-    private Onboarding onboarding;
-
     private User(final String nickname, final SocialInfo socialInfo, final UserStatus status, final UserRole userRole) {
         this.nickname = nickname;
         this.socialInfo = socialInfo;
@@ -61,10 +56,6 @@ public class User {
 
     public void changeNickname(String nickname) {
         this.nickname = nickname;
-    }
-
-    public void setOnboardInfo(Onboarding onboarding) {
-        this.onboarding = onboarding;
     }
 
     public boolean isDeleted() {

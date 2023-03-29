@@ -1,10 +1,8 @@
 package backend.wal.home.domain;
 
-import backend.wal.home.domain.entity.Home;
-import backend.wal.home.domain.vo.OpenStatus;
-import backend.wal.onboarding.domain.entity.WalCategoryType;
-import backend.wal.onboarding.domain.entity.WalTimeType;
-import backend.wal.reservation.domain.aggregate.vo.ShowStatus;
+import backend.wal.onboard.domain.common.WalCategoryType;
+import backend.wal.onboard.domain.common.WalTimeType;
+import backend.wal.reservation.domain.aggregate.ShowStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,8 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static backend.wal.home.domain.vo.OpenStatus.*;
-import static backend.wal.onboarding.domain.entity.WalTimeType.*;
+import static backend.wal.home.domain.OpenStatus.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class HomesTest {

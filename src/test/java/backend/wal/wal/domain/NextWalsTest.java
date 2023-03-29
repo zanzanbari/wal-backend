@@ -1,7 +1,9 @@
 package backend.wal.wal.domain;
 
-import backend.wal.wal.domain.entity.Item;
-import backend.wal.wal.domain.entity.NextWal;
+import backend.wal.onboard.domain.nextwal.aggregate.Item;
+import backend.wal.onboard.domain.nextwal.aggregate.NextWal;
+import backend.wal.onboard.domain.nextwal.NextWals;
+import backend.wal.onboard.domain.nextwal.support.RandomRangeGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static backend.wal.onboarding.domain.entity.WalCategoryType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class NextWalsTest {
@@ -32,7 +33,7 @@ class NextWalsTest {
     @DisplayName("NextWal 과 랜덤범위 난수 생성기를 받아 NextWal 을 가져온다")
     @ParameterizedTest
     @MethodSource("provideGivenNextWalsAndRandomRangeGeneratorAndExpect")
-    void getRandomBy(List<NextWal> givenNextWals, RandomRangeGenerator randomRangeGenerator,  NextWal expect) {
+    void getRandomBy(List<NextWal> givenNextWals, RandomRangeGenerator randomRangeGenerator, NextWal expect) {
         // given
         nextWals = new NextWals(givenNextWals);
 
