@@ -1,7 +1,7 @@
-package backend.wal.onboard.nextwal.domain.repository;
+package backend.wal.wal.nextwal.domain.repository;
 
-import backend.wal.onboard.common.WalCategoryType;
-import backend.wal.onboard.nextwal.domain.aggregate.NextWal;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.nextwal.domain.aggregate.NextWal;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

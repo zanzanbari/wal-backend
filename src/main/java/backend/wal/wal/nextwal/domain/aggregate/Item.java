@@ -1,4 +1,4 @@
-package backend.wal.onboard.nextwal.domain.aggregate;
+package backend.wal.wal.nextwal.domain.aggregate;
 
 import lombok.AccessLevel;
 import lombok.Builder;

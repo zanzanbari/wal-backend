@@ -1,7 +1,7 @@
-package backend.wal.onboard.nextwal.domain;
+package backend.wal.wal.nextwal.domain;
 
-import backend.wal.onboard.nextwal.domain.aggregate.NextWal;
-import backend.wal.onboard.nextwal.domain.support.RandomRangeGenerator;
+import backend.wal.wal.nextwal.domain.aggregate.NextWal;
+import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
 
 import java.util.List;
 
