@@ -2,10 +2,10 @@ package backend.wal.notification.scheduler;
 
 import backend.wal.notification.application.port.NotificationSchedulerPort;
 import backend.wal.notification.application.service.NotificationService;
-import backend.wal.onboard.domain.common.WalTimeType;
-import backend.wal.onboard.domain.onboarding.repository.OnboardingTimeRepository;
-import backend.wal.onboard.domain.todaywal.aggregate.TodayWal;
-import backend.wal.onboard.domain.todaywal.repository.TodayWalRepository;
+import backend.wal.wal.common.domain.WalTimeType;
+import backend.wal.wal.onboarding.domain.repository.OnboardingTimeRepository;
+import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
+import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static backend.wal.onboard.domain.common.WalTimeType.*;
+import static backend.wal.wal.common.domain.WalTimeType.*;
 
 @Component
 @RequiredArgsConstructor

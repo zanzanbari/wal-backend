@@ -1,4 +1,4 @@
-package backend.wal.onboard.todaywal.exception;
+package backend.wal.wal.todaywal.exception;
 
 import backend.wal.advice.exception.NotFoundException;
 

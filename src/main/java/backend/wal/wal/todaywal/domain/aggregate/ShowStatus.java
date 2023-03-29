@@ -1,4 +1,4 @@
-package backend.wal.onboard.todaywal.domain.aggregate;
+package backend.wal.wal.todaywal.domain.aggregate;
 
 public enum ShowStatus {
     OPEN,

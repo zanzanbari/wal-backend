@@ -1,8 +1,8 @@
-package backend.wal.onboard.todaywal.domain.repository;
+package backend.wal.wal.todaywal.domain.repository;
 
-import backend.wal.onboard.common.WalCategoryType;
-import backend.wal.onboard.common.WalTimeType;
-import backend.wal.onboard.todaywal.domain.aggregate.TodayWal;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.common.domain.WalTimeType;
+import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

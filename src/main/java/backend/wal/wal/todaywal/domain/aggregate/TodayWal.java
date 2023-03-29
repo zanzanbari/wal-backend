@@ -1,7 +1,7 @@
-package backend.wal.onboard.todaywal.domain.aggregate;
+package backend.wal.wal.todaywal.domain.aggregate;
 
-import backend.wal.onboard.common.WalCategoryType;
-import backend.wal.onboard.common.WalTimeType;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.common.domain.WalTimeType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

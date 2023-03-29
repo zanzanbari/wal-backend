@@ -1,6 +1,6 @@
-package backend.wal.wal.common.domain;
+package backend.wal.wal.todaywal.domain;
 
-import backend.wal.wal.common.domain.aggregate.WalTimeType;
+import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
 
 import java.time.LocalDateTime;
@@ -38,10 +38,6 @@ public final class WalTimeTypes {
                 .map(timeType -> timeType.findAfterNow(now))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
-    }
-
-    public boolean isExist() {
-        return !values.isEmpty();
     }
 
     public Set<WalTimeType> getValues() {
