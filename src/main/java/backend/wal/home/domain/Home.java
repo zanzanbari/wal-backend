@@ -1,8 +1,8 @@
 package backend.wal.home.domain;
 
-import backend.wal.onboard.domain.common.WalCategoryType;
-import backend.wal.onboard.domain.common.WalTimeType;
-import backend.wal.onboard.domain.todaywal.aggregate.ShowStatus;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.common.domain.WalTimeType;
+import backend.wal.wal.todaywal.domain.aggregate.ShowStatus;
 import com.google.common.base.Objects;
 import lombok.Getter;
 
