@@ -1,22 +1,24 @@
-package backend.wal.wal.onboarding.application.port.dto;
+package backend.wal.wal.onboarding.application.port.in.dto;
 
-import backend.wal.wal.common.domain.WalTimeTypes;
+import backend.wal.wal.common.domain.WalTimeType;
+
+import java.util.Set;
 
 public final class WalTimeTypesResponseDto {
 
-    private final WalTimeTypes willCancelAfterNow;
-    private final WalTimeTypes willAddAfterNow;
+    private final Set<WalTimeType> willCancelAfterNow;
+    private final Set<WalTimeType> willAddAfterNow;
 
-    public WalTimeTypesResponseDto(final WalTimeTypes willCancelAfterNow, final WalTimeTypes willAddAfterNow) {
+    public WalTimeTypesResponseDto(final Set<WalTimeType> willCancelAfterNow, final Set<WalTimeType> willAddAfterNow) {
         this.willCancelAfterNow = willCancelAfterNow;
         this.willAddAfterNow = willAddAfterNow;
     }
 
-    public WalTimeTypes getWillCancelAfterNow() {
+    public Set<WalTimeType> getWillCancelAfterNow() {
         return willCancelAfterNow;
     }
 
-    public WalTimeTypes getWillAddAfterNow() {
+    public Set<WalTimeType> getWillAddAfterNow() {
         return willAddAfterNow;
     }
 }

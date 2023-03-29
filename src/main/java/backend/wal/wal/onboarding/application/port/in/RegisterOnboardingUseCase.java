@@ -1,6 +1,6 @@
-package backend.wal.wal.onboarding.application.port;
+package backend.wal.wal.onboarding.application.port.in;
 
-import backend.wal.wal.onboarding.application.port.dto.InitOnboardInfoRequestDto;
+import backend.wal.wal.onboarding.application.port.in.dto.InitOnboardInfoRequestDto;
 
 public interface RegisterOnboardingUseCase {
 

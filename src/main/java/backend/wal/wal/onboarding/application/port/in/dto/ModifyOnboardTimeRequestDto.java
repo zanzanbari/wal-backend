@@ -1,6 +1,6 @@
-package backend.wal.wal.onboarding.application.port.dto;
+package backend.wal.wal.onboarding.application.port.in.dto;
 
-import backend.wal.wal.common.domain.aggregate.WalTimeType;
+import backend.wal.wal.common.domain.WalTimeType;
 import lombok.Getter;
 
 import java.util.Set;

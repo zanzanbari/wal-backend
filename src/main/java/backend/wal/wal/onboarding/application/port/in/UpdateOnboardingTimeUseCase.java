@@ -1,6 +1,6 @@
-package backend.wal.wal.onboarding.application.port;
+package backend.wal.wal.onboarding.application.port.in;
 
-import backend.wal.wal.onboarding.application.port.dto.ModifyOnboardTimeRequestDto;
+import backend.wal.wal.onboarding.application.port.in.dto.ModifyOnboardTimeRequestDto;
 
 public interface UpdateOnboardingTimeUseCase {
 

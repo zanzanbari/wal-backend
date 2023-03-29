@@ -1,6 +1,6 @@
-package backend.wal.wal.onboarding.application.port;
+package backend.wal.wal.onboarding.application.port.in;
 
-import backend.wal.wal.onboarding.application.port.dto.ModifyOnboardCategoryRequestDto;
+import backend.wal.wal.onboarding.application.port.in.dto.ModifyOnboardCategoryRequestDto;
 
 public interface UpdateOnboardingCategoryUseCase {
 

@@ -1,6 +1,6 @@
-package backend.wal.wal.onboarding.application.port.dto;
+package backend.wal.wal.onboarding.application.port.in.dto;
 
-import backend.wal.wal.common.domain.aggregate.WalCategoryType;
+import backend.wal.wal.common.domain.WalCategoryType;
 import lombok.Getter;
 
 import java.util.Set;
