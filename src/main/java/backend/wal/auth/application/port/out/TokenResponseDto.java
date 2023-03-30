@@ -1,8 +1,5 @@
-package backend.wal.auth.application.port.dto;
+package backend.wal.auth.web.dto;
 
-import lombok.Getter;
-
-@Getter
 public final class TokenResponse {
 
     private final String accessToken;
@@ -11,5 +8,13 @@ public final class TokenResponse {
     public TokenResponse(final String accessToken, final String refreshToken) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
     }
 }

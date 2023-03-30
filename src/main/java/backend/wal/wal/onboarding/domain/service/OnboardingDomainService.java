@@ -35,7 +35,7 @@ public class OnboardingDomainService {
         WalTimeTypes willCancelAfterNow = WalTimeTypes.createCompareAfterNow(canceledTimeTypes);
         WalTimeTypes willAddAfterNow = WalTimeTypes.createCompareAfterNow(addedTimeTypes);
 
-        return new WalTimeTypesResponseDto(willCancelAfterNow, willAddAfterNow);
+        return new WalTimeTypesResponseDto(willCancelAfterNow.getValues(), willAddAfterNow.getValues());
     }
 
     public WalCategoryTypesResponseDto updateCategoryTypes(Set<WalCategoryType> modifiedCategoryTypes, Long userId) { // 추가된놈, 삭제된 놈 반환
