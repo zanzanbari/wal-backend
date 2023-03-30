@@ -1,35 +1,38 @@
 package backend.wal.auth.application.service;
 
-import backend.wal.auth.application.port.AuthUseCase;
-import backend.wal.auth.application.port.OAuthApiClientPort;
-import backend.wal.auth.application.port.dto.LoginRequestDto;
-import backend.wal.auth.application.port.dto.OAuthUserInfoResponseDto;
+import backend.wal.auth.application.port.in.LoginRequestDto;
+import backend.wal.auth.application.port.in.AuthUseCase;
+import backend.wal.auth.application.port.out.OAuthUserInfoResponseDto;
+import backend.wal.auth.application.port.out.OAuthApiClientPort;
+import backend.wal.auth.application.port.out.RegisterFcmPort;
+import backend.wal.auth.application.port.out.UserPort;
 import backend.wal.auth.exception.UnAuthorizedUserException;
-import backend.wal.notification.application.service.RegisterFcmTokenService;
-import backend.wal.user.application.port.FindSocialUserUseCase;
-import backend.wal.user.application.port.RegisterUserUseCase;
 import backend.wal.user.domain.aggregate.entity.User;
-import lombok.RequiredArgsConstructor;
 import backend.wal.support.annotation.AppService;
 import org.springframework.transaction.annotation.Transactional;
 
 @AppService
-@RequiredArgsConstructor
 public class KakaoAuthService implements AuthUseCase {
 
     private final OAuthApiClientPort oAuthApiClientPort;
-    private final FindSocialUserUseCase findSocialUserUseCase;
-    private final RegisterUserUseCase registerUserUseCase;
-    private final RegisterFcmTokenService registerFcmTokenService;
+    private final UserPort userPort;
+    private final RegisterFcmPort registerFcmPort;
+
+    public KakaoAuthService(final OAuthApiClientPort oAuthApiClientPort, final UserPort userPort,
+                            final RegisterFcmPort registerFcmPort) {
+        this.oAuthApiClientPort = oAuthApiClientPort;
+        this.userPort = userPort;
+        this.registerFcmPort = registerFcmPort;
+    }
 
     @Override
     @Transactional
     public Long login(LoginRequestDto requestDto) {
         OAuthUserInfoResponseDto oAuthUserInfo = oAuthApiClientPort.getOAuthUserId(requestDto.getSocialAccessToken());
-        User alreadyUser = findSocialUserUseCase.findUserBySocialIdAndSocialType(oAuthUserInfo.getId(), requestDto.getSocialType());
+        User alreadyUser = userPort.findSocialUserCall(oAuthUserInfo.getId(), requestDto.getSocialType());
         if (alreadyUser == null) {
-            Long newUserId = registerUserUseCase.signup(requestDto.toCreateUserDto(oAuthUserInfo.getNickname(), oAuthUserInfo.getId()));
-            registerFcmTokenService.register(requestDto.toFcmTokenServiceDto(newUserId));
+            Long newUserId = userPort.signupCall(requestDto.toCreateUserDto(oAuthUserInfo.getNickname(), oAuthUserInfo.getId()));
+            registerFcmPort.registerCall(requestDto.toFcmTokenServiceDto(newUserId));
             return newUserId;
         }
         if (alreadyUser.isDeleted()) {
