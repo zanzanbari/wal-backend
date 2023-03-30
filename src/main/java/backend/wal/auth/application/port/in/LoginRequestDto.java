@@ -1,5 +1,6 @@
-package backend.wal.auth.application.port.dto;
+package backend.wal.auth.application.port.in;
 
+import backend.wal.notification.application.port.in.InitFcmRequestDto;
 import backend.wal.user.domain.aggregate.SocialType;
 import backend.wal.user.application.port.dto.CreateUserDto;
 import lombok.Getter;

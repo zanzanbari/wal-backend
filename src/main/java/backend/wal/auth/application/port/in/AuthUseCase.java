@@ -1,6 +1,4 @@
-package backend.wal.auth.application.port;
-
-import backend.wal.auth.application.port.dto.LoginRequestDto;
+package backend.wal.auth.application.port.in;
 
 public interface AuthUseCase {
 

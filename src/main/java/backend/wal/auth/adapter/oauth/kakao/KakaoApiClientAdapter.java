@@ -1,9 +1,9 @@
 package backend.wal.auth.adapter.oauth.kakao;
 
 import backend.wal.auth.adapter.oauth.kakao.dto.KakaoUserInfoResponse;
-import backend.wal.auth.application.port.OAuthApiClientPort;
-import backend.wal.auth.application.port.dto.OAuthUserInfoResponseDto;
-import backend.wal.utils.HttpHeaderUtils;
+import backend.wal.auth.application.port.out.OAuthApiClientPort;
+import backend.wal.auth.application.port.out.OAuthUserInfoResponseDto;
+import backend.wal.support.utils.HttpHeaderUtils;
 import org.springframework.stereotype.Component;
 
 @Component

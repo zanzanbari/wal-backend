@@ -1,4 +1,4 @@
-package backend.wal.auth.application.port.dto;
+package backend.wal.auth.application.port.out;
 
 import java.util.Date;
 

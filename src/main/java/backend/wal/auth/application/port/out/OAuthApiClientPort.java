@@ -1,6 +1,4 @@
-package backend.wal.auth.application.port;
-
-import backend.wal.auth.application.port.dto.OAuthUserInfoResponseDto;
+package backend.wal.auth.application.port.out;
 
 public interface OAuthApiClientPort {
 

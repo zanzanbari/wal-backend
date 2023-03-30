@@ -1,10 +1,10 @@
-package backend.wal.auth.application.port;
+package backend.wal.auth.application.port.in;
 
-import backend.wal.auth.application.port.dto.TokenResponse;
+import backend.wal.auth.application.port.out.TokenResponseDto;
 
 public interface IssueTokenUseCase {
 
-    TokenResponse issue(Long userId);
+    TokenResponseDto issue(Long userId);
 
     String reissue(String validRefreshToken);
 }

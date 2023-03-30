@@ -1,7 +1,7 @@
 package backend.wal.auth.adapter.oauth.kakao;
 
 import backend.wal.auth.adapter.oauth.kakao.dto.KakaoUserInfoResponse;
-import backend.wal.utils.HttpHeaderUtils;
+import backend.wal.support.utils.HttpHeaderUtils;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
