@@ -1,4 +1,4 @@
-package backend.wal.home.domain;
+package backend.wal.wal.todaywal.domain.view;
 
 public enum OpenStatus {
     ABLE,

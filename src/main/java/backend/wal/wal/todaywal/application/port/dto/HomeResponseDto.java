@@ -1,11 +1,11 @@
-package backend.wal.home.application.port.in;
+package backend.wal.wal.todaywal.application.port.dto;
 
-import backend.wal.home.web.dto.HomeResponse;
-import backend.wal.home.domain.Home;
-import backend.wal.home.domain.OpenStatus;
+import backend.wal.wal.todaywal.web.dto.HomeResponse;
+import backend.wal.wal.todaywal.domain.view.Home;
+import backend.wal.wal.todaywal.domain.aggregate.ShowStatus;
+import backend.wal.wal.todaywal.domain.view.OpenStatus;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
-import backend.wal.wal.todaywal.domain.aggregate.ShowStatus;
 
 public final class HomeResponseDto {
 

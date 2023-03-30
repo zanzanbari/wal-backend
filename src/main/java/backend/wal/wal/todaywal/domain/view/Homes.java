@@ -1,6 +1,6 @@
-package backend.wal.home.domain;
+package backend.wal.wal.todaywal.domain.view;
 
-import backend.wal.home.application.port.in.HomeResponseDto;
+import backend.wal.wal.todaywal.application.port.dto.HomeResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.List;

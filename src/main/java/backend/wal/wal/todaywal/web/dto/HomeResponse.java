@@ -1,6 +1,6 @@
-package backend.wal.home.web.dto;
+package backend.wal.wal.todaywal.web.dto;
 
-import backend.wal.home.domain.OpenStatus;
+import backend.wal.wal.todaywal.domain.view.OpenStatus;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.wal.todaywal.domain.aggregate.ShowStatus;
