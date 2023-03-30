@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
@@ -13,4 +14,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findReservationsByUserId(Long userId);
 
     List<Reservation> findReservationsBySendDueDateAfterAndUserId(LocalDateTime now, Long userId);
+
+    Optional<Reservation> findReservationBySendDueDateBetweenAndUserId(LocalDateTime today, LocalDateTime tomorrow, Long userId);
 }

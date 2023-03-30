@@ -8,26 +8,24 @@ import backend.wal.wal.nextwal.domain.NextWals;
 import backend.wal.wal.nextwal.domain.aggregate.Item;
 import backend.wal.wal.nextwal.domain.aggregate.NextWal;
 import backend.wal.wal.common.domain.WalCategoryType;
-import backend.wal.support.annotation.AppService;
+import backend.wal.support.annotation.DomainService;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@AppService
+@DomainService
 public class NextWalSettingService implements NextWalSettingUseCase {
 
     private final ItemRepository itemRepository;
     private final NextWalRepository nextWalRepository;
-    private final RandomRangeGenerator randomRangeGenerator;
 
-    public NextWalSettingService(final ItemRepository itemRepository, final NextWalRepository nextWalRepository,
-                                 final RandomRangeGenerator randomRangeGenerator) {
+    public NextWalSettingService(final ItemRepository itemRepository, final NextWalRepository nextWalRepository) {
         this.itemRepository = itemRepository;
         this.nextWalRepository = nextWalRepository;
-        this.randomRangeGenerator = randomRangeGenerator;
     }
 
+    @Override
     public NextWals setNextWals(Set<WalCategoryType> categoryTypes, Long userId) {
         List<NextWal> nextWals = categoryTypes.stream()
                 .map(categoryType -> {
@@ -39,14 +37,7 @@ public class NextWalSettingService implements NextWalSettingUseCase {
         return new NextWals(nextWals);
     }
 
-    public NextWal getRandomNextWal(NextWals nextWals) {
-        return nextWals.getRandomBy(randomRangeGenerator);
-    }
-
-    public NextWals getNextWalsByUserId(Long userId) {
-        return new NextWals(nextWalRepository.findNextWalsByUserId(userId));
-    }
-
+    @Override
     public void updateNextWal(NextWals nextWals, NextWal randomNextWal, WalCategoryType categoryType) {
         Long countOfCorrespondCategoryType = itemRepository.countAllByCategoryCategoryType(categoryType);
         double nextItemId = nextWals.calculateNextItemId(randomNextWal, countOfCorrespondCategoryType);
@@ -55,6 +46,7 @@ public class NextWalSettingService implements NextWalSettingUseCase {
         nextWals.updateNextWalInfo(randomNextWal);
     }
 
+    @Override
     public void deleteNextWalsByCanceledCategoryTypes(Set<WalCategoryType> canceledCategoryTypes, Long userId) {
         nextWalRepository.deleteAllInBatch(
                 nextWalRepository.findNextWalsByCategoryTypeInAndUserId(canceledCategoryTypes, userId));

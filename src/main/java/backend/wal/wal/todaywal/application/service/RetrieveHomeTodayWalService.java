@@ -1,7 +1,7 @@
 package backend.wal.wal.todaywal.application.service;
 
-import backend.wal.wal.todaywal.application.port.dto.HomeResponseDto;
-import backend.wal.wal.todaywal.application.port.RetrieveHomeTodayWalUseCase;
+import backend.wal.wal.todaywal.application.port.in.HomeResponseDto;
+import backend.wal.wal.todaywal.application.port.in.RetrieveHomeTodayWalUseCase;
 import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
 import backend.wal.wal.todaywal.domain.view.Home;
 import backend.wal.wal.todaywal.domain.view.Homes;

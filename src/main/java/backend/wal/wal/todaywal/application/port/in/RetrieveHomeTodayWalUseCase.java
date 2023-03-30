@@ -1,6 +1,4 @@
-package backend.wal.wal.todaywal.application.port;
-
-import backend.wal.wal.todaywal.application.port.dto.HomeResponseDto;
+package backend.wal.wal.todaywal.application.port.in;
 
 import java.util.List;
 

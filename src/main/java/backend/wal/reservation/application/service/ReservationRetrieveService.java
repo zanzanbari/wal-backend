@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,6 +42,7 @@ public class ReservationRetrieveService implements ReservationRetrieveUseCase {
         );
     }
 
+    @Override
     public List<ReservationCalendarResponse> retrieveReservationDate(Long userId) {
         List<Reservation> reservationsAfterNow = reservationRepository
                 .findReservationsBySendDueDateAfterAndUserId(LocalDateTime.now(clock), userId);
@@ -56,5 +59,13 @@ public class ReservationRetrieveService implements ReservationRetrieveUseCase {
         if (findReservations.isEmpty()) {
             throw ConflictReservationException.none();
         }
+    }
+
+    @Override
+    public Optional<Reservation> retrieveReservationBetweenTodayAndTomorrow(Long userId) {
+        long ONE_DAY = 1;
+        LocalDateTime today = LocalDate.now(clock).atStartOfDay();
+        LocalDateTime tomorrow = today.plusDays(ONE_DAY);
+        return reservationRepository.findReservationBySendDueDateBetweenAndUserId(today, tomorrow, userId);
     }
 }

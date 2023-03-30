@@ -23,10 +23,6 @@ public class RegisterOnboardingService implements RegisterOnboardingUseCase {
     @Transactional
     public void registerOnboardInfo(InitOnboardInfoRequestDto requestDto, Long userId) {
         onboardingDomainService.register(requestDto.toOnboardingEntity(userId));
-        walSettingPort.setTodayWals(
-                requestDto.getTimeTypes(),
-                userId,
-                walSettingPort.setNextWals(requestDto.getCategoryTypes(), userId)
-        );
+        walSettingPort.setWalInfo(requestDto.getTimeTypes(), requestDto.getCategoryTypes(), userId);
     }
 }
