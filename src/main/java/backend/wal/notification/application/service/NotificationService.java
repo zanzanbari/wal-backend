@@ -1,7 +1,7 @@
 package backend.wal.notification.application.service;
 
-import backend.wal.notification.application.port.FirebaseMessagingPort;
-import backend.wal.notification.application.port.NotificationUseCase;
+import backend.wal.notification.application.port.out.FirebaseMessagingPort;
+import backend.wal.notification.application.port.in.NotificationUseCase;
 import backend.wal.notification.domain.repository.FcmTokenRepository;
 import backend.wal.notification.domain.FcmToken;
 import backend.wal.notification.exception.NotFoundFcmTokenException;

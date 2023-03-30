@@ -1,4 +1,4 @@
-package backend.wal.notification.application.port;
+package backend.wal.notification.application.port.out;
 
 import backend.wal.wal.common.domain.WalTimeType;
 

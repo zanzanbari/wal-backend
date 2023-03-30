@@ -1,4 +1,4 @@
-package backend.wal.auth.application.port.dto;
+package backend.wal.notification.application.port.in;
 
 import lombok.Getter;
 
