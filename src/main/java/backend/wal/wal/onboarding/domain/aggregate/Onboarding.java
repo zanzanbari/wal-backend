@@ -77,7 +77,7 @@ public class Onboarding {
         return getTimeTypes();
     }
 
-    private Set<WalTimeType> getTimeTypes() {
+    public Set<WalTimeType> getTimeTypes() {
         return times.stream()
                 .map(OnboardingTime::getTimeType)
                 .collect(Collectors.toSet());
