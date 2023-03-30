@@ -1,6 +1,6 @@
 package backend.wal.wal.service;
 
-import backend.wal.wal.todaywal.application.port.UpdateTodayWalShowStatusUseCase;
+import backend.wal.wal.todaywal.application.port.in.UpdateTodayWalUseCase;
 import backend.wal.reservation.domain.aggregate.ShowStatus;
 import backend.wal.wal.application.service.TodayWalService;
 import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
@@ -29,7 +29,7 @@ class TodayWalSettingAdapterTest {
     private TodayWalRepository todayWalRepository;
 
     @InjectMocks
-    private UpdateTodayWalShowStatusUseCase todayWalService;
+    private UpdateTodayWalUseCase todayWalService;
 
     @DisplayName("todayWalId 와 userId 로 찾은 TodayWal 이 존재하지 않으면 에러가 발생한다")
     @Test
