@@ -1,4 +1,4 @@
-package backend.wal.utils;
+package backend.wal.support.utils;
 
 import org.springframework.http.HttpHeaders;
 
