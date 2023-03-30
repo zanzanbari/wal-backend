@@ -1,8 +1,8 @@
 package backend.wal.wal.todaywal.web;
 
-import backend.wal.wal.todaywal.application.port.RetrieveHomeTodayWalUseCase;
-import backend.wal.wal.todaywal.application.port.UpdateTodayWalShowStatusUseCase;
-import backend.wal.wal.todaywal.application.port.dto.HomeResponseDto;
+import backend.wal.wal.todaywal.application.port.in.RetrieveHomeTodayWalUseCase;
+import backend.wal.wal.todaywal.application.port.in.UpdateTodayWalUseCase;
+import backend.wal.wal.todaywal.application.port.in.HomeResponseDto;
 import backend.wal.wal.todaywal.web.dto.HomeResponse;
 import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.LoginUser;
@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
 public class TodayWalHomeController {
 
     private final RetrieveHomeTodayWalUseCase retrieveHomeTodayWalUseCase;
-    private final UpdateTodayWalShowStatusUseCase updateTodayWalShowStatusUseCase;
+    private final UpdateTodayWalUseCase updateTodayWalUseCase;
 
     public TodayWalHomeController(final RetrieveHomeTodayWalUseCase retrieveHomeTodayWalUseCase,
-                                  final UpdateTodayWalShowStatusUseCase updateTodayWalShowStatusUseCase) {
+                                  final UpdateTodayWalUseCase updateTodayWalUseCase) {
         this.retrieveHomeTodayWalUseCase = retrieveHomeTodayWalUseCase;
-        this.updateTodayWalShowStatusUseCase = updateTodayWalShowStatusUseCase;
+        this.updateTodayWalUseCase = updateTodayWalUseCase;
     }
 
     @Authentication
@@ -38,7 +38,7 @@ public class TodayWalHomeController {
     @Authentication
     @PatchMapping("/{todayWalId}")
     public ResponseEntity<Void> updateShowStatus(@PathVariable Long todayWalId, @LoginUser Long userId) {
-        updateTodayWalShowStatusUseCase.updateShowStatus(todayWalId, userId);
+        updateTodayWalUseCase.updateShowStatus(todayWalId, userId);
         return ResponseEntity.noContent().build();
     }
 }

@@ -1,6 +1,6 @@
 package backend.wal.wal.todaywal.application.service;
 
-import backend.wal.wal.todaywal.application.port.RegisterReservationTodayWalUseCase;
+import backend.wal.wal.todaywal.application.port.in.RegisterReservationTodayWalUseCase;
 import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
 import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
 import backend.wal.wal.common.domain.WalCategoryType;
