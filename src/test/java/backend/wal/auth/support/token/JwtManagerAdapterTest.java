@@ -1,6 +1,6 @@
 package backend.wal.auth.support.token;
 
-import backend.wal.auth.application.port.JwtManagerPort;
+import backend.wal.auth.application.port.out.JwtManagerPort;
 import backend.wal.auth.exception.UnAuthorizedTokenException;
 import backend.wal.auth.adapter.jwt.JwtManagerAdapter;
 import io.jsonwebtoken.Claims;

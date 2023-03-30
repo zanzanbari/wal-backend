@@ -1,7 +1,7 @@
 package backend.wal.auth.app.service.provider;
 
 import backend.wal.auth.application.service.AppleAuthService;
-import backend.wal.auth.application.port.AuthUseCase;
+import backend.wal.auth.application.port.in.AuthUseCase;
 import backend.wal.auth.application.service.KakaoAuthService;
 import backend.wal.auth.application.provider.AuthServiceProvider;
 import backend.wal.user.domain.aggregate.SocialType;
