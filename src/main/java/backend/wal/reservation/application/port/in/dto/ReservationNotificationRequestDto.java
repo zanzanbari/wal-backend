@@ -1,7 +1,5 @@
 package backend.wal.reservation.application.port.dto;
 
-import backend.wal.rabbitmq.producer.dto.DelayReservationMessage;
-
 import java.time.LocalDateTime;
 
 public final class ReservationNotificationRequestDto {
@@ -19,10 +17,6 @@ public final class ReservationNotificationRequestDto {
         this.message = message;
         this.sendDueDate = sendDueDate;
         this.delayTime = delayTime;
-    }
-
-    public DelayReservationMessage toDelayReservationMessage() {
-        return new DelayReservationMessage(userId, message, sendDueDate);
     }
 
     public Long getReservationId() {
