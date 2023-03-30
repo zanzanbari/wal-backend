@@ -1,6 +1,6 @@
 package backend.wal.reservation.application.service;
 
-import backend.wal.wal.todaywal.application.port.in.RegisterReservationTodayWalUseCase;
+import backend.wal.reservation.application.port.out.TodayWalPort;
 import backend.wal.reservation.application.port.in.RegisterReservationUseCase;
 import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
 import backend.wal.reservation.application.port.in.dto.RegisterReservationResponseDto;
@@ -8,7 +8,6 @@ import backend.wal.reservation.domain.ReservationTime;
 import backend.wal.reservation.domain.aggregate.Reservation;
 import backend.wal.reservation.domain.repository.ReservationRepository;
 import backend.wal.reservation.exception.ConflictReservationException;
-import lombok.RequiredArgsConstructor;
 import backend.wal.support.annotation.AppService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,12 +16,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @AppService
-@RequiredArgsConstructor
 public class ReservationService implements RegisterReservationUseCase {
 
     private final ReservationRepository reservationRepository;
-    private final RegisterReservationTodayWalUseCase reservationTodayWalUseCase;
+    private final TodayWalPort todayWalPort;
     private final Clock clock;
+
+    public ReservationService(final ReservationRepository reservationRepository, final TodayWalPort todayWalPort,
+                              final Clock clock) {
+        this.reservationRepository = reservationRepository;
+        this.todayWalPort = todayWalPort;
+        this.clock = clock;
+    }
 
     @Override
     @Transactional
@@ -30,7 +35,7 @@ public class ReservationService implements RegisterReservationUseCase {
         ReservationTime reservationTime = ReservationTime.startDayFrom(requestDto.getSendDate());
         validateReservationDate(reservationTime, requestDto.getUserId());
         Reservation reservation = reservationRepository.save(Reservation.newInstance(requestDto));
-        registerTodayWalIfToday(reservation); // FIXME 이건 이벤트 기반이 맞을듯 ㅇㅇ
+        registerTodayWalIfToday(reservation);
         return new RegisterReservationResponseDto(
                 reservation.getId(),
                 reservation.getUserId(),
@@ -50,7 +55,7 @@ public class ReservationService implements RegisterReservationUseCase {
 
     private void registerTodayWalIfToday(Reservation reservation) {
         if (reservation.isToday(LocalDate.now(clock))) {
-            reservationTodayWalUseCase.registerReservationTodayWal(reservation.getUserId(), reservation.getMessage());
+            todayWalPort.registerReservationCall(reservation.getUserId(), reservation.getMessage());
         }
     }
 }
