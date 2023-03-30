@@ -1,4 +1,4 @@
-package backend.wal.reservation.application.port;
+package backend.wal.reservation.application.port.in;
 
 import backend.wal.reservation.web.dto.ReservationCalendarResponse;
 import backend.wal.reservation.web.dto.ReservationHistoryResponse;

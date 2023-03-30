@@ -1,8 +1,8 @@
 package backend.wal.reservation.domain;
 
-import backend.wal.reservation.application.port.dto.AddReservationRequestDto;
-import backend.wal.reservation.application.port.dto.ReservationCalendarResponseDto;
-import backend.wal.reservation.application.port.dto.ReservationHistoryResponseDto;
+import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
+import backend.wal.reservation.application.port.in.dto.ReservationCalendarResponseDto;
+import backend.wal.reservation.application.port.in.dto.ReservationHistoryResponseDto;
 import backend.wal.reservation.domain.aggregate.Reservation;
 import backend.wal.reservation.domain.aggregate.ShowStatus;
 import org.junit.jupiter.api.BeforeEach;

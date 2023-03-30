@@ -1,4 +1,4 @@
-package backend.wal.reservation.application.port.dto;
+package backend.wal.reservation.application.port.in.dto;
 
 import java.time.LocalDateTime;
 

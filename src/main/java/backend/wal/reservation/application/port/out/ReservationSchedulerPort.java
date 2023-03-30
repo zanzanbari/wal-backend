@@ -1,4 +1,4 @@
-package backend.wal.reservation.application.port;
+package backend.wal.reservation.application.port.out;
 
 public interface ReservationSchedulerPort {
 

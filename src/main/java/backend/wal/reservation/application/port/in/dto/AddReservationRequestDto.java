@@ -1,4 +1,4 @@
-package backend.wal.reservation.application.port.dto;
+package backend.wal.reservation.application.port.in.dto;
 
 import backend.wal.reservation.domain.aggregate.ShowStatus;
 import lombok.Getter;

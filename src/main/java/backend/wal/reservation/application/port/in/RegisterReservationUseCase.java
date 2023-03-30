@@ -1,7 +1,7 @@
-package backend.wal.reservation.application.port;
+package backend.wal.reservation.application.port.in;
 
-import backend.wal.reservation.application.port.dto.AddReservationRequestDto;
-import backend.wal.reservation.application.port.dto.RegisterReservationResponseDto;
+import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
+import backend.wal.reservation.application.port.in.dto.RegisterReservationResponseDto;
 
 public interface RegisterReservationUseCase {
 
