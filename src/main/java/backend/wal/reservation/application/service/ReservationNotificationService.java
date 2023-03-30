@@ -1,21 +1,27 @@
 package backend.wal.reservation.application.service;
 
-import backend.wal.reservation.application.port.dto.ReservationNotificationRequestDto;
-import backend.wal.reservation.application.port.ReservationSchedulerPort;
-import backend.wal.notification.application.service.NotificationService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import backend.wal.reservation.application.port.in.dto.ReservationNotificationRequestDto;
+import backend.wal.reservation.application.port.in.ReservationNotificationUseCase;
+import backend.wal.reservation.application.port.out.ReservationSchedulerPort;
+import backend.wal.reservation.application.port.out.NotificationPort;
+import backend.wal.support.annotation.AppService;
 
-@Service
-@RequiredArgsConstructor
-public class ReservationNotificationService {
+@AppService
+public class ReservationNotificationService implements ReservationNotificationUseCase {
 
     private final ReservationSchedulerPort reservationSchedulerPort;
-    private final NotificationService notificationService;
+    private final NotificationPort notificationPort;
 
+    public ReservationNotificationService(final ReservationSchedulerPort reservationSchedulerPort,
+                                          final NotificationPort notificationPort) {
+        this.reservationSchedulerPort = reservationSchedulerPort;
+        this.notificationPort = notificationPort;
+    }
+
+    @Override
     public void send(ReservationNotificationRequestDto requestDto) {
         Runnable notificationTask = () -> {
-            notificationService.sendMessage(requestDto.getUserId(), requestDto.getMessage());
+            notificationPort.sendCall(requestDto.getUserId(), requestDto.getMessage());
             reservationSchedulerPort.shoutDown();
         };
         reservationSchedulerPort.sendMessageAfterDelay(notificationTask,
@@ -24,6 +30,7 @@ public class ReservationNotificationService {
         );
     }
 
+    @Override
     public void cancel(Long reservationId) {
         reservationSchedulerPort.cancelMessage(reservationId);
     }
