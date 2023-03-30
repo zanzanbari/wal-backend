@@ -1,6 +1,6 @@
 package backend.wal.user.application.service;
 
-import backend.wal.user.application.port.FindSocialUserUseCase;
+import backend.wal.user.application.port.in.FindSocialUserUseCase;
 import backend.wal.user.domain.aggregate.SocialType;
 import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.user.domain.repository.UserRepository;

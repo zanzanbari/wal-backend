@@ -1,4 +1,4 @@
-package backend.wal.user.application.port.dto;
+package backend.wal.user.application.port.in;
 
 import backend.wal.user.domain.aggregate.SocialType;
 import lombok.Builder;

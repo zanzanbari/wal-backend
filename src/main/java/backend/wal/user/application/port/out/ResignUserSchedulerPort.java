@@ -1,4 +1,4 @@
-package backend.wal.user.application.port;
+package backend.wal.user.application.port.out;
 
 public interface ResignUserSchedulerPort {
 

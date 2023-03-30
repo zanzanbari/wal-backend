@@ -1,7 +1,7 @@
 package backend.wal.user.application.service;
 
-import backend.wal.user.application.port.ResignUserSchedulerPort;
-import backend.wal.user.application.port.ResignUserUseCase;
+import backend.wal.user.application.port.out.ResignUserSchedulerPort;
+import backend.wal.user.application.port.in.ResignUserUseCase;
 import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.user.domain.repository.UserRepository;
 import backend.wal.support.annotation.AppService;

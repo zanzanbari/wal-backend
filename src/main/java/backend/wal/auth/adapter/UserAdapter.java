@@ -1,9 +1,9 @@
 package backend.wal.auth.adapter;
 
 import backend.wal.auth.application.port.out.UserPort;
-import backend.wal.user.application.port.FindSocialUserUseCase;
-import backend.wal.user.application.port.RegisterUserUseCase;
-import backend.wal.user.application.port.dto.CreateUserDto;
+import backend.wal.user.application.port.in.FindSocialUserUseCase;
+import backend.wal.user.application.port.in.RegisterUserUseCase;
+import backend.wal.user.application.port.in.CreateUserDto;
 import backend.wal.user.domain.aggregate.SocialType;
 import backend.wal.user.domain.aggregate.entity.User;
 import org.springframework.stereotype.Component;

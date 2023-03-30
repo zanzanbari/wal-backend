@@ -1,6 +1,6 @@
 package backend.wal.user.application.service;
 
-import backend.wal.user.application.port.ChangeUserInfoUseCase;
+import backend.wal.user.application.port.in.ChangeUserInfoUseCase;
 import backend.wal.user.domain.repository.UserRepository;
 import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.user.exception.NotFoundUserException;
