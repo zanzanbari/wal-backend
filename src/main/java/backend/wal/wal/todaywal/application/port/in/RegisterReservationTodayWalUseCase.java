@@ -1,4 +1,4 @@
-package backend.wal.wal.todaywal.application.port;
+package backend.wal.wal.todaywal.application.port.in;
 
 public interface RegisterReservationTodayWalUseCase {
 

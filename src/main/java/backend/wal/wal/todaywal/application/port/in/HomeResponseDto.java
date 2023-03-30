@@ -1,4 +1,4 @@
-package backend.wal.wal.todaywal.application.port.dto;
+package backend.wal.wal.todaywal.application.port.in;
 
 import backend.wal.wal.todaywal.web.dto.HomeResponse;
 import backend.wal.wal.todaywal.domain.view.Home;
