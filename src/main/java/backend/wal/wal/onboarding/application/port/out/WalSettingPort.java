@@ -14,9 +14,9 @@ public interface WalSettingPort {
 
     void updateTodayWalByAddTimeTypes(Set<WalTimeType> willAddAfterNow, Long userId);
 
-    Set<WalTimeType> updateWalInfoByCancelCategoryTypes(Set<WalCategoryType> canceledCategoryTypes, Long userId);
-
     void updateTodayWalByCancelTimeTypes(Set<WalTimeType> willCancelAfterNow, Long userId);
+
+    Set<WalTimeType> updateWalInfoByCancelCategoryTypes(Set<WalCategoryType> canceledCategoryTypes, Long userId);
 
     void updateWalInfoByAddCategoryTypesInEmptyTimeTypes(Set<WalTimeType> emptiedTimeTypes,
                                                          Set<WalCategoryType> addedCategoryTypes,
