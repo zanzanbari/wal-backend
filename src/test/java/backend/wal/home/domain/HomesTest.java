@@ -3,6 +3,9 @@ package backend.wal.home.domain;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.reservation.domain.aggregate.ShowStatus;
+import backend.wal.wal.todaywal.domain.view.Home;
+import backend.wal.wal.todaywal.domain.view.Homes;
+import backend.wal.wal.todaywal.domain.view.OpenStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static backend.wal.home.domain.OpenStatus.*;
+import static backend.wal.wal.todaywal.domain.view.OpenStatus.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class HomesTest {
