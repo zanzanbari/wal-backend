@@ -1,6 +1,6 @@
 package backend.wal.user.web.dto;
 
-import backend.wal.user.application.port.dto.RegisterResignRequestDto;
+import backend.wal.user.application.port.in.RegisterResignRequestDto;
 import backend.wal.user.domain.aggregate.ResignReason;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

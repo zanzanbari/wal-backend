@@ -1,11 +1,11 @@
 package backend.wal.reservation.web;
 
+import backend.wal.reservation.application.port.in.dto.RegisterReservationResponseDto;
+import backend.wal.reservation.application.port.in.RegisterReservationUseCase;
+import backend.wal.reservation.application.port.in.ReservationNotificationUseCase;
+import backend.wal.reservation.web.dto.AddReservationRequest;
 import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.LoginUser;
-import backend.wal.reservation.application.port.dto.RegisterReservationResponseDto;
-import backend.wal.reservation.application.service.ReservationNotificationService;
-import backend.wal.reservation.web.dto.AddReservationRequest;
-import backend.wal.reservation.application.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,21 +18,21 @@ import java.net.URI;
 @RequestMapping("/v2/reservation")
 public class ReservationController {
 
-    private final ReservationService reservationService;
-    private final ReservationNotificationService reservationNotificationService;
+    private final RegisterReservationUseCase registerReservationUseCase;
+    private final ReservationNotificationUseCase reservationNotificationUseCase;
 
     @Authentication
     @PostMapping("/register")
     public ResponseEntity<Void> register(@Valid @RequestBody AddReservationRequest request, @LoginUser Long userId) {
-        RegisterReservationResponseDto responseDto = reservationService.register(request.toServiceDto(userId));
-        reservationNotificationService.send(responseDto.toPublishRequestDto());
+        RegisterReservationResponseDto responseDto = registerReservationUseCase.register(request.toServiceDto(userId));
+        reservationNotificationUseCase.send(responseDto.toPublishRequestDto());
         return ResponseEntity.created(URI.create("/v2/reservation")).build();
     }
 
     @Authentication
     @PostMapping("/{reservationId}/cancel")
     public ResponseEntity<Void> cancel(@PathVariable Long reservationId) {
-        reservationNotificationService.cancel(reservationId);
+        reservationNotificationUseCase.cancel(reservationId);
         return ResponseEntity.noContent().build();
     }
 }

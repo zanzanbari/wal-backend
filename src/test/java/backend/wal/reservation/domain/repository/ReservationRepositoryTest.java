@@ -1,7 +1,7 @@
 package backend.wal.reservation.domain.repository;
 
 import backend.wal.config.JpaRepositoryTestConfig;
-import backend.wal.reservation.application.port.dto.AddReservationRequestDto;
+import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
 import backend.wal.reservation.domain.aggregate.Reservation;
 import backend.wal.reservation.domain.aggregate.ShowStatus;
 import org.junit.jupiter.api.DisplayName;

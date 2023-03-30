@@ -1,9 +1,9 @@
 package backend.wal.reservation.application.service;
 
-import backend.wal.reservation.application.port.dto.ReservationCalendarResponseDto;
+import backend.wal.reservation.application.port.in.dto.ReservationCalendarResponseDto;
 import backend.wal.reservation.web.dto.ReservationCalendarResponse;
 import backend.wal.reservation.web.dto.ReservationHistoryResponse;
-import backend.wal.reservation.application.port.ReservationRetrieveUseCase;
+import backend.wal.reservation.application.port.in.ReservationRetrieveUseCase;
 import backend.wal.reservation.domain.Reservations;
 import backend.wal.reservation.domain.aggregate.Reservation;
 import backend.wal.reservation.domain.repository.ReservationRepository;

@@ -1,7 +1,7 @@
 package backend.wal.auth.web.support.interceptor;
 
 import backend.wal.auth.adapter.jwt.JwtManagerAdapter;
-import backend.wal.utils.HttpHeaderUtils;
+import backend.wal.support.utils.HttpHeaderUtils;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;

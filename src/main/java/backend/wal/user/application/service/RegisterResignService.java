@@ -1,7 +1,7 @@
 package backend.wal.user.application.service;
 
-import backend.wal.user.application.port.dto.RegisterResignRequestDto;
-import backend.wal.user.application.port.RegisterResignInfoUseCase;
+import backend.wal.user.application.port.in.RegisterResignRequestDto;
+import backend.wal.user.application.port.in.RegisterResignInfoUseCase;
 import backend.wal.user.domain.repository.ResignRepository;
 import backend.wal.user.domain.aggregate.entity.Resign;
 import backend.wal.support.annotation.AppService;

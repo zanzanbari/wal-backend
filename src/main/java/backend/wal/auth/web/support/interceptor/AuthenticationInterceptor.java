@@ -4,7 +4,7 @@ import backend.wal.auth.adapter.jwt.JwtManagerAdapter;
 import backend.wal.auth.exception.InternalAuthServerException;
 import backend.wal.auth.exception.UnAuthorizedTokenException;
 import backend.wal.support.annotation.Authentication;
-import backend.wal.utils.HttpHeaderUtils;
+import backend.wal.support.utils.HttpHeaderUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;

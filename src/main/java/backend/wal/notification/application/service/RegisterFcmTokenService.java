@@ -1,7 +1,7 @@
 package backend.wal.notification.application.service;
 
-import backend.wal.auth.application.port.dto.InitFcmRequestDto;
-import backend.wal.notification.application.port.RegisterFcmTokenUseCase;
+import backend.wal.notification.application.port.in.InitFcmRequestDto;
+import backend.wal.notification.application.port.in.RegisterFcmTokenUseCase;
 import backend.wal.notification.domain.FcmToken;
 import backend.wal.notification.domain.repository.FcmTokenRepository;
 import backend.wal.support.annotation.AppService;

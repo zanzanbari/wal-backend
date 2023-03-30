@@ -1,7 +1,7 @@
 package backend.wal.auth.adapter.jwt;
 
-import backend.wal.auth.application.port.JwtManagerPort;
-import backend.wal.auth.application.port.dto.CreateRefreshTokenResponseDto;
+import backend.wal.auth.application.port.out.JwtManagerPort;
+import backend.wal.auth.application.port.out.CreateRefreshTokenResponseDto;
 import backend.wal.auth.exception.UnAuthorizedTokenException;
 import backend.wal.support.YamlPropertySourceFactory;
 import io.jsonwebtoken.*;

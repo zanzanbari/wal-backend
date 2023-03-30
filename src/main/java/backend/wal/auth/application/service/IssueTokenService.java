@@ -1,9 +1,9 @@
 package backend.wal.auth.application.service;
 
-import backend.wal.auth.application.port.dto.CreateRefreshTokenResponseDto;
-import backend.wal.auth.application.port.dto.TokenResponse;
-import backend.wal.auth.application.port.IssueTokenUseCase;
-import backend.wal.auth.application.port.JwtManagerPort;
+import backend.wal.auth.application.port.out.CreateRefreshTokenResponseDto;
+import backend.wal.auth.application.port.out.TokenResponseDto;
+import backend.wal.auth.application.port.in.IssueTokenUseCase;
+import backend.wal.auth.application.port.out.JwtManagerPort;
 import backend.wal.auth.domain.repository.RefreshTokenRepository;
 import backend.wal.auth.domain.RefreshToken;
 import backend.wal.auth.exception.NotFoundRefreshTokenException;
@@ -23,7 +23,7 @@ public class IssueTokenService implements IssueTokenUseCase {
 
     @Override
     @Transactional
-    public TokenResponse issue(Long userId) {
+    public TokenResponseDto issue(Long userId) {
         String accessToken = jwtManager.createAccessToken(userId);
         CreateRefreshTokenResponseDto createRefreshTokenResponseDto = jwtManager.createRefreshToken(userId);
         RefreshToken refreshToken = RefreshToken.newInstance(
@@ -32,7 +32,7 @@ public class IssueTokenService implements IssueTokenUseCase {
                 createRefreshTokenResponseDto.getRefreshTokenExpiresIn()
         );
         refreshTokenRepository.save(refreshToken);
-        return new TokenResponse(accessToken, refreshToken.getValue());
+        return new TokenResponseDto(accessToken, refreshToken.getValue());
     }
 
     @Override

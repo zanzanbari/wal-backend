@@ -1,11 +1,11 @@
 package backend.wal.user.web;
 
-import backend.wal.user.application.port.ResignUserUseCase;
+import backend.wal.user.application.port.in.ResignUserUseCase;
 import backend.wal.user.web.dto.RegisterResignRequest;
 import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.LoginUser;
-import backend.wal.user.application.port.ChangeUserInfoUseCase;
-import backend.wal.user.application.port.RegisterResignInfoUseCase;
+import backend.wal.user.application.port.in.ChangeUserInfoUseCase;
+import backend.wal.user.application.port.in.RegisterResignInfoUseCase;
 import backend.wal.user.web.dto.ModifyNicknameRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

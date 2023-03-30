@@ -9,7 +9,7 @@ import backend.wal.wal.onboarding.web.dto.ModifyOnboardCategoryRequest;
 import backend.wal.wal.onboarding.web.dto.ModifyOnboardTimeRequest;
 import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.LoginUser;
-import backend.wal.user.application.port.ChangeUserInfoUseCase;
+import backend.wal.user.application.port.in.ChangeUserInfoUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,7 +1,7 @@
 package backend.wal.auth.application.service;
 
-import backend.wal.auth.application.port.AuthUseCase;
-import backend.wal.auth.application.port.dto.LoginRequestDto;
+import backend.wal.auth.application.port.in.AuthUseCase;
+import backend.wal.auth.application.port.in.LoginRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package backend.wal.user.domain.aggregate.entity;
 
-import backend.wal.user.application.port.dto.CreateUserDto;
+import backend.wal.user.application.port.in.CreateUserDto;
 import backend.wal.user.domain.aggregate.SocialInfo;
 import backend.wal.user.domain.aggregate.SocialType;
 import backend.wal.user.domain.aggregate.UserRole;

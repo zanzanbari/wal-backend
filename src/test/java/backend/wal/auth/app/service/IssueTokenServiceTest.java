@@ -1,9 +1,9 @@
 package backend.wal.auth.app.service;
 
 import backend.wal.advice.exception.NotFoundException;
-import backend.wal.auth.application.port.dto.TokenResponse;
+import backend.wal.auth.application.port.out.TokenResponseDto;
 import backend.wal.auth.application.service.IssueTokenService;
-import backend.wal.auth.application.port.JwtManagerPort;
+import backend.wal.auth.application.port.out.JwtManagerPort;
 import backend.wal.auth.domain.RefreshToken;
 import backend.wal.auth.domain.repository.RefreshTokenRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -50,7 +50,7 @@ class IssueTokenServiceTest {
                 .thenReturn(refreshToken);
 
         // when
-        TokenResponse response = issueTokenService.issue(USER_ID);
+        TokenResponseDto response = issueTokenService.issue(USER_ID);
 
         // then
         assertAll(
