@@ -1,7 +1,5 @@
-package backend.wal.user.domain;
+package backend.wal.user.adapter;
 
-import backend.wal.user.adapter.ResignUserSchedulerAdapter;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,14 +9,9 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ResignUserSchedulerPortImplTest {
+class ResignUserSchedulerPortTest {
 
-    private final ResignUserSchedulerAdapter resignUserSchedulerImpl = new ResignUserSchedulerAdapter();
-
-    @AfterEach
-    void cleanUp() {
-        resignUserSchedulerImpl.shoutDown();
-    }
+    private final ResignUserSchedulerAdapter resignUserScheduler = new ResignUserSchedulerAdapter();
 
     @DisplayName("딜레이 시간(millis)과 수행해야 할 task 를 받아 딜레이 시간 이후 task 를 실행한다")
     @Test
@@ -30,10 +23,11 @@ class ResignUserSchedulerPortImplTest {
         Runnable task = () -> {
             taskChecker[0] = true;
             latch.countDown();
+            resignUserScheduler.shoutDown();
         };
 
         // when
-        resignUserSchedulerImpl.resignAfterDay(task, delayTimeMillis);
+        resignUserScheduler.resignAfterDay(task, delayTimeMillis);
 
         // then
         assertAll(

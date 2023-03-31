@@ -1,4 +1,4 @@
-//package backend.wal.wal.repository;
+//package backend.wal.wal.todaywal.domain.repository;
 //
 //import backend.wal.config.jpa.JPAConfig;
 //import backend.wal.wal.common.domain.WalCategoryType;
@@ -9,7 +9,6 @@
 //import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
 //import backend.wal.wal.nextwal.domain.repository.CategoryRepository;
 //import backend.wal.wal.nextwal.domain.repository.ItemRepository;
-//import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
 //import backend.wal.wal.onboarding.adapter.WalSettingAdapter;
 //import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
@@ -25,7 +24,8 @@
 //import java.util.Set;
 //import java.util.stream.Stream;
 //
-//import static backend.wal.wal.common.domain.WalCategoryType.YELL;
+//import static backend.wal.wal.common.domain.WalCategoryType.*;
+//import static backend.wal.wal.common.domain.WalTimeType.*;
 //import static org.assertj.core.api.Assertions.assertThat;
 //
 //@SpringBootTest

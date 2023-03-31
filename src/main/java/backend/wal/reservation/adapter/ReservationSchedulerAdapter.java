@@ -18,12 +18,14 @@ public final class ReservationSchedulerAdapter implements ReservationSchedulerPo
     private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
     private final ReservationScheduledFutures reservationScheduledFutures = new ReservationScheduledFutures();
 
+    @Override
     public void sendMessageAfterDelay(Runnable task, long delayTime, Long reservationId) {
         ScheduledFuture<?> scheduledFuture = scheduledExecutorService.schedule(task, delayTime, TimeUnit.MILLISECONDS);
         reservationScheduledFutures.register(reservationId, scheduledFuture);
         LOGGER.debug("예약번호 {}번 등록 완료 - 딜레이 시간 {}", reservationId, delayTime);
     }
 
+    @Override
     public void cancelMessage(Long reservationId) {
         if (reservationScheduledFutures.cancelScheduleByKey(reservationId)) {
             reservationScheduledFutures.removeByKey(reservationId);
@@ -31,6 +33,7 @@ public final class ReservationSchedulerAdapter implements ReservationSchedulerPo
         }
     }
 
+    @Override
     public void shoutDown() {
         scheduledExecutorService.shutdown();
     }
