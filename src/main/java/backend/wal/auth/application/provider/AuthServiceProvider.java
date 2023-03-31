@@ -11,7 +11,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 @Component
-public final class AuthServiceProvider {
+public class AuthServiceProvider {
 
     private static final Map<SocialType, AuthUseCase> AUTH_SERVICE_PROVIDER = new EnumMap<>(SocialType.class);
 
