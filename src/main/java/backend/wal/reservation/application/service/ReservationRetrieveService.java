@@ -7,7 +7,7 @@ import backend.wal.reservation.application.port.in.ReservationRetrieveUseCase;
 import backend.wal.reservation.domain.Reservations;
 import backend.wal.reservation.domain.aggregate.Reservation;
 import backend.wal.reservation.domain.repository.ReservationRepository;
-import backend.wal.reservation.exception.ConflictReservationException;
+import backend.wal.reservation.exception.NotFoundReservationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,7 +57,7 @@ public class ReservationRetrieveService implements ReservationRetrieveUseCase {
 
     private void validateReservationExists(List<Reservation> findReservations) {
         if (findReservations.isEmpty()) {
-            throw ConflictReservationException.none();
+            throw NotFoundReservationException.none();
         }
     }
 
