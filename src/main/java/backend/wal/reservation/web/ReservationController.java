@@ -1,6 +1,7 @@
 package backend.wal.reservation.web;
 
 import backend.wal.reservation.application.port.in.dto.RegisterReservationResponseDto;
+import backend.wal.reservation.application.port.in.DeleteReservationHistoryUseCase;
 import backend.wal.reservation.application.port.in.RegisterReservationUseCase;
 import backend.wal.reservation.application.port.in.ReservationNotificationUseCase;
 import backend.wal.reservation.web.dto.AddReservationRequest;
@@ -20,6 +21,7 @@ public class ReservationController {
 
     private final RegisterReservationUseCase registerReservationUseCase;
     private final ReservationNotificationUseCase reservationNotificationUseCase;
+    private final DeleteReservationHistoryUseCase deleteReservationHistoryUseCase;
 
     @Authentication
     @PostMapping("/register")
@@ -33,6 +35,13 @@ public class ReservationController {
     @PostMapping("/{reservationId}/cancel")
     public ResponseEntity<Void> cancel(@PathVariable Long reservationId) {
         reservationNotificationUseCase.cancel(reservationId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Authentication
+    @PostMapping("/history/{reservationId}/remove")
+    public ResponseEntity<Void> remove(@PathVariable Long reservationId) {
+        deleteReservationHistoryUseCase.deleteHistory(reservationId);
         return ResponseEntity.noContent().build();
     }
 }
