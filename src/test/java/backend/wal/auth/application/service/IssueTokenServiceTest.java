@@ -1,8 +1,8 @@
-package backend.wal.auth.app.service;
+package backend.wal.auth.application.service;
 
 import backend.wal.advice.exception.NotFoundException;
+import backend.wal.auth.application.port.out.CreateRefreshTokenResponseDto;
 import backend.wal.auth.application.port.out.TokenResponseDto;
-import backend.wal.auth.application.service.IssueTokenService;
 import backend.wal.auth.application.port.out.JwtManagerPort;
 import backend.wal.auth.domain.RefreshToken;
 import backend.wal.auth.domain.repository.RefreshTokenRepository;
@@ -29,7 +29,7 @@ class IssueTokenServiceTest {
     private static final String REFRESH_TOKEN = "RefreshToken";
 
     @Mock
-    private JwtManagerPort jwtManager;
+    private JwtManagerPort jwtManagerPort;
 
     @Mock
     private RefreshTokenRepository refreshTokenRepository;
@@ -37,17 +37,15 @@ class IssueTokenServiceTest {
     @InjectMocks
     private IssueTokenService issueTokenService;
 
-    private RefreshToken refreshToken;
-
     @DisplayName("유저의 아이디를 받아 accessToken, refreshToken 을 발급힌다")
     @Test
     void issueToken() {
         // given
-        refreshToken = RefreshToken.newInstance(USER_ID, REFRESH_TOKEN, new Date());
-        when(jwtManager.createAccessToken(USER_ID))
+        CreateRefreshTokenResponseDto createTokenDto = new CreateRefreshTokenResponseDto(USER_ID, REFRESH_TOKEN, new Date());
+        when(jwtManagerPort.createAccessToken(USER_ID))
                 .thenReturn(ACCESS_TOKEN);
-        when(jwtManager.createRefreshToken(USER_ID))
-                .thenReturn(refreshToken);
+        when(jwtManagerPort.createRefreshToken(USER_ID))
+                .thenReturn(createTokenDto);
 
         // when
         TokenResponseDto response = issueTokenService.issue(USER_ID);
@@ -55,7 +53,7 @@ class IssueTokenServiceTest {
         // then
         assertAll(
                 () -> assertThat(response.getAccessToken()).isEqualTo(ACCESS_TOKEN),
-                () -> assertThat(response.getRefreshToken()).isEqualTo(refreshToken.getValue())
+                () -> assertThat(response.getRefreshToken()).isEqualTo(REFRESH_TOKEN)
         );
     }
 
@@ -63,10 +61,10 @@ class IssueTokenServiceTest {
     @Test
     void reissueToken() {
         // given
-        refreshToken = RefreshToken.newInstance(USER_ID, REFRESH_TOKEN, new Date());
+        RefreshToken refreshToken = RefreshToken.newInstance(USER_ID, REFRESH_TOKEN, new Date());
         when(refreshTokenRepository.findRefreshTokenByValue(REFRESH_TOKEN))
                 .thenReturn(Optional.of(refreshToken));
-        when(jwtManager.createAccessToken(USER_ID))
+        when(jwtManagerPort.createAccessToken(USER_ID))
                 .thenReturn("NEW_ACCESS_TOKEN");
 
         // when
