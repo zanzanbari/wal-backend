@@ -1,6 +1,5 @@
-package backend.wal.reservation.domain;
+package backend.wal.reservation.adapter;
 
-import backend.wal.reservation.adapter.ReservationScheduledFutures;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

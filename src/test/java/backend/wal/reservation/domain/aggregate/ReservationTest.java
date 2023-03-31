@@ -1,4 +1,4 @@
-package backend.wal.reservation.domain.aggregate.entity;
+package backend.wal.reservation.domain.aggregate;
 
 import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
 import backend.wal.reservation.domain.aggregate.Reservation;
