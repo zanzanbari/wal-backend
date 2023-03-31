@@ -6,11 +6,15 @@ import backend.wal.auth.application.service.KakaoAuthService;
 import backend.wal.user.domain.aggregate.SocialType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,36 +22,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AuthServiceProviderTest {
 
     @Mock
-    private AppleAuthService appleAuthService;
+    private AppleAuthService appleAuthServiceMock;
 
     @Mock
-    private KakaoAuthService kakaoAuthService;
+    private KakaoAuthService kakaoAuthServiceMock;
 
     @InjectMocks
     private AuthServiceProvider authServiceProvider;
 
+    private static AppleAuthService appleAuthService;
+    private static KakaoAuthService kakaoAuthService;
+
     @BeforeEach
     void setUp() {
-        authServiceProvider.initAuthServiceProvider();
+        appleAuthService = appleAuthServiceMock;
+        kakaoAuthService = kakaoAuthServiceMock;
     }
 
     @DisplayName("Apple 소셜 타입을 받아 AppleAuthService 를 가져온다")
-    @Test
-    void getAuthServiceByApple() {
+    @ParameterizedTest
+    @MethodSource("provide")
+    void getAuthServiceByApple(SocialType socialType, AuthUseCase expect) {
         // when
-        AuthUseCase authUseCase = authServiceProvider.getAuthServiceBy(SocialType.APPLE);
+        AuthUseCase actual = authServiceProvider.getAuthServiceBy(socialType);
 
         // then
-        assertThat(authUseCase).isEqualTo(appleAuthService);
+        assertThat(actual).isEqualTo(expect);
     }
 
-    @DisplayName("Kakao 소셜 타입을 받아 KakaoAuthService 를 가져온다")
-    @Test
-    void getAuthServiceByKakao() {
-        // when
-        AuthUseCase authUseCase = authServiceProvider.getAuthServiceBy(SocialType.KAKAO);
-
-        // then
-        assertThat(authUseCase).isEqualTo(kakaoAuthService);
+    private static Stream<Arguments> provide() {
+        return Stream.of(
+                Arguments.of(SocialType.APPLE, appleAuthService),
+                Arguments.of(SocialType.KAKAO, kakaoAuthService)
+        );
     }
 }
