@@ -109,7 +109,7 @@ public class Onboarding {
         return getCategoryTypes();
     }
 
-    private Set<WalCategoryType> getCategoryTypes() {
+    public Set<WalCategoryType> getCategoryTypes() {
         return categories.stream()
                 .map(OnboardingCategory::getCategoryType)
                 .collect(Collectors.toSet());
