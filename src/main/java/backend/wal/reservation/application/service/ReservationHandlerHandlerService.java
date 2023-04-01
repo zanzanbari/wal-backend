@@ -1,7 +1,7 @@
 package backend.wal.reservation.application.service;
 
 import backend.wal.reservation.application.port.out.TodayWalPort;
-import backend.wal.reservation.application.port.in.RegisterReservationUseCase;
+import backend.wal.reservation.application.port.in.ReservationHandlerUseCase;
 import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
 import backend.wal.reservation.application.port.in.dto.RegisterReservationResponseDto;
 import backend.wal.reservation.domain.ReservationTime;
@@ -16,14 +16,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @AppService
-public class RegisterReservationService implements RegisterReservationUseCase {
+public class ReservationHandlerHandlerService implements ReservationHandlerUseCase {
 
     private final ReservationRepository reservationRepository;
     private final TodayWalPort todayWalPort;
     private final Clock clock;
 
-    public RegisterReservationService(final ReservationRepository reservationRepository, final TodayWalPort todayWalPort,
-                                      final Clock clock) {
+    public ReservationHandlerHandlerService(final ReservationRepository reservationRepository, final TodayWalPort todayWalPort,
+                                            final Clock clock) {
         this.reservationRepository = reservationRepository;
         this.todayWalPort = todayWalPort;
         this.clock = clock;
@@ -48,7 +48,7 @@ public class RegisterReservationService implements RegisterReservationUseCase {
     private void validateReservationDate(ReservationTime reservationTime, Long userId) {
         LocalDateTime startDay = reservationTime.getReservationDate();
         LocalDateTime endDay = reservationTime.getNextDate();
-        if (reservationRepository.existsReservationBySendDueDateBetweenAndUserId(startDay, endDay, userId)) {
+        if (hasReservationBetweenDate(startDay, endDay, userId)) {
             throw ConflictReservationException.alreadyExistDate(startDay.toLocalDate());
         }
     }
@@ -59,15 +59,16 @@ public class RegisterReservationService implements RegisterReservationUseCase {
         }
     }
 
-    public void delete(Long userId) {
+    @Override
+    public void deleteIfCanceledReservationIsToday(Long userId) {
         LocalDateTime today = LocalDate.now(clock).atStartOfDay();
         LocalDateTime tomorrow = today.plusDays(1);
-        if (hasReservationBetween(userId, today, tomorrow)) {
+        if (hasReservationBetweenDate(today, tomorrow, userId)) {
             todayWalPort.deleteReservationCAll(userId);
         }
     }
 
-    private boolean hasReservationBetween(final Long userId, final LocalDateTime today, final LocalDateTime tomorrow) {
-        return reservationRepository.existsReservationBySendDueDateBetweenAndUserId(today, tomorrow, userId);
+    private boolean hasReservationBetweenDate(LocalDateTime start, LocalDateTime end, Long userId) {
+        return reservationRepository.existsReservationBySendDueDateBetweenAndUserId(start, end, userId);
     }
 }
