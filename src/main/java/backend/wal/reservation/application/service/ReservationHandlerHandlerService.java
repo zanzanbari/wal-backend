@@ -58,4 +58,16 @@ public class RegisterReservationService implements RegisterReservationUseCase {
             todayWalPort.registerReservationCall(reservation.getUserId(), reservation.getMessage());
         }
     }
+
+    public void delete(Long userId) {
+        LocalDateTime today = LocalDate.now(clock).atStartOfDay();
+        LocalDateTime tomorrow = today.plusDays(1);
+        if (hasReservationBetween(userId, today, tomorrow)) {
+            todayWalPort.deleteReservationCAll(userId);
+        }
+    }
+
+    private boolean hasReservationBetween(final Long userId, final LocalDateTime today, final LocalDateTime tomorrow) {
+        return reservationRepository.existsReservationBySendDueDateBetweenAndUserId(today, tomorrow, userId);
+    }
 }
