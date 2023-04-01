@@ -64,7 +64,7 @@ public class ReservationHandlerHandlerService implements ReservationHandlerUseCa
         LocalDateTime today = LocalDate.now(clock).atStartOfDay();
         LocalDateTime tomorrow = today.plusDays(1);
         if (hasReservationBetweenDate(today, tomorrow, userId)) {
-            todayWalPort.deleteReservationCAll(userId);
+            todayWalPort.deleteReservationCall(userId);
         }
     }
 
