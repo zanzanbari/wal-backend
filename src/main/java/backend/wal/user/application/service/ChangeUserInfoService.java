@@ -25,7 +25,7 @@ public class ChangeUserInfoService implements ChangeUserInfoUseCase {
     }
 
     private User findUserByUserId(Long userId) {
-        return userRepository.findUserById(userId)
+        return userRepository.findById(userId)
                 .orElseThrow(() -> NotFoundUserException.notExists(userId));
     }
 }

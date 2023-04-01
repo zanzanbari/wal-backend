@@ -23,7 +23,7 @@ public class ResignUserService implements ResignUserUseCase {
 
     @Transactional
     public void resign(Long userId) {
-        User user = userRepository.findUserById(userId)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> NotFoundUserException.notExists(userId));
         user.resign();
 
