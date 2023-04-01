@@ -1,6 +1,6 @@
 package backend.wal.wal.todaywal.application.service;
 
-import backend.wal.wal.todaywal.application.port.in.RegisterReservationTodayWalUseCase;
+import backend.wal.wal.todaywal.application.port.in.ReservationTodayWalHandlerUseCase;
 import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
 import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
 import backend.wal.wal.common.domain.WalCategoryType;
@@ -8,11 +8,11 @@ import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.support.annotation.AppService;
 
 @AppService
-public class RegisterReservationTodayWalService implements RegisterReservationTodayWalUseCase {
+public class ReservationTodayWalHandlerService implements ReservationTodayWalHandlerUseCase {
 
     private final TodayWalRepository todayWalRepository;
 
-    public RegisterReservationTodayWalService(final TodayWalRepository todayWalRepository) {
+    public ReservationTodayWalHandlerService(final TodayWalRepository todayWalRepository) {
         this.todayWalRepository = todayWalRepository;
     }
 
@@ -25,5 +25,10 @@ public class RegisterReservationTodayWalService implements RegisterReservationTo
                 .timeType(WalTimeType.RESERVATION)
                 .build();
         todayWalRepository.save(todayWal);
+    }
+
+    @Override
+    public void deleteReservationTodayWal(Long userId) {
+        todayWalRepository.deleteTodayWalByUserIdAndCategoryType(userId, WalCategoryType.RESERVATION);
     }
 }
