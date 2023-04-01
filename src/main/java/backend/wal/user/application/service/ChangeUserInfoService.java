@@ -3,7 +3,6 @@ package backend.wal.user.application.service;
 import backend.wal.user.application.port.in.ChangeUserInfoUseCase;
 import backend.wal.user.domain.repository.UserRepository;
 import backend.wal.user.domain.aggregate.entity.User;
-import backend.wal.user.exception.NotFoundUserException;
 import backend.wal.support.annotation.AppService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,13 +18,8 @@ public class ChangeUserInfoService implements ChangeUserInfoUseCase {
 
     @Override
     public String changeNickname(String newNickname, Long userId) {
-        User user = findUserByUserId(userId);
+        User user = UserServiceUtils.findExistsUserByUserId(userRepository, userId);
         user.changeNickname(newNickname);
         return user.getNickname();
-    }
-
-    private User findUserByUserId(Long userId) {
-        return userRepository.findById(userId)
-                .orElseThrow(() -> NotFoundUserException.notExists(userId));
     }
 }

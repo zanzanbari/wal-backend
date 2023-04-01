@@ -5,7 +5,6 @@ import backend.wal.user.application.port.in.ResignUserUseCase;
 import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.user.domain.repository.UserRepository;
 import backend.wal.support.annotation.AppService;
-import backend.wal.user.exception.NotFoundUserException;
 import org.springframework.transaction.annotation.Transactional;
 
 @AppService
@@ -23,8 +22,7 @@ public class ResignUserService implements ResignUserUseCase {
 
     @Transactional
     public void resign(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> NotFoundUserException.notExists(userId));
+        User user = UserServiceUtils.findExistsUserByUserId(userRepository, userId);
         user.resign();
 
         Runnable userDeleteTask = () -> {
