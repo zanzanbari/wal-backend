@@ -2,7 +2,7 @@ package backend.wal.reservation.web;
 
 import backend.wal.reservation.application.port.in.dto.RegisterReservationResponseDto;
 import backend.wal.reservation.application.port.in.DeleteReservationHistoryUseCase;
-import backend.wal.reservation.application.port.in.RegisterReservationUseCase;
+import backend.wal.reservation.application.port.in.ReservationHandlerUseCase;
 import backend.wal.reservation.application.port.in.ReservationNotificationUseCase;
 import backend.wal.reservation.web.dto.AddReservationRequest;
 import backend.wal.support.annotation.Authentication;
@@ -19,22 +19,23 @@ import java.net.URI;
 @RequestMapping("/v2/reservation")
 public class ReservationController {
 
-    private final RegisterReservationUseCase registerReservationUseCase;
+    private final ReservationHandlerUseCase reservationHandlerUseCase;
     private final ReservationNotificationUseCase reservationNotificationUseCase;
     private final DeleteReservationHistoryUseCase deleteReservationHistoryUseCase;
 
     @Authentication
     @PostMapping("/register")
     public ResponseEntity<Void> register(@Valid @RequestBody AddReservationRequest request, @LoginUser Long userId) {
-        RegisterReservationResponseDto responseDto = registerReservationUseCase.register(request.toServiceDto(userId));
+        RegisterReservationResponseDto responseDto = reservationHandlerUseCase.register(request.toServiceDto(userId));
         reservationNotificationUseCase.send(responseDto.toPublishRequestDto());
         return ResponseEntity.created(URI.create("/v2/reservation")).build();
     }
 
     @Authentication
     @PostMapping("/{reservationId}/cancel")
-    public ResponseEntity<Void> cancel(@PathVariable Long reservationId) {
+    public ResponseEntity<Void> cancel(@PathVariable Long reservationId, @LoginUser Long userId) {
         reservationNotificationUseCase.cancel(reservationId);
+        reservationHandlerUseCase.deleteIfCanceledReservationIsToday(userId);
         return ResponseEntity.noContent().build();
     }
 
