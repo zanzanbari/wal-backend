@@ -16,14 +16,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @AppService
-public class ReservationService implements RegisterReservationUseCase {
+public class RegisterReservationService implements RegisterReservationUseCase {
 
     private final ReservationRepository reservationRepository;
     private final TodayWalPort todayWalPort;
     private final Clock clock;
 
-    public ReservationService(final ReservationRepository reservationRepository, final TodayWalPort todayWalPort,
-                              final Clock clock) {
+    public RegisterReservationService(final ReservationRepository reservationRepository, final TodayWalPort todayWalPort,
+                                      final Clock clock) {
         this.reservationRepository = reservationRepository;
         this.todayWalPort = todayWalPort;
         this.clock = clock;
