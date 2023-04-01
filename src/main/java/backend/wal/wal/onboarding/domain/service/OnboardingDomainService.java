@@ -24,8 +24,9 @@ public class OnboardingDomainService {
         onboardingRepository.save(onboarding);
     }
 
-    public WalTimeTypesResponseDto updateTimeTypes(Set<WalTimeType> modifiedTimeTypes, Long userId) { // 추가된놈, 삭제된 놈 반환
+    public WalTimeTypesResponseDto updateTimeTypes(Set<WalTimeType> modifiedTimeTypes, Long userId) {
         Onboarding onboarding = OnboardingServiceUtils.findExistOnboardingByUserId(onboardingRepository, userId);
+
         Set<WalTimeType> canceledTimeTypes = onboarding.extractCancelTimeTypes(modifiedTimeTypes);
         Set<WalTimeType> remainAfterCancel = onboarding.removeCanceledTimeTypes(modifiedTimeTypes);
         Set<WalTimeType> addedTimeTypes = onboarding.extractAddTimeTypes(modifiedTimeTypes, remainAfterCancel);
@@ -37,8 +38,9 @@ public class OnboardingDomainService {
         return new WalTimeTypesResponseDto(willCancelAfterNow.getValues(), willAddAfterNow.getValues());
     }
 
-    public WalCategoryTypesResponseDto updateCategoryTypes(Set<WalCategoryType> modifiedCategoryTypes, Long userId) { // 추가된놈, 삭제된 놈 반환
+    public WalCategoryTypesResponseDto updateCategoryTypes(Set<WalCategoryType> modifiedCategoryTypes, Long userId) {
         Onboarding onboarding = OnboardingServiceUtils.findExistOnboardingByUserId(onboardingRepository, userId);
+
         Set<WalCategoryType> canceledCategoryTypes = onboarding.extractCancelCategoryTypes(modifiedCategoryTypes);
         Set<WalCategoryType> remainAfterCancel = onboarding.removeCanceledCategoryTypes(modifiedCategoryTypes);
         Set<WalCategoryType> addedCategoryTypes = onboarding.extractAddCategoryTypes(modifiedCategoryTypes, remainAfterCancel);
