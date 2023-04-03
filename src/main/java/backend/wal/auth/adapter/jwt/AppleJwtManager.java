@@ -13,11 +13,17 @@ import java.util.Base64;
 import java.util.Map;
 
 @Component
-public final class AppleJwtParser {
+public final class AppleJwtManager {
 
     private static final String ID_TOKEN_VALUE_DELIMITER = "\\.";
     private static final int HEADER_INDEX = 0;
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+    private final AppleJwtClaimValidator appleJwtClaimValidator;
+
+    public AppleJwtManager(final AppleJwtClaimValidator appleJwtClaimValidator) {
+        this.appleJwtClaimValidator = appleJwtClaimValidator;
+    }
 
     public Map<String, String> parseHeaders(String idToken) {
         try {
@@ -29,7 +35,13 @@ public final class AppleJwtParser {
         }
     }
 
-    public Claims parseClaims(PublicKey publicKey, String idToken) {
+    public String getSubject(PublicKey publicKey, String idToken) {
+        Claims claims = parseClaims(publicKey, idToken);
+        validateClaims(claims);
+        return claims.getSubject();
+    }
+
+    private Claims parseClaims(PublicKey publicKey, String idToken) {
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(publicKey)
@@ -40,6 +52,15 @@ public final class AppleJwtParser {
             throw UnAuthorizedTokenException.wrong(idToken);
         } catch (ExpiredJwtException e) {
             throw UnAuthorizedTokenException.expired(idToken);
+        }
+    }
+
+    private void validateClaims(Claims claims) { // FIXME : Exception 재설정
+        if (!appleJwtClaimValidator.hasRightIssAndClientId(claims)) {
+            throw UnAuthorizedTokenException.unMatched();
+        }
+        if (!appleJwtClaimValidator.isValidExp(claims)) {
+            throw UnAuthorizedTokenException.expired(claims.getId());
         }
     }
 }
