@@ -18,4 +18,8 @@ public final class InternalAuthServerException extends InternalServerException {
         return new InternalAuthServerException(String.format(
                 "USER_ID 를 가져오지 못했습니다 (%s - %s)", clazz, method));
     }
+
+    public static InternalServerException cannotGeneratePublicKey() {
+        return new InternalAuthServerException("가져온 ApplePublicKey 값으로 PublicKey 생성에 실패했습니다");
+    }
 }
