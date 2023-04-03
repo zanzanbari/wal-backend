@@ -1,4 +1,4 @@
-package backend.wal.auth.application.port.out;
+package backend.wal.auth.application.port.in;
 
 public final class TokenResponseDto {
 

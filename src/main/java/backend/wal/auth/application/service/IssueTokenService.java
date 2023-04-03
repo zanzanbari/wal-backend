@@ -1,7 +1,7 @@
 package backend.wal.auth.application.service;
 
 import backend.wal.auth.application.port.out.CreateRefreshTokenResponseDto;
-import backend.wal.auth.application.port.out.TokenResponseDto;
+import backend.wal.auth.application.port.in.TokenResponseDto;
 import backend.wal.auth.application.port.in.IssueTokenUseCase;
 import backend.wal.auth.application.port.out.JwtManagerPort;
 import backend.wal.auth.domain.repository.RefreshTokenRepository;
