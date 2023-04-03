@@ -1,6 +1,7 @@
 package backend.wal.auth.application.service;
 
 import backend.wal.auth.application.port.in.LoginRequestDto;
+import backend.wal.auth.application.port.in.LoginResponseDto;
 import backend.wal.auth.application.port.out.OAuthApiClientPort;
 import backend.wal.auth.application.port.out.OAuthUserInfoResponseDto;
 import backend.wal.auth.application.port.out.RegisterFcmPort;
@@ -66,10 +67,11 @@ class KakaoAuthServiceTest {
                 .thenReturn(alreadyUser);
 
         // when
-        Long userId = kakaoAuthService.login(loginRequestDto);
+        LoginResponseDto loginResponseDto = kakaoAuthService.login(loginRequestDto);
 
         // then
-        assertThat(userId).isEqualTo(alreadyUser.getId());
+        assertThat(loginResponseDto.getUserId()).isEqualTo(alreadyUser.getId());
+        assertThat(loginResponseDto.isNewUser()).isFalse();
     }
 
     @DisplayName("존재하지 않는 회원이 login 을 하면 회원 가입을 한 후 회원 가입한 유저의 userId 를 반환한다")
@@ -85,10 +87,11 @@ class KakaoAuthServiceTest {
                 .thenReturn(newUserId);
 
         // when
-        Long userId = kakaoAuthService.login(loginRequestDto);
+        LoginResponseDto loginResponseDto = kakaoAuthService.login(loginRequestDto);
 
         // then
-        assertThat(userId).isEqualTo(newUserId);
+        assertThat(loginResponseDto.getUserId()).isEqualTo(newUserId);
+        assertThat(loginResponseDto.isNewUser()).isTrue();
     }
 
     @DisplayName("탈퇴한 회원이 24시간 이내에 login 을 하면 에러가 발생한다")
