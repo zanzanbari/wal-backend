@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class KakaoAuthServiceTest {
+class AuthServiceTest {
 
     private static final String SOCIAL_ACCESS_TOKEN = "socialAccessToken";
     private static final String FCM_TOKEN = "FcmToken";
