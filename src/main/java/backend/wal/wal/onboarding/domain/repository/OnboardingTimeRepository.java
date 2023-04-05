@@ -2,6 +2,7 @@ package backend.wal.wal.onboarding.domain.repository;
 
 import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.wal.onboarding.domain.aggregate.OnboardingTime;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -5,6 +5,7 @@ import backend.wal.user.domain.aggregate.SocialInfo;
 import backend.wal.user.domain.aggregate.SocialType;
 import backend.wal.user.domain.aggregate.UserRole;
 import backend.wal.user.domain.aggregate.UserStatus;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -7,9 +7,10 @@ import backend.wal.wal.onboarding.web.dto.InitOnboardInfoRequest;
 import backend.wal.wal.onboarding.web.dto.OnboardInfoResponse;
 import backend.wal.wal.onboarding.web.dto.ModifyOnboardCategoryRequest;
 import backend.wal.wal.onboarding.web.dto.ModifyOnboardTimeRequest;
+import backend.wal.user.application.port.in.ChangeUserInfoUseCase;
 import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.LoginUser;
-import backend.wal.user.application.port.in.ChangeUserInfoUseCase;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+
 import java.net.URI;
 
 @RestController

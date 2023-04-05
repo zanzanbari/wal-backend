@@ -1,12 +1,13 @@
 package backend.wal.user.application.service;
 
-import backend.wal.support.annotation.AppService;
 import backend.wal.user.application.port.in.RetrieveUserInfoUseCase;
-import backend.wal.user.application.port.out.OnboardingPort;
 import backend.wal.user.application.port.out.CategoryTypeResponseDto;
 import backend.wal.user.application.port.out.TimeTypeResponseDto;
+import backend.wal.user.application.port.out.OnboardingPort;
 import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.user.domain.repository.UserRepository;
+import backend.wal.support.annotation.AppService;
+
 import org.springframework.transaction.annotation.Transactional;
 
 @AppService

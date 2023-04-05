@@ -3,6 +3,7 @@ package backend.wal.auth.adapter;
 import backend.wal.auth.application.port.out.RegisterFcmPort;
 import backend.wal.notification.application.port.in.InitFcmRequestDto;
 import backend.wal.notification.application.port.in.RegisterFcmTokenUseCase;
+
 import org.springframework.stereotype.Component;
 
 @Component

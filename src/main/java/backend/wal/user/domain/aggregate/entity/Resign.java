@@ -3,6 +3,7 @@ package backend.wal.user.domain.aggregate.entity;
 import backend.wal.user.domain.aggregate.converter.ResignReasonsConverter;
 import backend.wal.user.domain.aggregate.ResignReason;
 import backend.wal.user.domain.aggregate.ResignReasons;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

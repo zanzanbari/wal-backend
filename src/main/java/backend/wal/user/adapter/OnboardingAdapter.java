@@ -4,6 +4,7 @@ import backend.wal.user.application.port.out.OnboardingPort;
 import backend.wal.user.application.port.out.CategoryTypeResponseDto;
 import backend.wal.user.application.port.out.TimeTypeResponseDto;
 import backend.wal.wal.onboarding.application.port.in.RetrieveOnboardingInfoUseCase;
+
 import org.springframework.stereotype.Component;
 
 @Component

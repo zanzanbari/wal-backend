@@ -4,6 +4,7 @@ import backend.wal.user.application.port.in.ChangeUserInfoUseCase;
 import backend.wal.user.domain.repository.UserRepository;
 import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.support.annotation.AppService;
+
 import org.springframework.transaction.annotation.Transactional;
 
 @AppService

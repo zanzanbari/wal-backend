@@ -7,6 +7,7 @@ import backend.wal.wal.onboarding.domain.repository.OnboardingRepository;
 import backend.wal.wal.todaywal.application.port.in.ReservationTodayWalHandlerUseCase;
 import backend.wal.wal.todaywal.application.port.in.TodayWalSettingUseCase;
 import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
+
 import org.springframework.stereotype.Component;
 import org.springframework.scheduling.annotation.Scheduled;
 

@@ -2,11 +2,14 @@ package backend.wal.auth.adapter.jwt;
 
 import backend.wal.auth.adapter.oauth.apple.AppleClaimsValidator;
 import backend.wal.auth.exception.UnAuthorizedTokenException;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SecurityException;
+
 import org.springframework.stereotype.Component;
 
 import java.security.PublicKey;

@@ -6,6 +6,7 @@ import backend.wal.user.application.port.in.RegisterUserUseCase;
 import backend.wal.user.application.port.in.CreateUserDto;
 import backend.wal.user.domain.aggregate.SocialType;
 import backend.wal.user.domain.aggregate.entity.User;
+
 import org.springframework.stereotype.Component;
 
 @Component

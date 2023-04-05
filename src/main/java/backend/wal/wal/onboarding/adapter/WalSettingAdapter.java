@@ -7,6 +7,7 @@ import backend.wal.wal.nextwal.application.port.GetNextWalUseCase;
 import backend.wal.wal.nextwal.application.port.NextWalSettingUseCase;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
+
 import org.springframework.stereotype.Component;
 
 import java.util.Set;

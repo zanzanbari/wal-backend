@@ -1,12 +1,13 @@
 package backend.wal.auth.application.service;
 
 import backend.wal.auth.application.port.in.LoginRequestDto;
-import backend.wal.auth.application.port.in.AuthUseCase;
 import backend.wal.auth.application.port.in.LoginResponseDto;
+import backend.wal.auth.application.port.in.AuthUseCase;
 import backend.wal.auth.application.port.out.OAuthUserInfoResponseDto;
 import backend.wal.auth.application.port.out.OAuthApiClientPort;
 import backend.wal.auth.domain.service.OAuthDomainService;
 import backend.wal.support.annotation.AppService;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,14 +1,15 @@
 package backend.wal.reservation.application.service;
 
 import backend.wal.reservation.application.port.in.dto.ReservationCalendarResponseDto;
+import backend.wal.reservation.application.port.in.ReservationRetrieveUseCase;
 import backend.wal.reservation.web.dto.ReservationCalendarResponse;
 import backend.wal.reservation.web.dto.ReservationHistoryResponse;
-import backend.wal.reservation.application.port.in.ReservationRetrieveUseCase;
 import backend.wal.reservation.domain.Reservations;
 import backend.wal.reservation.domain.aggregate.Reservation;
 import backend.wal.reservation.domain.repository.ReservationRepository;
 import backend.wal.reservation.exception.NotFoundReservationException;
-import org.springframework.stereotype.Service;
+import backend.wal.support.annotation.AppService;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service
+@AppService
 @Transactional(readOnly = true)
 public class ReservationRetrieveService implements ReservationRetrieveUseCase {
 
