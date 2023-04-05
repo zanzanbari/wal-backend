@@ -24,7 +24,7 @@ public class ReservationRetrieveController {
     }
 
     @Authentication
-    @GetMapping
+    @GetMapping("/history")
     public ResponseEntity<ReservationHistoryResponse> retrieveHistory(@LoginUser Long userId) {
         return ResponseEntity.ok(reservationRetrieveService.retrieveReservationHistory(userId));
     }
