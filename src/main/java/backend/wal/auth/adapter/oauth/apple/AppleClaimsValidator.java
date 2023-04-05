@@ -18,7 +18,7 @@ public final class AppleJwtClaimValidator {
         this.clientId = clientId;
     }
 
-    public boolean hasRightIssAndClientId(Claims claims) {
+    public boolean hasRightIssAndClientId(String issuer, String audience) {
         return claims.getIssuer().equals(iss)
                 && claims.getAudience().equals(clientId);
     }
