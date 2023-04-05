@@ -14,10 +14,12 @@ public class ApplePublicKeyMatcher {
     private static final String KID_KEY = "kid";
 
     public ApplePublicKey getMatchKey(ApplePublicKeyResponse applePublicKeyResponse, Map<String, String> tokenHeader) {
+        String tokenAlg = tokenHeader.get(ALG_KEY);
+        String tokenKid = tokenHeader.get(KID_KEY);
         return applePublicKeyResponse.getKeys()
                 .stream()
-                .filter(publicKey -> publicKey.getAlg().equals(tokenHeader.get(ALG_KEY)))
-                .filter(publicKey -> publicKey.getKid().equals(tokenHeader.get(KID_KEY)))
+                .filter(publicKey -> publicKey.getAlg().equals(tokenAlg))
+                .filter(publicKey -> publicKey.getKid().equals(tokenKid))
                 .findFirst()
                 .orElseThrow(UnAuthorizedTokenException::unMatched);
     }
