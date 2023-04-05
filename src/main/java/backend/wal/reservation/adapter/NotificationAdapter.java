@@ -2,6 +2,7 @@ package backend.wal.reservation.adapter;
 
 import backend.wal.notification.application.port.in.NotificationUseCase;
 import backend.wal.reservation.application.port.out.NotificationPort;
+
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,6 +1,7 @@
 package backend.wal.wal.nextwal.domain.aggregate;
 
 import backend.wal.wal.common.domain.WalCategoryType;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -2,6 +2,7 @@ package backend.wal.reservation.web.dto;
 
 import backend.wal.reservation.domain.aggregate.ShowStatus;
 import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

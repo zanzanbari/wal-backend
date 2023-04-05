@@ -2,6 +2,7 @@ package backend.wal.user.domain.aggregate.converter;
 
 import backend.wal.user.domain.aggregate.ResignReasons;
 import backend.wal.user.exception.InternalServerJsonException;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

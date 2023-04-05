@@ -8,6 +8,7 @@ import backend.wal.wal.onboarding.domain.service.OnboardingDomainService;
 import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.support.annotation.AppService;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;

@@ -2,11 +2,13 @@ package backend.wal.reservation.domain.aggregate;
 
 import backend.wal.reservation.application.port.in.dto.ReservationHistoryResponseDto;
 import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -1,8 +1,5 @@
 package backend.wal.notification.application.port.in;
 
-import lombok.Getter;
-
-@Getter
 public final class InitFcmRequestDto {
 
     private final Long userId;
@@ -11,5 +8,13 @@ public final class InitFcmRequestDto {
     public InitFcmRequestDto(final Long userId, final String fcmToken) {
         this.userId = userId;
         this.fcmToken = fcmToken;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
     }
 }

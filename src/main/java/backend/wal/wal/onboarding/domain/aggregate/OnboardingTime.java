@@ -1,6 +1,7 @@
 package backend.wal.wal.onboarding.domain.aggregate;
 
 import backend.wal.wal.common.domain.WalTimeType;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

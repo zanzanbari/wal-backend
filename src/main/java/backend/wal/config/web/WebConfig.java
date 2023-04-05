@@ -4,6 +4,7 @@ import backend.wal.auth.web.support.interceptor.AuthenticationInterceptor;
 import backend.wal.auth.web.support.interceptor.ReissueTokenInterceptor;
 import backend.wal.auth.web.support.resolver.LoginUserResolver;
 import backend.wal.auth.web.support.resolver.RefreshTokenResolver;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

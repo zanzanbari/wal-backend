@@ -2,6 +2,7 @@ package backend.wal.wal.onboarding.web.dto;
 
 import backend.wal.wal.onboarding.application.port.in.dto.ModifyOnboardCategoryRequestDto;
 import backend.wal.wal.common.domain.WalCategoryType;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

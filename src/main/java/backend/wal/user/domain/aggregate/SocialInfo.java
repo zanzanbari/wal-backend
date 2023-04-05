@@ -1,6 +1,7 @@
 package backend.wal.user.domain.aggregate;
 
 import com.google.common.base.Objects;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

@@ -1,5 +1,8 @@
 package backend.wal.auth.web;
 
+import static backend.wal.support.utils.HttpHeaderUtils.*;
+import static org.springframework.http.HttpStatus.*;
+
 import backend.wal.auth.application.port.in.LoginResponseDto;
 import backend.wal.auth.application.port.in.TokenResponseDto;
 import backend.wal.auth.application.port.in.IssueTokenUseCase;
@@ -8,13 +11,11 @@ import backend.wal.auth.application.provider.AuthServiceProvider;
 import backend.wal.auth.web.dto.LoginRequest;
 import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.ExtractValidRefreshToken;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
-import static backend.wal.support.utils.HttpHeaderUtils.*;
-import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping("/v2/auth")

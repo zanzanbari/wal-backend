@@ -1,6 +1,7 @@
 package backend.wal.user.application.port.in;
 
 import backend.wal.user.domain.aggregate.SocialType;
+
 import lombok.Builder;
 import lombok.Getter;
 

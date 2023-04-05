@@ -2,12 +2,15 @@ package backend.wal.wal.onboarding.domain.aggregate;
 
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

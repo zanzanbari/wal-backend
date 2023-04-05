@@ -1,6 +1,7 @@
 package backend.wal.user.adapter;
 
 import backend.wal.user.application.port.out.ResignUserSchedulerPort;
+
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Executors;

@@ -3,6 +3,7 @@ package backend.wal.auth.adapter.oauth.apple;
 import backend.wal.auth.adapter.oauth.apple.dto.ApplePublicKey;
 import backend.wal.auth.adapter.oauth.apple.dto.ApplePublicKeyResponse;
 import backend.wal.auth.exception.UnAuthorizedTokenException;
+
 import org.springframework.stereotype.Component;
 
 import java.util.Map;

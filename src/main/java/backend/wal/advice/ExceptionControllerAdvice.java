@@ -2,9 +2,14 @@ package backend.wal.advice;
 
 import backend.wal.advice.dto.ExceptionResponse;
 import backend.wal.advice.exception.WalException;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.hibernate.exception.ConstraintViolationException;
+
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -22,16 +27,17 @@ import java.util.Objects;
 
 import static org.springframework.http.HttpStatus.*;
 
-@Slf4j
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionControllerAdvice.class);
 
     /**
      * <b>Wal Custom Exception</b>
      */
     @ExceptionHandler(WalException.class)
     protected ResponseEntity<ExceptionResponse> handleBaseException(WalException exception) {
-        log.error(exception.getMessage(), exception);
+        LOGGER.error(exception.getMessage(), exception);
         return ResponseEntity
                 .status(exception.getStatus())
                 .body(ExceptionResponse.create(exception.getMessage()));
@@ -43,7 +49,7 @@ public class ExceptionControllerAdvice {
      */
     @ExceptionHandler(BindException.class)
     protected ResponseEntity<ExceptionResponse> handleBadRequest(final BindException e) {
-        log.error(e.getMessage());
+        LOGGER.error(e.getMessage());
         FieldError fieldError = Objects.requireNonNull(e.getFieldError());
         return ResponseEntity
                 .badRequest()
@@ -58,7 +64,7 @@ public class ExceptionControllerAdvice {
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     protected ResponseEntity<ExceptionResponse> handleHttpMessageNotReadableException(final HttpMessageNotReadableException e) {
-        log.error(e.getMessage());
+        LOGGER.error(e.getMessage());
         return ResponseEntity.badRequest().body(ExceptionResponse.create(e.getMessage()));
     }
 
@@ -68,7 +74,7 @@ public class ExceptionControllerAdvice {
      */
     @ExceptionHandler(MissingRequestValueException.class)
     protected ResponseEntity<ExceptionResponse> handle(final MissingRequestValueException e) {
-        log.error(e.getMessage());
+        LOGGER.error(e.getMessage());
         return ResponseEntity.badRequest().body(ExceptionResponse.create(e.getMessage()));
     }
 
@@ -78,7 +84,7 @@ public class ExceptionControllerAdvice {
      */
     @ExceptionHandler(TypeMismatchException.class)
     protected ResponseEntity<ExceptionResponse> handleTypeMismatchException(final TypeMismatchException e) {
-        log.error(e.getMessage());
+        LOGGER.error(e.getMessage());
         return ResponseEntity.badRequest().body(ExceptionResponse.create(e.getMessage()));
     }
 
@@ -91,7 +97,7 @@ public class ExceptionControllerAdvice {
             ConstraintViolationException.class
     })
     protected ResponseEntity<ExceptionResponse> handleInvalidFormatException(final Exception e) {
-        log.error(e.getMessage());
+        LOGGER.error(e.getMessage());
         return ResponseEntity.badRequest().body(ExceptionResponse.create(e.getMessage()));
     }
 
@@ -101,7 +107,7 @@ public class ExceptionControllerAdvice {
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     protected ResponseEntity<ExceptionResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
-        log.error(e.getMessage());
+        LOGGER.error(e.getMessage());
         return ResponseEntity.status(METHOD_NOT_ALLOWED).body(ExceptionResponse.create(e.getMessage()));
     }
 
@@ -110,7 +116,7 @@ public class ExceptionControllerAdvice {
      */
     @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
     protected ResponseEntity<ExceptionResponse> handleHttpMediaTypeNotAcceptableException(HttpMediaTypeNotAcceptableException e) {
-        log.error(e.getMessage());
+        LOGGER.error(e.getMessage());
         return ResponseEntity.status(NOT_ACCEPTABLE).body(ExceptionResponse.create(e.getMessage()));
     }
 
@@ -120,7 +126,7 @@ public class ExceptionControllerAdvice {
      */
     @ExceptionHandler(HttpMediaTypeException.class)
     protected ResponseEntity<ExceptionResponse> handleHttpMediaTypeException(final HttpMediaTypeException e) {
-        log.error(e.getMessage(), e);
+        LOGGER.error(e.getMessage(), e);
         return ResponseEntity.status(UNSUPPORTED_MEDIA_TYPE).body(ExceptionResponse.create(e.getMessage()));
     }
 
@@ -129,7 +135,7 @@ public class ExceptionControllerAdvice {
      */
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ExceptionResponse> handleException(final Exception e) {
-        log.error(e.getMessage(), e);
+        LOGGER.error(e.getMessage(), e);
         return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(ExceptionResponse.create(e.getMessage()));
     }
 }

@@ -2,6 +2,7 @@ package backend.wal.auth.adapter.oauth.apple;
 
 import backend.wal.auth.adapter.oauth.apple.dto.ApplePublicKey;
 import backend.wal.auth.exception.InternalAuthServerException;
+
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;

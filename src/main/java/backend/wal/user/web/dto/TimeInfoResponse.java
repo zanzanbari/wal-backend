@@ -1,6 +1,7 @@
 package backend.wal.user.web.dto;
 
 import backend.wal.wal.common.domain.WalTimeType;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

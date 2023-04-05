@@ -1,6 +1,7 @@
 package backend.wal.notification.domain.repository;
 
 import backend.wal.notification.domain.FcmToken;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

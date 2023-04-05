@@ -4,6 +4,7 @@ import backend.wal.wal.todaywal.domain.view.OpenStatus;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.wal.todaywal.domain.aggregate.ShowStatus;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

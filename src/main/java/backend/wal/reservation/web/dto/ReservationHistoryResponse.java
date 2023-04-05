@@ -1,6 +1,7 @@
 package backend.wal.reservation.web.dto;
 
 import backend.wal.reservation.application.port.in.dto.ReservationHistoryResponseDto;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

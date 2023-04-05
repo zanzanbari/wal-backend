@@ -4,6 +4,7 @@ import backend.wal.auth.application.port.in.AuthUseCase;
 import backend.wal.auth.application.service.AppleAuthService;
 import backend.wal.auth.application.service.KakaoAuthService;
 import backend.wal.user.domain.aggregate.SocialType;
+
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

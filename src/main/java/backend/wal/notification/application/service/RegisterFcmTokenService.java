@@ -5,6 +5,7 @@ import backend.wal.notification.application.port.in.RegisterFcmTokenUseCase;
 import backend.wal.notification.domain.FcmToken;
 import backend.wal.notification.domain.repository.FcmTokenRepository;
 import backend.wal.support.annotation.AppService;
+
 import org.springframework.transaction.annotation.Transactional;
 
 @AppService

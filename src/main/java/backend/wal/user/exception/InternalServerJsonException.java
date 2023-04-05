@@ -2,7 +2,7 @@ package backend.wal.user.exception;
 
 import backend.wal.advice.exception.InternalServerException;
 
-public class InternalServerJsonException extends InternalServerException {
+public final class InternalServerJsonException extends InternalServerException {
 
     private InternalServerJsonException(final String message) {
         super(message);

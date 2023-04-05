@@ -5,6 +5,7 @@ import backend.wal.auth.adapter.oauth.apple.dto.ApplePublicKey;
 import backend.wal.auth.adapter.oauth.apple.dto.ApplePublicKeyResponse;
 import backend.wal.auth.application.port.out.OAuthApiClientPort;
 import backend.wal.auth.application.port.out.OAuthUserInfoResponseDto;
+
 import org.springframework.stereotype.Component;
 
 import java.security.PublicKey;

@@ -1,11 +1,12 @@
 package backend.wal.wal.todaywal.web;
 
+import backend.wal.wal.todaywal.application.port.in.HomeResponseDto;
 import backend.wal.wal.todaywal.application.port.in.RetrieveHomeTodayWalUseCase;
 import backend.wal.wal.todaywal.application.port.in.UpdateTodayWalUseCase;
-import backend.wal.wal.todaywal.application.port.in.HomeResponseDto;
 import backend.wal.wal.todaywal.web.dto.HomeResponse;
 import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.LoginUser;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
