@@ -7,14 +7,12 @@ import backend.wal.user.application.port.in.RegisterResignInfoUseCase;
 import backend.wal.user.web.dto.*;
 import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.LoginUser;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/v2/user/me")
 public class UserController {
 
@@ -22,6 +20,16 @@ public class UserController {
     private final RegisterResignInfoUseCase registerResignInfoUseCase;
     private final ResignUserUseCase resignUserUseCase;
     private final RetrieveUserInfoUseCase retrieveUserInfoUseCase;
+
+    public UserController(final ChangeUserInfoUseCase changeUserInfoUseCase,
+                          final RegisterResignInfoUseCase registerResignInfoUseCase,
+                          final ResignUserUseCase resignUserUseCase,
+                          final RetrieveUserInfoUseCase retrieveUserInfoUseCase) {
+        this.changeUserInfoUseCase = changeUserInfoUseCase;
+        this.registerResignInfoUseCase = registerResignInfoUseCase;
+        this.resignUserUseCase = resignUserUseCase;
+        this.retrieveUserInfoUseCase = retrieveUserInfoUseCase;
+    }
 
     @PatchMapping("/nickname/edit")
     public ResponseEntity<Void> changeNickname(@Valid @RequestBody ModifyNicknameRequest request, Long userId) {

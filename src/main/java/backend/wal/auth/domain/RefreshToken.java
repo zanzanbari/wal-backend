@@ -1,7 +1,6 @@
 package backend.wal.auth.domain;
 
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -14,7 +13,6 @@ import java.util.Date;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
 public class RefreshToken {
 
     @Id
@@ -38,5 +36,17 @@ public class RefreshToken {
                 .atZone(ZoneId.of("Asia/Seoul"))
                 .toLocalDateTime();
         return new RefreshToken(userId, value, expiredAt);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public String getValue() {
+        return value;
     }
 }

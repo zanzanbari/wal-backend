@@ -10,7 +10,6 @@ import backend.wal.wal.onboarding.web.dto.ModifyOnboardTimeRequest;
 import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.LoginUser;
 import backend.wal.user.application.port.in.ChangeUserInfoUseCase;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +20,6 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/v2/onboard")
 public class OnboardingController {
 
@@ -29,6 +27,16 @@ public class OnboardingController {
     private final RegisterOnboardingUseCase registerOnboardingUseCase;
     private final UpdateOnboardingTimeUseCase updateOnboardingTimeUseCase;
     private final UpdateOnboardingCategoryUseCase updateOnboardingCategoryUseCase;
+
+    public OnboardingController(final ChangeUserInfoUseCase changeUserInfoUseCase,
+                                final RegisterOnboardingUseCase registerOnboardingUseCase,
+                                final UpdateOnboardingTimeUseCase updateOnboardingTimeUseCase,
+                                final UpdateOnboardingCategoryUseCase updateOnboardingCategoryUseCase) {
+        this.changeUserInfoUseCase = changeUserInfoUseCase;
+        this.registerOnboardingUseCase = registerOnboardingUseCase;
+        this.updateOnboardingTimeUseCase = updateOnboardingTimeUseCase;
+        this.updateOnboardingCategoryUseCase = updateOnboardingCategoryUseCase;
+    }
 
     @Authentication
     @PostMapping

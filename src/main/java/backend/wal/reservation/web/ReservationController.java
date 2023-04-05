@@ -7,7 +7,6 @@ import backend.wal.reservation.application.port.in.ReservationNotificationUseCas
 import backend.wal.reservation.web.dto.AddReservationRequest;
 import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.LoginUser;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +14,20 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/v2/reservation")
 public class ReservationController {
 
     private final ReservationHandlerUseCase reservationHandlerUseCase;
     private final ReservationNotificationUseCase reservationNotificationUseCase;
     private final DeleteReservationHistoryUseCase deleteReservationHistoryUseCase;
+
+    public ReservationController(final ReservationHandlerUseCase reservationHandlerUseCase,
+                                 final ReservationNotificationUseCase reservationNotificationUseCase,
+                                 final DeleteReservationHistoryUseCase deleteReservationHistoryUseCase) {
+        this.reservationHandlerUseCase = reservationHandlerUseCase;
+        this.reservationNotificationUseCase = reservationNotificationUseCase;
+        this.deleteReservationHistoryUseCase = deleteReservationHistoryUseCase;
+    }
 
     @Authentication
     @PostMapping("/register")

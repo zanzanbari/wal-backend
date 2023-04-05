@@ -3,11 +3,9 @@ package backend.wal.wal.onboarding.application.port.in.dto;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.onboarding.domain.aggregate.Onboarding;
 import backend.wal.wal.common.domain.WalTimeType;
-import lombok.Getter;
 
 import java.util.Set;
 
-@Getter
 public final class InitOnboardInfoRequestDto {
 
     private final String nickname;
@@ -26,5 +24,17 @@ public final class InitOnboardInfoRequestDto {
         onboarding.addCategories(categoryTypes);
         onboarding.addTimes(timeTypes);
         return onboarding;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public Set<WalCategoryType> getCategoryTypes() {
+        return categoryTypes;
+    }
+
+    public Set<WalTimeType> getTimeTypes() {
+        return timeTypes;
     }
 }
