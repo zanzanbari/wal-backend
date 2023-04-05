@@ -13,7 +13,10 @@ import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.ExtractValidRefreshToken;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
@@ -50,7 +53,7 @@ public class AuthController {
     }
 
     @Authentication
-    @GetMapping("/reissue")
+    @PostMapping("/reissue")
     public ResponseEntity<Void> reissue(@ExtractValidRefreshToken String refreshToken) {
         String reissuedAccessToken = issueTokenUseCase.reissue(refreshToken);
         return ResponseEntity.ok()
