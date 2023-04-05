@@ -1,5 +1,6 @@
 package backend.wal.auth.adapter.jwt;
 
+import backend.wal.auth.adapter.oauth.apple.AppleClaimsValidator;
 import backend.wal.auth.exception.UnAuthorizedTokenException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -10,19 +11,20 @@ import org.springframework.stereotype.Component;
 
 import java.security.PublicKey;
 import java.util.Base64;
+import java.util.Date;
 import java.util.Map;
 
 @Component
-public final class AppleJwtManager {
+public class AppleJwtManager {
 
     private static final String ID_TOKEN_VALUE_DELIMITER = "\\.";
     private static final int HEADER_INDEX = 0;
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    private final AppleJwtClaimValidator appleJwtClaimValidator;
+    private final AppleClaimsValidator appleClaimsValidator;
 
-    public AppleJwtManager(final AppleJwtClaimValidator appleJwtClaimValidator) {
-        this.appleJwtClaimValidator = appleJwtClaimValidator;
+    public AppleJwtManager(final AppleClaimsValidator appleClaimsValidator) {
+        this.appleClaimsValidator = appleClaimsValidator;
     }
 
     public Map<String, String> parseHeaders(String idToken) {
@@ -37,7 +39,9 @@ public final class AppleJwtManager {
 
     public String getSubject(PublicKey publicKey, String idToken) {
         Claims claims = parseClaims(publicKey, idToken);
-        validateClaims(claims);
+        // FIXME : change validate throw exception
+        validateIssuerAndAudience(claims.getIssuer(), claims.getAudience());
+        validateExpiresIn(claims.getExpiration());
         return claims.getSubject();
     }
 
@@ -55,12 +59,15 @@ public final class AppleJwtManager {
         }
     }
 
-    private void validateClaims(Claims claims) { // FIXME : Exception 재설정
-        if (!appleJwtClaimValidator.hasRightIssAndClientId(claims)) {
+    private void validateIssuerAndAudience(String issuer, String audience) {
+        if (!appleClaimsValidator.hasRightIssAndClientId(issuer, audience)) {
             throw UnAuthorizedTokenException.unMatched();
         }
-        if (!appleJwtClaimValidator.isValidExp(claims)) {
-            throw UnAuthorizedTokenException.expired(claims.getId());
+    }
+
+    private void validateExpiresIn(Date expiration) {
+        if (!appleClaimsValidator.isValidExp(expiration.getTime(), new Date().getTime())) {
+            throw UnAuthorizedTokenException.unMatched();
         }
     }
 }
