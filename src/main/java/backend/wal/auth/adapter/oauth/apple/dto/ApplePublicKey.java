@@ -41,4 +41,8 @@ public class ApplePublicKey {
     public String getN() {
         return n;
     }
+
+    public String getUse() {
+        return use;
+    }
 }

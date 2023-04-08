@@ -11,6 +11,10 @@ public class KakaoAccount {
         this.profile = profile;
     }
 
+    public Profile getProfile() {
+        return profile;
+    }
+
     public String getProfileNickname() {
         return profile.getNickname();
     }
