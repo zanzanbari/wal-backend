@@ -32,6 +32,12 @@ public class ExceptionControllerAdvice {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionControllerAdvice.class);
 
+    private static final int BAD_REQUEST_CODE = 400;
+    private static final int METHOD_NOT_ALLOWED_CODE = 405;
+    private static final int NOT_ACCEPTABLE_CODE = 406;
+    private static final int UNSUPPORTED_MEDIA_TYPE_CODE = 415;
+    private static final int INTERNAL_SERVER_CODE = 500;
+
     /**
      * <b>Wal Custom Exception</b>
      */
@@ -40,7 +46,7 @@ public class ExceptionControllerAdvice {
         LOGGER.error(exception.getMessage(), exception);
         return ResponseEntity
                 .status(exception.getStatus())
-                .body(ExceptionResponse.create(exception.getMessage()));
+                .body(new ExceptionResponse(exception.getStatus().value(), exception.getMessage()));
     }
 
     /**
@@ -48,12 +54,13 @@ public class ExceptionControllerAdvice {
      * Spring Validation
      */
     @ExceptionHandler(BindException.class)
-    protected ResponseEntity<ExceptionResponse> handleBadRequest(final BindException e) {
+    protected ResponseEntity<ExceptionResponse> handleBadRequest(BindException e) {
         LOGGER.error(e.getMessage());
         FieldError fieldError = Objects.requireNonNull(e.getFieldError());
         return ResponseEntity
                 .badRequest()
-                .body(ExceptionResponse.create(
+                .body(new ExceptionResponse(
+                        BAD_REQUEST_CODE,
                         String.format("(%s) %s", fieldError.getDefaultMessage(), fieldError.getField()))
                 );
     }
@@ -63,9 +70,9 @@ public class ExceptionControllerAdvice {
      * 잘못된 Enum 값이 입력된 경우 발생하는 Exception
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    protected ResponseEntity<ExceptionResponse> handleHttpMessageNotReadableException(final HttpMessageNotReadableException e) {
+    protected ResponseEntity<ExceptionResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         LOGGER.error(e.getMessage());
-        return ResponseEntity.badRequest().body(ExceptionResponse.create(e.getMessage()));
+        return ResponseEntity.badRequest().body(new ExceptionResponse(BAD_REQUEST_CODE, e.getMessage()));
     }
 
     /**
@@ -73,9 +80,9 @@ public class ExceptionControllerAdvice {
      * RequestParam, RequestPath, RequestPart 등의 필드가 입력되지 않은 경우 발생하는 Exception
      */
     @ExceptionHandler(MissingRequestValueException.class)
-    protected ResponseEntity<ExceptionResponse> handle(final MissingRequestValueException e) {
+    protected ResponseEntity<ExceptionResponse> handle(MissingRequestValueException e) {
         LOGGER.error(e.getMessage());
-        return ResponseEntity.badRequest().body(ExceptionResponse.create(e.getMessage()));
+        return ResponseEntity.badRequest().body(new ExceptionResponse(BAD_REQUEST_CODE, e.getMessage()));
     }
 
     /**
@@ -83,9 +90,9 @@ public class ExceptionControllerAdvice {
      * 잘못된 타입이 입력된 경우 발생하는 Exception
      */
     @ExceptionHandler(TypeMismatchException.class)
-    protected ResponseEntity<ExceptionResponse> handleTypeMismatchException(final TypeMismatchException e) {
+    protected ResponseEntity<ExceptionResponse> handleTypeMismatchException(TypeMismatchException e) {
         LOGGER.error(e.getMessage());
-        return ResponseEntity.badRequest().body(ExceptionResponse.create(e.getMessage()));
+        return ResponseEntity.badRequest().body(new ExceptionResponse(BAD_REQUEST_CODE, e.getMessage()));
     }
 
     /**
@@ -96,9 +103,9 @@ public class ExceptionControllerAdvice {
             ServletRequestBindingException.class,
             ConstraintViolationException.class
     })
-    protected ResponseEntity<ExceptionResponse> handleInvalidFormatException(final Exception e) {
+    protected ResponseEntity<ExceptionResponse> handleInvalidFormatException(Exception e) {
         LOGGER.error(e.getMessage());
-        return ResponseEntity.badRequest().body(ExceptionResponse.create(e.getMessage()));
+        return ResponseEntity.badRequest().body(new ExceptionResponse(BAD_REQUEST_CODE, e.getMessage()));
     }
 
     /**
@@ -106,18 +113,21 @@ public class ExceptionControllerAdvice {
      * 지원하지 않은 HTTP method 호출 할 경우 발생하는 Exception
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    protected ResponseEntity<ExceptionResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+    protected ResponseEntity<ExceptionResponse> handleHttpRequestMethodNotSupportedException(
+            HttpRequestMethodNotSupportedException e) {
         LOGGER.error(e.getMessage());
-        return ResponseEntity.status(METHOD_NOT_ALLOWED).body(ExceptionResponse.create(e.getMessage()));
+        return ResponseEntity.status(METHOD_NOT_ALLOWED)
+                .body(new ExceptionResponse(METHOD_NOT_ALLOWED_CODE, e.getMessage()));
     }
 
     /**
      * <b>406 Not Acceptable</b>
      */
     @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
-    protected ResponseEntity<ExceptionResponse> handleHttpMediaTypeNotAcceptableException(HttpMediaTypeNotAcceptableException e) {
+    protected ResponseEntity<ExceptionResponse> handleHttpMediaTypeNotAcceptableException(
+            HttpMediaTypeNotAcceptableException e) {
         LOGGER.error(e.getMessage());
-        return ResponseEntity.status(NOT_ACCEPTABLE).body(ExceptionResponse.create(e.getMessage()));
+        return ResponseEntity.status(NOT_ACCEPTABLE).body(new ExceptionResponse(NOT_ACCEPTABLE_CODE, e.getMessage()));
     }
 
     /**
@@ -125,17 +135,19 @@ public class ExceptionControllerAdvice {
      * 지원하지 않는 미디어 타입인 경우 발생하는 Exception
      */
     @ExceptionHandler(HttpMediaTypeException.class)
-    protected ResponseEntity<ExceptionResponse> handleHttpMediaTypeException(final HttpMediaTypeException e) {
+    protected ResponseEntity<ExceptionResponse> handleHttpMediaTypeException(HttpMediaTypeException e) {
         LOGGER.error(e.getMessage(), e);
-        return ResponseEntity.status(UNSUPPORTED_MEDIA_TYPE).body(ExceptionResponse.create(e.getMessage()));
+        return ResponseEntity.status(UNSUPPORTED_MEDIA_TYPE)
+                .body(new ExceptionResponse(UNSUPPORTED_MEDIA_TYPE_CODE, e.getMessage()));
     }
 
     /**
      * <b>500 Internal Server</b>
      */
     @ExceptionHandler(Exception.class)
-    protected ResponseEntity<ExceptionResponse> handleException(final Exception e) {
+    protected ResponseEntity<ExceptionResponse> handleException(Exception e) {
         LOGGER.error(e.getMessage(), e);
-        return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(ExceptionResponse.create(e.getMessage()));
+        return ResponseEntity.status(INTERNAL_SERVER_ERROR)
+                .body(new ExceptionResponse(INTERNAL_SERVER_CODE, e.getMessage()));
     }
 }
