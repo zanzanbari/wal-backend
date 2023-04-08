@@ -22,4 +22,8 @@ public final class InternalAuthServerException extends InternalServerException {
     public static InternalServerException cannotGeneratePublicKey() {
         return new InternalAuthServerException("가져온 ApplePublicKey 값으로 PublicKey 생성에 실패했습니다");
     }
+
+    public static InternalServerException anotherFeignException() {
+        return new InternalAuthServerException("Feign 통신간 Exception 이 발생했습니다");
+    }
 }
