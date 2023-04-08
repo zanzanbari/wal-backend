@@ -30,7 +30,15 @@ public class LoginRequest {
         return new LoginRequestDto(socialToken, socialType, fcmToken);
     }
 
+    public String getSocialToken() {
+        return socialToken;
+    }
+
     public SocialType getSocialType() {
         return socialType;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
     }
 }
