@@ -1,6 +1,5 @@
 package backend.wal.wal.todaywal.web;
 
-import backend.wal.wal.todaywal.application.port.in.HomeResponseDto;
 import backend.wal.wal.todaywal.application.port.in.RetrieveHomeTodayWalUseCase;
 import backend.wal.wal.todaywal.application.port.in.UpdateTodayWalUseCase;
 import backend.wal.wal.todaywal.web.dto.HomeResponse;
@@ -9,9 +8,6 @@ import backend.wal.support.annotation.LoginUser;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v2/today-wal")
@@ -28,12 +24,8 @@ public class TodayWalHomeController {
 
     @Authentication
     @GetMapping
-    public ResponseEntity<List<HomeResponse>> retrieveHome(@LoginUser Long userId) {
-        List<HomeResponse> homeResponses = retrieveHomeTodayWalUseCase.getHomeInfo(userId)
-                .stream()
-                .map(HomeResponseDto::toWebResponse)
-                .collect(Collectors.toUnmodifiableList());
-        return ResponseEntity.ok(homeResponses);
+    public ResponseEntity<HomeResponse> retrieveHome(@LoginUser Long userId) {
+        return ResponseEntity.ok(new HomeResponse(retrieveHomeTodayWalUseCase.getHomeInfo(userId)));
     }
 
     @Authentication
