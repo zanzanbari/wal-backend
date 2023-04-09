@@ -9,7 +9,6 @@ import backend.wal.auth.application.port.in.IssueTokenUseCase;
 import backend.wal.auth.application.port.in.AuthUseCase;
 import backend.wal.auth.application.provider.AuthServiceProvider;
 import backend.wal.auth.web.dto.LoginRequest;
-import backend.wal.support.annotation.Authentication;
 import backend.wal.support.annotation.ExtractValidRefreshToken;
 
 import org.springframework.http.ResponseEntity;
@@ -52,7 +51,6 @@ public class AuthController {
                 .build();
     }
 
-    @Authentication
     @PostMapping("/reissue")
     public ResponseEntity<Void> reissue(@ExtractValidRefreshToken String refreshToken) {
         String reissuedAccessToken = issueTokenUseCase.reissue(refreshToken);
