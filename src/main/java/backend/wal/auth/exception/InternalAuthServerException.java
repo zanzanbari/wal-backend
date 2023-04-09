@@ -14,9 +14,9 @@ public final class InternalAuthServerException extends InternalServerException {
         return new InternalAuthServerException("@Authentication 어노테이션이 필요한 컨트롤러 입니다");
     }
 
-    public static InternalServerException attributeNotFound(Class<?> clazz, Method method) {
+    public static InternalServerException attributeNotFound(String attribute, Class<?> clazz, Method method) {
         return new InternalAuthServerException(String.format(
-                "USER_ID 를 가져오지 못했습니다 (%s - %s)", clazz, method));
+                "(%s) 를 가져오지 못했습니다 (%s - %s)", attribute, clazz, method));
     }
 
     public static InternalServerException cannotGeneratePublicKey() {
