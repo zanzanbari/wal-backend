@@ -22,4 +22,8 @@ public class ModifyOnboardTimeRequest {
     public ModifyOnboardTimeRequestDto toServiceDto() {
         return new ModifyOnboardTimeRequestDto(timeTypes);
     }
+
+    public Set<WalTimeType> getTimeTypes() {
+        return timeTypes;
+    }
 }

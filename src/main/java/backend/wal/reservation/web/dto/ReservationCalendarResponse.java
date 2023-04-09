@@ -16,4 +16,8 @@ public class ReservationCalendarResponse {
     public ReservationCalendarResponse(final LocalDateTime reserveDate) {
         this.reserveDate = reserveDate;
     }
+
+    public LocalDateTime getReserveDate() {
+        return reserveDate;
+    }
 }

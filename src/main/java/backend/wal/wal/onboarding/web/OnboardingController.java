@@ -49,6 +49,7 @@ public class OnboardingController {
                 .body(new OnboardInfoResponse(changeUserInfoUseCase.changeNickname(request.getNickname(), userId)));
     }
 
+    @Authentication
     @PostMapping("/time/edit")
     public ResponseEntity<Void> updateOnboardTimeInfo(@Valid @RequestBody ModifyOnboardTimeRequest request,
                                                       @LoginUser Long userId) {
@@ -56,6 +57,7 @@ public class OnboardingController {
         return ResponseEntity.noContent().build();
     }
 
+    @Authentication
     @PostMapping("/category/edit")
     public ResponseEntity<Void> updateOnboardCategoryInfo(@Valid @RequestBody ModifyOnboardCategoryRequest request,
                                                           @LoginUser Long userId) {

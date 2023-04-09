@@ -20,4 +20,8 @@ public class ModifyOnboardCategoryRequest {
     public ModifyOnboardCategoryRequestDto toServiceDto() {
         return new ModifyOnboardCategoryRequestDto(categoryTypes);
     }
+
+    public Set<WalCategoryType> getCategoryTypes() {
+        return categoryTypes;
+    }
 }

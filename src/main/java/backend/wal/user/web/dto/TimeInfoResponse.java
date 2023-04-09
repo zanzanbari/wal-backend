@@ -15,4 +15,8 @@ public class TimeInfoResponse {
     public TimeInfoResponse(final Set<WalTimeType> timeInfo) {
         this.timeInfo = timeInfo;
     }
+
+    public Set<WalTimeType> getTimeInfo() {
+        return timeInfo;
+    }
 }

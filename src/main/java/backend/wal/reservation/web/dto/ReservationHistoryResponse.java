@@ -18,4 +18,12 @@ public class ReservationHistoryResponse {
         this.toDoneData = toDoneData;
         this.doneData = doneData;
     }
+
+    public List<ReservationHistoryResponseDto> getToDoneData() {
+        return toDoneData;
+    }
+
+    public List<ReservationHistoryResponseDto> getDoneData() {
+        return doneData;
+    }
 }

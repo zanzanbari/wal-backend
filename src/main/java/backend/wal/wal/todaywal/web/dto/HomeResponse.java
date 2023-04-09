@@ -6,8 +6,10 @@ import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.wal.todaywal.domain.aggregate.ShowStatus;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HomeResponse {
 
