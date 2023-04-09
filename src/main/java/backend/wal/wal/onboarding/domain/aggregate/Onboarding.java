@@ -30,10 +30,10 @@ public class Onboarding {
     @Column(nullable = false)
     private Long userId;
 
-    @OneToMany(mappedBy = "onboarding", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "onboarding", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<OnboardingCategory> categories = new ArrayList<>();
 
-    @OneToMany(mappedBy = "onboarding", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "onboarding", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<OnboardingTime> times = new ArrayList<>();
 
     private Onboarding(Long userId) {
