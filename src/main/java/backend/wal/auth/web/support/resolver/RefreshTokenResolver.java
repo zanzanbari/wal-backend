@@ -32,7 +32,8 @@ public final class RefreshTokenResolver implements HandlerMethodArgumentResolver
 
     private static void checkGetRefreshToken(String refreshToken, MethodParameter parameter) {
         if (refreshToken == null) {
-            throw InternalAuthServerException.attributeNotFound(parameter.getClass(), parameter.getMethod());
+            throw InternalAuthServerException.attributeNotFound(
+                    REFRESH_TOKEN_ATTRIBUTE, parameter.getClass(), parameter.getMethod());
         }
     }
 }
