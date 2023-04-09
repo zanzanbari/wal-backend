@@ -14,6 +14,9 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 @Component
 public final class LoginUserResolver implements HandlerMethodArgumentResolver {
 
+    private static final String LOGIN_USER_ATTRIBUTE = "USER_ID";
+    private static final int SCOPE = 0;
+
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         return parameter.hasParameterAnnotation(LoginUser.class)
@@ -24,7 +27,7 @@ public final class LoginUserResolver implements HandlerMethodArgumentResolver {
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
         checkHasAuthAnnotation(parameter);
-        Long validUserId = (Long) webRequest.getAttribute("USER_ID", 0);
+        Long validUserId = (Long) webRequest.getAttribute(LOGIN_USER_ATTRIBUTE, SCOPE);
         checkGetLoginUserId(validUserId, parameter);
         return validUserId;
     }
@@ -37,7 +40,8 @@ public final class LoginUserResolver implements HandlerMethodArgumentResolver {
 
     private static void checkGetLoginUserId(Long validUserId, MethodParameter parameter) {
         if (validUserId == null) {
-            throw InternalAuthServerException.attributeNotFound(parameter.getClass(), parameter.getMethod());
+            throw InternalAuthServerException.attributeNotFound(
+                    LOGIN_USER_ATTRIBUTE, parameter.getClass(), parameter.getMethod());
         }
     }
 }
