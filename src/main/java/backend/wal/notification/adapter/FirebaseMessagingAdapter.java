@@ -58,7 +58,7 @@ public final class FirebaseMessagingAdapter implements FirebaseMessagingPort {
             }
 
             @Override
-            public void onSuccess(String result) {
+            public void onSuccess(String result) { // FIXME : Reservation SendStatus 변경
                 LOGGER.info(String.format("메세지 전송에 성공했습니다 (%s)", result));
             }
         };

@@ -9,6 +9,8 @@ import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.support.annotation.DomainService;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Set;
 
 @DomainService
@@ -20,10 +22,12 @@ public class OnboardingDomainService {
         this.onboardingRepository = onboardingRepository;
     }
 
+    @Transactional
     public void register(Onboarding onboarding) {
         onboardingRepository.save(onboarding);
     }
 
+    @Transactional
     public WalTimeTypesResponseDto updateTimeTypes(Set<WalTimeType> modifiedTimeTypes, Long userId) {
         Onboarding onboarding = OnboardingServiceUtils.findExistOnboardingByUserId(onboardingRepository, userId);
 
@@ -38,6 +42,7 @@ public class OnboardingDomainService {
         return new WalTimeTypesResponseDto(willCancelAfterNow.getValues(), willAddAfterNow.getValues());
     }
 
+    @Transactional
     public WalCategoryTypesResponseDto updateCategoryTypes(Set<WalCategoryType> modifiedCategoryTypes, Long userId) {
         Onboarding onboarding = OnboardingServiceUtils.findExistOnboardingByUserId(onboardingRepository, userId);
 

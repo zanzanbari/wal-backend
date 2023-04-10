@@ -7,4 +7,8 @@ public class OnboardInfoResponse {
     public OnboardInfoResponse(final String nickname) {
         this.nickname = nickname;
     }
+
+    public String getNickname() {
+        return nickname;
+    }
 }

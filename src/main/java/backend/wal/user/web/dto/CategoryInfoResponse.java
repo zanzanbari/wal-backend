@@ -15,4 +15,8 @@ public class CategoryInfoResponse {
     public CategoryInfoResponse(final Set<WalCategoryType> categoryInfo) {
         this.categoryInfo = categoryInfo;
     }
+
+    public Set<WalCategoryType> getCategoryInfo() {
+        return categoryInfo;
+    }
 }

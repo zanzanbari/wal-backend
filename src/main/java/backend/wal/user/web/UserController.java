@@ -32,8 +32,10 @@ public class UserController {
         this.retrieveUserInfoUseCase = retrieveUserInfoUseCase;
     }
 
+    @Authentication
     @PatchMapping("/nickname/edit")
-    public ResponseEntity<Void> changeNickname(@Valid @RequestBody ModifyNicknameRequest request, Long userId) {
+    public ResponseEntity<Void> changeNickname(@Valid @RequestBody ModifyNicknameRequest request,
+                                               @LoginUser Long userId) {
         changeUserInfoUseCase.changeNickname(request.getNickname(), userId);
         return ResponseEntity.noContent().build();
     }

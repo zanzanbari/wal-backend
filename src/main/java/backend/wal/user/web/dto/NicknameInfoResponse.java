@@ -11,4 +11,8 @@ public class NicknameInfoResponse {
     public NicknameInfoResponse(final String nickname) {
         this.nickname = nickname;
     }
+
+    public String getNickname() {
+        return nickname;
+    }
 }

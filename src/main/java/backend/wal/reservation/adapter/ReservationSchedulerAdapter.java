@@ -23,14 +23,14 @@ public final class ReservationSchedulerAdapter implements ReservationSchedulerPo
     public void sendMessageAfterDelay(Runnable task, long delayTime, Long reservationId) {
         ScheduledFuture<?> scheduledFuture = scheduledExecutorService.schedule(task, delayTime, TimeUnit.MILLISECONDS);
         reservationScheduledFutures.register(reservationId, scheduledFuture);
-        LOGGER.debug("예약번호 {}번 등록 완료 - 딜레이 시간 {}", reservationId, delayTime);
+        LOGGER.info("예약번호 {}번 등록 완료 - 딜레이 시간 {}", reservationId, delayTime);
     }
 
     @Override
     public void cancelMessage(Long reservationId) {
         if (reservationScheduledFutures.cancelScheduleByKey(reservationId)) {
             reservationScheduledFutures.removeByKey(reservationId);
-            LOGGER.debug("예약번호 {}번 취소 완료", reservationId);
+            LOGGER.info("예약번호 {}번 취소 완료", reservationId);
         }
     }
 

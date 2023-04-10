@@ -8,8 +8,6 @@ import backend.wal.wal.onboarding.domain.service.OnboardingDomainService;
 import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.support.annotation.AppService;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Set;
 
 @AppService
@@ -25,7 +23,6 @@ public class UpdateOnboardingTimeService implements UpdateOnboardingTimeUseCase 
     }
 
     @Override
-    @Transactional
     public void updateOnboardTimeInfo(ModifyOnboardTimeRequestDto requestDto, Long userId) {
         WalTimeTypesResponseDto responseDto = onboardingDomainService.updateTimeTypes(requestDto.getTimeTypes(), userId);
         updateWalInfoByCancelAfterNow(responseDto.getWillCancelAfterNow(), userId);

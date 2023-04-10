@@ -1,7 +1,7 @@
 package backend.wal.reservation.domain;
 
 import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
-import backend.wal.reservation.application.port.in.dto.ReservationCalendarResponseDto;
+import backend.wal.reservation.application.port.in.dto.ReservationCalenderResponseDto;
 import backend.wal.reservation.application.port.in.dto.ReservationHistoryResponseDto;
 import backend.wal.reservation.domain.aggregate.Reservation;
 import backend.wal.reservation.domain.aggregate.ShowStatus;
@@ -75,7 +75,7 @@ class ReservationsTest {
     @Test
     void extractDateForCalender() {
         // when
-        List<ReservationCalendarResponseDto> responseDtos = reservations.extractDateForCalender();
+        List<ReservationCalenderResponseDto> responseDtos = reservations.extractDateForCalender();
 
         // then
         assertThat(responseDtos).hasSize(3);

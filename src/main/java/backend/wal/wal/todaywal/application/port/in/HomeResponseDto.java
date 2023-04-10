@@ -1,6 +1,5 @@
 package backend.wal.wal.todaywal.application.port.in;
 
-import backend.wal.wal.todaywal.web.dto.HomeResponse;
 import backend.wal.wal.todaywal.domain.view.Home;
 import backend.wal.wal.todaywal.domain.aggregate.ShowStatus;
 import backend.wal.wal.todaywal.domain.view.OpenStatus;
@@ -37,14 +36,27 @@ public final class HomeResponseDto {
         );
     }
 
-    public HomeResponse toWebResponse() {
-        return new HomeResponse(
-                todayWalId,
-                timeType,
-                categoryType,
-                message,
-                showStatus,
-                openStatus
-        );
+    public Long getTodayWalId() {
+        return todayWalId;
+    }
+
+    public WalTimeType getTimeType() {
+        return timeType;
+    }
+
+    public WalCategoryType getCategoryType() {
+        return categoryType;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public ShowStatus getShowStatus() {
+        return showStatus;
+    }
+
+    public OpenStatus getOpenStatus() {
+        return openStatus;
     }
 }

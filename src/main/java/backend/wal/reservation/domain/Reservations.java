@@ -1,6 +1,6 @@
 package backend.wal.reservation.domain;
 
-import backend.wal.reservation.application.port.in.dto.ReservationCalendarResponseDto;
+import backend.wal.reservation.application.port.in.dto.ReservationCalenderResponseDto;
 import backend.wal.reservation.application.port.in.dto.ReservationHistoryResponseDto;
 import backend.wal.reservation.domain.aggregate.Reservation;
 
@@ -29,10 +29,10 @@ public final class Reservations {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public List<ReservationCalendarResponseDto> extractDateForCalender() {
+    public List<ReservationCalenderResponseDto> extractDateForCalender() {
         return values.stream()
                 .map(Reservation::getSendDueDate)
-                .map(ReservationCalendarResponseDto::new)
+                .map(ReservationCalenderResponseDto::create)
                 .collect(Collectors.toUnmodifiableList());
     }
 }
