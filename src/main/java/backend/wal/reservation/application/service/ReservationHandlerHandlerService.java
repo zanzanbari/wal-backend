@@ -61,10 +61,11 @@ public class ReservationHandlerHandlerService implements ReservationHandlerUseCa
     }
 
     @Override
+    @Transactional
     public void deleteIfCanceledReservationIsToday(Long userId) {
         LocalDateTime today = LocalDate.now(clock).atStartOfDay();
         LocalDateTime tomorrow = today.plusDays(1);
-        if (hasReservationBetweenDate(today, tomorrow, userId)) {
+        if (hasReservationBetweenDate(today, tomorrow, userId)) { // FIXME : 예약날짜에 해당하는 TodayWal 이 있을때 삭제해야함
             todayWalPort.deleteReservationCall(userId);
         }
     }
