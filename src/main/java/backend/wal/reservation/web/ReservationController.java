@@ -35,7 +35,7 @@ public class ReservationController {
     public ResponseEntity<Void> register(@Valid @RequestBody AddReservationRequest request, @LoginUser Long userId) {
         RegisterReservationResponseDto responseDto = reservationHandlerUseCase.register(request.toServiceDto(userId));
         reservationNotificationUseCase.send(responseDto.toPublishRequestDto());
-        return ResponseEntity.created(URI.create("/v2/reservation")).build();
+        return ResponseEntity.created(URI.create("/v2/reservation/history")).build();
     }
 
     @Authentication
@@ -47,7 +47,7 @@ public class ReservationController {
     }
 
     @Authentication
-    @PostMapping("/history/{reservationId}/remove")
+    @DeleteMapping("/history/{reservationId}/remove")
     public ResponseEntity<Void> remove(@PathVariable Long reservationId) {
         deleteReservationHistoryUseCase.deleteHistory(reservationId);
         return ResponseEntity.noContent().build();
