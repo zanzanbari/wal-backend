@@ -16,4 +16,20 @@ public final class ReservationHistoryResponseDto {
         this.detail = detail;
         this.showStatus = showStatus;
     }
+
+    public Long getReservationId() {
+        return reservationId;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public ShowStatus getShowStatus() {
+        return showStatus;
+    }
 }
