@@ -1,19 +1,30 @@
 package backend.wal.reservation.web.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import backend.wal.reservation.application.port.in.dto.ReservationCalenderResponseDto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class ReservationCalendarResponse {
+public class ReservationCalenderResponse {
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private final LocalDateTime reserveDate;
+    private List<LocalDate> reserveDates;
 
-    public ReservationCalendarResponse(final LocalDateTime reserveDate) {
-        this.reserveDate = reserveDate;
+    private ReservationCalenderResponse() {
     }
 
-    public LocalDateTime getReserveDate() {
-        return reserveDate;
+    private ReservationCalenderResponse(final List<LocalDate> reserveDates) {
+        this.reserveDates = reserveDates;
+    }
+
+    public static ReservationCalenderResponse create(final List<ReservationCalenderResponseDto> responseDtos) {
+        List<LocalDate> reserveDates = responseDtos.stream()
+                .map(ReservationCalenderResponseDto::getReserveDate)
+                .collect(Collectors.toUnmodifiableList());
+        return new ReservationCalenderResponse(reserveDates);
+    }
+
+    public List<LocalDate> getReserveDates() {
+        return reserveDates;
     }
 }
