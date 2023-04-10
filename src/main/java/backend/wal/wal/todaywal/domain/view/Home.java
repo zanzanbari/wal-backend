@@ -42,7 +42,10 @@ public final class Home {
     }
 
     public void setOpenStatusBy(LocalDateTime now) {
-        if (!timeType.isAfterNow(now)) {
+        if (timeType.isReservation()) {
+            return;
+        }
+        else if (!timeType.isAfterNow(now)) {
             this.openStatus = OpenStatus.ABLE;
         }
     }
