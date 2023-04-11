@@ -1,6 +1,7 @@
 package backend.wal.notification.adapter;
 
 import backend.wal.notification.application.port.out.FirebaseMessagingPort;
+import backend.wal.reservation.application.port.in.UpdateReservationUseCase;
 
 import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutureCallback;
@@ -24,16 +25,19 @@ public final class FirebaseMessagingAdapter implements FirebaseMessagingPort {
     private static final Logger LOGGER = LoggerFactory.getLogger(FirebaseMessagingAdapter.class);
 
     private final FirebaseMessaging firebaseMessaging;
+    private final UpdateReservationUseCase updateReservationUseCase;
 
-    public FirebaseMessagingAdapter(final FirebaseMessaging firebaseMessaging) {
+    public FirebaseMessagingAdapter(final FirebaseMessaging firebaseMessaging,
+                                    final UpdateReservationUseCase updateReservationUseCase) {
         this.firebaseMessaging = firebaseMessaging;
+        this.updateReservationUseCase = updateReservationUseCase;
     }
 
     @Override
-    public void send(String contents, String fcmTokenValue) {
+    public void send(Long reservationId, String contents, String fcmTokenValue) {
         Message message = buildMessage(contents, fcmTokenValue);
         ApiFuture<String> messageStringApiFuture = firebaseMessaging.sendAsync(message);
-        ApiFutureCallback<String> apiFutureCallback = getApiFutureCallback();
+        ApiFutureCallback<String> apiFutureCallback = getApiFutureCallback(reservationId);
         Executor directExecutor = MoreExecutors.directExecutor();
         ApiFutures.addCallback(messageStringApiFuture, apiFutureCallback, directExecutor);
     }
@@ -50,7 +54,7 @@ public final class FirebaseMessagingAdapter implements FirebaseMessagingPort {
     }
 
     @NotNull
-    private ApiFutureCallback<String> getApiFutureCallback() {
+    private ApiFutureCallback<String> getApiFutureCallback(Long reservationId) {
         return new ApiFutureCallback<>() {
             @Override
             public void onFailure(Throwable t) {
@@ -58,7 +62,8 @@ public final class FirebaseMessagingAdapter implements FirebaseMessagingPort {
             }
 
             @Override
-            public void onSuccess(String result) { // FIXME : Reservation SendStatus 변경
+            public void onSuccess(String result) {
+                updateReservationUseCase.updateSendStatusToDone(reservationId);
                 LOGGER.info(String.format("메세지 전송에 성공했습니다 (%s)", result));
             }
         };
