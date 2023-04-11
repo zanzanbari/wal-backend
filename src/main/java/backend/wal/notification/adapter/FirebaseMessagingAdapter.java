@@ -35,14 +35,14 @@ public final class FirebaseMessagingAdapter implements FirebaseMessagingPort {
 
     @Override
     public void send(Long reservationId, String contents, String fcmTokenValue) {
-        Message message = buildMessage(contents, fcmTokenValue);
+        Message message = createMessage(contents, fcmTokenValue);
         ApiFuture<String> messageStringApiFuture = firebaseMessaging.sendAsync(message);
-        ApiFutureCallback<String> apiFutureCallback = getApiFutureCallback(reservationId);
+        ApiFutureCallback<String> apiFutureCallback = registerApiFutureCallback(reservationId);
         Executor directExecutor = MoreExecutors.directExecutor();
         ApiFutures.addCallback(messageStringApiFuture, apiFutureCallback, directExecutor);
     }
 
-    private Message buildMessage(String contents, String fcmTokenValue) {
+    private Message createMessage(String contents, String fcmTokenValue) {
         Notification notification = Notification.builder()
                 .setTitle("🐶오늘의 개소리 도착!🐶")
                 .setBody(contents)
@@ -54,7 +54,7 @@ public final class FirebaseMessagingAdapter implements FirebaseMessagingPort {
     }
 
     @NotNull
-    private ApiFutureCallback<String> getApiFutureCallback(Long reservationId) {
+    private ApiFutureCallback<String> registerApiFutureCallback(Long reservationId) {
         return new ApiFutureCallback<>() {
             @Override
             public void onFailure(Throwable t) {
