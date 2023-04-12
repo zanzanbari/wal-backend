@@ -6,6 +6,8 @@ import backend.wal.reservation.domain.repository.ReservationRepository;
 import backend.wal.reservation.exception.NotFoundReservationException;
 import backend.wal.support.annotation.AppService;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @AppService
 public class UpdateReservationService implements UpdateReservationUseCase {
 
@@ -16,6 +18,7 @@ public class UpdateReservationService implements UpdateReservationUseCase {
     }
 
     @Override
+    @Transactional
     public void updateSendStatusToDone(Long reservationId) {
         Reservation reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> NotFoundReservationException.notExists(reservationId));
