@@ -1,11 +1,4 @@
-server:
-  port: 8080
-  servlet:
-    encoding:
-      charset: UTF-8
-      force: true
-    context-path: /api
-
 spring:
-  profiles:
-    default: local
+  config:
+    import:
+      - classpath:/wal-backend-config/application.yml

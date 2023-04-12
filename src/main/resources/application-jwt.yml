@@ -1,6 +1,0 @@
-jwt:
-  token:
-    secret: dXNlciBjdXN0b21pemVkIGxlbnMgcmVjb21tZW5kYXRpb24gc2VydmljZSBvbW9vbGVuIHNlcnZlciBmaWdodGluZwo=
-    expired-time:
-      access: 86400000
-      refresh: 604800000
