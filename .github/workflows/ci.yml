@@ -15,7 +15,6 @@ jobs:
     - name: Get Repository to Working Directory
       uses: actions/checkout@v3
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
         submodules: true
 
     - name: Set up JDK 11
