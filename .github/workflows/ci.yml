@@ -7,6 +7,11 @@ on:
 permissions:
   contents: read
 
+env:
+  TEST_DB_URL: jdbc:mysql://localhost:3306/test
+  TEST_DB_USERNAME: root
+  TEST_DB_PASSWORD: cozomysql
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,8 +39,8 @@ jobs:
         mysql version: 8.0.31
         mysql root password: cozomysql
         mysql database: test
-        mysql user: root
-        mysql password: cozomysql
+        mysql user: test
+        mysql password: test_password
 
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
