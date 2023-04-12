@@ -34,7 +34,31 @@ public final class FirebaseMessagingAdapter implements FirebaseMessagingPort {
     }
 
     @Override
-    public void send(Long reservationId, String contents, String fcmTokenValue) {
+    public void send(String contents, String fcmTokenValue) {
+        Message message = createMessage(contents, fcmTokenValue);
+        ApiFuture<String> messageStringApiFuture = firebaseMessaging.sendAsync(message);
+        ApiFutureCallback<String> apiFutureCallback = registerApiFutureCallback();
+        Executor directExecutor = MoreExecutors.directExecutor();
+        ApiFutures.addCallback(messageStringApiFuture, apiFutureCallback, directExecutor);
+    }
+
+    @NotNull
+    private ApiFutureCallback<String> registerApiFutureCallback() {
+        return new ApiFutureCallback<>() {
+            @Override
+            public void onFailure(Throwable t) {
+                LOGGER.info(String.format("메세지 전송에 실패했습니다 (%s)", t.getMessage()));
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                LOGGER.info(String.format("메세지 전송에 성공했습니다 (%s)", result));
+            }
+        };
+    }
+
+    @Override
+    public void send(String contents, String fcmTokenValue, Long reservationId) {
         Message message = createMessage(contents, fcmTokenValue);
         ApiFuture<String> messageStringApiFuture = firebaseMessaging.sendAsync(message);
         ApiFutureCallback<String> apiFutureCallback = registerApiFutureCallback(reservationId);
