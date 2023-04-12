@@ -8,7 +8,12 @@ import org.springframework.context.annotation.Import;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-@DataJpaTest
+@DataJpaTest(properties = {
+        "spring.datasource.url=jdbc:mysql://localhost:3306/test",
+        "spring.datasource.username=root",
+        "spring.datasource.password=cozomysql",
+        "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver"
+})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(JPAConfig.class)
 @Retention(RetentionPolicy.RUNTIME)
