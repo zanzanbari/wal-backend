@@ -4,22 +4,16 @@ import backend.wal.auth.application.port.in.AuthUseCase;
 import backend.wal.auth.application.service.AppleAuthService;
 import backend.wal.auth.application.service.KakaoAuthService;
 
-import backend.wal.support.YamlPropertySourceFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
 
 import static backend.wal.user.domain.aggregate.SocialType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@PropertySource(
-        value = "classpath:wal-backend-config/application-test.yml",
-        factory = YamlPropertySourceFactory.class,
-        ignoreResourceNotFound = true)
-@SpringBootTest(properties = "spring.config.additional-location=classpath:wal-backend-config/application-test.yml")
+@SpringBootTest
 class AuthServiceProviderTest {
 
     @Autowired
