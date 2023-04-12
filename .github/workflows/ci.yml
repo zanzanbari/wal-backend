@@ -29,18 +29,18 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
-    - name: Setup MySQL
-      uses: mirromutth/mysql-action@v1.1
-      with:
-        host port: 3306
-        container port: 3306
-        character set server: utf8mb4
-        collation server: utf8mb4_general_ci
-        mysql version: 8.0.31
-        mysql root password: cozomysql
-        mysql database: test
-        mysql user: test
-        mysql password: test_password
+#    - name: Setup MySQL
+#      uses: mirromutth/mysql-action@v1.1
+#      with:
+#        host port: 3306
+#        container port: 3306
+#        character set server: utf8mb4
+#        collation server: utf8mb4_general_ci
+#        mysql version: 8.0.31
+#        mysql root password: cozomysql
+#        mysql database: test
+#        mysql user: test
+#        mysql password: test_password
 
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
