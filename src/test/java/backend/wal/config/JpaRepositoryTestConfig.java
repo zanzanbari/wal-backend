@@ -7,18 +7,15 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-//@PropertySource(
-//        value = "classpath:wal-backend-config/application-test.yml",
-//        factory = YamlPropertySourceFactory.class,
-//        ignoreResourceNotFound = true)
-//@DataJpaTest(properties = {"spring.config.location=classpath:wal-backend-config/application-test.yml"})
-@ActiveProfiles("test")
-@DataJpaTest
+@PropertySource(
+        value = "classpath:wal-backend-config/application-test.yml",
+        factory = YamlPropertySourceFactory.class,
+        ignoreResourceNotFound = true)
+@DataJpaTest(properties = {"spring.config.location=classpath:wal-backend-config/application-test.yml"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(JPAConfig.class)
 @Retention(RetentionPolicy.RUNTIME)
