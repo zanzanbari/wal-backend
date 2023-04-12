@@ -15,7 +15,7 @@ import java.lang.annotation.RetentionPolicy;
         value = "classpath:wal-backend-config/application-test.yml",
         factory = YamlPropertySourceFactory.class,
         ignoreResourceNotFound = true)
-@DataJpaTest(properties = {"spring.config.location=classpath:wal-backend-config/application-test.yml"})
+@DataJpaTest(properties = {"spring.config.additional-location=classpath:wal-backend-config/application-test.yml"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(JPAConfig.class)
 @Retention(RetentionPolicy.RUNTIME)
