@@ -1,12 +1,13 @@
-CURRENT_PORT=$(cat /etc/nginx/conf.d/service-url.inc | grep -Po '[0-9]+' | tail -1)
+CURRENT_PROFILE=$(curl -s http://localhost/api/profile)
 
-if [ $CURRENT_PORT == 8081 ]; then
+if [ $CURRENT_PROFILE == prod1 ]; then
     TARGET_PORT=8082
-elif [ $CURRENT_PORT == 8082 ]; then
+elif [ $CURRENT_PROFILE == prod2 ]; then
     TARGET_PORT=8081
 else
-  echo "> 일치하는 Port 가 없습니다. 8081 Port 를 할당합니다"
-  echo "> Port: $CURRENT_PORT"
+  echo "> 일치하는 Profile 이 없습니다. prod1 의 Port 를 할당합니다"
+  echo "> Profile: $CURRENT_PROFILE"
+  echo "> Profile: 8081"
   TARGET_PORT=8081
 fi
 

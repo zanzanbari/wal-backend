@@ -7,18 +7,18 @@ echo "> build 파일 복사"
 DEPLOY_PATH=$ROOT_PATH/jar
 cp $BUILD_PATH $DEPLOY_PATH
 
-echo "> 현재 구동중인 Port 확인"
-CURRENT_PORT=$(cat /etc/nginx/conf.d/service-url.inc | grep -Po '[0-9]+' | tail -1)
-echo "> 현재 구동중인 Port: $CURRENT_PORT"
+echo "> 현재 구동중인 Profile 확인"
+CURRENT_PROFILE=$(curl -s http://localhost/api/profile)
+echo "> 현재 구동중인 Profile: $CURRENT_PROFILE"
 
-if [ $CURRENT_PORT == 8081 ]; then
+if [ $CURRENT_PROFILE == prod1 ]; then
     TARGET_PROFILES=prod2
     TARGET_PORT=8082
-elif [ $CURRENT_PORT == 8082 ]; then
+elif [ $CURRENT_PROFILE == prod2 ]; then
     TARGET_PROFILES=prod1
     TARGET_PORT=8081
 else
-  echo "> 일치하는 Profile 이 없습니다. Profile: $CURRENT_PORT"
+  echo "> 일치하는 Profile 이 없습니다. Profile: $CURRENT_PROFILE"
   echo "> prod1 을 할당합니다. TARGET_PROFILES: prod1"
   TARGET_PROFILES=prod1
   TARGET_PORT=8081
