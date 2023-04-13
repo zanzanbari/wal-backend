@@ -9,6 +9,7 @@ cp $BUILD_PATH $DEPLOY_PATH
 
 echo "> 현재 구동중인 Port 확인"
 CURRENT_PORT=$(cat /etc/nginx/conf.d/service-url.inc | grep -Po '[0-9]+' | tail -1)
+echo "> 현재 구동중인 Port: $CURRENT_PORT"
 
 if [ $CURRENT_PORT == 8081 ]; then
     TARGET_PROFILES=prod2
