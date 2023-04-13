@@ -36,7 +36,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/v2/auth/login")
                 .excludePathPatterns("/v2/auth/reissue")
-                .excludePathPatterns("/health");
+                .excludePathPatterns("/health")
+                .excludePathPatterns("/profile");
         registry.addInterceptor(reissueTokenInterceptor)
                 .addPathPatterns("/v2/auth/reissue");
     }
