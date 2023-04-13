@@ -1,4 +1,4 @@
-CURRENT_PORT=$(cat /home/ec2-user/service_url.inc | grep -Po '[0-9]+' | tail -1)
+CURRENT_PORT=$(cat /etc/nginx/conf.d/service-url.inc | grep -Po '[0-9]+' | tail -1)
 
 if [ $CURRENT_PORT == 8081 ]; then
     TARGET_PORT=8082
