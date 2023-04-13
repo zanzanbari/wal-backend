@@ -2,7 +2,7 @@ name: Deploy to AWS EC2
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "develop", "cd/62" ]
 
 env:
   S3_BUCKET_NAME: wals3bucket
