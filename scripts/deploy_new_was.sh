@@ -29,8 +29,8 @@ TARGET_APPLICATION=$TARGET_PROFILES-wal-server.jar
 TARGET_APPLICATION_PATH=$DEPLOY_PATH$TARGET_APPLICATION
 ln -Tfs $DEPLOY_PATH$JAR_NAME $TARGET_APPLICATION_PATH
 
-echo "> $TARGET_PROFILE 에서 구동중인 애플리케이션 pid 확인"
-TARGET_PID=$(pgrep -f $TARGET_APPLICATION)
+echo "> $TARGET_PROFILES 에서 구동중인 애플리케이션 pid 확인"
+TARGET_PID=$(lsof -Fp -i TCP:$TARGET_PORT | grep -Po 'p[0-9]+' | grep -Po '[0-9]+')
 
 if [ -z $TARGET_PID ]; then
   echo "> 현재 구동중인 애플리케이션이 없으므로 종료하지 않습니다."
