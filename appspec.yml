@@ -13,20 +13,20 @@ permissions:
     group: ubuntu
 
 hooks:
-  AfterInstall:
-    - location: scripts/terminate.sh
-      timeout: 60
-      runas: ubuntu
+#  AfterInstall:
+#    - location: scripts/terminate.sh
+#      timeout: 60
+#      runas: ubuntu
   ApplicationStart:
-    - location: scripts/deploy.sh
+#    - location: scripts/deploy.sh
+#      timeout: 60
+#      runas: ubuntu
+    - location: scripts/deploy_new_was.sh
       timeout: 60
       runas: ubuntu
-#    - location: scripts/deploy_new_was.sh
-#      timeout: 60
-#      runas: ubuntu
-#    - location: scripts/health_check.sh
-#      timeout: 60
-#      runas: ubuntu
-#    - location: scripts/switch.sh
-#      timeout: 60
-#      runas: ubuntu
+    - location: scripts/health_check.sh
+      timeout: 60
+      runas: ubuntu
+    - location: scripts/switch.sh
+      timeout: 60
+      runas: ubuntu
