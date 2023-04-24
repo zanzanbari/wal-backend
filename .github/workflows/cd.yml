@@ -5,9 +5,9 @@ on:
     branches: [ "develop", "cd/62" ]
 
 env:
-  S3_BUCKET_NAME: wals3bucket
-  CODE_DEPLOY_APPLICATION_NAME: wal-code-deploy-application
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: wal-server-deploy-group
+  S3_BUCKET_NAME: wal-s3-bucket
+  CODE_DEPLOY_APPLICATION_NAME: Wal-CodeDeploy-Application
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: Wal-CodeDeploy-Group
 
 permissions:
   contents: read
