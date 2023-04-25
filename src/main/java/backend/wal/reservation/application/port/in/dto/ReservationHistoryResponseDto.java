@@ -8,13 +8,15 @@ public final class ReservationHistoryResponseDto {
     private final String message;
     private final String detail;
     private final ShowStatus showStatus;
+    private final String reservedAt;
 
     public ReservationHistoryResponseDto(final Long reservationId, final String message, final String detail,
-                                         final ShowStatus showStatus) {
+                                         final ShowStatus showStatus, final String reservedAt) {
         this.reservationId = reservationId;
         this.message = message;
         this.detail = detail;
         this.showStatus = showStatus;
+        this.reservedAt = reservedAt;
     }
 
     public Long getReservationId() {
@@ -31,5 +33,9 @@ public final class ReservationHistoryResponseDto {
 
     public ShowStatus getShowStatus() {
         return showStatus;
+    }
+
+    public String getReservedAt() {
+        return reservedAt;
     }
 }

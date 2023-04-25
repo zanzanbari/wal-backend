@@ -7,6 +7,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 
 import java.time.Duration;
@@ -19,6 +22,7 @@ import java.util.Locale;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@EntityListeners(AuditingEntityListener.class)
 public class Reservation {
 
     @Id
@@ -42,6 +46,9 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private SendStatus sendStatus;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
 
     private Reservation(final Long userId, final String message, final LocalDateTime sendDueDate,
                        final ShowStatus showStatus, final SendStatus sendStatus) {
@@ -117,6 +124,12 @@ public class Reservation {
     }
 
     private ReservationHistoryResponseDto toHistoryResponseDto(String detailMessage) {
-        return new ReservationHistoryResponseDto(id, message, detailMessage, showStatus);
+        return new ReservationHistoryResponseDto(
+                id,
+                message,
+                detailMessage,
+                showStatus,
+                createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm"))
+        );
     }
 }
