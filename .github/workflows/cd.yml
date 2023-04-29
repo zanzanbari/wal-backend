@@ -1,0 +1,62 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches: [ "develop", "cd/62" ]
+
+env:
+  S3_BUCKET_NAME: wal-s3-bucket
+  CODE_DEPLOY_APPLICATION_NAME: Wal-CodeDeploy-Application
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: Wal-CodeDeploy-Group
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Check Out
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.YML_CONFIG_SECRETS }}
+          submodules: true
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Build with Gradle without test
+        uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+        with:
+          arguments: clean build -x test
+
+      - name: Make zip file
+        run: zip -r ./$GITHUB_SHA.zip .
+        shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Upload to AWS S3
+        run: |
+          aws s3 cp \
+          --region ${{ secrets.AWS_REGION }} \
+          ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip
+
+      - name: Code Deploy to AWS EC2 from S3
+        run: |
+          aws deploy create-deployment \
+            --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+            --deployment-config-name CodeDeployDefault.AllAtOnce \
+            --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+            --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
