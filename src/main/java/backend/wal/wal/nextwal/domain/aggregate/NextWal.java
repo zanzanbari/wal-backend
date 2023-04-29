@@ -38,15 +38,15 @@ public class NextWal {
         return new NextWal(userId, categoryType, item);
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getItemContent() {
         return item.getContents();
     }
 
     public double getCurrentCategoryItemNumber() {
         return item.getCategoryItemNumber();
-    }
-
-    public void updateItemToNextItem(Item item) {
-        this.item = item;
     }
 }
