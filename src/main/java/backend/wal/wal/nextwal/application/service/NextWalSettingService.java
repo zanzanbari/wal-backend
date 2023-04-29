@@ -41,7 +41,7 @@ public class NextWalSettingService implements NextWalSettingUseCase {
         Long countOfCorrespondCategoryType = itemRepository.countAllByCategoryCategoryType(categoryType);
         double nextItemId = nextWals.calculateNextItemId(randomNextWal, countOfCorrespondCategoryType);
         Item nextItem = itemRepository.findByCategoryCategoryTypeAndCategoryItemNumber(categoryType, nextItemId);
-        randomNextWal.updateItemToNextItem(nextItem);
+        nextWalRepository.updateNextWalItem(randomNextWal.getId(), nextItem);
         nextWals.updateNextWalInfo(randomNextWal);
     }
 
