@@ -12,7 +12,8 @@ public class RegisterOnboardingService implements RegisterOnboardingUseCase {
     private final OnboardingDomainService onboardingDomainService;
     private final WalSettingPort walSettingPort;
 
-    public RegisterOnboardingService(final OnboardingDomainService onboardingDomainService, final WalSettingPort walSettingPort) {
+    public RegisterOnboardingService(final OnboardingDomainService onboardingDomainService,
+                                     final WalSettingPort walSettingPort) {
         this.onboardingDomainService = onboardingDomainService;
         this.walSettingPort = walSettingPort;
     }
