@@ -2,6 +2,7 @@ package backend.wal.wal.onboarding.domain.service;
 
 import backend.wal.wal.onboarding.domain.aggregate.Onboarding;
 import backend.wal.wal.onboarding.domain.repository.OnboardingRepository;
+import backend.wal.wal.onboarding.exception.ConflictOnboardingException;
 import backend.wal.wal.onboarding.exception.NotFoundOnboardingException;
 
 public final class OnboardingServiceUtils {
@@ -13,5 +14,11 @@ public final class OnboardingServiceUtils {
     static Onboarding findExistOnboardingByUserId(OnboardingRepository onboardingRepository, Long userId) {
         return onboardingRepository.findByUserId(userId)
                 .orElseThrow(() -> NotFoundOnboardingException.notExists(userId));
+    }
+
+    static void validateAlreadyExistOnboardingByUserId(OnboardingRepository onboardingRepository, Long userId) {
+        if (onboardingRepository.findByUserId(userId).isPresent()) {
+            throw ConflictOnboardingException.alreadyExists(userId);
+        }
     }
 }

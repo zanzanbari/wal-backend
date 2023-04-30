@@ -24,6 +24,7 @@ public class OnboardingDomainService {
 
     @Transactional
     public void register(Onboarding onboarding) {
+        OnboardingServiceUtils.validateAlreadyExistOnboardingByUserId(onboardingRepository, onboarding.getUserId());
         onboardingRepository.save(onboarding);
     }
 
