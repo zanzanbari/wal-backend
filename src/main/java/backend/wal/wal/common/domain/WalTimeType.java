@@ -27,7 +27,7 @@ public enum WalTimeType {
         return sendDateTime.isAfter(now);
     }
 
-    public boolean isReservation() {
-        return this == RESERVATION;
+    public LocalTime getSendTime() {
+        return sendTime;
     }
 }
