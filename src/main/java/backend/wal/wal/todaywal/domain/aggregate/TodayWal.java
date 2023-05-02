@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -37,13 +39,17 @@ public class TodayWal {
     @Column(nullable = false)
     private ShowStatus showStatus;
 
+    private LocalDateTime sendTime;
+
     @Builder
-    private TodayWal(final Long userId, final String message, final WalCategoryType categoryType, final WalTimeType timeType) {
+    private TodayWal(final Long userId, final String message, final WalCategoryType categoryType,
+                     final WalTimeType timeType, final LocalDateTime sendTime) {
         this.userId = userId;
         this.message = message;
         this.categoryType = categoryType;
         this.timeType = timeType;
         this.showStatus = ShowStatus.CLOSED;
+        this.sendTime = sendTime;
     }
 
     public void updateShowStatus() {
