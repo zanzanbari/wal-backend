@@ -4,6 +4,7 @@ import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
 import backend.wal.reservation.application.port.in.dto.RegisterReservationResponseDto;
 import backend.wal.reservation.application.port.in.ReservationHandlerUseCase;
 import backend.wal.reservation.application.port.out.TodayWalPort;
+import backend.wal.reservation.application.port.out.ReservationTodayWalRequestDto;
 import backend.wal.reservation.domain.ReservationTime;
 import backend.wal.reservation.domain.aggregate.Reservation;
 import backend.wal.reservation.domain.repository.ReservationRepository;
@@ -23,7 +24,8 @@ public class ReservationHandlerHandlerService implements ReservationHandlerUseCa
     private final TodayWalPort todayWalPort;
     private final Clock clock;
 
-    public ReservationHandlerHandlerService(final ReservationRepository reservationRepository, final TodayWalPort todayWalPort,
+    public ReservationHandlerHandlerService(final ReservationRepository reservationRepository,
+                                            final TodayWalPort todayWalPort,
                                             final Clock clock) {
         this.reservationRepository = reservationRepository;
         this.todayWalPort = todayWalPort;
@@ -56,7 +58,12 @@ public class ReservationHandlerHandlerService implements ReservationHandlerUseCa
 
     private void registerTodayWalIfToday(Reservation reservation) {
         if (reservation.isToday(LocalDate.now(clock))) {
-            todayWalPort.registerReservationCall(reservation.getUserId(), reservation.getMessage());
+            todayWalPort.registerReservationCall(
+                    new ReservationTodayWalRequestDto(
+                            reservation.getId(),
+                            reservation.getMessage(),
+                            reservation.getSendDueDate()
+                    ));
         }
     }
 
