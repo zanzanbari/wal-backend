@@ -7,6 +7,8 @@ import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.support.annotation.AppService;
 
+import java.time.LocalDateTime;
+
 @AppService
 public class ReservationTodayWalHandlerService implements ReservationTodayWalHandlerUseCase {
 
@@ -17,12 +19,13 @@ public class ReservationTodayWalHandlerService implements ReservationTodayWalHan
     }
 
     @Override
-    public void registerReservationTodayWal(Long userId, String message) {
+    public void registerReservationTodayWal(Long userId, String message, LocalDateTime sendTime) {
         TodayWal todayWal = TodayWal.builder()
                 .userId(userId)
                 .message(message)
                 .categoryType(WalCategoryType.RESERVATION)
                 .timeType(WalTimeType.RESERVATION)
+                .sendTime(sendTime)
                 .build();
         todayWalRepository.save(todayWal);
     }
