@@ -1,6 +1,7 @@
 package backend.wal.reservation.adapter;
 
 import backend.wal.reservation.application.port.out.TodayWalPort;
+import backend.wal.reservation.application.port.out.ReservationTodayWalRequestDto;
 import backend.wal.wal.todaywal.application.port.in.ReservationTodayWalHandlerUseCase;
 
 import org.springframework.stereotype.Component;
@@ -15,8 +16,12 @@ public final class TodayWalAdapter implements TodayWalPort {
     }
 
     @Override
-    public void registerReservationCall(Long userId, String message) {
-        reservationTodayWalHandlerUseCase.registerReservationTodayWal(userId, message);
+    public void registerReservationCall(ReservationTodayWalRequestDto requestDto) {
+        reservationTodayWalHandlerUseCase.registerReservationTodayWal(
+                requestDto.getUserId(),
+                requestDto.getMessage(),
+                requestDto.getSendTime()
+        );
     }
 
     @Override
