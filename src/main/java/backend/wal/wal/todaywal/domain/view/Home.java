@@ -19,16 +19,17 @@ public final class Home {
     private final WalCategoryType categoryType;
     private final String message;
     private final ShowStatus showStatus;
+    private final LocalDateTime sendTime;
     private OpenStatus openStatus;
 
-    private Home(final Long todayWalId, final WalTimeType timeType, final WalCategoryType categoryType,
-                final String message, final ShowStatus showStatus) {
+    public Home(final Long todayWalId, final WalTimeType timeType, final WalCategoryType categoryType, final String message,
+                final ShowStatus showStatus, final LocalDateTime sendTime) {
         this.todayWalId = todayWalId;
         this.timeType = timeType;
         this.categoryType = categoryType;
         this.message = message;
         this.showStatus = showStatus;
-        this.openStatus = OpenStatus.UNABLE;
+        this.sendTime = sendTime;
     }
 
     public static Home of(final TodayWal todayWal) {
@@ -37,15 +38,13 @@ public final class Home {
                 todayWal.getTimeType(),
                 todayWal.getCategoryType(),
                 todayWal.getMessage(),
-                todayWal.getShowStatus()
+                todayWal.getShowStatus(),
+                todayWal.getSendTime()
         );
     }
 
     public void setOpenStatusBy(LocalDateTime now) {
-        if (timeType.isReservation()) {
-            return;
-        }
-        else if (!timeType.isAfterNow(now)) {
+        if (sendTime.isBefore(now)) {
             this.openStatus = OpenStatus.ABLE;
         }
     }
