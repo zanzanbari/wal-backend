@@ -25,7 +25,7 @@ public class RetrieveHomeTodayWalService implements RetrieveHomeTodayWalUseCase 
 
     @Override
     public List<HomeResponseDto> getHomeInfo(Long userId) {
-        List<Home> homeInfo = todayWalRepository.findTodayWalsByUserId(userId)
+        List<Home> homeInfo = todayWalRepository.findTodayWalsByUserIdOrderBySendTimeAsc(userId)
                 .stream()
                 .map(Home::of)
                 .collect(Collectors.toList());
