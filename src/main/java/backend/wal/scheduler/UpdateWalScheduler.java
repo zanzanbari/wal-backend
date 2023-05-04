@@ -53,7 +53,7 @@ public final class UpdateWalScheduler {
 
             reservationRetrieveUseCase.retrieveReservationBetweenTodayAndTomorrow(userId)
                     .ifPresent(reservation -> reservationTodayWalHandlerUseCase
-                            .registerReservationTodayWal(userId, reservation.getMessage()));
+                            .registerReservationTodayWal(userId, reservation.getMessage(), reservation.getSendDueDate()));
         }
     }
 }
