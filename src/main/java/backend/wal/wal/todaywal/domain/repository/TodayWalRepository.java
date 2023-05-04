@@ -12,7 +12,7 @@ import java.util.Set;
 
 public interface TodayWalRepository extends JpaRepository<TodayWal, Long> {
 
-    List<TodayWal> findTodayWalsByUserId(Long userId);
+    List<TodayWal> findTodayWalsByUserIdOrderBySendTimeAsc(Long userId);
 
     List<TodayWal> findTodayWalsByTimeTypeInAndUserId(Set<WalTimeType> timeTypes, Long userId);
 

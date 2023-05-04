@@ -2,7 +2,7 @@ package backend.wal.reservation.application.port.out;
 
 public interface TodayWalPort {
 
-    void registerReservationCall(Long userId, String message);
+    void registerReservationCall(ReservationTodayWalRequestDto requestDto);
 
     void deleteReservationCall(Long userId);
 }
