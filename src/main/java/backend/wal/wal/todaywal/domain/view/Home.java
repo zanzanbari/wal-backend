@@ -30,6 +30,7 @@ public final class Home {
         this.message = message;
         this.showStatus = showStatus;
         this.sendTime = sendTime;
+        this.openStatus = OpenStatus.UNABLE;
     }
 
     public static Home of(final TodayWal todayWal) {
