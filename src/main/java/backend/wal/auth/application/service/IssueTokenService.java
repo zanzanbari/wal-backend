@@ -24,7 +24,7 @@ public class IssueTokenService implements IssueTokenUseCase {
 
     @Override
     @Transactional
-    public TokenResponseDto issue(Long userId) {
+    public TokenResponseDto issueForNewUser(Long userId) {
         String accessToken = jwtManager.createAccessToken(userId);
         CreateRefreshTokenResponseDto createRefreshTokenResponseDto = jwtManager.createRefreshToken(userId);
         RefreshToken refreshToken = RefreshToken.newInstance(
@@ -33,6 +33,20 @@ public class IssueTokenService implements IssueTokenUseCase {
                 createRefreshTokenResponseDto.getRefreshTokenExpiresIn()
         );
         refreshTokenRepository.save(refreshToken);
+        return new TokenResponseDto(accessToken, refreshToken.getValue());
+    }
+
+    @Override
+    @Transactional
+    public TokenResponseDto issueForAlreadyUser(Long userId) {
+        RefreshToken refreshToken = refreshTokenRepository.findRefreshTokenByUserId(userId)
+                .orElseThrow(NotFoundRefreshTokenException::notExists);
+        String accessToken = jwtManager.createAccessToken(userId);
+        CreateRefreshTokenResponseDto createRefreshTokenResponseDto = jwtManager.createRefreshToken(userId);
+        refreshToken.updateRefreshTokenValueAndExpiredAt(
+                createRefreshTokenResponseDto.getTokenValue(),
+                createRefreshTokenResponseDto.getRefreshTokenExpiresIn()
+        );
         return new TokenResponseDto(accessToken, refreshToken.getValue());
     }
 
