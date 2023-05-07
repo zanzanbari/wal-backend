@@ -34,17 +34,17 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest request) {
         AuthUseCase authUseCase = authServiceProvider.getAuthServiceBy(request.getSocialType());
-
         LoginResponseDto loginResponseDto = authUseCase.login(request.toAuthServiceDto());
-        TokenResponseDto tokenResponseDto = issueTokenUseCase.issue(loginResponseDto.getUserId());
 
         if (loginResponseDto.isNewUser()) {
+            TokenResponseDto tokenResponseDto = issueTokenUseCase.issueForNewUser(loginResponseDto.getUserId());
             return ResponseEntity.status(CREATED)
                     .header(AUTHORIZATION, withBearerToken(tokenResponseDto.getAccessToken()))
                     .header(REFRESH_TOKEN, tokenResponseDto.getRefreshToken())
                     .build();
         }
 
+        TokenResponseDto tokenResponseDto = issueTokenUseCase.issueForAlreadyUser(loginResponseDto.getUserId());
         return ResponseEntity.ok()
                 .header(AUTHORIZATION, withBearerToken(tokenResponseDto.getAccessToken()))
                 .header(REFRESH_TOKEN, tokenResponseDto.getRefreshToken())

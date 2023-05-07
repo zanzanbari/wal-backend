@@ -39,6 +39,14 @@ public class RefreshToken {
         return new RefreshToken(userId, value, expiredAt);
     }
 
+    public void updateRefreshTokenValueAndExpiredAt(String value, Date expiredDate) {
+        LocalDateTime expiredAt = expiredDate.toInstant()
+                .atZone(ZoneId.of("Asia/Seoul"))
+                .toLocalDateTime();
+        this.value = value;
+        this.expiredAt = expiredAt;
+    }
+
     public Long getId() {
         return id;
     }

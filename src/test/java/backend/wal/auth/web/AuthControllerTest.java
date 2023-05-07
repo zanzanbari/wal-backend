@@ -64,7 +64,7 @@ class AuthControllerTest {
         String accessToken = "access-token";
         String refreshToken = "refresh-token";
         TokenResponseDto tokenResponseDto = new TokenResponseDto(accessToken, refreshToken);
-        when(issueTokenUseCase.issue(userId))
+        when(issueTokenUseCase.issueForNewUser(userId))
                 .thenReturn(tokenResponseDto);
 
         // when, then
