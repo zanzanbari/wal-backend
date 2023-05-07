@@ -48,7 +48,7 @@ class IssueTokenServiceTest {
                 .thenReturn(createTokenDto);
 
         // when
-        TokenResponseDto response = issueTokenService.issue(USER_ID);
+        TokenResponseDto response = issueTokenService.issueForNewUser(USER_ID);
 
         // then
         assertAll(
