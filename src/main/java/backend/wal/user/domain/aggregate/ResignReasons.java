@@ -15,6 +15,10 @@ public class ResignReasons {
         this.reasons = reasons;
     }
 
+    public Set<ResignReason> getReasons() {
+        return reasons;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
