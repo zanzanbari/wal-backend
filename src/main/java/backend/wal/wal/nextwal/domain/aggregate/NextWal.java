@@ -38,6 +38,10 @@ public class NextWal {
         return new NextWal(userId, categoryType, item);
     }
 
+    public void updateItem(Item item) {
+        this.item = item;
+    }
+
     public Long getId() {
         return id;
     }
