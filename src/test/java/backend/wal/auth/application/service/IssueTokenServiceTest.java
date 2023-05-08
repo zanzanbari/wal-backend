@@ -37,9 +37,9 @@ class IssueTokenServiceTest {
     @InjectMocks
     private IssueTokenService issueTokenService;
 
-    @DisplayName("유저의 아이디를 받아 accessToken, refreshToken 을 발급힌다")
+    @DisplayName("새로운 유저의 아이디를 받아 accessToken, refreshToken 을 발급힌다")
     @Test
-    void issueToken() {
+    void issueForNewUser() {
         // given
         CreateRefreshTokenResponseDto createTokenDto = new CreateRefreshTokenResponseDto(USER_ID, REFRESH_TOKEN, new Date());
         when(jwtManagerPort.createAccessToken(USER_ID))
@@ -49,6 +49,28 @@ class IssueTokenServiceTest {
 
         // when
         TokenResponseDto response = issueTokenService.issueForNewUser(USER_ID);
+
+        // then
+        assertAll(
+                () -> assertThat(response.getAccessToken()).isEqualTo(ACCESS_TOKEN),
+                () -> assertThat(response.getRefreshToken()).isEqualTo(REFRESH_TOKEN)
+        );
+    }
+
+    @DisplayName("기존 유저의 아이디를 받아 accessToken, refreshToken 을 발급힌다")
+    @Test
+    void issueForAlreadyUser() {
+        // given
+        CreateRefreshTokenResponseDto createTokenDto = new CreateRefreshTokenResponseDto(USER_ID, REFRESH_TOKEN, new Date());
+        when(refreshTokenRepository.findRefreshTokenByUserId(USER_ID))
+                .thenReturn(Optional.of(RefreshToken.newInstance(USER_ID, REFRESH_TOKEN, new Date())));
+        when(jwtManagerPort.createAccessToken(USER_ID))
+                .thenReturn(ACCESS_TOKEN);
+        when(jwtManagerPort.createRefreshToken(USER_ID))
+                .thenReturn(createTokenDto);
+
+        // when
+        TokenResponseDto response = issueTokenService.issueForAlreadyUser(USER_ID);
 
         // then
         assertAll(
@@ -76,7 +98,20 @@ class IssueTokenServiceTest {
 
     @DisplayName("유효한 refreshToken 에 해당하는 값이 없으면 에러가 발생한다")
     @Test
-    void test() {
+    void fail_issueForAlreadyUser() {
+        // given
+        when(refreshTokenRepository.findRefreshTokenByUserId(USER_ID))
+                .thenReturn(Optional.empty());
+
+        // when, then
+        assertThatThrownBy(() -> issueTokenService.issueForAlreadyUser(USER_ID))
+                .isInstanceOf(NotFoundException.class)
+                .hasMessage("존재하지 않는 refreshToken 입니다");
+    }
+
+    @DisplayName("유효한 refreshToken 에 해당하는 값이 없으면 에러가 발생한다")
+    @Test
+    void fail_reissueToken() {
         // given
         when(refreshTokenRepository.findRefreshTokenByValue(REFRESH_TOKEN))
                 .thenReturn(Optional.empty());
