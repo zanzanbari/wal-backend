@@ -46,7 +46,38 @@ class AuthControllerTest {
                 .build();
     }
 
-    @DisplayName("social token, social type, fcm token 값을 받아 요청 유저를 회원가입 또는 로그인 한다")
+    @DisplayName("social token, social type, fcm token 값을 받아 요청 유저를 회원가입 처리한다")
+    @Test
+    void signup() throws Exception {
+        // given
+        String socialToken = "social-token";
+        String fcmToken = "fcm-token";
+        LoginRequest loginRequest = new LoginRequest(socialToken, SocialType.KAKAO, fcmToken);
+        AuthUseCase authUseCase = mock(AuthUseCase.class);
+        when(authServiceProvider.getAuthServiceBy(loginRequest.getSocialType()))
+                .thenReturn(authUseCase);
+
+        Long userId = 1L;
+        LoginResponseDto loginResponseDto = new LoginResponseDto(userId, true);
+        when(authUseCase.login(any()))
+                .thenReturn(loginResponseDto);
+
+        String accessToken = "access-token";
+        String refreshToken = "refresh-token";
+        TokenResponseDto tokenResponseDto = new TokenResponseDto(accessToken, refreshToken);
+        when(issueTokenUseCase.issueForNewUser(userId))
+                .thenReturn(tokenResponseDto);
+
+        // when, then
+        mockMvc.perform(MockMvcRequestBuilders.post("/v2/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(loginRequest)))
+                .andExpect(status().isCreated())
+                .andExpect(header().string(HttpHeaderUtils.AUTHORIZATION, "Bearer " + accessToken))
+                .andExpect(header().string(HttpHeaderUtils.REFRESH_TOKEN, refreshToken));
+    }
+
+    @DisplayName("social token, social type, fcm token 값을 받아 요청 유저를 로그인 처리한다")
     @Test
     void login() throws Exception {
         // given
@@ -58,13 +89,14 @@ class AuthControllerTest {
                 .thenReturn(authUseCase);
 
         Long userId = 1L;
+        LoginResponseDto loginResponseDto = new LoginResponseDto(userId, false);
         when(authUseCase.login(any()))
-                .thenReturn(any(LoginResponseDto.class));
+                .thenReturn(loginResponseDto);
 
         String accessToken = "access-token";
         String refreshToken = "refresh-token";
         TokenResponseDto tokenResponseDto = new TokenResponseDto(accessToken, refreshToken);
-        when(issueTokenUseCase.issueForNewUser(userId))
+        when(issueTokenUseCase.issueForAlreadyUser(userId))
                 .thenReturn(tokenResponseDto);
 
         // when, then
@@ -86,7 +118,7 @@ class AuthControllerTest {
                 .thenReturn(reissuedAccessToken);
 
         // when, then
-        mockMvc.perform(MockMvcRequestBuilders.get("/v2/auth/reissue")
+        mockMvc.perform(MockMvcRequestBuilders.post("/v2/auth/reissue")
                         .header(HttpHeaderUtils.REFRESH_TOKEN, refreshToken))
                 .andExpect(status().isOk())
                 .andExpect(header().string(HttpHeaderUtils.AUTHORIZATION, "Bearer " + reissuedAccessToken));
