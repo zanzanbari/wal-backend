@@ -26,4 +26,8 @@ public enum WalTimeType {
         LocalDateTime sendDateTime = LocalDateTime.of(now.toLocalDate(), this.sendTime);
         return sendDateTime.isAfter(now);
     }
+
+    public LocalTime getSendTime() {
+        return sendTime;
+    }
 }

@@ -1,8 +1,9 @@
 package backend.wal.reservation.domain;
 
-import backend.wal.reservation.application.port.in.dto.ReservationCalendarResponseDto;
+import backend.wal.reservation.application.port.in.dto.ReservationCalenderResponseDto;
 import backend.wal.reservation.application.port.in.dto.ReservationHistoryResponseDto;
 import backend.wal.reservation.domain.aggregate.Reservation;
+import backend.wal.reservation.domain.view.ReservationHistory;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,21 +19,23 @@ public final class Reservations {
     public List<ReservationHistoryResponseDto> extractNotDoneReservation() {
         return values.stream()
                 .filter(Reservation::isNotDone)
-                .map(Reservation::getDetailSendDateInfo)
+                .map(Reservation::toHistory)
+                .map(ReservationHistory::getDetailSendDateInfo)
                 .collect(Collectors.toUnmodifiableList());
     }
 
     public List<ReservationHistoryResponseDto> extractDoneReservation() {
         return values.stream()
                 .filter(Reservation::isDone)
-                .map(Reservation::getDetailSendDateInfo)
+                .map(Reservation::toHistory)
+                .map(ReservationHistory::getDetailSendDateInfo)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public List<ReservationCalendarResponseDto> extractDateForCalender() {
+    public List<ReservationCalenderResponseDto> extractDateForCalender() {
         return values.stream()
                 .map(Reservation::getSendDueDate)
-                .map(ReservationCalendarResponseDto::new)
+                .map(ReservationCalenderResponseDto::create)
                 .collect(Collectors.toUnmodifiableList());
     }
 }

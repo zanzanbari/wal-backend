@@ -6,6 +6,7 @@ import backend.wal.wal.nextwal.application.port.NextWalSettingUseCase;
 import backend.wal.wal.nextwal.domain.NextWals;
 import backend.wal.wal.nextwal.domain.aggregate.NextWal;
 import backend.wal.wal.todaywal.application.port.out.NextWalSettingPort;
+
 import org.springframework.stereotype.Component;
 
 @Component

@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
@@ -21,7 +22,11 @@ class HomeTest {
     @MethodSource("provideWalTimeTypeAndDateTimeTextAndExpect")
     void setOpenStatusBy(WalTimeType timeType, CharSequence dateTimeText, OpenStatus expect) {
         // given
-        TodayWal todayWal = TodayWal.builder().timeType(timeType).build();
+        LocalDate fixedDate = LocalDate.parse("1998-04-02");
+        TodayWal todayWal = TodayWal.builder()
+                .timeType(timeType)
+                .sendTime(timeType.getSendTime().atDate(fixedDate))
+                .build();
         Home home = Home.of(todayWal);
 
         // when

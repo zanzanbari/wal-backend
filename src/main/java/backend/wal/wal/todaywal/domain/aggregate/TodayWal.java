@@ -2,12 +2,15 @@ package backend.wal.wal.todaywal.domain.aggregate;
 
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -36,13 +39,17 @@ public class TodayWal {
     @Column(nullable = false)
     private ShowStatus showStatus;
 
+    private LocalDateTime sendTime;
+
     @Builder
-    private TodayWal(final Long userId, final String message, final WalCategoryType categoryType, final WalTimeType timeType) {
+    private TodayWal(final Long userId, final String message, final WalCategoryType categoryType,
+                     final WalTimeType timeType, final LocalDateTime sendTime) {
         this.userId = userId;
         this.message = message;
         this.categoryType = categoryType;
         this.timeType = timeType;
         this.showStatus = ShowStatus.CLOSED;
+        this.sendTime = sendTime;
     }
 
     public void updateShowStatus() {

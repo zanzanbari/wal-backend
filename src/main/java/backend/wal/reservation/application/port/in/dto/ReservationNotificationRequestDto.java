@@ -1,5 +1,7 @@
 package backend.wal.reservation.application.port.in.dto;
 
+import backend.wal.reservation.application.port.out.NotificationRequestDto;
+
 import java.time.LocalDateTime;
 
 public final class ReservationNotificationRequestDto {
@@ -17,6 +19,10 @@ public final class ReservationNotificationRequestDto {
         this.message = message;
         this.sendDueDate = sendDueDate;
         this.delayTime = delayTime;
+    }
+
+    public NotificationRequestDto toNotificationRequest() {
+        return new NotificationRequestDto(reservationId, userId, message);
     }
 
     public Long getReservationId() {

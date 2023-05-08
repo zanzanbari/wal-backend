@@ -1,22 +1,25 @@
 package backend.wal.reservation.domain.aggregate;
 
-import backend.wal.reservation.application.port.in.dto.ReservationHistoryResponseDto;
 import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
+import backend.wal.reservation.domain.view.ReservationHistory;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
-import java.util.Locale;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@EntityListeners(AuditingEntityListener.class)
 public class Reservation {
 
     @Id
@@ -40,6 +43,9 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private SendStatus sendStatus;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
 
     private Reservation(final Long userId, final String message, final LocalDateTime sendDueDate,
                        final ShowStatus showStatus, final SendStatus sendStatus) {
@@ -83,38 +89,11 @@ public class Reservation {
         return sendStatus == SendStatus.NOT_DONE;
     }
 
-    public ReservationHistoryResponseDto getDetailSendDateInfo() {
-        String monthDate = sendDueDate.format(DateTimeFormatter.ofPattern("MM. dd"));
-        String time = sendDueDate.format(DateTimeFormatter.ofPattern(":mm"));
-
-        int hour = sendDueDate.getHour();
-        if (hour > 12) {
-            time = "오후 " + (hour - 12) + time;
-        } else {
-            time = "오전 " + hour + time;
-        }
-
-        String dayOfWeek = sendDueDate.getDayOfWeek()
-                .getDisplayName(TextStyle.FULL, Locale.KOREAN);
-
-        String detailMessage = makeDetailMessage(monthDate, time, dayOfWeek);
-
-        return toHistoryResponseDto(detailMessage);
+    public ReservationHistory toHistory() {
+        return new ReservationHistory(id, message, sendDueDate, showStatus, sendStatus, createdAt);
     }
 
-    private String makeDetailMessage(String monthDate, String time, String dayOfWeek) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(monthDate)
-                .append(" ")
-                .append(time)
-                .append(" ")
-                .append(dayOfWeek)
-                .append(" • ")
-                .append(sendStatus.getValue());
-        return stringBuilder.toString();
-    }
-
-    private ReservationHistoryResponseDto toHistoryResponseDto(String detailMessage) {
-        return new ReservationHistoryResponseDto(id, message, detailMessage, showStatus);
+    public void setCreatedAtForTest(LocalDateTime testTime) { // FIXME : 다른 방법 없는지 찾아보기
+        this.createdAt = testTime;
     }
 }

@@ -3,9 +3,7 @@ package backend.wal.auth.application.port.in;
 import backend.wal.notification.application.port.in.InitFcmRequestDto;
 import backend.wal.user.domain.aggregate.SocialType;
 import backend.wal.user.application.port.in.CreateUserDto;
-import lombok.Getter;
 
-@Getter
 public final class LoginRequestDto {
 
     private final String socialAccessToken;
@@ -28,5 +26,13 @@ public final class LoginRequestDto {
 
     public InitFcmRequestDto toFcmTokenServiceDto(Long userId) {
         return new InitFcmRequestDto(userId, fcmToken);
+    }
+
+    public String getSocialAccessToken() {
+        return socialAccessToken;
+    }
+
+    public SocialType getSocialType() {
+        return socialType;
     }
 }

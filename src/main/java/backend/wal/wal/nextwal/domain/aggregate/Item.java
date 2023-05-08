@@ -2,14 +2,12 @@ package backend.wal.wal.nextwal.domain.aggregate;
 
 import lombok.AccessLevel;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
 public class Item {
 
     @Id
@@ -35,5 +33,17 @@ public class Item {
         this.contents = contents;
         this.imageUrl = imageUrl;
         this.categoryItemNumber = currentItemSize + 1;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getContents() {
+        return contents;
+    }
+
+    public double getCategoryItemNumber() {
+        return categoryItemNumber;
     }
 }

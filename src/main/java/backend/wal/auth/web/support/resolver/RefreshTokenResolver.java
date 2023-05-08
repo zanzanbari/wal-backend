@@ -2,6 +2,7 @@ package backend.wal.auth.web.support.resolver;
 
 import backend.wal.auth.exception.InternalAuthServerException;
 import backend.wal.support.annotation.ExtractValidRefreshToken;
+
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -31,7 +32,8 @@ public final class RefreshTokenResolver implements HandlerMethodArgumentResolver
 
     private static void checkGetRefreshToken(String refreshToken, MethodParameter parameter) {
         if (refreshToken == null) {
-            throw InternalAuthServerException.attributeNotFound(parameter.getClass(), parameter.getMethod());
+            throw InternalAuthServerException.attributeNotFound(
+                    REFRESH_TOKEN_ATTRIBUTE, parameter.getClass(), parameter.getMethod());
         }
     }
 }

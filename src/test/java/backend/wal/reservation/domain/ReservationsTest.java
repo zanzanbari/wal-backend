@@ -1,14 +1,16 @@
 package backend.wal.reservation.domain;
 
 import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
-import backend.wal.reservation.application.port.in.dto.ReservationCalendarResponseDto;
+import backend.wal.reservation.application.port.in.dto.ReservationCalenderResponseDto;
 import backend.wal.reservation.application.port.in.dto.ReservationHistoryResponseDto;
 import backend.wal.reservation.domain.aggregate.Reservation;
 import backend.wal.reservation.domain.aggregate.ShowStatus;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ReservationsTest {
 
     private static final Long USER_ID = 1L;
+    private static final LocalDateTime TEST_TIME = LocalDateTime.now();
 
     private Reservation firstReservation;
     private Reservations reservations;
@@ -41,6 +44,10 @@ class ReservationsTest {
         firstReservation = Reservation.newInstance(first);
         Reservation secondReservation = Reservation.newInstance(second);
         Reservation thirdReservation = Reservation.newInstance(third);
+
+        firstReservation.setCreatedAtForTest(TEST_TIME);
+        secondReservation.setCreatedAtForTest(TEST_TIME);
+        thirdReservation.setCreatedAtForTest(TEST_TIME);
 
         reservations = new Reservations(List.of(firstReservation, secondReservation, thirdReservation));
     }
@@ -75,7 +82,7 @@ class ReservationsTest {
     @Test
     void extractDateForCalender() {
         // when
-        List<ReservationCalendarResponseDto> responseDtos = reservations.extractDateForCalender();
+        List<ReservationCalenderResponseDto> responseDtos = reservations.extractDateForCalender();
 
         // then
         assertThat(responseDtos).hasSize(3);

@@ -4,6 +4,7 @@ import backend.wal.config.JpaRepositoryTestConfig;
 import backend.wal.reservation.application.port.in.dto.AddReservationRequestDto;
 import backend.wal.reservation.domain.aggregate.Reservation;
 import backend.wal.reservation.domain.aggregate.ShowStatus;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,13 +33,23 @@ class ReservationRepositoryTest {
                                                         CharSequence endDate,
                                                         boolean expect) {
         // given
-        AddReservationRequestDto requestDto = AddReservationRequestDto.of(USER_ID, "예약 메세지", "2019-12-31", "10:12:22", ShowStatus.OPEN);
+        AddReservationRequestDto requestDto = AddReservationRequestDto.of(
+                USER_ID,
+                "예약 메세지",
+                "2019-12-31",
+                "10:12:22",
+                ShowStatus.OPEN
+        );
         reservationRepository.save(Reservation.newInstance(requestDto));
 
         // when
         LocalDateTime startDateTime = LocalDateTime.parse(startDate);
         LocalDateTime endDateTime = LocalDateTime.parse(endDate);
-        boolean actual = reservationRepository.existsReservationBySendDueDateBetweenAndUserId(startDateTime, endDateTime, USER_ID);
+        boolean actual = reservationRepository.existsReservationBySendDueDateBetweenAndUserId(
+                startDateTime,
+                endDateTime,
+                USER_ID
+        );
 
         // then
         assertThat(actual).isEqualTo(expect);
@@ -71,16 +82,26 @@ class ReservationRepositoryTest {
         setUpReservations();
 
         // when
-        List<Reservation> reservations = reservationRepository.findReservationsBySendDueDateAfterAndUserId(LocalDateTime.parse("2020-01-01T00:00"), USER_ID);
+        List<Reservation> reservations = reservationRepository.findReservationsBySendDueDateAfterAndUserId(
+                LocalDateTime.parse("2020-01-01T00:00"),
+                USER_ID
+        );
 
         // then
         assertThat(reservations).hasSize(1);
     }
 
     private void setUpReservations() {
-        AddReservationRequestDto first = AddReservationRequestDto.of(USER_ID, "예약메세지1", "2019-12-31", "23:59:59", ShowStatus.OPEN);
-        AddReservationRequestDto second = AddReservationRequestDto.of(USER_ID, "예약메세지2", "2020-01-01", "00:00:00", ShowStatus.OPEN);
-        AddReservationRequestDto third = AddReservationRequestDto.of(USER_ID, "예약메세지3", "2020-01-01", "00:00:01", ShowStatus.OPEN);
-        reservationRepository.saveAll(List.of(Reservation.newInstance(first), Reservation.newInstance(second), Reservation.newInstance(third)));
+        AddReservationRequestDto first = AddReservationRequestDto.of(USER_ID, "예약메세지1",
+                "2019-12-31", "23:59:59", ShowStatus.OPEN);
+        AddReservationRequestDto second = AddReservationRequestDto.of(USER_ID, "예약메세지2",
+                "2020-01-01", "00:00:00", ShowStatus.OPEN);
+        AddReservationRequestDto third = AddReservationRequestDto.of(USER_ID, "예약메세지3",
+                "2020-01-01", "00:00:01", ShowStatus.OPEN);
+        reservationRepository.saveAll(List.of(
+                Reservation.newInstance(first),
+                Reservation.newInstance(second),
+                Reservation.newInstance(third))
+        );
     }
 }

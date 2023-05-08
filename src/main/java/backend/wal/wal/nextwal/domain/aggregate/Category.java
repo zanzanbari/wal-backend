@@ -1,8 +1,8 @@
 package backend.wal.wal.nextwal.domain.aggregate;
 
 import backend.wal.wal.common.domain.WalCategoryType;
+
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
 public class Category {
 
     @Id
@@ -27,5 +26,13 @@ public class Category {
 
     public void addItem(Item item) {
         items.add(item);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public WalCategoryType getCategoryType() {
+        return categoryType;
     }
 }

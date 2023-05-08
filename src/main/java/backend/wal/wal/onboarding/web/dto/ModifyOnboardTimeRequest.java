@@ -2,6 +2,7 @@ package backend.wal.wal.onboarding.web.dto;
 
 import backend.wal.wal.onboarding.application.port.in.dto.ModifyOnboardTimeRequestDto;
 import backend.wal.wal.common.domain.WalTimeType;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -20,5 +21,9 @@ public class ModifyOnboardTimeRequest {
 
     public ModifyOnboardTimeRequestDto toServiceDto() {
         return new ModifyOnboardTimeRequestDto(timeTypes);
+    }
+
+    public Set<WalTimeType> getTimeTypes() {
+        return timeTypes;
     }
 }

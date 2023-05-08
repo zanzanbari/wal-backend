@@ -1,11 +1,11 @@
 package backend.wal.wal.nextwal.application.service;
 
-import backend.wal.support.annotation.DomainService;
 import backend.wal.wal.nextwal.application.port.GetNextWalUseCase;
 import backend.wal.wal.nextwal.domain.NextWals;
 import backend.wal.wal.nextwal.domain.aggregate.NextWal;
 import backend.wal.wal.nextwal.domain.repository.NextWalRepository;
 import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
+import backend.wal.support.annotation.DomainService;
 
 @DomainService
 public class GetNextWalService implements GetNextWalUseCase {

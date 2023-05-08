@@ -1,7 +1,9 @@
 package backend.wal.reservation.adapter;
 
-import backend.wal.notification.application.port.in.NotificationUseCase;
+import backend.wal.reservation.application.port.out.NotificationRequestDto;
 import backend.wal.reservation.application.port.out.NotificationPort;
+import backend.wal.notification.application.port.in.NotificationUseCase;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,7 +16,7 @@ public final class NotificationAdapter implements NotificationPort {
     }
 
     @Override
-    public void sendCall(Long userId, String message) {
-        notificationUseCase.sendMessage(userId, message);
+    public void sendCall(NotificationRequestDto requestDto) {
+        notificationUseCase.sendMessage(requestDto.getReservationId(), requestDto.getUserId(), requestDto.getMessage());
     }
 }

@@ -5,6 +5,7 @@ import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.wal.onboarding.domain.repository.OnboardingTimeRepository;
 import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
 import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
+
 import org.springframework.stereotype.Component;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;

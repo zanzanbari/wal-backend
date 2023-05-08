@@ -5,15 +5,22 @@ import backend.wal.user.domain.aggregate.SocialInfo;
 import backend.wal.user.domain.aggregate.SocialType;
 import backend.wal.user.domain.aggregate.UserRole;
 import backend.wal.user.domain.aggregate.UserStatus;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@EntityListeners(AuditingEntityListener.class)
 public class User {
 
     @Id
@@ -33,6 +40,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private UserRole userRole;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
 
     private User(final String nickname, final SocialInfo socialInfo, final UserStatus status, final UserRole userRole) {
         this.nickname = nickname;

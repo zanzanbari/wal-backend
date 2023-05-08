@@ -3,12 +3,14 @@ package backend.wal.wal.onboarding.web.dto;
 import backend.wal.wal.onboarding.application.port.in.dto.InitOnboardInfoRequestDto;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
 import java.util.Set;
 
 @Getter

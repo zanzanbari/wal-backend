@@ -1,12 +1,10 @@
 package backend.wal.user.web.dto;
 
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
-@Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ModifyNicknameRequest {
 
@@ -15,5 +13,9 @@ public class ModifyNicknameRequest {
 
     public ModifyNicknameRequest(final String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getNickname() {
+        return nickname;
     }
 }

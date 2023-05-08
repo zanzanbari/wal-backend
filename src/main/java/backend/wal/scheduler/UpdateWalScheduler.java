@@ -1,12 +1,14 @@
 package backend.wal.scheduler;
 
 import backend.wal.reservation.application.port.in.ReservationRetrieveUseCase;
-import backend.wal.wal.nextwal.application.port.GetNextWalUseCase;
+import backend.wal.wal.nextwal.domain.NextWals;
+import backend.wal.wal.nextwal.domain.repository.NextWalRepository;
 import backend.wal.wal.onboarding.domain.aggregate.Onboarding;
 import backend.wal.wal.onboarding.domain.repository.OnboardingRepository;
-import backend.wal.wal.todaywal.application.port.in.RegisterReservationTodayWalUseCase;
+import backend.wal.wal.todaywal.application.port.in.ReservationTodayWalHandlerUseCase;
 import backend.wal.wal.todaywal.application.port.in.TodayWalSettingUseCase;
 import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
+
 import org.springframework.stereotype.Component;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -17,37 +19,41 @@ public final class UpdateWalScheduler {
 
     private final OnboardingRepository onboardingRepository;
     private final TodayWalRepository todayWalRepository;
-    private final GetNextWalUseCase getNextWalUseCase;
+    private final NextWalRepository nextWalRepository;
     private final TodayWalSettingUseCase todayWalSettingUseCase;
     private final ReservationRetrieveUseCase reservationRetrieveUseCase;
-    private final RegisterReservationTodayWalUseCase registerReservationTodayWalUseCase;
+    private final ReservationTodayWalHandlerUseCase reservationTodayWalHandlerUseCase;
 
     public UpdateWalScheduler(final OnboardingRepository onboardingRepository,
                               final TodayWalRepository todayWalRepository,
-                              final GetNextWalUseCase getNextWalUseCase,
+                              final NextWalRepository nextWalRepository,
                               final TodayWalSettingUseCase todayWalSettingUseCase,
                               final ReservationRetrieveUseCase reservationRetrieveUseCase,
-                              final RegisterReservationTodayWalUseCase registerReservationTodayWalUseCase) {
+                              final ReservationTodayWalHandlerUseCase reservationTodayWalHandlerUseCase) {
         this.onboardingRepository = onboardingRepository;
         this.todayWalRepository = todayWalRepository;
-        this.getNextWalUseCase = getNextWalUseCase;
+        this.nextWalRepository = nextWalRepository;
         this.todayWalSettingUseCase = todayWalSettingUseCase;
         this.reservationRetrieveUseCase = reservationRetrieveUseCase;
-        this.registerReservationTodayWalUseCase = registerReservationTodayWalUseCase;
+        this.reservationTodayWalHandlerUseCase = reservationTodayWalHandlerUseCase;
     }
 
     @Scheduled(cron = "0 0 0 * * *")
     void updateWalAtNoonEveryday() {
         todayWalRepository.deleteAllInBatch();
-        List<Onboarding> onboardings = onboardingRepository.findAll();
+
+        List<Onboarding> onboardings = onboardingRepository.findOnboardingsWithTimeTypes();
         for (Onboarding onboarding : onboardings) {
             Long userId = onboarding.getUserId();
-            todayWalSettingUseCase.setTodayWals(onboarding.getTimeTypes(), userId,
-                    getNextWalUseCase.getNextWalsByUserId(userId));
+            todayWalSettingUseCase.setTodayWals(
+                    onboarding.getTimeTypes(),
+                    userId,
+                    new NextWals(nextWalRepository.findNextWalsWithItemByUserId(userId))
+            );
 
             reservationRetrieveUseCase.retrieveReservationBetweenTodayAndTomorrow(userId)
-                    .ifPresent(reservation -> registerReservationTodayWalUseCase
-                            .registerReservationTodayWal(userId, reservation.getMessage()));
+                    .ifPresent(reservation -> reservationTodayWalHandlerUseCase
+                            .registerReservationTodayWal(userId, reservation.getMessage(), reservation.getSendDueDate()));
         }
     }
 }

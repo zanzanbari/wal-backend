@@ -3,7 +3,6 @@ package backend.wal.wal.nextwal.application.service;
 import backend.wal.wal.nextwal.application.port.NextWalSettingUseCase;
 import backend.wal.wal.nextwal.domain.repository.NextWalRepository;
 import backend.wal.wal.nextwal.domain.repository.ItemRepository;
-import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
 import backend.wal.wal.nextwal.domain.NextWals;
 import backend.wal.wal.nextwal.domain.aggregate.Item;
 import backend.wal.wal.nextwal.domain.aggregate.NextWal;
@@ -42,7 +41,7 @@ public class NextWalSettingService implements NextWalSettingUseCase {
         Long countOfCorrespondCategoryType = itemRepository.countAllByCategoryCategoryType(categoryType);
         double nextItemId = nextWals.calculateNextItemId(randomNextWal, countOfCorrespondCategoryType);
         Item nextItem = itemRepository.findByCategoryCategoryTypeAndCategoryItemNumber(categoryType, nextItemId);
-        randomNextWal.updateItemToNextItem(nextItem);
+        randomNextWal.updateItem(nextItem);
         nextWals.updateNextWalInfo(randomNextWal);
     }
 

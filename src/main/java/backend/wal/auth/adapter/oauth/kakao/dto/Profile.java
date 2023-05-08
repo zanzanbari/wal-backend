@@ -1,12 +1,11 @@
 package backend.wal.auth.adapter.oauth.kakao.dto;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Profile {
 
     private String nickname;
+
+    private Profile() {
+    }
 
     public Profile(final String nickname) {
         this.nickname = nickname;

@@ -2,11 +2,13 @@ package backend.wal.wal.todaywal.domain.view;
 
 import backend.wal.wal.common.domain.WalTimeType;
 import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Stream;
@@ -24,7 +26,11 @@ class HomesTest {
     @MethodSource("provideWalTimeTypeAndDateTimeTextAndExpect")
     void create(WalTimeType timeType, CharSequence dateTimeText, List<OpenStatus> expect) {
         // given
-        TodayWal todayWal = TodayWal.builder().timeType(timeType).build();
+        LocalDate fixedDate = LocalDate.parse("1998-04-02");
+        TodayWal todayWal = TodayWal.builder()
+                .timeType(timeType)
+                .sendTime(timeType.getSendTime().atDate(fixedDate))
+                .build();
         Home home = Home.of(todayWal);
         List<Home> homeInfo = List.of(home);
 

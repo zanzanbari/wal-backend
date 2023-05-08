@@ -21,7 +21,7 @@ public class ReservationNotificationService implements ReservationNotificationUs
     @Override
     public void send(ReservationNotificationRequestDto requestDto) {
         Runnable notificationTask = () -> {
-            notificationPort.sendCall(requestDto.getUserId(), requestDto.getMessage());
+            notificationPort.sendCall(requestDto.toNotificationRequest());
             reservationSchedulerPort.shoutDown();
         };
         reservationSchedulerPort.sendMessageAfterDelay(notificationTask,

@@ -2,12 +2,15 @@ package backend.wal.wal.onboarding.domain.aggregate;
 
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,10 +30,10 @@ public class Onboarding {
     @Column(nullable = false)
     private Long userId;
 
-    @OneToMany(mappedBy = "onboarding", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "onboarding", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<OnboardingCategory> categories = new ArrayList<>();
 
-    @OneToMany(mappedBy = "onboarding", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "onboarding", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<OnboardingTime> times = new ArrayList<>();
 
     private Onboarding(Long userId) {
@@ -109,7 +112,7 @@ public class Onboarding {
         return getCategoryTypes();
     }
 
-    private Set<WalCategoryType> getCategoryTypes() {
+    public Set<WalCategoryType> getCategoryTypes() {
         return categories.stream()
                 .map(OnboardingCategory::getCategoryType)
                 .collect(Collectors.toSet());

@@ -2,7 +2,8 @@ package backend.wal.auth.web;
 
 import backend.wal.auth.application.port.in.AuthUseCase;
 import backend.wal.auth.application.port.in.IssueTokenUseCase;
-import backend.wal.auth.application.port.out.TokenResponseDto;
+import backend.wal.auth.application.port.in.LoginResponseDto;
+import backend.wal.auth.application.port.in.TokenResponseDto;
 import backend.wal.auth.application.provider.AuthServiceProvider;
 import backend.wal.auth.web.dto.LoginRequest;
 import backend.wal.support.utils.HttpHeaderUtils;
@@ -58,12 +59,12 @@ class AuthControllerTest {
 
         Long userId = 1L;
         when(authUseCase.login(any()))
-                .thenReturn(userId);
+                .thenReturn(any(LoginResponseDto.class));
 
         String accessToken = "access-token";
         String refreshToken = "refresh-token";
         TokenResponseDto tokenResponseDto = new TokenResponseDto(accessToken, refreshToken);
-        when(issueTokenUseCase.issue(userId))
+        when(issueTokenUseCase.issueForNewUser(userId))
                 .thenReturn(tokenResponseDto);
 
         // when, then

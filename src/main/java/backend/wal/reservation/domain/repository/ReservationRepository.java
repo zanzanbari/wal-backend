@@ -1,6 +1,7 @@
 package backend.wal.reservation.domain.repository;
 
 import backend.wal.reservation.domain.aggregate.Reservation;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

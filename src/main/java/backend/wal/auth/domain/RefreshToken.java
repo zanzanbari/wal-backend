@@ -1,20 +1,19 @@
 package backend.wal.auth.domain;
 
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
 public class RefreshToken {
 
     @Id
@@ -38,5 +37,25 @@ public class RefreshToken {
                 .atZone(ZoneId.of("Asia/Seoul"))
                 .toLocalDateTime();
         return new RefreshToken(userId, value, expiredAt);
+    }
+
+    public void updateRefreshTokenValueAndExpiredAt(String value, Date expiredDate) {
+        LocalDateTime expiredAt = expiredDate.toInstant()
+                .atZone(ZoneId.of("Asia/Seoul"))
+                .toLocalDateTime();
+        this.value = value;
+        this.expiredAt = expiredAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public String getValue() {
+        return value;
     }
 }
