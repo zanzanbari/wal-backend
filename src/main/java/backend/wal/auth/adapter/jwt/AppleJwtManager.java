@@ -42,9 +42,8 @@ public class AppleJwtManager {
 
     public String getSubject(PublicKey publicKey, String idToken) {
         Claims claims = parseClaims(publicKey, idToken);
-        // FIXME : change validate throw exception
         validateIssuerAndAudience(claims.getIssuer(), claims.getAudience());
-        validateExpiresIn(claims.getExpiration());
+        validateExpiresIn(claims.getExpiration(), idToken);
         return claims.getSubject();
     }
 
@@ -64,13 +63,13 @@ public class AppleJwtManager {
 
     private void validateIssuerAndAudience(String issuer, String audience) {
         if (!appleClaimsValidator.hasRightIssAndClientId(issuer, audience)) {
-            throw UnAuthorizedTokenException.unMatched();
+            throw UnAuthorizedTokenException.unMatchedClaims();
         }
     }
 
-    private void validateExpiresIn(Date expiration) {
+    private void validateExpiresIn(Date expiration, String token) {
         if (!appleClaimsValidator.isValidExp(expiration.getTime(), new Date().getTime())) {
-            throw UnAuthorizedTokenException.unMatched();
+            throw UnAuthorizedTokenException.expired(token);
         }
     }
 }

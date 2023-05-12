@@ -5,7 +5,7 @@ import backend.wal.auth.application.port.in.LoginResponseDto;
 import backend.wal.auth.application.port.out.OAuthUserInfoResponseDto;
 import backend.wal.auth.application.port.out.RegisterFcmPort;
 import backend.wal.auth.application.port.out.UserPort;
-import backend.wal.auth.exception.UnAuthorizedUserException;
+import backend.wal.auth.exception.ForbiddenUserException;
 import backend.wal.support.annotation.DomainService;
 import backend.wal.user.domain.aggregate.entity.User;
 
@@ -28,7 +28,7 @@ public class OAuthDomainService {
             return new LoginResponseDto(newUserId, true);
         }
         if (alreadyUser.isDeleted()) {
-            throw UnAuthorizedUserException.resignUser();
+            throw ForbiddenUserException.resignUser();
         }
         return new LoginResponseDto(alreadyUser.getId(), false);
     }

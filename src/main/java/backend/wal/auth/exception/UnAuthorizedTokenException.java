@@ -28,6 +28,10 @@ public final class UnAuthorizedTokenException extends UnAuthorizedException {
         return new UnAuthorizedTokenException("ApplePublicKey 와 일치하는 값을 찾을 수 없습니다");
     }
 
+    public static UnAuthorizedException unMatchedClaims() {
+        return new UnAuthorizedTokenException("public key 와 idToken 으로 찾은 claim 정보 issuer,audience 가 일치하지 않습니다");
+    }
+
     public static UnAuthorizedException expired() {
         return new UnAuthorizedTokenException("social token 이 만료되었습니다");
     }
