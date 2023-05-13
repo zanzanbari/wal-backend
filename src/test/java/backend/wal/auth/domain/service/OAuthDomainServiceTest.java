@@ -3,7 +3,7 @@ package backend.wal.auth.domain.service;
 import backend.wal.auth.application.port.in.LoginRequestDto;
 import backend.wal.auth.application.port.in.LoginResponseDto;
 import backend.wal.auth.application.port.out.OAuthUserInfoResponseDto;
-import backend.wal.auth.application.port.out.RegisterFcmPort;
+import backend.wal.auth.application.port.out.FcmTokenPort;
 import backend.wal.auth.application.port.out.UserPort;
 import backend.wal.auth.exception.UnAuthorizedUserException;
 import backend.wal.user.domain.aggregate.SocialType;
@@ -34,7 +34,7 @@ class OAuthDomainServiceTest {
     private UserPort userPort;
 
     @Mock
-    private RegisterFcmPort registerFcmPort;
+    private FcmTokenPort fcmTokenPort;
 
     @InjectMocks
     private OAuthDomainService oAuthDomainService;
