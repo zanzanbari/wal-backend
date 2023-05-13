@@ -29,6 +29,14 @@ public class FcmToken {
         return new FcmToken(userId, value);
     }
 
+    public boolean isNotSameWith(String value) {
+        return !this.value.equals(value);
+    }
+
+    public void updateTokenValue(String value) {
+        this.value = value;
+    }
+
     public String getValue() {
         return value;
     }
