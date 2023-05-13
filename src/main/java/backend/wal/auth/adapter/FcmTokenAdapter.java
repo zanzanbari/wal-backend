@@ -1,22 +1,28 @@
 package backend.wal.auth.adapter;
 
-import backend.wal.auth.application.port.out.RegisterFcmPort;
+import backend.wal.auth.application.port.out.FcmTokenPort;
+import backend.wal.notification.application.port.in.FcmTokenUseCase;
 import backend.wal.notification.application.port.in.InitFcmRequestDto;
-import backend.wal.notification.application.port.in.RegisterFcmTokenUseCase;
+import backend.wal.notification.application.port.in.UpdateFcmTokenRequestDto;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public final class RegisterFcmAdapter implements RegisterFcmPort {
+public final class FcmTokenAdapter implements FcmTokenPort {
 
-    private final RegisterFcmTokenUseCase registerFcmTokenUseCase;
+    private final FcmTokenUseCase fcmTokenUseCase;
 
-    public RegisterFcmAdapter(final RegisterFcmTokenUseCase registerFcmTokenUseCase) {
-        this.registerFcmTokenUseCase = registerFcmTokenUseCase;
+    public FcmTokenAdapter(final FcmTokenUseCase fcmTokenUseCase) {
+        this.fcmTokenUseCase = fcmTokenUseCase;
     }
 
     @Override
     public void registerCall(InitFcmRequestDto requestDto) {
-        registerFcmTokenUseCase.register(requestDto);
+        fcmTokenUseCase.register(requestDto);
+    }
+
+    @Override
+    public void checkAndUpdateCall(UpdateFcmTokenRequestDto requestDto) {
+        fcmTokenUseCase.update(requestDto);
     }
 }
