@@ -63,12 +63,14 @@ public final class ReservationHistory {
     }
 
     private ReservationHistoryResponseDto toHistoryResponseDto(String detailMessage) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm");
         return new ReservationHistoryResponseDto(
                 reservationId,
                 message,
                 detailMessage,
-                showStatus,
-                reservedAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm"))
+                showStatus.name(),
+                reservedAt.format(dateTimeFormatter),
+                sendDueDate.format(dateTimeFormatter)
         );
     }
 }
