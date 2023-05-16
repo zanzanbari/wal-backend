@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 
+@Deprecated
 public final class ReservationScheduledFutures {
 
     private final Map<Long, ScheduledFuture<?>> values = new HashMap<>();

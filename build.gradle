@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'backend.wal'
-version = '0.0.2-SNAPSHOT'
+version = '0.0.3-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
@@ -40,6 +40,7 @@ dependencies {
     compileOnly 'org.jetbrains:annotations:23.0.0'
 
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
 
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'

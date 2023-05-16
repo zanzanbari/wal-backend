@@ -11,6 +11,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+@Deprecated
 @Component
 public final class ReservationSchedulerAdapter implements ReservationSchedulerPort {
 
