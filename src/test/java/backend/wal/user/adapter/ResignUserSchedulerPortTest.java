@@ -23,7 +23,6 @@ class ResignUserSchedulerPortTest {
         Runnable task = () -> {
             taskChecker[0] = true;
             latch.countDown();
-            resignUserScheduler.shoutDown();
         };
 
         // when
