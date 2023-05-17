@@ -4,6 +4,7 @@ import backend.wal.user.application.port.out.ResignUserSchedulerPort;
 
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -13,11 +14,13 @@ public final class ResignUserSchedulerAdapter implements ResignUserSchedulerPort
 
     private final ScheduledExecutorService scheduledExecutorService =  Executors.newSingleThreadScheduledExecutor();
 
+    @Override
     public void resignAfterDay(Runnable task, long delayOneDayMillis) {
         scheduledExecutorService.schedule(task, delayOneDayMillis, TimeUnit.MILLISECONDS);
     }
 
-    public void shoutDown() {
+    @PreDestroy
+    public void shutDown() {
         scheduledExecutorService.shutdown();
     }
 }
