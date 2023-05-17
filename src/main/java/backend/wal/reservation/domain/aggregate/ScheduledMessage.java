@@ -26,7 +26,7 @@ public class ScheduledMessage {
     protected ScheduledMessage() {
     }
 
-    private ScheduledMessage(final Long reservationId, final Long userId,
+    public ScheduledMessage(final Long reservationId, final Long userId,
                             final String message, final LocalDateTime sendDueDate) {
         this.reservationId = reservationId;
         this.userId = userId;
