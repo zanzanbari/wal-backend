@@ -7,15 +7,12 @@ import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutureCallback;
 import com.google.api.core.ApiFutures;
 import com.google.common.util.concurrent.MoreExecutors;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.Message;
-import com.google.firebase.messaging.Notification;
+import com.google.firebase.messaging.*;
 
+import org.springframework.stereotype.Component;
 import org.jetbrains.annotations.NotNull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Executor;
 
@@ -23,6 +20,8 @@ import java.util.concurrent.Executor;
 public final class FirebaseMessagingAdapter implements FirebaseMessagingPort {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FirebaseMessagingAdapter.class);
+    private static final String NOTIFICATION_TITLE = "왈";
+    private static final String ALERT_SOUND = "default";
 
     private final FirebaseMessaging firebaseMessaging;
     private final UpdateReservationUseCase updateReservationUseCase;
@@ -67,13 +66,21 @@ public final class FirebaseMessagingAdapter implements FirebaseMessagingPort {
     }
 
     private Message createMessage(String contents, String fcmTokenValue) {
-        Notification notification = Notification.builder()
-                .setTitle("🐶오늘의 개소리 도착!🐶")
+        ApsAlert apsAlert = ApsAlert.builder()
+                .setTitle(NOTIFICATION_TITLE)
                 .setBody(contents)
+                .build();
+        Aps aps = Aps.builder()
+                .setAlert(apsAlert)
+                .setContentAvailable(true)
+                .setSound(ALERT_SOUND)
+                .build();
+        ApnsConfig apnsConfig = ApnsConfig.builder()
+                .setAps(aps)
                 .build();
         return Message.builder()
                 .setToken(fcmTokenValue)
-                .setNotification(notification)
+                .setApnsConfig(apnsConfig)
                 .build();
     }
 
