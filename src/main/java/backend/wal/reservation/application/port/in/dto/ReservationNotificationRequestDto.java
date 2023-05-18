@@ -2,6 +2,8 @@ package backend.wal.reservation.application.port.in.dto;
 
 import backend.wal.reservation.application.port.out.NotificationRequestDto;
 
+import com.google.common.base.Objects;
+
 import java.time.LocalDateTime;
 
 public final class ReservationNotificationRequestDto {
@@ -43,5 +45,18 @@ public final class ReservationNotificationRequestDto {
 
     public long getDelayTime() {
         return delayTime;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ReservationNotificationRequestDto that = (ReservationNotificationRequestDto) o;
+        return Objects.equal(reservationId, that.reservationId) && Objects.equal(userId, that.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(reservationId, userId);
     }
 }

@@ -1,8 +1,10 @@
 package backend.wal.reservation.domain.repository;
 
 import backend.wal.reservation.domain.aggregate.Reservation;
+import backend.wal.reservation.domain.aggregate.SendStatus;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,5 +18,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     List<Reservation> findReservationsBySendDueDateAfterAndUserId(LocalDateTime now, Long userId);
 
-    Optional<Reservation> findReservationBySendDueDateBetweenAndUserId(LocalDateTime today, LocalDateTime tomorrow, Long userId);
+    Optional<Reservation> findReservationBySendDueDateBetweenAndUserId(LocalDateTime today,
+                                                                       LocalDateTime tomorrow,
+                                                                       Long userId);
+
+    @Query("SELECT r FROM Reservation r WHERE r.sendDueDate > :now AND r.sendStatus = :notDone")
+    List<Reservation> findNotDoneReservationAfterNow(LocalDateTime now, SendStatus notDone);
 }
