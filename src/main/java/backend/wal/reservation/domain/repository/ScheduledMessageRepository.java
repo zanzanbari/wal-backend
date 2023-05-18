@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface ScheduledMessageRepository extends JpaRepository<ScheduledMessage, Long> {
 
-    @Query("SELECT sm FROM ScheduledMessage sm WHERE sm.sendDueDate > :now")
+    @Query("SELECT DISTINCT sm FROM ScheduledMessage sm WHERE sm.sendDueDate > :now")
     List<ScheduledMessage> findScheduledMessagesBySendDueDateAfter(LocalDateTime now);
 }
