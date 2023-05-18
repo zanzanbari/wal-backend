@@ -24,7 +24,7 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ReservationSchedulerProviderTest {
+class ReservationSchedulerManagerTest {
 
     @Mock
     private ReservationNotificationService reservationNotificationService;
@@ -39,7 +39,7 @@ class ReservationSchedulerProviderTest {
     private Clock clock;
 
     @InjectMocks
-    private ReservationSchedulerProvider reservationSchedulerProvider;
+    private ReservationSchedulerManager reservationSchedulerManager;
 
     @DisplayName("스케줄된 메시지 정보를 가져와 예약 스케줄링에 재등록한다")
     @Test
@@ -57,7 +57,7 @@ class ReservationSchedulerProviderTest {
                 .thenReturn(scheduledMessages);
 
         // when
-        reservationSchedulerProvider.reloadReservationSchedules();
+        reservationSchedulerManager.reloadReservationSchedules();
 
         // then
         ReservationNotificationRequestDto taskRequest1 = new ReservationNotificationRequestDto(
@@ -95,7 +95,7 @@ class ReservationSchedulerProviderTest {
                 .thenReturn(reservations);
 
         // when
-        reservationSchedulerProvider.saveReservationSchedules();
+        reservationSchedulerManager.saveReservationSchedules();
 
         // then
         ArgumentCaptor<List<ScheduledMessage>> captor = ArgumentCaptor.forClass(List.class);

@@ -43,5 +43,6 @@ public final class ReservationSchedulerAdapter implements ReservationSchedulerPo
     @PreDestroy
     public void shutdown() {
         scheduledExecutorService.shutdown();
+        LOGGER.info("예약 메시지 스케줄러 종료");
     }
 }

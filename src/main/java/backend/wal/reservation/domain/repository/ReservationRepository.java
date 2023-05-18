@@ -22,6 +22,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
                                                                        LocalDateTime tomorrow,
                                                                        Long userId);
 
-    @Query("SELECT r FROM Reservation r WHERE r.sendDueDate > :now AND r.sendStatus = :notDone")
+    @Query("SELECT r FROM Reservation r " +
+            "LEFT JOIN ScheduledMessage sm ON r.id = sm.reservationId " +
+            "WHERE sm.id IS NULL " +
+            "AND r.sendDueDate > :now " +
+            "AND r.sendStatus = :notDone")
     List<Reservation> findNotDoneReservationAfterNow(LocalDateTime now, SendStatus notDone);
 }

@@ -17,17 +17,17 @@ import java.util.stream.Collectors;
 import static backend.wal.reservation.domain.aggregate.SendStatus.NOT_DONE;
 
 @Component
-public class ReservationSchedulerProvider {
+public class ReservationSchedulerManager {
 
     private final ReservationNotificationService reservationNotificationService;
     private final ScheduledMessageRepository scheduledMessageRepository;
     private final ReservationRepository reservationRepository;
     private final Clock clock;
 
-    public ReservationSchedulerProvider(final ReservationNotificationService reservationNotificationService,
-                                        final ScheduledMessageRepository scheduledMessageRepository,
-                                        final ReservationRepository reservationRepository,
-                                        final Clock clock) {
+    public ReservationSchedulerManager(final ReservationNotificationService reservationNotificationService,
+                                       final ScheduledMessageRepository scheduledMessageRepository,
+                                       final ReservationRepository reservationRepository,
+                                       final Clock clock) {
         this.reservationNotificationService = reservationNotificationService;
         this.scheduledMessageRepository = scheduledMessageRepository;
         this.reservationRepository = reservationRepository;
