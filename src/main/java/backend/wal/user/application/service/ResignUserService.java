@@ -26,10 +26,6 @@ public class ResignUserService implements ResignUserUseCase {
         User user = UserServiceUtils.findExistsUserByUserId(userRepository, userId);
         user.resign();
 
-        Runnable userDeleteTask = () -> {
-            userRepository.delete(user);
-            resignUserSchedulerPort.shoutDown();
-        };
-        resignUserSchedulerPort.resignAfterDay(userDeleteTask, MILLIS_OF_ONE_DAY);
+        resignUserSchedulerPort.resignAfterDay(() -> userRepository.delete(user), MILLIS_OF_ONE_DAY);
     }
 }

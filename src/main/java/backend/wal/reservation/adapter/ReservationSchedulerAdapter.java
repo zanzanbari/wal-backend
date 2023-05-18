@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.Executors;
+import javax.annotation.PreDestroy;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -16,8 +16,14 @@ public final class ReservationSchedulerAdapter implements ReservationSchedulerPo
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReservationSchedulerAdapter.class);
 
-    private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-    private final ReservationScheduledFutures reservationScheduledFutures = new ReservationScheduledFutures();
+    private final ScheduledExecutorService scheduledExecutorService;
+    private final ReservationScheduledFutures reservationScheduledFutures;
+
+    public ReservationSchedulerAdapter(final ScheduledExecutorService scheduledExecutorService,
+                                       final ReservationScheduledFutures reservationScheduledFutures) {
+        this.scheduledExecutorService = scheduledExecutorService;
+        this.reservationScheduledFutures = reservationScheduledFutures;
+    }
 
     @Override
     public void sendMessageAfterDelay(Runnable task, long delayTime, Long reservationId) {
@@ -34,8 +40,8 @@ public final class ReservationSchedulerAdapter implements ReservationSchedulerPo
         }
     }
 
-    @Override
-    public void shoutDown() {
+    @PreDestroy
+    public void shutdown() {
         scheduledExecutorService.shutdown();
     }
 }

@@ -47,7 +47,7 @@ public class Reservation {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    private Reservation(final Long userId, final String message, final LocalDateTime sendDueDate,
+    public Reservation(final Long userId, final String message, final LocalDateTime sendDueDate,
                        final ShowStatus showStatus, final SendStatus sendStatus) {
         this.userId = userId;
         this.message = message;
