@@ -1,7 +1,10 @@
 package backend.wal.reservation.adapter;
 
+import backend.wal.reservation.exception.NotFoundReservationException;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ScheduledFuture;
 
 public final class ReservationScheduledFutures {
@@ -13,12 +16,13 @@ public final class ReservationScheduledFutures {
     }
 
     public boolean cancelScheduleByKey(Long key) {
-        ScheduledFuture<?> scheduledFuture = findByKey(key);
+        ScheduledFuture<?> scheduledFuture = findByKey(key)
+                .orElseThrow(() -> NotFoundReservationException.notExists(key));
         return scheduledFuture.cancel(true);
     }
 
-    public ScheduledFuture<?> findByKey(Long key) {
-        return values.get(key);
+    public Optional<ScheduledFuture<?>> findByKey(Long key) {
+        return Optional.ofNullable(values.get(key));
     }
 
     public void removeByKey(Long key) {
