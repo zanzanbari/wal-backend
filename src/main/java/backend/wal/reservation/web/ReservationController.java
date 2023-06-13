@@ -42,7 +42,7 @@ public class ReservationController {
     @PostMapping("/{reservationId}/cancel")
     public ResponseEntity<Void> cancel(@PathVariable Long reservationId, @LoginUser Long userId) {
         reservationNotificationUseCase.cancel(reservationId);
-        reservationHandlerUseCase.deleteIfCanceledReservationIsToday(userId);
+        reservationHandlerUseCase.deleteReservation(userId, reservationId);
         return ResponseEntity.noContent().build();
     }
 
