@@ -7,5 +7,5 @@ public interface ReservationHandlerUseCase {
 
     RegisterReservationResponseDto register(AddReservationRequestDto requestDto);
 
-    void deleteIfCanceledReservationIsToday(Long userId);
+    void deleteReservation(Long userId, Long reservationId);
 }
