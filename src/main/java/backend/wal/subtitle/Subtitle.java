@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 public enum Subtitle {
 
-    ERROR("서브타이틀 에러를 본 당신은 행운아!"),
-
     ONE("가끔은 쉬어가는 것도 좋아~ 넌 항상 최고야!"),
     TWO("박수를 3번 쳐보자. 오늘 하루도 화이팅!"),
     THREE("안녕! 오늘 뭔가 느낌이 좋아!"),
@@ -45,6 +43,8 @@ public enum Subtitle {
     THIRTY_FOUR("왈뿡이 보고 오늘 하루도 화이팅이야!"),
     THIRTY_FIVE("오늘은 어떤 달이 뜰까 기대된다! 두근두근"),
     THIRTY_SIX("어제보다 더 좋을 오늘을 왈뿡이가 응원해!"),
+
+    ERROR("서브타이틀 에러를 본 당신은 행운아!"),
     ;
 
     private final String value;

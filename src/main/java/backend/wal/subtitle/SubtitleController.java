@@ -22,7 +22,7 @@ public class SubtitleController {
     @Authentication
     @GetMapping
     public ResponseEntity<HomeSubtitleResponse> retrieveSubtitle() {
-        int randomNumberInRange = randomRangeGenerator.generate(Subtitle.values().length);
+        int randomNumberInRange = randomRangeGenerator.generate(Subtitle.values().length - 1);
         return ResponseEntity.ok(new HomeSubtitleResponse(Subtitle.getRandomValue(randomNumberInRange)));
     }
 }
