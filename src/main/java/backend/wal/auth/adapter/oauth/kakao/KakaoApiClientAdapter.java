@@ -20,6 +20,6 @@ public final class KakaoApiClientAdapter implements OAuthApiClientPort {
     public OAuthUserInfoResponseDto getOAuthUserId(String token) {
         String bearerToken = HttpHeaderUtils.withBearerToken(token);
         KakaoUserInfoResponse kakaoUserInfo = kakaoApiClientCaller.getKakaoUserInfo(bearerToken);
-        return new OAuthUserInfoResponseDto(kakaoUserInfo.getId(), kakaoUserInfo.getNickname());
+        return new OAuthUserInfoResponseDto(kakaoUserInfo.getId(), "DEFAULT");
     }
 }

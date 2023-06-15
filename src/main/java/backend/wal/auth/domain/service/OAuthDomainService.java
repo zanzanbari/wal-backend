@@ -25,12 +25,12 @@ public class OAuthDomainService {
         if (alreadyUser == null) {
             Long newUserId = userPort.signupCall(requestDto.toCreateUserDto(oAuthUserInfo.getNickname(), oAuthUserInfo.getId()));
             fcmTokenPort.registerCall(requestDto.toFcmTokenServiceDto(newUserId));
-            return new LoginResponseDto(newUserId, true);
+            return new LoginResponseDto(newUserId, oAuthUserInfo.getNickname(), true);
         }
         if (alreadyUser.isDeleted()) {
             throw ForbiddenUserException.resignUser();
         }
         fcmTokenPort.checkAndUpdateCall(requestDto.toUpdateTokenServiceDto(alreadyUser.getId()));
-        return new LoginResponseDto(alreadyUser.getId(), false);
+        return new LoginResponseDto(alreadyUser.getId(), alreadyUser.getNickname(), false);
     }
 }
