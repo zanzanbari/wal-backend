@@ -9,6 +9,7 @@ import backend.wal.auth.application.port.in.IssueTokenUseCase;
 import backend.wal.auth.application.port.in.AuthUseCase;
 import backend.wal.auth.application.provider.AuthServiceProvider;
 import backend.wal.auth.web.dto.LoginRequest;
+import backend.wal.auth.web.dto.LoginResponse;
 import backend.wal.support.annotation.ExtractValidRefreshToken;
 
 import org.springframework.http.ResponseEntity;
@@ -32,23 +33,24 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest request) {
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
         AuthUseCase authUseCase = authServiceProvider.getAuthServiceBy(request.getSocialType());
         LoginResponseDto loginResponseDto = authUseCase.login(request.toAuthServiceDto());
+        LoginResponse loginResponse = new LoginResponse(loginResponseDto.getNickname());
 
         if (loginResponseDto.isNewUser()) {
             TokenResponseDto tokenResponseDto = issueTokenUseCase.issueForNewUser(loginResponseDto.getUserId());
             return ResponseEntity.status(CREATED)
                     .header(AUTHORIZATION, withBearerToken(tokenResponseDto.getAccessToken()))
                     .header(REFRESH_TOKEN, tokenResponseDto.getRefreshToken())
-                    .build();
+                    .body(loginResponse);
         }
 
         TokenResponseDto tokenResponseDto = issueTokenUseCase.issueForAlreadyUser(loginResponseDto.getUserId());
         return ResponseEntity.ok()
                 .header(AUTHORIZATION, withBearerToken(tokenResponseDto.getAccessToken()))
                 .header(REFRESH_TOKEN, tokenResponseDto.getRefreshToken())
-                .build();
+                .body(loginResponse);
     }
 
     @PostMapping("/reissue")
