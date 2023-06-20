@@ -20,5 +20,7 @@ public class ResignUserService implements ResignUserUseCase {
     public void resign(Long userId) {
         User user = UserServiceUtils.findExistsUserByUserId(userRepository, userId);
         user.resign();
+        // FIXME: 2023/06/20 : user delete 로직 수정 필요 (모두 삭제 or soft delete)
+        userRepository.delete(user);
     }
 }
