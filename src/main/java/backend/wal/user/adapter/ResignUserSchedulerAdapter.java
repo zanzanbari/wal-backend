@@ -9,6 +9,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+@Deprecated(since = "issue.110")
 @Component
 public final class ResignUserSchedulerAdapter implements ResignUserSchedulerPort {
 
