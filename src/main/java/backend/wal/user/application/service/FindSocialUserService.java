@@ -2,6 +2,7 @@ package backend.wal.user.application.service;
 
 import backend.wal.user.application.port.in.FindSocialUserUseCase;
 import backend.wal.user.domain.aggregate.SocialType;
+import backend.wal.user.domain.aggregate.UserStatus;
 import backend.wal.user.domain.aggregate.entity.User;
 import backend.wal.user.domain.repository.UserRepository;
 import backend.wal.support.annotation.AppService;
@@ -20,6 +21,6 @@ public class FindSocialUserService implements FindSocialUserUseCase {
 
     @Override
     public User findUserBySocialIdAndSocialType(String socialId, SocialType socialType) {
-        return userRepository.findUserBySocialInfoSocialIdAndSocialInfoSocialType(socialId, socialType);
+        return userRepository.findActiveUserBySocialIdAndSocialType(socialId, socialType, UserStatus.ACTIVE);
     }
 }
