@@ -2,6 +2,7 @@ package backend.wal.auth.exception;
 
 import backend.wal.advice.exception.ForbiddenException;
 
+@Deprecated(since = "issue.110")
 public final class ForbiddenUserException extends ForbiddenException {
 
     private ForbiddenUserException(final String message) {

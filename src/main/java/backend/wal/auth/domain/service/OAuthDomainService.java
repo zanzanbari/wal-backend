@@ -5,7 +5,6 @@ import backend.wal.auth.application.port.in.LoginResponseDto;
 import backend.wal.auth.application.port.out.OAuthUserInfoResponseDto;
 import backend.wal.auth.application.port.out.FcmTokenPort;
 import backend.wal.auth.application.port.out.UserPort;
-import backend.wal.auth.exception.ForbiddenUserException;
 import backend.wal.support.annotation.DomainService;
 import backend.wal.user.domain.aggregate.entity.User;
 
@@ -26,9 +25,6 @@ public class OAuthDomainService {
             Long newUserId = userPort.signupCall(requestDto.toCreateUserDto(oAuthUserInfo.getNickname(), oAuthUserInfo.getId()));
             fcmTokenPort.registerCall(requestDto.toFcmTokenServiceDto(newUserId));
             return new LoginResponseDto(newUserId, oAuthUserInfo.getNickname(), true);
-        }
-        if (alreadyUser.isDeleted()) {
-            throw ForbiddenUserException.resignUser();
         }
         fcmTokenPort.checkAndUpdateCall(requestDto.toUpdateTokenServiceDto(alreadyUser.getId()));
         return new LoginResponseDto(alreadyUser.getId(), alreadyUser.getNickname(), false);
