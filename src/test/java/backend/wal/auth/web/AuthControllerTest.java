@@ -58,7 +58,7 @@ class AuthControllerTest {
                 .thenReturn(authUseCase);
 
         Long userId = 1L;
-        LoginResponseDto loginResponseDto = new LoginResponseDto(userId, true);
+        LoginResponseDto loginResponseDto = new LoginResponseDto(userId, "nickname", true);
         when(authUseCase.login(any()))
                 .thenReturn(loginResponseDto);
 
@@ -89,7 +89,7 @@ class AuthControllerTest {
                 .thenReturn(authUseCase);
 
         Long userId = 1L;
-        LoginResponseDto loginResponseDto = new LoginResponseDto(userId, false);
+        LoginResponseDto loginResponseDto = new LoginResponseDto(userId, "nickname", false);
         when(authUseCase.login(any()))
                 .thenReturn(loginResponseDto);
 
