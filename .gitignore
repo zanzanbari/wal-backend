@@ -38,3 +38,6 @@ out/
 
 ### firebase admin ###
 src/main/resources/firebase
+
+### logback log files ###
+./logs
