@@ -40,4 +40,4 @@ out/
 src/main/resources/firebase
 
 ### logback log files ###
-./logs
+logs
