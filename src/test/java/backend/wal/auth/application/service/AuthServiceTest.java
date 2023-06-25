@@ -47,7 +47,7 @@ class AuthServiceTest {
     void setUp() {
         userId = 1L;
         oAuthUserInfoResponseDto = new OAuthUserInfoResponseDto(SOCIAL_ID, NICKNAME);
-        loginResponseDto = new LoginResponseDto(userId, false);
+        loginResponseDto = new LoginResponseDto(userId, "nickname", false);
     }
 
     @DisplayName("카카오 로그인을 수행하면 LoginResponseDto 를 반환한다")
