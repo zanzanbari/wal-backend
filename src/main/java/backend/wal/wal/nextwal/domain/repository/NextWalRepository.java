@@ -17,4 +17,6 @@ public interface NextWalRepository extends JpaRepository<NextWal, Long> {
 
     @Query("SELECT nw FROM NextWal nw JOIN FETCH nw.item")
     List<NextWal> findNextWalsWithItemByUserId(Long userId);
+
+    void deleteAllByUserId(Long userId);
 }
