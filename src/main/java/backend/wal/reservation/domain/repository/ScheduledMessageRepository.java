@@ -11,4 +11,6 @@ public interface ScheduledMessageRepository extends JpaRepository<ScheduledMessa
 
     @Query("SELECT DISTINCT sm FROM ScheduledMessage sm WHERE sm.sendDueDate > :now")
     List<ScheduledMessage> findScheduledMessagesBySendDueDateAfter(LocalDateTime now);
+
+    void deleteAllByUserId(Long userId);
 }

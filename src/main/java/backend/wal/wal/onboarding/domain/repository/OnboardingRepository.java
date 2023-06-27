@@ -14,4 +14,6 @@ public interface OnboardingRepository extends JpaRepository<Onboarding, Long> {
 
     @Query("SELECT DISTINCT o FROM Onboarding o JOIN FETCH o.times")
     List<Onboarding> findOnboardingsWithTimeTypes();
+
+    void deleteByUserId(Long userId);
 }

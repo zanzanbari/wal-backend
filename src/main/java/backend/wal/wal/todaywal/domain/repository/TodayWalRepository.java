@@ -23,4 +23,6 @@ public interface TodayWalRepository extends JpaRepository<TodayWal, Long> {
     Optional<TodayWal> findTodayWalByIdAndUserId(Long todayWalId, Long userId);
 
     void deleteTodayWalByUserIdAndCategoryType(Long userId, WalCategoryType categoryType);
+
+    void deleteAllByUserId(Long userId);
 }

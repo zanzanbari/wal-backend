@@ -28,4 +28,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             "AND r.sendDueDate > :now " +
             "AND r.sendStatus = :notDone")
     List<Reservation> findNotDoneReservationAfterNow(LocalDateTime now, SendStatus notDone);
+
+    void deleteAllByUserId(Long userId);
 }
