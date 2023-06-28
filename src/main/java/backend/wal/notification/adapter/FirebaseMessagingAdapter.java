@@ -46,7 +46,7 @@ public final class FirebaseMessagingAdapter implements FirebaseMessagingPort {
         return new ApiFutureCallback<>() {
             @Override
             public void onFailure(Throwable t) {
-                LOGGER.info("메세지 전송에 실패했습니다 {}", t.getMessage());
+                LOGGER.error("메세지 전송에 실패했습니다 {}", t.getMessage());
             }
 
             @Override
