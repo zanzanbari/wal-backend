@@ -22,7 +22,7 @@ import java.io.IOException;
         ignoreResourceNotFound = true)
 public class FCMConfig {
 
-    private static final String FIREBASE_APP_NAME = "WAL_BACKEND";
+    private static final String FIREBASE_APP_NAME = "WAL-NOTIFICATION";
 
     @Value("${firebase.fcm.config.path}")
     private String firebaseConfigPath;
