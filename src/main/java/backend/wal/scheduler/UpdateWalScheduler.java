@@ -2,6 +2,7 @@ package backend.wal.scheduler;
 
 import backend.wal.reservation.application.port.in.ReservationRetrieveUseCase;
 import backend.wal.wal.nextwal.domain.NextWals;
+import backend.wal.wal.nextwal.domain.aggregate.NextWal;
 import backend.wal.wal.nextwal.domain.repository.NextWalRepository;
 import backend.wal.wal.onboarding.domain.aggregate.Onboarding;
 import backend.wal.wal.onboarding.domain.repository.OnboardingRepository;
@@ -45,11 +46,8 @@ public final class UpdateWalScheduler {
         List<Onboarding> onboardings = onboardingRepository.findOnboardingsWithTimeTypes();
         for (Onboarding onboarding : onboardings) {
             Long userId = onboarding.getUserId();
-            todayWalSettingUseCase.setTodayWals(
-                    onboarding.getTimeTypes(),
-                    userId,
-                    new NextWals(nextWalRepository.findNextWalsWithItemByUserId(userId))
-            );
+            List<NextWal> nextWalWithItem = nextWalRepository.findNextWalsWithItemByUserId(userId);
+            todayWalSettingUseCase.setTodayWals(onboarding.getTimeTypes(), userId, new NextWals(nextWalWithItem));
 
             reservationRetrieveUseCase.retrieveReservationBetweenTodayAndTomorrow(userId)
                     .ifPresent(reservation -> reservationTodayWalHandlerUseCase
