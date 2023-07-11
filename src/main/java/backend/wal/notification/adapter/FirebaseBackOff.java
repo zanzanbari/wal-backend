@@ -9,21 +9,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class FirebaseBackOff implements BackOff {
 
-    private static final Integer MIN_RETRY = 0;
-    private static final Integer MAX_RETRY = 3;
-    private static final Integer INITIAL_INTERVAL = 1_000;
-    private static final Integer MAX_INTERVAL = 5_000;
+    private static final long MIN_RETRY = 0;
+    private static final long MAX_RETRY = 3;
+    private static final long INITIAL_INTERVAL = 1_000;
+    private static final long MAX_INTERVAL = 5_000;
 
-    private Integer currentRetry = MIN_RETRY;
-    private Integer currentInterval = INITIAL_INTERVAL;
+    private Long currentRetry = MIN_RETRY;
+    private Long currentInterval = INITIAL_INTERVAL;
 
     @Override
     public long nextBackOffMillis() {
         if (isStopped()) {
             return MAX_RETRY;
         }
-        int exponentialInterval = INITIAL_INTERVAL * (1 << currentRetry);
-        int nextInterval = Math.min(exponentialInterval, MAX_INTERVAL);
+        long exponentialInterval = INITIAL_INTERVAL * (1L << currentRetry);
+        long nextInterval = Math.min(exponentialInterval, MAX_INTERVAL);
         currentInterval = nextInterval;
         currentRetry++;
         return nextInterval;
@@ -47,7 +47,7 @@ public class FirebaseBackOff implements BackOff {
         }
     }
 
-    public int getCurrentRetry() {
+    public long getCurrentRetry() {
         return currentRetry;
     }
 

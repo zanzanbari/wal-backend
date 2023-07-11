@@ -23,7 +23,7 @@ public class FirebaseMessageReSender {
         this.firebaseBackOff = firebaseBackOff;
     }
 
-    public int retryFailureMessage(List<String> failureTokenValues) {
+    public long retryFailureMessage(List<String> failureTokenValues) {
         List<String> failure = new ArrayList<>(failureTokenValues);
         boolean retry  = true;
         boolean isFailure = true;
@@ -39,7 +39,7 @@ public class FirebaseMessageReSender {
                 isFailure = false;
             }
         }
-        int finalRetryCount = firebaseBackOff.getCurrentRetry();
+        long finalRetryCount = firebaseBackOff.getCurrentRetry();
         firebaseBackOff.reset();
         return finalRetryCount;
     }

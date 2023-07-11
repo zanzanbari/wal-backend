@@ -8,6 +8,7 @@ import com.google.firebase.messaging.BatchResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class FirebaseAsyncCallbackHandler {
             if (batchMessageResponse.hasFailure()) {
                 LOGGER.info("메세지 전송에 실패했습니다 {}", batchMessageResponse.getFailureReasons(fcmTokenValues));
                 List<String> failureTokenValues = batchMessageResponse.extractFailure(fcmTokenValues);
-                int finalRetryCount = firebaseMessageReSender.retryFailureMessage(failureTokenValues);
+                long finalRetryCount = firebaseMessageReSender.retryFailureMessage(failureTokenValues);
                 LOGGER.info("메시지 전송 재시도 횟수 : {}", finalRetryCount);
             }
             LOGGER.info(
@@ -49,13 +50,13 @@ public class FirebaseAsyncCallbackHandler {
         return new ApiFutureCallback<>() {
             @Override
             public void onFailure(Throwable t) {
-                LOGGER.info("메세지 전송에 실패했습니다 {}", t.getMessage());
+                LOGGER.info("예약 메세지 전송에 실패했습니다 {}", t.getMessage());
             }
 
             @Override
             public void onSuccess(String result) {
                 updateReservationUseCase.updateSendStatusToDone(reservationId);
-                LOGGER.info("메세지 전송에 성공했습니다 {}", result);
+                LOGGER.info("예약 메세지 전송에 성공했습니다 {}", result);
             }
         };
     }
