@@ -37,12 +37,4 @@ public class NextWals {
         }
         return actualNextItemNumberOfCategoryType;
     }
-
-    public int getSize() {
-        return values.size();
-    }
-
-    public List<NextWal> getValues() {
-        return values;
-    }
 }
