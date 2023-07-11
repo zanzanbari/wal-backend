@@ -2,14 +2,15 @@ package backend.wal.notification.domain;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 public class FcmToken {
 
     @Id
@@ -19,6 +20,9 @@ public class FcmToken {
     private Long userId;
 
     private String value;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
 
     private FcmToken(final Long userId, final String value) {
         this.userId = userId;

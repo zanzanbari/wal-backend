@@ -2,7 +2,7 @@ package backend.wal.notification.application.port.in;
 
 public interface NotificationUseCase {
 
-    void sendMessage(Long userId, String contents);
+    void sendMessage(NotificationTimeRequestDto requestDto);
 
-    void sendMessage(Long reservationId, Long userId, String contents);
+    void sendReservation(Long reservationId, Long userId);
 }

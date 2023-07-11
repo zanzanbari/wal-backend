@@ -1,8 +1,10 @@
 package backend.wal.notification.application.port.out;
 
+import java.util.List;
+
 public interface FirebaseMessagingPort {
 
-    void send(String contents, String fcmTokenValue);
+    void sendMessage(List<String> fcmTokenValues);
 
-    void send(String contents, String fcmTokenValue, Long reservationId);
+    void sendReservation(String fcmTokenValue, Long reservationId);
 }
