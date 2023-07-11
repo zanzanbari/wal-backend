@@ -15,7 +15,7 @@ public interface NextWalRepository extends JpaRepository<NextWal, Long> {
 
     List<NextWal> findNextWalsByCategoryTypeInAndUserId(Set<WalCategoryType> categoryTypes, Long userId);
 
-    @Query("SELECT nw FROM NextWal nw JOIN FETCH nw.item")
+    @Query("SELECT nw FROM NextWal nw JOIN FETCH nw.item WHERE nw.userId = :userId")
     List<NextWal> findNextWalsWithItemByUserId(Long userId);
 
     void deleteAllByUserId(Long userId);
