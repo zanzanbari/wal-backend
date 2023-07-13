@@ -4,5 +4,5 @@ public interface NotificationUseCase {
 
     void sendMessage(NotificationTimeRequestDto requestDto);
 
-    void sendReservation(Long reservationId, Long userId);
+    void sendReservation(Long reservationId, Long userId, String message);
 }

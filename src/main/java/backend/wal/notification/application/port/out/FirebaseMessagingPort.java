@@ -6,5 +6,5 @@ public interface FirebaseMessagingPort {
 
     void sendMessage(List<String> fcmTokenValues);
 
-    void sendReservation(String fcmTokenValue, Long reservationId);
+    void sendReservation(String fcmTokenValue, Long reservationId, String content);
 }

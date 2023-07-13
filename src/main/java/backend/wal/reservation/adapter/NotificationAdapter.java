@@ -17,6 +17,6 @@ public final class NotificationAdapter implements NotificationPort {
 
     @Override
     public void sendCall(NotificationRequestDto requestDto) {
-        notificationUseCase.sendReservation(requestDto.getReservationId(), requestDto.getUserId());
+        notificationUseCase.sendReservation(requestDto.getReservationId(), requestDto.getUserId(), requestDto.getContent());
     }
 }

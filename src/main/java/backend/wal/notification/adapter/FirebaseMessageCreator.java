@@ -10,27 +10,26 @@ import java.util.List;
 public class FirebaseMessageCreator {
 
     private static final String NOTIFICATION_TITLE = "왈";
-    private static final String NOTIFICATION_BODY = "왈소리가 도착했어요!";
     private static final String ALERT_SOUND = "default";
 
     public MulticastMessage createMulticastMessage(List<String> fcmTokenValues) {
         return MulticastMessage.builder()
                 .addAllTokens(fcmTokenValues)
-                .setApnsConfig(createAppleNotification())
+                .setApnsConfig(createAppleNotification(""))
                 .build();
     }
 
-    public Message createMessage(String fcmTokenValue) {
+    public Message createMessage(String fcmTokenValue, String content) {
         return Message.builder()
                 .setToken(fcmTokenValue)
-                .setApnsConfig(createAppleNotification())
+                .setApnsConfig(createAppleNotification(content))
                 .build();
     }
 
-    private ApnsConfig createAppleNotification() {
+    private ApnsConfig createAppleNotification(String content) {
         ApsAlert apsAlert = ApsAlert.builder()
                 .setTitle(NOTIFICATION_TITLE)
-                .setBody(NOTIFICATION_BODY)
+                .setBody(content)
                 .build();
         Aps aps = Aps.builder()
                 .setAlert(apsAlert)

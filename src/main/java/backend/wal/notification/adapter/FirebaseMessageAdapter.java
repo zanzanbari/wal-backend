@@ -42,8 +42,8 @@ public class FirebaseMessageAdapter implements FirebaseMessagingPort {
     }
 
     @Override
-    public void sendReservation(String fcmTokenValue, Long reservationId) {
-        Message message = firebaseMessageCreator.createMessage(fcmTokenValue);
+    public void sendReservation(String fcmTokenValue, Long reservationId, String content) {
+        Message message = firebaseMessageCreator.createMessage(fcmTokenValue, content);
         ApiFuture<String> reservationFuture = firebaseMessaging.sendAsync(message);
         ApiFutureCallback<String> callbackHandler = firebaseAsyncCallbackHandler
                 .reservationNotificationCallbackHandler(reservationId);

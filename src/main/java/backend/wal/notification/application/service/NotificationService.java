@@ -37,9 +37,9 @@ public class NotificationService implements NotificationUseCase {
 
     @Override
     @Transactional(readOnly = true)
-    public void sendReservation(Long reservationId, Long userId) {
+    public void sendReservation(Long reservationId, Long userId, String content) {
         FcmToken fcmToken = fcmTokenRepository.findFcmTokenByUserId(userId)
                 .orElseThrow(() -> NotFoundFcmTokenException.notExists(userId));
-        firebaseMessagingPort.sendReservation(fcmToken.getValue(), reservationId);
+        firebaseMessagingPort.sendReservation(fcmToken.getValue(), reservationId, content);
     }
 }
