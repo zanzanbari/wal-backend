@@ -18,8 +18,6 @@ public interface TodayWalRepository extends JpaRepository<TodayWal, Long> {
 
     List<TodayWal> findTodayWalsByCategoryTypeInAndUserId(Set<WalCategoryType> categoryTypes, Long userId);
 
-    List<TodayWal> findTodayWalByUserIdInAndTimeType(List<Long> userIds, WalTimeType timeType);
-
     Optional<TodayWal> findTodayWalByIdAndUserId(Long todayWalId, Long userId);
 
     void deleteTodayWalByUserIdAndCategoryType(Long userId, WalCategoryType categoryType);
