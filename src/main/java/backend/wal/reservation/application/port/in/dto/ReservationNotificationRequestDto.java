@@ -24,7 +24,7 @@ public final class ReservationNotificationRequestDto {
     }
 
     public NotificationRequestDto toNotificationRequest() {
-        return new NotificationRequestDto(reservationId, userId);
+        return new NotificationRequestDto(reservationId, userId, message);
     }
 
     public Long getReservationId() {
