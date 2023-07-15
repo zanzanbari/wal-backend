@@ -1,5 +1,6 @@
 package backend.wal.notification.adapter;
 
+import backend.wal.notification.application.port.out.NotificationRequestDto;
 import backend.wal.notification.exception.FCMException;
 
 import com.google.api.core.ApiFuture;
@@ -46,16 +47,16 @@ public class BatchMessageResponse {
         return failureTokenAndReasons;
     }
 
-    public List<String> extractFailure(List<String> fcmTokenValues) {
+    public List<NotificationRequestDto> extractFailure(List<NotificationRequestDto> requestDto) {
         List<SendResponse> sendResponses = response.getResponses();
-        List<String> failureTokens = new ArrayList<>();
+        List<NotificationRequestDto> failure = new ArrayList<>();
         for (int i = 0; i < sendResponses.size(); i++) {
             SendResponse sendResponse = sendResponses.get(i);
             if (!sendResponse.isSuccessful()) {
-                failureTokens.add(fcmTokenValues.get(i));
+                failure.add(requestDto.get(i));
             }
         }
-        return failureTokens;
+        return failure;
     }
 
     public int getFailureCount() {

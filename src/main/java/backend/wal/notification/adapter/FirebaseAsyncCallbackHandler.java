@@ -1,5 +1,7 @@
 package backend.wal.notification.adapter;
 
+import backend.wal.notification.application.port.out.NotificationRequestDto;
+import backend.wal.notification.application.port.out.NotificationRequestDtos;
 import backend.wal.reservation.application.port.in.UpdateReservationUseCase;
 
 import com.google.api.core.ApiFuture;
@@ -29,13 +31,13 @@ public class FirebaseAsyncCallbackHandler {
 
     public Runnable notificationCallbackHandler(
             ApiFuture<BatchResponse> batchResponseFuture,
-            List<String> fcmTokenValues) {
+            NotificationRequestDtos requestDto) {
         return () -> {
             BatchMessageResponse batchMessageResponse = new BatchMessageResponse(batchResponseFuture);
             if (batchMessageResponse.hasFailure()) {
-                LOGGER.info("메세지 전송에 실패했습니다 {}", batchMessageResponse.getFailureReasons(fcmTokenValues));
-                List<String> failureTokenValues = batchMessageResponse.extractFailure(fcmTokenValues);
-                long finalRetryCount = firebaseMessageReSender.retryFailureMessage(failureTokenValues);
+                LOGGER.info("메세지 전송에 실패했습니다 {}", batchMessageResponse.getFailureReasons(requestDto.getFcmTokens()));
+                List<NotificationRequestDto> failure = batchMessageResponse.extractFailure(requestDto.getValues());
+                long finalRetryCount = firebaseMessageReSender.retryFailureMessage(failure);
                 LOGGER.info("메시지 전송 재시도 횟수 : {}", finalRetryCount);
             }
             LOGGER.info(

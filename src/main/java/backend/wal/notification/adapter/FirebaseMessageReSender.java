@@ -1,5 +1,7 @@
 package backend.wal.notification.adapter;
 
+import backend.wal.notification.application.port.out.NotificationRequestDto;
+
 import com.google.firebase.messaging.*;
 
 import org.springframework.stereotype.Component;
@@ -23,8 +25,8 @@ public class FirebaseMessageReSender {
         this.firebaseBackOff = firebaseBackOff;
     }
 
-    public long retryFailureMessage(List<String> failureTokenValues) {
-        List<String> failure = new ArrayList<>(failureTokenValues);
+    public long retryFailureMessage(List<NotificationRequestDto> failureRequest) {
+        List<NotificationRequestDto> failure = new ArrayList<>(failureRequest);
         boolean retry  = true;
         boolean isFailure = true;
         while(retry && isFailure) {
@@ -44,11 +46,11 @@ public class FirebaseMessageReSender {
         return finalRetryCount;
     }
 
-    private List<String> resendAndExtractFailure(List<String> failureTokenValues) {
-        MulticastMessage message = firebaseMessageCreator.createMulticastMessage(failureTokenValues);
-        BatchMessageResponse batchResponse = new BatchMessageResponse(firebaseMessaging.sendMulticastAsync(message));
+    private List<NotificationRequestDto> resendAndExtractFailure(List<NotificationRequestDto> failureRequest) {
+        List<Message> messages = firebaseMessageCreator.createMessages(failureRequest);
+        BatchMessageResponse batchResponse = new BatchMessageResponse(firebaseMessaging.sendAllAsync(messages));
         if (batchResponse.hasFailure()) {
-            return batchResponse.extractFailure(failureTokenValues);
+            return batchResponse.extractFailure(failureRequest);
         }
         return Collections.emptyList();
     }
