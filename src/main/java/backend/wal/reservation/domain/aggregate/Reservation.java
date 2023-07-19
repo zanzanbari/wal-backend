@@ -79,6 +79,7 @@ public class Reservation {
 
     public void finish() {
         this.sendStatus = SendStatus.DONE;
+        this.showStatus = ShowStatus.OPEN;
     }
 
     public boolean isDone() {
