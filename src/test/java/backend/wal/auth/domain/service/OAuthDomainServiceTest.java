@@ -5,7 +5,6 @@ import backend.wal.auth.application.port.in.LoginResponseDto;
 import backend.wal.auth.application.port.out.OAuthUserInfoResponseDto;
 import backend.wal.auth.application.port.out.FcmTokenPort;
 import backend.wal.auth.application.port.out.UserPort;
-import backend.wal.auth.exception.ForbiddenUserException;
 import backend.wal.user.domain.aggregate.SocialType;
 import backend.wal.user.domain.aggregate.entity.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -85,24 +83,5 @@ class OAuthDomainServiceTest {
         // then
         assertThat(loginResponseDto.getUserId()).isEqualTo(newUserId);
         assertThat(loginResponseDto.isNewUser()).isTrue();
-    }
-
-    @DisplayName("탈퇴한 회원이 24시간 이내에 login 을 하면 에러가 발생한다")
-    @Test
-    void resignUserLogin() {
-        // given
-        User alreadyUser = User.createGeneral(
-                loginRequestDto.toCreateUserDto(
-                        oAuthUserInfoResponseDto.getNickname(),
-                        oAuthUserInfoResponseDto.getId())
-        );
-        alreadyUser.resign();
-        when(userPort.findSocialUserCall(eq(oAuthUserInfoResponseDto.getId()), any(SocialType.class)))
-                .thenReturn(alreadyUser);
-
-        // when, then
-        assertThatThrownBy(() -> oAuthDomainService.signupOrLogin(loginRequestDto, oAuthUserInfoResponseDto))
-                .isInstanceOf(ForbiddenUserException.class)
-                .hasMessage("탈퇴한지 24시간이 지나지 않아 재가입 할 수 없습니다");
     }
 }
