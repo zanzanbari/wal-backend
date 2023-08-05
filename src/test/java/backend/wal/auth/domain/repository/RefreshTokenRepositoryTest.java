@@ -38,8 +38,8 @@ class RefreshTokenRepositoryTest {
 
         // then
         if (target.equals("RefreshToken")) {
-            assertThat(refreshToken.isPresent()).isTrue();
-            assertThat(refreshToken.get()).isEqualTo(saved);
+            assertThat(refreshToken).isPresent();
+            assertThat(refreshToken).contains(saved);
         };
         if (target.equals("null")) {
             assertThat(refreshToken.isPresent()).isFalse();
