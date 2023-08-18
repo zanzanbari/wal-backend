@@ -43,7 +43,7 @@ class ReservationHistoryTest {
         assertAll(
                 () -> assertThat(detailSendDateInfo.getReservationId()).isEqualTo(reservationId),
                 () -> assertThat(detailSendDateInfo.getMessage()).isEqualTo(message),
-                () -> assertThat(detailSendDateInfo.getShowStatus()).isEqualTo(showStatus),
+                () -> assertThat(detailSendDateInfo.getShowStatus()).isEqualTo(showStatus.name()),
                 () -> assertThat(detailSendDateInfo.getDetail()).isEqualTo(expect),
                 () -> assertThat(detailSendDateInfo.getReservedAt()).isEqualTo("2011-12-30.00:00")
         );
