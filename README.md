@@ -9,17 +9,21 @@
 - 배포 환경 : `AWS EC2`, `Nginx`
 
 <br>
+
 ## 아키텍처 및 폴더링
 
 - [프로젝트에 적용한 아키텍처](https://cozo.tistory.com/6)
 
 
 <br>
+
 ## 기능 및 개발 
 
 <br>
+
 ## 트러블슈팅
 
+<br>
 
 ## 개발 API 목록 
 |기능|endpoints|
