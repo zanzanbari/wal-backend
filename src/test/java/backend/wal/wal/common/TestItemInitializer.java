@@ -1,11 +1,11 @@
 package backend.wal.wal.common;
 
 import backend.wal.config.JpaRepositoryTestConfig;
-import backend.wal.wal.nextwal.domain.aggregate.Category;
-import backend.wal.wal.nextwal.domain.aggregate.Item;
+import backend.wal.wal.item.domain.aggregate.Category;
+import backend.wal.wal.item.domain.aggregate.Item;
 
-import backend.wal.wal.nextwal.domain.repository.CategoryRepository;
-import backend.wal.wal.nextwal.domain.repository.ItemRepository;
+import backend.wal.wal.item.domain.repository.CategoryRepository;
+import backend.wal.wal.item.domain.repository.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,6 +1,6 @@
 package backend.wal.wal.nextwal.domain;
 
-import backend.wal.wal.nextwal.domain.aggregate.Item;
+import backend.wal.wal.item.domain.aggregate.Item;
 import backend.wal.wal.nextwal.domain.aggregate.NextWal;
 import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
 import org.junit.jupiter.api.DisplayName;

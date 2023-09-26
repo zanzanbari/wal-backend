@@ -2,9 +2,9 @@ package backend.wal.wal.nextwal.application.service;
 
 import backend.wal.wal.nextwal.application.port.NextWalSettingUseCase;
 import backend.wal.wal.nextwal.domain.repository.NextWalRepository;
-import backend.wal.wal.nextwal.domain.repository.ItemRepository;
+import backend.wal.wal.item.domain.repository.ItemRepository;
 import backend.wal.wal.nextwal.domain.NextWals;
-import backend.wal.wal.nextwal.domain.aggregate.Item;
+import backend.wal.wal.item.domain.aggregate.Item;
 import backend.wal.wal.nextwal.domain.aggregate.NextWal;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.support.annotation.DomainService;

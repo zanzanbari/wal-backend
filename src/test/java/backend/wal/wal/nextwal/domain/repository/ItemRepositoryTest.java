@@ -1,7 +1,7 @@
 package backend.wal.wal.nextwal.domain.repository;
 
 import backend.wal.wal.common.TestItemInitializer;
-import backend.wal.wal.nextwal.domain.aggregate.Item;
+import backend.wal.wal.item.domain.aggregate.Item;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
