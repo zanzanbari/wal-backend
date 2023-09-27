@@ -1,12 +1,12 @@
 package backend.wal.wal.censorWal.application.port.in.dto;
 
-public class RetrieveUncheckedCensorItemResponseDto {
+public class UncheckedCensorItemResponseDto {
 
     private final Long censorItemId;
     private final String walCategoryType;
     private final String contents;
 
-    public RetrieveUncheckedCensorItemResponseDto(Long censorItemId, String walCategoryType, String contents) {
+    public UncheckedCensorItemResponseDto(Long censorItemId, String walCategoryType, String contents) {
         this.censorItemId = censorItemId;
         this.walCategoryType = walCategoryType;
         this.contents = contents;
