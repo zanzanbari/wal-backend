@@ -27,7 +27,7 @@ public class NextWal {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
-    private Item item;
+    private Item item; // FIXME: 2023/09/26 - 다른 바운디드 컨텍스트에 대한 의존성 끊기
 
     private NextWal(final Long userId, final WalCategoryType categoryType, final Item item) {
         this.userId = userId;
