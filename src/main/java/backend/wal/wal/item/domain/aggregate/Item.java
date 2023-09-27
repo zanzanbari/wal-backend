@@ -27,7 +27,7 @@ public class Item {
     @Column(nullable = false)
     private double categoryItemNumber; // 카테고리별 유니크한 번호
 
-    @Builder
+    @Builder(builderMethodName = "testBuilder")
     private Item(final Category category, final String contents, final String imageUrl, final double currentItemSize) {
         this.category = category;
         this.contents = contents;
