@@ -11,11 +11,11 @@ import java.util.List;
 
 public interface CensorItemRepository extends JpaRepository<CensorItem, Long> {
 
-    List<CensorItem> findAllByCheckStatus(WalCategoryType categoryType, CheckStatus checkStatus);
+    List<CensorItem> findAllByCategoryTypeAndCheckStatus(WalCategoryType categoryType, CheckStatus checkStatus);
 
     List<CensorItem> findAllByIdIn(List<Long> censorItemIds);
 
     @Modifying
-    @Query("UPDATE CensorItem c SET c.checkStatus =: checkStatus WHERE c.id = :censorItemId")
-    void updateCheckStatus( Long censorItemId, CheckStatus checkStatus);
+    @Query("UPDATE CensorItem c SET c.checkStatus = :checkStatus WHERE c.id = :censorItemId")
+    void updateCheckStatus(Long censorItemId, CheckStatus checkStatus);
 }
