@@ -3,8 +3,8 @@ package backend.wal.wal.onboarding.adapter;
 import backend.wal.wal.onboarding.application.port.out.WalSettingPort;
 import backend.wal.wal.todaywal.application.port.in.TodayWalSettingUseCase;
 import backend.wal.wal.todaywal.application.port.in.UpdateTodayWalUseCase;
-import backend.wal.wal.nextwal.application.port.GetNextWalUseCase;
-import backend.wal.wal.nextwal.application.port.NextWalSettingUseCase;
+import backend.wal.wal.nextwal.application.port.in.GetNextWalUseCase;
+import backend.wal.wal.nextwal.application.port.in.NextWalSettingUseCase;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
 

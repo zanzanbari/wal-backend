@@ -3,7 +3,7 @@ package backend.wal.wal.nextwal.application.service;
 import backend.wal.support.annotation.DomainService;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.item.domain.aggregate.Item;
-import backend.wal.wal.nextwal.application.port.NextWalSettingUseCase;
+import backend.wal.wal.nextwal.application.port.in.NextWalSettingUseCase;
 import backend.wal.wal.nextwal.application.port.out.ItemPort;
 import backend.wal.wal.nextwal.domain.NextWals;
 import backend.wal.wal.nextwal.domain.aggregate.NextWal;

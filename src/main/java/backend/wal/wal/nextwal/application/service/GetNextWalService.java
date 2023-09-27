@@ -1,6 +1,6 @@
 package backend.wal.wal.nextwal.application.service;
 
-import backend.wal.wal.nextwal.application.port.GetNextWalUseCase;
+import backend.wal.wal.nextwal.application.port.in.GetNextWalUseCase;
 import backend.wal.wal.nextwal.domain.NextWals;
 import backend.wal.wal.nextwal.domain.aggregate.NextWal;
 import backend.wal.wal.nextwal.domain.repository.NextWalRepository;
