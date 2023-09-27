@@ -1,8 +1,9 @@
 package backend.wal.wal.censorWal.application.service;
 
 import backend.wal.support.annotation.AppService;
+import backend.wal.wal.censorWal.application.port.in.dto.ApprovedCensorItemResponseDto;
 import backend.wal.wal.censorWal.domain.aggregate.CheckStatus;
-import backend.wal.wal.censorWal.application.port.in.dto.RetrieveCensorItemResponseDto;
+import backend.wal.wal.censorWal.application.port.in.dto.UncheckedCensorItemResponseDto;
 import backend.wal.wal.censorWal.application.port.in.dto.RetrieveCensorItemRequestDto;
 import backend.wal.wal.censorWal.application.port.in.RetrieveCensorItemUseCase;
 import backend.wal.wal.censorWal.domain.repository.CensorItemRepository;
@@ -22,14 +23,29 @@ public class RetrieveCensorItemService implements RetrieveCensorItemUseCase {
     }
 
     @Override
-    public List<RetrieveCensorItemResponseDto> retrieveCensorItemInfo(RetrieveCensorItemRequestDto requestDto) {
+    public List<UncheckedCensorItemResponseDto> retrieveUncheckedCensorItemInfo(
+            RetrieveCensorItemRequestDto requestDto) {
         return censorItemRepository
                 .findAllByCategoryTypeAndCheckStatus(requestDto.getCategoryType(), CheckStatus.UNCHECKED)
                 .stream()
-                .map(censorItem -> new RetrieveCensorItemResponseDto(
+                .map(censorItem -> new UncheckedCensorItemResponseDto(
                         censorItem.getId(),
                         censorItem.getCategoryTypeName(),
                         censorItem.getContents())
+                )
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ApprovedCensorItemResponseDto> retrieveApprovedCensorItemInfo(
+            RetrieveCensorItemRequestDto requestDto) {
+        return censorItemRepository
+                .findAllByCategoryTypeAndCheckStatus(requestDto.getCategoryType(), CheckStatus.APPROVED)
+                .stream()
+                .map(censorItem -> new ApprovedCensorItemResponseDto(
+                        censorItem.getCategoryType(),
+                        censorItem.getContents(),
+                        censorItem.getImageUrl())
                 )
                 .collect(Collectors.toList());
     }
