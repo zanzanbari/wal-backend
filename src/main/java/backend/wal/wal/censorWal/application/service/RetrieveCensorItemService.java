@@ -23,7 +23,8 @@ public class RetrieveCensorItemService implements RetrieveCensorItemUseCase {
 
     @Override
     public List<RetrieveCensorItemResponseDto> retrieveCensorItemInfo(RetrieveCensorItemRequestDto requestDto) {
-        return censorItemRepository.findAllByCheckStatus(requestDto.getCategoryType(), CheckStatus.UNCHECKED)
+        return censorItemRepository
+                .findAllByCategoryTypeAndCheckStatus(requestDto.getCategoryType(), CheckStatus.UNCHECKED)
                 .stream()
                 .map(censorItem -> new RetrieveCensorItemResponseDto(
                         censorItem.getId(),
