@@ -1,6 +1,5 @@
 package backend.wal.admin.web.dto;
 
-
 import backend.wal.wal.censorWal.domain.aggregate.CheckStatus;
 
 import javax.validation.constraints.NotNull;
