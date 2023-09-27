@@ -24,7 +24,7 @@ public class AdminCensorItemManageController {
     @GetMapping("/retrieve")
     public ResponseEntity<List<RetrieveCensorItemResponse>> retrieveCensorItems(
             @Valid @RequestBody RetrieveCensorItemRequest request) {
-        List<RetrieveCensorItemResponse> responses = censorItemManagePort.retrieveCensorItemInfo(request);
+        List<RetrieveCensorItemResponse> responses = censorItemManagePort.retrieveUncheckedCensorItemInfo(request);
         return ResponseEntity.ok(responses);
     }
 

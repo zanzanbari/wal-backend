@@ -25,8 +25,9 @@ public class CensorItemManageAdapter implements CensorItemManagePort {
     }
 
     @Override
-    public List<RetrieveCensorItemResponse> retrieveCensorItemInfo(RetrieveCensorItemRequest request) {
-        return retrieveCensorItemUseCase.retrieveCensorItemInfo(new RetrieveCensorItemRequestDto(request.getCategoryType()))
+    public List<RetrieveCensorItemResponse> retrieveUncheckedCensorItemInfo(RetrieveCensorItemRequest request) {
+        return retrieveCensorItemUseCase
+                .retrieveUncheckedCensorItemInfo(new RetrieveCensorItemRequestDto(request.getCategoryType()))
                 .stream()
                 .map(responseDto -> new RetrieveCensorItemResponse(
                         responseDto.getCensorItemId(),

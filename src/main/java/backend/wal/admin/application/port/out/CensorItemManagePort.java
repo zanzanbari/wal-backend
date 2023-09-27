@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CensorItemManagePort {
 
-    List<RetrieveCensorItemResponse> retrieveCensorItemInfo(RetrieveCensorItemRequest request);
+    List<RetrieveCensorItemResponse> retrieveUncheckedCensorItemInfo(RetrieveCensorItemRequest request);
 
     void updateCheckStatus(Long censorItemId, CheckStatus checkStatus);
 }
