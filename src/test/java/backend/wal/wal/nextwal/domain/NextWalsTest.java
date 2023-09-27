@@ -19,10 +19,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 class NextWalsTest {
 
     private static final Long USER_ID = 1L;
-    private static final Item COMEDY_ITEM = Item.builder().currentItemSize(1).build();
-    private static final Item FUSS_ITEM = Item.builder().currentItemSize(1).build();
-    private static final Item COMFORT_ITEM = Item.builder().currentItemSize(1).build();
-    private static final Item YELL_ITEM = Item.builder().currentItemSize(1).build();
+    private static final Item COMEDY_ITEM = Item.testBuilder().categoryItemNumber(1).build();
+    private static final Item FUSS_ITEM = Item.testBuilder().categoryItemNumber(1).build();
+    private static final Item COMFORT_ITEM = Item.testBuilder().categoryItemNumber(1).build();
+    private static final Item YELL_ITEM = Item.testBuilder().categoryItemNumber(1).build();
     private static final NextWal COMEDY_NEXT_WAL = NextWal.newInstance(USER_ID, COMEDY, COMEDY_ITEM);
     private static final NextWal FUSS_NEXT_WAL = NextWal.newInstance(USER_ID, FUSS, FUSS_ITEM);
     private static final NextWal COMFORT_NEXT_WAL = NextWal.newInstance(USER_ID, COMFORT, COMFORT_ITEM);
