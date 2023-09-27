@@ -37,11 +37,19 @@ public class CensorItem {
         return id;
     }
 
+    public WalCategoryType getCategoryType() {
+        return categoryType;
+    }
+
     public String getCategoryTypeName() {
         return categoryType.name();
     }
 
     public String getContents() {
         return contents;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 }
