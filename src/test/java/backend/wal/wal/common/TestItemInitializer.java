@@ -1,11 +1,11 @@
 package backend.wal.wal.common;
 
 import backend.wal.config.JpaRepositoryTestConfig;
-import backend.wal.wal.nextwal.domain.aggregate.Category;
-import backend.wal.wal.nextwal.domain.aggregate.Item;
+import backend.wal.wal.item.domain.aggregate.Category;
+import backend.wal.wal.item.domain.aggregate.Item;
 
-import backend.wal.wal.nextwal.domain.repository.CategoryRepository;
-import backend.wal.wal.nextwal.domain.repository.ItemRepository;
+import backend.wal.wal.item.domain.repository.CategoryRepository;
+import backend.wal.wal.item.domain.repository.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -49,23 +49,23 @@ public abstract class TestItemInitializer {
     }
 
     protected void setForItemRepositoryTest() {
-        comedyItem1 = Item.builder().category(comedy).contents("").imageUrl("").currentItemSize(0).build();
-        comedyItem2 = Item.builder().category(comedy).contents("").imageUrl("").currentItemSize(1).build();
+        comedyItem1 = Item.testBuilder().category(comedy).contents("").imageUrl("").categoryItemNumber(1).build();
+        comedyItem2 = Item.testBuilder().category(comedy).contents("").imageUrl("").categoryItemNumber(2).build();
         comedy.addItem(comedyItem1);
         comedy.addItem(comedyItem2);
 
-        fussItem1 = Item.builder().category(fuss).contents("").imageUrl("").currentItemSize(0).build();
-        fussItem2 = Item.builder().category(fuss).contents("").imageUrl("").currentItemSize(1).build();
+        fussItem1 = Item.testBuilder().category(fuss).contents("").imageUrl("").categoryItemNumber(1).build();
+        fussItem2 = Item.testBuilder().category(fuss).contents("").imageUrl("").categoryItemNumber(2).build();
         fuss.addItem(fussItem1);
         fuss.addItem(fussItem2);
 
-        comfortItem1 = Item.builder().category(comfort).contents("").imageUrl("").currentItemSize(0).build();
-        comfortItem2 = Item.builder().category(comfort).contents("").imageUrl("").currentItemSize(1).build();
+        comfortItem1 = Item.testBuilder().category(comfort).contents("").imageUrl("").categoryItemNumber(1).build();
+        comfortItem2 = Item.testBuilder().category(comfort).contents("").imageUrl("").categoryItemNumber(2).build();
         comfort.addItem(comfortItem1);
         comfort.addItem(comfortItem2);
 
-        yellItem1 = Item.builder().category(yell).contents("").imageUrl("").currentItemSize(0).build();
-        yellItem2 = Item.builder().category(yell).contents("").imageUrl("").currentItemSize(1).build();
+        yellItem1 = Item.testBuilder().category(yell).contents("").imageUrl("").categoryItemNumber(1).build();
+        yellItem2 = Item.testBuilder().category(yell).contents("").imageUrl("").categoryItemNumber(2).build();
         yell.addItem(yellItem1);
         yell.addItem(yellItem2);
 
@@ -83,10 +83,10 @@ public abstract class TestItemInitializer {
     }
 
     protected void setForNexWalRepositoryTest() {
-        comedyItem1 = Item.builder().category(comedy).contents("").imageUrl("").currentItemSize(0).build();
-        fussItem1 = Item.builder().category(fuss).contents("").imageUrl("").currentItemSize(0).build();
-        comfortItem1 = Item.builder().category(comfort).contents("").imageUrl("").currentItemSize(0).build();
-        yellItem1 = Item.builder().category(yell).contents("").imageUrl("").currentItemSize(0).build();
+        comedyItem1 = Item.testBuilder().category(comedy).contents("").imageUrl("").categoryItemNumber(1).build();
+        fussItem1 = Item.testBuilder().category(fuss).contents("").imageUrl("").categoryItemNumber(1).build();
+        comfortItem1 = Item.testBuilder().category(comfort).contents("").imageUrl("").categoryItemNumber(1).build();
+        yellItem1 = Item.testBuilder().category(yell).contents("").imageUrl("").categoryItemNumber(1).build();
 
         itemRepository.saveAll(List.of(comedyItem1, fussItem1, comfortItem1, yellItem1));
     }

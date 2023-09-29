@@ -1,4 +1,4 @@
-package backend.wal.wal.nextwal.domain.aggregate;
+package backend.wal.wal.item.domain.aggregate;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -27,12 +27,12 @@ public class Item {
     @Column(nullable = false)
     private double categoryItemNumber; // 카테고리별 유니크한 번호
 
-    @Builder
-    private Item(final Category category, final String contents, final String imageUrl, final double currentItemSize) {
+    @Builder(builderMethodName = "testBuilder")
+    public Item(final Category category, final String contents, final String imageUrl, final double categoryItemNumber) {
         this.category = category;
         this.contents = contents;
         this.imageUrl = imageUrl;
-        this.categoryItemNumber = currentItemSize + 1;
+        this.categoryItemNumber = categoryItemNumber;
     }
 
     public Long getId() {

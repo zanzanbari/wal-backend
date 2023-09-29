@@ -3,12 +3,12 @@
 //import backend.wal.wal.common.domain.WalCategoryType;
 //import backend.wal.wal.common.domain.WalTimeType;
 //import backend.wal.wal.nextwal.domain.NextWals;
-//import backend.wal.wal.nextwal.domain.aggregate.Category;
-//import backend.wal.wal.nextwal.domain.aggregate.Item;
+//import backend.wal.wal.item.domain.aggregate.Category;
+//import backend.wal.wal.item.domain.aggregate.Item;
 //import backend.wal.wal.onboarding.adapter.WalSettingAdapter;
 //import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
-//import backend.wal.wal.nextwal.domain.repository.CategoryRepository;
-//import backend.wal.wal.nextwal.domain.repository.ItemRepository;
+//import backend.wal.wal.item.domain.repository.CategoryRepository;
+//import backend.wal.wal.item.domain.repository.ItemRepository;
 //import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
 //import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;

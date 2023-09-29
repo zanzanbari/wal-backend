@@ -1,4 +1,4 @@
-package backend.wal.wal.nextwal.application.port;
+package backend.wal.wal.nextwal.application.port.in;
 
 import backend.wal.wal.nextwal.domain.NextWals;
 import backend.wal.wal.nextwal.domain.aggregate.NextWal;

@@ -1,4 +1,4 @@
-package backend.wal.wal.nextwal.domain.aggregate;
+package backend.wal.wal.item.domain.aggregate;
 
 import backend.wal.wal.common.domain.WalCategoryType;
 

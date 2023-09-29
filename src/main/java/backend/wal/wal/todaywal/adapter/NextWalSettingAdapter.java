@@ -1,8 +1,8 @@
 package backend.wal.wal.todaywal.adapter;
 
 import backend.wal.wal.common.domain.WalCategoryType;
-import backend.wal.wal.nextwal.application.port.GetNextWalUseCase;
-import backend.wal.wal.nextwal.application.port.NextWalSettingUseCase;
+import backend.wal.wal.nextwal.application.port.in.GetNextWalUseCase;
+import backend.wal.wal.nextwal.application.port.in.NextWalSettingUseCase;
 import backend.wal.wal.nextwal.domain.NextWals;
 import backend.wal.wal.nextwal.domain.aggregate.NextWal;
 import backend.wal.wal.todaywal.application.port.out.NextWalSettingPort;
