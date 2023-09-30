@@ -60,10 +60,6 @@ public class User {
         );
     }
 
-    public static User createManager(final String nickname, final String socialId, SocialType socialType) {
-        return new User(nickname, SocialInfo.of(socialId, socialType), UserStatus.ACTIVE, UserRole.ADMIN);
-    }
-
     public void changeNickname(String nickname) {
         this.nickname = nickname;
     }
