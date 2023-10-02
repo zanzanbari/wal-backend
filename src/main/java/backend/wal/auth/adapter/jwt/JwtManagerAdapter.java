@@ -97,4 +97,8 @@ public final class JwtManagerAdapter implements JwtManagerPort {
                 .getBody();
         return payload.get(JWT_CLAIM_NAME, Long.class);
     }
+
+    public long getAccessTokenExpiresIn() {
+        return accessTokenExpiresIn;
+    }
 }
