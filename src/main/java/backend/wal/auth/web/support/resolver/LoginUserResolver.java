@@ -32,13 +32,13 @@ public final class LoginUserResolver implements HandlerMethodArgumentResolver {
         return validUserId;
     }
 
-    private static void checkHasAuthAnnotation(MethodParameter parameter) {
+    private void checkHasAuthAnnotation(MethodParameter parameter) {
         if (parameter.getMethodAnnotation(Authentication.class) == null) {
             throw InternalAuthServerException.annotationNotFound();
         }
     }
 
-    private static void checkGetLoginUserId(Long validUserId, MethodParameter parameter) {
+    private void checkGetLoginUserId(Long validUserId, MethodParameter parameter) {
         if (validUserId == null) {
             throw InternalAuthServerException.attributeNotFound(
                     LOGIN_USER_ATTRIBUTE, parameter.getClass(), parameter.getMethod());
