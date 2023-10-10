@@ -7,7 +7,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 public abstract class TokenInterceptor implements HandlerInterceptor {
 
-    protected static void checkHeaderHasToken(String token) {
+    void checkHeaderHasToken(String token) {
         if (!StringUtils.hasText(token)) {
             throw UnAuthorizedTokenException.tokenNotFound(token);
         }
