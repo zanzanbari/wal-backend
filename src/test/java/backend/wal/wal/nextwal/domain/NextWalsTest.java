@@ -99,9 +99,9 @@ class NextWalsTest {
 
     private static Stream<Arguments> provideTargetNextWalAndCategoryMaxSizeAndExpect() {
         return Stream.of(
-                Arguments.of(COMEDY_NEXT_WAL, 100L, 3),
-                Arguments.of(COMEDY_NEXT_WAL, 3L, 3),
-                Arguments.of(COMEDY_NEXT_WAL, 2L, 1)
+                Arguments.of(COMEDY_NEXT_WAL, 100L, 2),
+                Arguments.of(COMEDY_NEXT_WAL, 2L, 2),
+                Arguments.of(COMEDY_NEXT_WAL, 1L, 1)
         );
     }
 }
