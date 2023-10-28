@@ -15,10 +15,10 @@ public class AdminJwtManageAdapter implements AdminJwtManagePort {
     }
 
     @Override
-    public AdminTokenResponseDto createToken(Long adminId) {
+    public AdminTokenResponseDto createToken(Long adminId, String role) {
         return new AdminTokenResponseDto(
-                jwtManagerAdapter.createAccessToken(adminId),
-                jwtManagerAdapter.getAccessTokenExpiresIn()
+                jwtManagerAdapter.createAccessToken(adminId, role),
+                jwtManagerAdapter.getAccessTokenExpiredIn()
         );
     }
 }
