@@ -6,6 +6,7 @@ import backend.wal.auth.application.port.in.TokenResponseDto;
 import backend.wal.auth.application.port.out.JwtManagerPort;
 import backend.wal.auth.domain.RefreshToken;
 import backend.wal.auth.domain.repository.RefreshTokenRepository;
+import backend.wal.support.Role;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +28,7 @@ class IssueTokenServiceTest {
     private static final Long USER_ID = 1L;
     private static final String ACCESS_TOKEN = "AccessToken";
     private static final String REFRESH_TOKEN = "RefreshToken";
+    private static final String USER_ROLE = Role.USER.name();
 
     @Mock
     private JwtManagerPort jwtManagerPort;
@@ -42,13 +44,13 @@ class IssueTokenServiceTest {
     void issueForNewUser() {
         // given
         CreateRefreshTokenResponseDto createTokenDto = new CreateRefreshTokenResponseDto(USER_ID, REFRESH_TOKEN, new Date());
-        when(jwtManagerPort.createAccessToken(USER_ID))
+        when(jwtManagerPort.createAccessToken(USER_ID, USER_ROLE))
                 .thenReturn(ACCESS_TOKEN);
         when(jwtManagerPort.createRefreshToken(USER_ID))
                 .thenReturn(createTokenDto);
 
         // when
-        TokenResponseDto response = issueTokenService.issueForNewUser(USER_ID);
+        TokenResponseDto response = issueTokenService.issueForNewUser(USER_ID, USER_ROLE);
 
         // then
         assertAll(
@@ -64,13 +66,13 @@ class IssueTokenServiceTest {
         CreateRefreshTokenResponseDto createTokenDto = new CreateRefreshTokenResponseDto(USER_ID, REFRESH_TOKEN, new Date());
         when(refreshTokenRepository.findRefreshTokenByUserId(USER_ID))
                 .thenReturn(Optional.of(RefreshToken.newInstance(USER_ID, REFRESH_TOKEN, new Date())));
-        when(jwtManagerPort.createAccessToken(USER_ID))
+        when(jwtManagerPort.createAccessToken(USER_ID, USER_ROLE))
                 .thenReturn(ACCESS_TOKEN);
         when(jwtManagerPort.createRefreshToken(USER_ID))
                 .thenReturn(createTokenDto);
 
         // when
-        TokenResponseDto response = issueTokenService.issueForAlreadyUser(USER_ID);
+        TokenResponseDto response = issueTokenService.issueForAlreadyUser(USER_ID, USER_ROLE);
 
         // then
         assertAll(
@@ -86,11 +88,11 @@ class IssueTokenServiceTest {
         RefreshToken refreshToken = RefreshToken.newInstance(USER_ID, REFRESH_TOKEN, new Date());
         when(refreshTokenRepository.findRefreshTokenByValue(REFRESH_TOKEN))
                 .thenReturn(Optional.of(refreshToken));
-        when(jwtManagerPort.createAccessToken(USER_ID))
+        when(jwtManagerPort.createAccessToken(USER_ID, USER_ROLE))
                 .thenReturn("NEW_ACCESS_TOKEN");
 
         // when
-        String newAccessToken = issueTokenService.reissue(REFRESH_TOKEN);
+        String newAccessToken = issueTokenService.reissue(REFRESH_TOKEN, USER_ROLE);
 
         // then
         assertThat(newAccessToken).isEqualTo("NEW_ACCESS_TOKEN");
@@ -104,7 +106,7 @@ class IssueTokenServiceTest {
                 .thenReturn(Optional.empty());
 
         // when, then
-        assertThatThrownBy(() -> issueTokenService.issueForAlreadyUser(USER_ID))
+        assertThatThrownBy(() -> issueTokenService.issueForAlreadyUser(USER_ID, USER_ROLE))
                 .isInstanceOf(NotFoundException.class)
                 .hasMessage("존재하지 않는 refreshToken 입니다");
     }
@@ -117,7 +119,7 @@ class IssueTokenServiceTest {
                 .thenReturn(Optional.empty());
 
         // when, then
-        assertThatThrownBy(() -> issueTokenService.reissue(REFRESH_TOKEN))
+        assertThatThrownBy(() -> issueTokenService.reissue(REFRESH_TOKEN, USER_ROLE))
                 .isInstanceOf(NotFoundException.class)
                 .hasMessage("존재하지 않는 refreshToken 입니다");
     }

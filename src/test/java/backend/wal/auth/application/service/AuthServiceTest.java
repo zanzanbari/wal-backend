@@ -5,6 +5,7 @@ import backend.wal.auth.application.port.in.LoginResponseDto;
 import backend.wal.auth.application.port.out.OAuthApiClientPort;
 import backend.wal.auth.application.port.out.OAuthUserInfoResponseDto;
 import backend.wal.auth.domain.service.OAuthDomainService;
+import backend.wal.support.Role;
 import backend.wal.user.domain.aggregate.SocialType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,6 +26,7 @@ class AuthServiceTest {
     private static final String FCM_TOKEN = "FcmToken";
     private static final String SOCIAL_ID = "socialId";
     private static final String NICKNAME = "nickname";
+    private static final String USER_ROLE = Role.USER.name();
 
     @Mock
     private OAuthApiClientPort oAuthApiClientPort;
@@ -47,7 +49,7 @@ class AuthServiceTest {
     void setUp() {
         userId = 1L;
         oAuthUserInfoResponseDto = new OAuthUserInfoResponseDto(SOCIAL_ID, NICKNAME);
-        loginResponseDto = new LoginResponseDto(userId, "nickname", false);
+        loginResponseDto = new LoginResponseDto(userId, "nickname", USER_ROLE, false);
     }
 
     @DisplayName("카카오 로그인을 수행하면 LoginResponseDto 를 반환한다")
