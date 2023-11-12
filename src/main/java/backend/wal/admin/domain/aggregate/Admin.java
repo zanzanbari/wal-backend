@@ -1,5 +1,7 @@
 package backend.wal.admin.domain.aggregate;
 
+import backend.wal.support.Role;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -42,5 +44,9 @@ public class Admin {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getRole() {
+        return role.name();
     }
 }

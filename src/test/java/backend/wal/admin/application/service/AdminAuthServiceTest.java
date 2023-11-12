@@ -60,7 +60,7 @@ class AdminAuthServiceTest {
                 .thenReturn(true);
 
         // when
-        Long adminId = adminAuthService.login(requestDto);
+        Long adminId = adminAuthService.login(requestDto).getUserId();
 
         // then
         verify(adminRepository).findByEmail(requestDto.getEmail());

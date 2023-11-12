@@ -2,6 +2,7 @@ package backend.wal.auth.adapter.jwt;
 
 import backend.wal.auth.application.port.out.JwtManagerPort;
 import backend.wal.auth.application.port.out.CreateRefreshTokenResponseDto;
+import backend.wal.auth.application.port.out.JwtPayloadInfo;
 import backend.wal.auth.exception.UnAuthorizedTokenException;
 import backend.wal.support.YamlPropertySourceFactory;
 
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 @PropertySource(
@@ -29,32 +32,34 @@ public final class JwtManagerAdapter implements JwtManagerPort {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtManagerAdapter.class);
 
-    private static final String JWT_CLAIM_NAME = "USER_ID";
+    private static final String JWT_CLAIM_USER_ID = "USER_ID";
+    private static final String JWT_CLAIM_ROLE = "ROLE";
 
     private final Key secretKey;
-    private final long accessTokenExpiresIn;
-    private final long refreshTokenExpiresIn;
+    private final long accessTokenExpiredIn;
+    private final long refreshTokenExpiredIn;
 
     public JwtManagerAdapter(
             @Value("${jwt.token.secret}") final String secretKey,
-            @Value("${jwt.token.expired-time.access}") final long accessTokenExpiresIn,
-            @Value("${jwt.token.expired-time.refresh}") final long refreshTokenExpiresIn
+            @Value("${jwt.token.expired-time.access}") final long accessTokenExpiredIn,
+            @Value("${jwt.token.expired-time.refresh}") final long refreshTokenExpiredIn
     ) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
-        this.accessTokenExpiresIn = accessTokenExpiresIn;
-        this.refreshTokenExpiresIn = refreshTokenExpiresIn;
+        this.accessTokenExpiredIn = accessTokenExpiredIn;
+        this.refreshTokenExpiredIn = refreshTokenExpiredIn;
     }
 
     @Override
-    public String createAccessToken(Long userId) {
+    public String createAccessToken(Long userId, String role) {
         Date now = new Date();
-        Date accessTokenExpiresIn = new Date(now.getTime() + this.accessTokenExpiresIn);
-
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(JWT_CLAIM_USER_ID, userId);
+        claims.put(JWT_CLAIM_ROLE, role);
         return Jwts.builder()
-                .claim(JWT_CLAIM_NAME, userId)
+                .addClaims(claims)
                 .setIssuedAt(now)
-                .setExpiration(accessTokenExpiresIn)
+                .setExpiration(new Date(now.getTime() + this.accessTokenExpiredIn))
                 .signWith(secretKey, SignatureAlgorithm.HS512)
                 .compact();
     }
@@ -62,14 +67,14 @@ public final class JwtManagerAdapter implements JwtManagerPort {
     @Override
     public CreateRefreshTokenResponseDto createRefreshToken(Long userId) {
         Date now = new Date();
-        Date refreshTokenExpiresIn = new Date(now.getTime() + this.refreshTokenExpiresIn);
+        Date expiredIn = new Date(now.getTime() + this.refreshTokenExpiredIn);
 
         String refreshToken = Jwts.builder()
                 .setIssuedAt(now)
-                .setExpiration(refreshTokenExpiresIn)
+                .setExpiration(expiredIn)
                 .signWith(secretKey, SignatureAlgorithm.HS512)
                 .compact();
-        return new CreateRefreshTokenResponseDto(userId, refreshToken, refreshTokenExpiresIn);
+        return new CreateRefreshTokenResponseDto(userId, refreshToken, expiredIn);
     }
 
     @Override
@@ -80,25 +85,28 @@ public final class JwtManagerAdapter implements JwtManagerPort {
                     .build()
                     .parseClaimsJws(token);
         } catch (SecurityException | MalformedJwtException | IllegalArgumentException | UnsupportedJwtException e) {
-            LOGGER.error("Invalid JWT Token", e);
+            LOGGER.error("Invalid JWT Token : {}", e.getMessage());
             throw UnAuthorizedTokenException.wrong(token);
         } catch (ExpiredJwtException e) {
-            LOGGER.error("Expired JWT Token", e);
+            LOGGER.error("Expired JWT Token : {}", e.getMessage());
             throw UnAuthorizedTokenException.expired(token);
         }
     }
 
     @Override
-    public Long getLoginUserIdFromAccessToken(String accessToken) {
+    public JwtPayloadInfo getLoginUserIdFromAccessToken(String accessToken) {
         Claims payload = Jwts.parserBuilder()
                 .setSigningKey(secretKey)
                 .build()
                 .parseClaimsJws(accessToken)
                 .getBody();
-        return payload.get(JWT_CLAIM_NAME, Long.class);
+        return new JwtPayloadInfo(
+                payload.get(JWT_CLAIM_USER_ID, Long.class),
+                payload.get(JWT_CLAIM_ROLE, String.class)
+        );
     }
 
-    public long getAccessTokenExpiresIn() {
-        return accessTokenExpiresIn;
+    public long getAccessTokenExpiredIn() {
+        return accessTokenExpiredIn;
     }
 }

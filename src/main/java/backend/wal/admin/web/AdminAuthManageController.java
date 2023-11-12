@@ -1,6 +1,7 @@
 package backend.wal.admin.web;
 
 import backend.wal.admin.application.port.in.AdminAuthUseCase;
+import backend.wal.admin.application.port.in.AdminLoginResponseDto;
 import backend.wal.admin.application.port.out.AdminJwtManagePort;
 import backend.wal.admin.application.port.out.AdminTokenResponseDto;
 import backend.wal.admin.web.dto.AdminLoginRequest;
@@ -38,8 +39,11 @@ public class AdminAuthManageController {
 
     @PostMapping("/login")
     public ResponseEntity<AdminLoginResponse> login(@Valid @RequestBody AdminLoginRequest request) {
-        Long adminId = adminAuthUseCase.login(request.toServiceDto());
-        AdminTokenResponseDto responseDto = adminJwtManagePort.createToken(adminId);
+        AdminLoginResponseDto loginResponse = adminAuthUseCase.login(request.toServiceDto());
+        AdminTokenResponseDto responseDto = adminJwtManagePort.createToken(
+                loginResponse.getUserId(),
+                loginResponse.getRole()
+        );
         return ResponseEntity.ok()
                 .header(AUTHORIZATION, withBearerToken(responseDto.getToken()))
                 .body(new AdminLoginResponse(responseDto.getExpiredIn()));

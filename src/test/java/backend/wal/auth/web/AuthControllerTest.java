@@ -6,6 +6,7 @@ import backend.wal.auth.application.port.in.LoginResponseDto;
 import backend.wal.auth.application.port.in.TokenResponseDto;
 import backend.wal.auth.application.provider.AuthServiceProvider;
 import backend.wal.auth.web.dto.LoginRequest;
+import backend.wal.support.Role;
 import backend.wal.support.utils.HttpHeaderUtils;
 import backend.wal.user.domain.aggregate.SocialType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 class AuthControllerTest {
+
+    private static final String USER_ROLE = Role.USER.name();
 
     private MockMvc mockMvc;
 
@@ -58,14 +61,14 @@ class AuthControllerTest {
                 .thenReturn(authUseCase);
 
         Long userId = 1L;
-        LoginResponseDto loginResponseDto = new LoginResponseDto(userId, "nickname", true);
+        LoginResponseDto loginResponseDto = new LoginResponseDto(userId, "nickname", USER_ROLE, true);
         when(authUseCase.login(any()))
                 .thenReturn(loginResponseDto);
 
         String accessToken = "access-token";
         String refreshToken = "refresh-token";
         TokenResponseDto tokenResponseDto = new TokenResponseDto(accessToken, refreshToken);
-        when(issueTokenUseCase.issueForNewUser(userId))
+        when(issueTokenUseCase.issueForNewUser(userId, USER_ROLE))
                 .thenReturn(tokenResponseDto);
 
         // when, then
@@ -89,14 +92,14 @@ class AuthControllerTest {
                 .thenReturn(authUseCase);
 
         Long userId = 1L;
-        LoginResponseDto loginResponseDto = new LoginResponseDto(userId, "nickname", false);
+        LoginResponseDto loginResponseDto = new LoginResponseDto(userId, "nickname", USER_ROLE, false);
         when(authUseCase.login(any()))
                 .thenReturn(loginResponseDto);
 
         String accessToken = "access-token";
         String refreshToken = "refresh-token";
         TokenResponseDto tokenResponseDto = new TokenResponseDto(accessToken, refreshToken);
-        when(issueTokenUseCase.issueForAlreadyUser(userId))
+        when(issueTokenUseCase.issueForAlreadyUser(userId, USER_ROLE))
                 .thenReturn(tokenResponseDto);
 
         // when, then
@@ -114,7 +117,7 @@ class AuthControllerTest {
         // given
         String refreshToken = "valid-refresh-token";
         String reissuedAccessToken = "reissued-access-token";
-        when(issueTokenUseCase.reissue(any()))
+        when(issueTokenUseCase.reissue(any(), any()))
                 .thenReturn(reissuedAccessToken);
 
         // when, then

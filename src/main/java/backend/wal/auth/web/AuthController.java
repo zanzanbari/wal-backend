@@ -39,14 +39,20 @@ public class AuthController {
         LoginResponse loginResponse = new LoginResponse(loginResponseDto.getNickname());
 
         if (loginResponseDto.isNewUser()) {
-            TokenResponseDto tokenResponseDto = issueTokenUseCase.issueForNewUser(loginResponseDto.getUserId());
+            TokenResponseDto tokenResponseDto = issueTokenUseCase.issueForNewUser(
+                    loginResponseDto.getUserId(),
+                    loginResponseDto.getRole()
+            );
             return ResponseEntity.status(CREATED)
                     .header(AUTHORIZATION, withBearerToken(tokenResponseDto.getAccessToken()))
                     .header(REFRESH_TOKEN, tokenResponseDto.getRefreshToken())
                     .body(loginResponse);
         }
 
-        TokenResponseDto tokenResponseDto = issueTokenUseCase.issueForAlreadyUser(loginResponseDto.getUserId());
+        TokenResponseDto tokenResponseDto = issueTokenUseCase.issueForAlreadyUser(
+                loginResponseDto.getUserId(),
+                loginResponseDto.getRole()
+        );
         return ResponseEntity.ok()
                 .header(AUTHORIZATION, withBearerToken(tokenResponseDto.getAccessToken()))
                 .header(REFRESH_TOKEN, tokenResponseDto.getRefreshToken())
@@ -55,7 +61,7 @@ public class AuthController {
 
     @PostMapping("/reissue")
     public ResponseEntity<Void> reissue(@ExtractValidRefreshToken String refreshToken) {
-        String reissuedAccessToken = issueTokenUseCase.reissue(refreshToken);
+        String reissuedAccessToken = issueTokenUseCase.reissue(refreshToken, "USER");
         return ResponseEntity.ok()
                 .header(AUTHORIZATION, withBearerToken(reissuedAccessToken))
                 .build();

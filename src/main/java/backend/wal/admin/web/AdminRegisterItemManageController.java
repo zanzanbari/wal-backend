@@ -2,6 +2,9 @@ package backend.wal.admin.web;
 
 import backend.wal.admin.application.port.out.RegisterItemManagePort;
 import backend.wal.admin.web.dto.RetrieveCensorItemRequest;
+import backend.wal.support.Role;
+import backend.wal.support.annotation.Authentication;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +24,7 @@ public class AdminRegisterItemManageController {
         this.registerItemManagePort = registerItemManagePort;
     }
 
+    @Authentication(Role.ADMIN)
     @PostMapping("/register")
     public ResponseEntity<Void> register(@Valid @RequestBody RetrieveCensorItemRequest request) {
         registerItemManagePort.registerItemsBy(request.getCategoryType());

@@ -9,6 +9,9 @@ public class RetrieveCensorItemRequest {
     @NotNull
     private WalCategoryType categoryType;
 
+    private RetrieveCensorItemRequest() {
+    }
+
     public RetrieveCensorItemRequest(WalCategoryType categoryType) {
         this.categoryType = categoryType;
     }

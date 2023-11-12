@@ -4,5 +4,5 @@ public interface AdminAuthUseCase {
 
     void create(AdminLoginRequestDto requestDto);
 
-    Long login(AdminLoginRequestDto requestDto);
+    AdminLoginResponseDto login(AdminLoginRequestDto requestDto);
 }

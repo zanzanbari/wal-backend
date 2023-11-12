@@ -1,13 +1,11 @@
 package backend.wal.user.domain.aggregate.entity;
 
+import backend.wal.support.Role;
 import backend.wal.user.application.port.in.CreateUserDto;
 import backend.wal.user.domain.aggregate.SocialInfo;
-import backend.wal.user.domain.aggregate.SocialType;
-import backend.wal.user.domain.aggregate.UserRole;
 import backend.wal.user.domain.aggregate.UserStatus;
 
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -19,7 +17,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
 @EntityListeners(AuditingEntityListener.class)
 public class User {
 
@@ -39,16 +36,16 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
-    private UserRole userRole;
+    private Role role;
 
     @CreatedDate
     private LocalDateTime createdAt;
 
-    private User(final String nickname, final SocialInfo socialInfo, final UserStatus status, final UserRole userRole) {
+    private User(final String nickname, final SocialInfo socialInfo, final UserStatus status, final Role role) {
         this.nickname = nickname;
         this.socialInfo = socialInfo;
         this.status = status;
-        this.userRole = userRole;
+        this.role = role;
     }
 
     public static User createGeneral(final CreateUserDto createUserDto) {
@@ -56,7 +53,7 @@ public class User {
                 createUserDto.getNickname(),
                 SocialInfo.of(createUserDto.getSocialId(), createUserDto.getSocialType()),
                 UserStatus.ACTIVE,
-                UserRole.USER
+                Role.USER
         );
     }
 
@@ -70,5 +67,17 @@ public class User {
 
     public void resign() {
         this.status = UserStatus.DELETED;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getRole() {
+        return role.name();
     }
 }
