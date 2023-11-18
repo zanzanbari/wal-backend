@@ -1,6 +1,7 @@
 package backend.wal.admin.web;
 
 import backend.wal.admin.application.port.out.RegisterItemManagePort;
+import backend.wal.admin.web.dto.RegisterAllItemRequest;
 import backend.wal.admin.web.dto.RetrieveCensorItemRequest;
 import backend.wal.support.Role;
 import backend.wal.support.annotation.Authentication;
@@ -28,6 +29,13 @@ public class AdminRegisterItemManageController {
     @PostMapping("/register")
     public ResponseEntity<Void> register(@Valid @RequestBody RetrieveCensorItemRequest request) {
         registerItemManagePort.registerItemsBy(request.getCategoryType());
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @Authentication(Role.ADMIN)
+    @PostMapping("/register/all")
+    public ResponseEntity<Void> registerAll(@Valid @RequestBody RegisterAllItemRequest request) {
+        registerItemManagePort.registerAllItems(request.getContents(), request.getCategoryType());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

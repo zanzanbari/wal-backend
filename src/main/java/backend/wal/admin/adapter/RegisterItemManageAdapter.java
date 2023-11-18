@@ -2,7 +2,7 @@ package backend.wal.admin.adapter;
 
 import backend.wal.admin.application.port.out.RegisterItemManagePort;
 import backend.wal.wal.censorWal.application.port.in.RetrieveCensorItemUseCase;
-import backend.wal.wal.censorWal.application.port.in.dto.ApprovedCensorItemResponseDto;
+import backend.wal.wal.censorWal.application.port.in.dto.ItemToRegisterDto;
 import backend.wal.wal.censorWal.application.port.in.dto.RetrieveCensorItemRequestDto;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.item.application.port.in.CountItemUseCase;
@@ -10,6 +10,8 @@ import backend.wal.wal.item.application.port.in.RegisterItemUseCase;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class RegisterItemManageAdapter implements RegisterItemManagePort {
@@ -28,11 +30,22 @@ public class RegisterItemManageAdapter implements RegisterItemManagePort {
 
     @Override
     public void registerItemsBy(WalCategoryType categoryType) {
-        List<ApprovedCensorItemResponseDto> approvedCensorItemInfo = retrieveCensorItemUseCase
+        List<ItemToRegisterDto> approvedCensorItemInfo = retrieveCensorItemUseCase
                 .retrieveApprovedCensorItemInfo(new RetrieveCensorItemRequestDto(categoryType));
         Long countOfCategoryType = countItemUseCase.countAllCorrespondItemsByCategoryType(categoryType);
         RegisterItemRequestDtoConvertor registerItemRequestDtoConvertor =
                 new RegisterItemRequestDtoConvertor(approvedCensorItemInfo, countOfCategoryType);
+        registerItemUseCase.registerNewItems(registerItemRequestDtoConvertor.convert(), categoryType);
+    }
+
+    @Override
+    public void registerAllItems(Set<String> contents, WalCategoryType categoryType) {
+        List<ItemToRegisterDto> itemToRegisterInfo = contents.stream()
+                .map(content -> new ItemToRegisterDto(categoryType, content, ""))
+                .collect(Collectors.toList());
+        Long countOfCategoryType = countItemUseCase.countAllCorrespondItemsByCategoryType(categoryType);
+        RegisterItemRequestDtoConvertor registerItemRequestDtoConvertor =
+                new RegisterItemRequestDtoConvertor(itemToRegisterInfo, countOfCategoryType);
         registerItemUseCase.registerNewItems(registerItemRequestDtoConvertor.convert(), categoryType);
     }
 }

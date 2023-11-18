@@ -22,7 +22,7 @@ public class Admin {
     @Column(nullable = false, length = 50)
     private String email;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 500)
     private String password;
 
     @Enumerated(EnumType.STRING)
