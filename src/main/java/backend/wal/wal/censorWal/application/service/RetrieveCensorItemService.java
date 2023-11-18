@@ -2,7 +2,7 @@ package backend.wal.wal.censorWal.application.service;
 
 import backend.wal.support.annotation.AppService;
 import backend.wal.wal.censorWal.application.port.in.RetrieveCensorItemUseCase;
-import backend.wal.wal.censorWal.application.port.in.dto.ApprovedCensorItemResponseDto;
+import backend.wal.wal.censorWal.application.port.in.dto.ItemToRegisterDto;
 import backend.wal.wal.censorWal.application.port.in.dto.RetrieveCensorItemRequestDto;
 import backend.wal.wal.censorWal.application.port.in.dto.UncheckedCensorItemResponseDto;
 import backend.wal.wal.censorWal.domain.repository.CensorItemRepository;
@@ -39,12 +39,12 @@ public class RetrieveCensorItemService implements RetrieveCensorItemUseCase {
     }
 
     @Override
-    public List<ApprovedCensorItemResponseDto> retrieveApprovedCensorItemInfo(
+    public List<ItemToRegisterDto> retrieveApprovedCensorItemInfo(
             RetrieveCensorItemRequestDto requestDto) {
         return censorItemRepository
                 .findAllByCategoryTypeAndCheckStatus(requestDto.getCategoryType(), APPROVED)
                 .stream()
-                .map(censorItem -> new ApprovedCensorItemResponseDto(
+                .map(censorItem -> new ItemToRegisterDto(
                         censorItem.getCategoryType(),
                         censorItem.getContents(),
                         censorItem.getImageUrl())

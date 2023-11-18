@@ -1,6 +1,6 @@
 package backend.wal.admin.adapter;
 
-import backend.wal.wal.censorWal.application.port.in.dto.ApprovedCensorItemResponseDto;
+import backend.wal.wal.censorWal.application.port.in.dto.ItemToRegisterDto;
 import backend.wal.wal.item.application.port.in.RegisterItemRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,10 +22,10 @@ class RegisterItemRequestDtoConvertorTest {
     @Test
     void convert() {
         // given
-        List<ApprovedCensorItemResponseDto> approvedCensorItemsInfo = List.of(
-                new ApprovedCensorItemResponseDto(COMEDY, "드립1", ""),
-                new ApprovedCensorItemResponseDto(COMEDY, "드립2", ""),
-                new ApprovedCensorItemResponseDto(COMEDY, "드립3", "")
+        List<ItemToRegisterDto> approvedCensorItemsInfo = List.of(
+                new ItemToRegisterDto(COMEDY, "드립1", ""),
+                new ItemToRegisterDto(COMEDY, "드립2", ""),
+                new ItemToRegisterDto(COMEDY, "드립3", "")
         );
         RegisterItemRequestDtoConvertor convertor =
                 new RegisterItemRequestDtoConvertor(approvedCensorItemsInfo, COUNT_OF_CATEGORY_TYPE);
@@ -45,7 +45,7 @@ class RegisterItemRequestDtoConvertorTest {
                 .collect(Collectors.toUnmodifiableList());
 
         List<String> expectContents = approvedCensorItemsInfo.stream()
-                .map(ApprovedCensorItemResponseDto::getContents)
+                .map(ItemToRegisterDto::getContents)
                 .collect(Collectors.toUnmodifiableList());
         List<String> actualContents = registerItemRequestInfo.stream()
                 .map(RegisterItemRequestDto::getContents)
