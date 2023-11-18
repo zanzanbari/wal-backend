@@ -2,13 +2,13 @@ package backend.wal.wal.censorWal.application.port.in.dto;
 
 import backend.wal.wal.common.domain.WalCategoryType;
 
-public class ApprovedCensorItemResponseDto {
+public class ItemToRegisterDto {
 
     private final WalCategoryType categoryType;
     private final String contents;
     private final String imageUrl;
 
-    public ApprovedCensorItemResponseDto(WalCategoryType categoryType, String contents, String imageUrl) {
+    public ItemToRegisterDto(WalCategoryType categoryType, String contents, String imageUrl) {
         this.categoryType = categoryType;
         this.contents = contents;
         this.imageUrl = imageUrl;
