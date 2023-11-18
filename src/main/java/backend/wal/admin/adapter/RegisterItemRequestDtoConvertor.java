@@ -1,6 +1,6 @@
 package backend.wal.admin.adapter;
 
-import backend.wal.wal.censorWal.application.port.in.dto.ApprovedCensorItemResponseDto;
+import backend.wal.wal.censorWal.application.port.in.dto.ItemToRegisterDto;
 import backend.wal.wal.item.application.port.in.RegisterItemRequestDto;
 
 import java.util.ArrayList;
@@ -8,10 +8,10 @@ import java.util.List;
 
 public class RegisterItemRequestDtoConvertor {
 
-    private final List<ApprovedCensorItemResponseDto> approvedCensorItemInfo;
+    private final List<ItemToRegisterDto> approvedCensorItemInfo;
     private final double countOfCategoryType;
 
-    public RegisterItemRequestDtoConvertor(List<ApprovedCensorItemResponseDto> approvedCensorItemInfo,
+    public RegisterItemRequestDtoConvertor(List<ItemToRegisterDto> approvedCensorItemInfo,
                                            double countOfCategoryType) {
         this.approvedCensorItemInfo = approvedCensorItemInfo;
         this.countOfCategoryType = countOfCategoryType;
@@ -21,7 +21,7 @@ public class RegisterItemRequestDtoConvertor {
         List<RegisterItemRequestDto> requestDtos = new ArrayList<>();
 
         double categoryItemNumber = calculateStartCategoryItemNumber();
-        for (ApprovedCensorItemResponseDto responseDto : approvedCensorItemInfo) {
+        for (ItemToRegisterDto responseDto : approvedCensorItemInfo) {
             RegisterItemRequestDto requestDto = new RegisterItemRequestDto(
                     responseDto.getContents(),
                     responseDto.getImageUrl(),
