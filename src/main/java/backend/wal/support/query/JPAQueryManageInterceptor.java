@@ -25,7 +25,7 @@ public class JPAQueryManageInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        JPAQueryInspector.QueryInspectResult queryInspectResult = jpaQueryInspector.inspectResult();
+        QueryInspectResult queryInspectResult = jpaQueryInspector.inspectResult();
         LOGGER.info("METHOD: [{}], URI: {}, QUERY_COUNT: {}, QUERY_EXECUTION_TIME: {} ms",
                 request.getMethod(),
                 request.getRequestURI(),
