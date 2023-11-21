@@ -1,6 +1,7 @@
 package backend.wal.support.query;
 
 import org.hibernate.resource.jdbc.spi.StatementInspector;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -11,12 +12,14 @@ import java.util.ArrayList;
 public class JPAQueryInspector implements StatementInspector {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JPAQueryInspector.class);
-    private static final int MAX_QUERY_COUNT = 10;
 
     private static final ThreadLocal<QueryManager> queryManagers = new ThreadLocal<>();
 
     void start() {
-        queryManagers.set(new QueryManager(new ArrayList<>()));
+        queryManagers.set(new QueryManager(
+                new ArrayList<>(),
+                System.currentTimeMillis()
+        ));
     }
 
     void finish() {
@@ -25,7 +28,7 @@ public class JPAQueryInspector implements StatementInspector {
 
     @Override
     public String inspect(String sql) {
-        LOGGER.info("sql: {}", sql);
+        LOGGER.info("🚀sql: {}", sql);
         QueryManager queryManager = queryManagers.get();
         if (queryManager != null) {
             queryManager.addQuery(sql);
@@ -35,32 +38,22 @@ public class JPAQueryInspector implements StatementInspector {
 
     public QueryInspectResult inspectResult() {
         QueryManager queryManager = queryManagers.get();
-        int queryCount = queryManager.getQueryCount();
-        if (queryManager.hasDuplicatedQuery()) {
-            LOGGER.warn("중복된 쿼리가 있습니다");
-        }
-        if (queryCount > MAX_QUERY_COUNT) {
-            LOGGER.warn("쿼리가 10번 이상 실행되었습니다");
-        }
-        return new QueryInspectResult(queryCount, queryManager.calculateDuration(System.currentTimeMillis()));
+        long queryDurationTime = queryManager.calculateDuration(System.currentTimeMillis());
+        checkQueryCountIsOverThanMaxCount(queryManager);
+        return new QueryInspectResult(queryManager.getQueryCount(), queryDurationTime);
     }
 
-    static class QueryInspectResult {
-
-        private final int count;
-        private final long time;
-
-        public QueryInspectResult(int count, long time) {
-            this.count = count;
-            this.time = time;
+    private void checkQueryCountIsOverThanMaxCount(@NotNull QueryManager queryManager) {
+        if (queryManager.isOverThanMaxQueryCount()) {
+            LOGGER.warn("🚨쿼리가 10번 이상 실행되었습니다");
+            checkIsSusceptibleToNPlusOne(queryManager);
         }
+    }
 
-        public int getCount() {
-            return count;
-        }
-
-        public long getTime() {
-            return time;
+    private void checkIsSusceptibleToNPlusOne(@NotNull QueryManager queryManager) {
+        NPlusOneDetector nPlusOneDetector = new NPlusOneDetector(queryManager.extractIndexOfSelectQuery());
+        if (nPlusOneDetector.isSelectCountOverThanWarnCount() && nPlusOneDetector.detect()) {
+            LOGGER.warn("🚨select 문이 연속해서 5회 이상 실행되었습니다. N+1 문제일 수 있습니다");
         }
     }
 }
