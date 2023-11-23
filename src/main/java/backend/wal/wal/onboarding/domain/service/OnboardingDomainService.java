@@ -1,15 +1,14 @@
 package backend.wal.wal.onboarding.domain.service;
 
+import backend.wal.support.annotation.DomainService;
+import backend.wal.wal.common.domain.WalCategoryType;
+import backend.wal.wal.common.domain.WalTimeType;
+import backend.wal.wal.onboarding.application.port.in.dto.InitOnboardInfoRequestDto;
 import backend.wal.wal.onboarding.application.port.in.dto.WalCategoryTypesResponseDto;
 import backend.wal.wal.onboarding.application.port.in.dto.WalTimeTypesResponseDto;
 import backend.wal.wal.onboarding.domain.aggregate.Onboarding;
 import backend.wal.wal.onboarding.domain.repository.OnboardingRepository;
 import backend.wal.wal.todaywal.domain.WalTimeTypes;
-import backend.wal.wal.common.domain.WalCategoryType;
-import backend.wal.wal.common.domain.WalTimeType;
-import backend.wal.support.annotation.DomainService;
-
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
@@ -22,13 +21,14 @@ public class OnboardingDomainService {
         this.onboardingRepository = onboardingRepository;
     }
 
-    @Transactional
-    public void register(Onboarding onboarding) {
-        OnboardingServiceUtils.validateAlreadyExistOnboardingByUserId(onboardingRepository, onboarding.getUserId());
+    public void register(InitOnboardInfoRequestDto requestDto, Long userId) {
+        OnboardingServiceUtils.validateAlreadyExistOnboardingByUserId(onboardingRepository, userId);
+        Onboarding onboarding = Onboarding.newInstance(userId);
+        onboarding.addCategories(requestDto.getCategoryTypes());
+        onboarding.addTimes(requestDto.getTimeTypes());
         onboardingRepository.save(onboarding);
     }
 
-    @Transactional
     public WalTimeTypesResponseDto updateTimeTypes(Set<WalTimeType> modifiedTimeTypes, Long userId) {
         Onboarding onboarding = OnboardingServiceUtils.findExistOnboardingByUserId(onboardingRepository, userId);
 
@@ -43,7 +43,6 @@ public class OnboardingDomainService {
         return new WalTimeTypesResponseDto(willCancelAfterNow.getValues(), willAddAfterNow.getValues());
     }
 
-    @Transactional
     public WalCategoryTypesResponseDto updateCategoryTypes(Set<WalCategoryType> modifiedCategoryTypes, Long userId) {
         Onboarding onboarding = OnboardingServiceUtils.findExistOnboardingByUserId(onboardingRepository, userId);
 

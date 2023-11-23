@@ -6,6 +6,8 @@ import backend.wal.wal.onboarding.application.port.out.WalSettingPort;
 import backend.wal.wal.onboarding.domain.service.OnboardingDomainService;
 import backend.wal.support.annotation.AppService;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @AppService
 public class RegisterOnboardingService implements RegisterOnboardingUseCase {
 
@@ -19,8 +21,9 @@ public class RegisterOnboardingService implements RegisterOnboardingUseCase {
     }
 
     @Override
+    @Transactional
     public void registerOnboardInfo(InitOnboardInfoRequestDto requestDto, Long userId) {
-        onboardingDomainService.register(requestDto.toOnboardingEntity(userId));
+        onboardingDomainService.register(requestDto, userId);
         walSettingPort.setWalInfo(requestDto.getTimeTypes(), requestDto.getCategoryTypes(), userId);
     }
 }
