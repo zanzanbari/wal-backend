@@ -10,12 +10,12 @@ import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    @Query("SELECT new backend.wal.wal.item.domain.repository.FirstItemsResult(i, c.categoryType) " +
-            "FROM Item i " +
-            "LEFT JOIN Category c ON i.category.id = c.id " +
+    @Query(
+            "SELECT i FROM Item i " +
+            "JOIN FETCH i.category c " +
             "WHERE i.categoryItemNumber = 1 AND c.categoryType IN (:categoryTypes)"
     )
-    List<FirstItemsResult> findFirstItemsByCategoryTypes(Iterable<WalCategoryType> categoryTypes);
+    List<Item> findFirstItemsByCategoryTypes(Iterable<WalCategoryType> categoryTypes);
 
     Long countAllByCategoryCategoryType(WalCategoryType categoryType);
 
