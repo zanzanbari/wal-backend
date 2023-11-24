@@ -4,7 +4,6 @@ import backend.wal.support.annotation.AppService;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.item.application.port.in.RetrieveItemUseCase;
 import backend.wal.wal.item.domain.aggregate.Item;
-import backend.wal.wal.item.domain.repository.FirstItemsResult;
 import backend.wal.wal.item.domain.repository.ItemRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +20,7 @@ public class RetrieveItemService implements RetrieveItemUseCase {
     }
 
     @Override
-    public List<FirstItemsResult> retrieveFirstByCategoryType(Iterable<WalCategoryType> categoryTypes) {
+    public List<Item> retrieveFirstByCategoryType(Iterable<WalCategoryType> categoryTypes) {
         return itemRepository.findFirstItemsByCategoryTypes(categoryTypes);
     }
 

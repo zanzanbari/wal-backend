@@ -4,7 +4,6 @@ import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.item.application.port.in.CountItemUseCase;
 import backend.wal.wal.item.application.port.in.RetrieveItemUseCase;
 import backend.wal.wal.item.domain.aggregate.Item;
-import backend.wal.wal.item.domain.repository.FirstItemsResult;
 import backend.wal.wal.nextwal.application.port.out.ItemPort;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +21,7 @@ public class ItemAdapter implements ItemPort {
     }
 
     @Override
-    public List<FirstItemsResult> retrieveFirstByCategoryType(Iterable<WalCategoryType> categoryTypes) {
+    public List<Item> retrieveFirstByCategoryType(Iterable<WalCategoryType> categoryTypes) {
         return retrieveItemUseCase.retrieveFirstByCategoryType(categoryTypes);
     }
 

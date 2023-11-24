@@ -26,13 +26,11 @@ public class NextWalSettingService implements NextWalSettingUseCase {
 
     @Override
     public NextWals setNextWals(Set<WalCategoryType> categoryTypes, Long userId) {
-        List<NextWal> nextWals = categoryTypes.stream()
-                .map(categoryType -> {
-                    Item firstItem = itemPort.retrieveFirstByCategoryType(categoryType);
-                    NextWal nextWal = NextWal.newInstance(userId, categoryType, firstItem);
-                    return nextWalRepository.save(nextWal);
-                })
+        List<NextWal> nextWals = itemPort.retrieveFirstByCategoryType(categoryTypes)
+                .stream()
+                .map(result -> NextWal.newInstance(userId, result.getCategoryType(), result))
                 .collect(Collectors.toList());
+        nextWalRepository.saveAll(nextWals);
         return new NextWals(nextWals);
     }
 
