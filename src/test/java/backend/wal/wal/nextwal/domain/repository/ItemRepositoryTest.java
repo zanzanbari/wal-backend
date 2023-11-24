@@ -2,7 +2,6 @@ package backend.wal.wal.nextwal.domain.repository;
 
 import backend.wal.wal.common.TestItemInitializer;
 import backend.wal.wal.item.domain.aggregate.Item;
-import backend.wal.wal.item.domain.repository.FirstItemsResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,15 +21,15 @@ class ItemRepositoryTest extends TestItemInitializer {
         setForItemRepositoryTest();
 
         // when
-        List<FirstItemsResult> firstItemsResult = itemRepository.findFirstItemsByCategoryTypes(Set.of(COMEDY, COMFORT, YELL, FUSS));
+        List<Item> items = itemRepository.findFirstItemsByCategoryTypes(Set.of(COMEDY, COMFORT, YELL, FUSS));
 
         // then
-        for (FirstItemsResult itemsResult : firstItemsResult) {
-            switch (itemsResult.getCategoryType()) {
-                case COMEDY: assertThat(itemsResult.getFirstItem()).isEqualTo(comedyItem1); break;
-                case FUSS: assertThat(itemsResult.getFirstItem()).isEqualTo(fussItem1); break;
-                case COMFORT: assertThat(itemsResult.getFirstItem()).isEqualTo(comfortItem1); break;
-                case YELL: assertThat(itemsResult.getFirstItem()).isEqualTo(yellItem1); break;
+        for (Item item : items) {
+            switch (item.getCategoryType()) {
+                case COMEDY: assertThat(item).isEqualTo(comedyItem1); break;
+                case FUSS: assertThat(item).isEqualTo(fussItem1); break;
+                case COMFORT: assertThat(item).isEqualTo(comfortItem1); break;
+                case YELL: assertThat(item).isEqualTo(yellItem1); break;
             }
         }
 
