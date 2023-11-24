@@ -4,8 +4,11 @@ import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.item.application.port.in.CountItemUseCase;
 import backend.wal.wal.item.application.port.in.RetrieveItemUseCase;
 import backend.wal.wal.item.domain.aggregate.Item;
+import backend.wal.wal.item.domain.repository.FirstItemsResult;
 import backend.wal.wal.nextwal.application.port.out.ItemPort;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class ItemAdapter implements ItemPort {
@@ -19,8 +22,8 @@ public class ItemAdapter implements ItemPort {
     }
 
     @Override
-    public Item retrieveFirstByCategoryType(WalCategoryType categoryType) {
-        return retrieveItemUseCase.retrieveFirstByCategoryType(categoryType);
+    public List<FirstItemsResult> retrieveFirstByCategoryType(Iterable<WalCategoryType> categoryTypes) {
+        return retrieveItemUseCase.retrieveFirstByCategoryType(categoryTypes);
     }
 
     @Override
