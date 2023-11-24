@@ -1,5 +1,6 @@
 package backend.wal.wal.item.domain.aggregate;
 
+import backend.wal.wal.common.domain.WalCategoryType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,10 @@ public class Item {
 
     public Long getId() {
         return id;
+    }
+
+    public WalCategoryType getCategoryType() {
+        return category.getCategoryType();
     }
 
     public String getContents() {
