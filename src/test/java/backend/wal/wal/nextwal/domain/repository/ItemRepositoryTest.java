@@ -2,13 +2,16 @@ package backend.wal.wal.nextwal.domain.repository;
 
 import backend.wal.wal.common.TestItemInitializer;
 import backend.wal.wal.item.domain.aggregate.Item;
-
+import backend.wal.wal.item.domain.repository.FirstItemsResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.Set;
+
 import static backend.wal.wal.common.domain.WalCategoryType.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class ItemRepositoryTest extends TestItemInitializer {
 
@@ -19,10 +22,18 @@ class ItemRepositoryTest extends TestItemInitializer {
         setForItemRepositoryTest();
 
         // when
-        Item firstComedyItem = itemRepository.findFirstByCategoryCategoryType(COMEDY);
+        List<FirstItemsResult> firstItemsResult = itemRepository.findFirstItemsByCategoryTypes(Set.of(COMEDY, COMFORT, YELL, FUSS));
 
         // then
-        assertThat(firstComedyItem).isEqualTo(comedyItem1);
+        for (FirstItemsResult itemsResult : firstItemsResult) {
+            switch (itemsResult.getCategoryType()) {
+                case COMEDY: assertThat(itemsResult.getFirstItem()).isEqualTo(comedyItem1); break;
+                case FUSS: assertThat(itemsResult.getFirstItem()).isEqualTo(fussItem1); break;
+                case COMFORT: assertThat(itemsResult.getFirstItem()).isEqualTo(comfortItem1); break;
+                case YELL: assertThat(itemsResult.getFirstItem()).isEqualTo(yellItem1); break;
+            }
+        }
+
     }
 
     @DisplayName("카테고리 타입을 받아 해당 카테고리 타입의 모든 아이템 개수를 가져온다")
