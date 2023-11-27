@@ -1,9 +1,9 @@
 package backend.wal.wal.nextwal.application.service;
 
 import backend.wal.wal.nextwal.application.port.in.GetNextWalUseCase;
+import backend.wal.wal.nextwal.application.port.out.NextWalPersistencePort;
 import backend.wal.wal.nextwal.domain.NextWals;
-import backend.wal.wal.nextwal.domain.aggregate.NextWal;
-import backend.wal.wal.nextwal.domain.repository.NextWalRepository;
+import backend.wal.wal.nextwal.domain.NextWal;
 import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
 import backend.wal.support.annotation.DomainService;
 
@@ -11,11 +11,11 @@ import backend.wal.support.annotation.DomainService;
 public class GetNextWalService implements GetNextWalUseCase {
 
     private final RandomRangeGenerator randomRangeGenerator;
-    private final NextWalRepository nextWalRepository;
+    private final NextWalPersistencePort nextWalPersistencePort;
 
-    public GetNextWalService(final RandomRangeGenerator randomRangeGenerator, final NextWalRepository nextWalRepository) {
+    public GetNextWalService(RandomRangeGenerator randomRangeGenerator, NextWalPersistencePort nextWalPersistencePort) {
         this.randomRangeGenerator = randomRangeGenerator;
-        this.nextWalRepository = nextWalRepository;
+        this.nextWalPersistencePort = nextWalPersistencePort;
     }
 
     @Override
@@ -25,6 +25,6 @@ public class GetNextWalService implements GetNextWalUseCase {
 
     @Override
     public NextWals getNextWalsByUserId(Long userId) {
-        return new NextWals(nextWalRepository.findNextWalsByUserId(userId));
+        return new NextWals(nextWalPersistencePort.findNextWalsByUserId(userId));
     }
 }
