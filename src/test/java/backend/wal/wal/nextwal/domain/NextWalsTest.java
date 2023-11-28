@@ -1,7 +1,8 @@
 package backend.wal.wal.nextwal.domain;
 
-import backend.wal.wal.item.domain.aggregate.Item;
-import backend.wal.wal.nextwal.domain.aggregate.NextWal;
+import backend.wal.wal.item.adapter.out.persistence.ItemEntity;
+import backend.wal.wal.item.domain.Category;
+import backend.wal.wal.item.domain.Item;
 import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,14 +20,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 class NextWalsTest {
 
     private static final Long USER_ID = 1L;
-    private static final Item COMEDY_ITEM = Item.testBuilder().categoryItemNumber(1).build();
-    private static final Item FUSS_ITEM = Item.testBuilder().categoryItemNumber(1).build();
-    private static final Item COMFORT_ITEM = Item.testBuilder().categoryItemNumber(1).build();
-    private static final Item YELL_ITEM = Item.testBuilder().categoryItemNumber(1).build();
-    private static final NextWal COMEDY_NEXT_WAL = NextWal.newInstance(USER_ID, COMEDY, COMEDY_ITEM);
-    private static final NextWal FUSS_NEXT_WAL = NextWal.newInstance(USER_ID, FUSS, FUSS_ITEM);
-    private static final NextWal COMFORT_NEXT_WAL = NextWal.newInstance(USER_ID, COMFORT, COMFORT_ITEM);
-    private static final NextWal YELL_NEXT_WAL = NextWal.newInstance(USER_ID, YELL, YELL_ITEM);
+    private static final Item COMEDY_ITEM = Item.of(ItemEntity.testBuilder().contents("").categoryItemNumber(1).build(), new Category(COMEDY));
+    private static final Item FUSS_ITEM = Item.of(ItemEntity.testBuilder().contents("").categoryItemNumber(1).build(), new Category(FUSS));
+    private static final Item COMFORT_ITEM = Item.of(ItemEntity.testBuilder().contents("").categoryItemNumber(1).build(), new Category(COMFORT));
+    private static final Item YELL_ITEM = Item.of(ItemEntity.testBuilder().contents("").categoryItemNumber(1).build(), new Category(YELL));
+    private static final NextWal COMEDY_NEXT_WAL = new NextWal(1L, USER_ID, COMEDY, COMEDY_ITEM);
+    private static final NextWal FUSS_NEXT_WAL = new NextWal(1L, USER_ID, FUSS, FUSS_ITEM);
+    private static final NextWal COMFORT_NEXT_WAL = new NextWal(1L, USER_ID, COMFORT, COMFORT_ITEM);
+    private static final NextWal YELL_NEXT_WAL = new NextWal(1L, USER_ID, YELL, YELL_ITEM);
 
     private NextWals nextWals;
 
