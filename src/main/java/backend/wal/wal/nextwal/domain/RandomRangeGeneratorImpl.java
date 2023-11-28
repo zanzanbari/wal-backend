@@ -1,4 +1,4 @@
-package backend.wal.wal.nextwal.domain.support;
+package backend.wal.wal.nextwal.domain;
 
 import org.springframework.stereotype.Component;
 

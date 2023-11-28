@@ -4,7 +4,7 @@ import backend.wal.wal.nextwal.application.port.in.GetNextWalUseCase;
 import backend.wal.wal.nextwal.application.port.out.NextWalPersistencePort;
 import backend.wal.wal.nextwal.domain.NextWals;
 import backend.wal.wal.nextwal.domain.NextWal;
-import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
+import backend.wal.wal.nextwal.domain.RandomRangeGenerator;
 import backend.wal.support.annotation.DomainService;
 
 @DomainService

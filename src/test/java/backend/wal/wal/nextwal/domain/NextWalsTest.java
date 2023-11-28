@@ -3,7 +3,6 @@ package backend.wal.wal.nextwal.domain;
 import backend.wal.wal.item.adapter.out.persistence.ItemEntity;
 import backend.wal.wal.item.domain.Category;
 import backend.wal.wal.item.domain.Item;
-import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

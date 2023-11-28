@@ -1,4 +1,4 @@
-package backend.wal.wal.nextwal.domain.support;
+package backend.wal.wal.nextwal.domain;
 
 public interface RandomRangeGenerator {
 

@@ -1,7 +1,5 @@
 package backend.wal.wal.nextwal.domain;
 
-import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
-
 import java.util.List;
 
 public class NextWals {
