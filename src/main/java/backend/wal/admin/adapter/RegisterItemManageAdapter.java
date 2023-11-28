@@ -32,7 +32,7 @@ public class RegisterItemManageAdapter implements RegisterItemManagePort {
     public void registerItemsBy(WalCategoryType categoryType) {
         List<ItemToRegisterDto> approvedCensorItemInfo = retrieveCensorItemUseCase
                 .retrieveApprovedCensorItemInfo(new RetrieveCensorItemRequestDto(categoryType));
-        Long countOfCategoryType = countItemUseCase.countAllCorrespondItemsByCategoryType(categoryType);
+        int countOfCategoryType = countItemUseCase.countAllCorrespondItemsByCategoryType(categoryType).intValue();
         RegisterItemRequestDtoConvertor registerItemRequestDtoConvertor =
                 new RegisterItemRequestDtoConvertor(approvedCensorItemInfo, countOfCategoryType);
         registerItemUseCase.registerNewItems(registerItemRequestDtoConvertor.convert(), categoryType);
@@ -43,7 +43,7 @@ public class RegisterItemManageAdapter implements RegisterItemManagePort {
         List<ItemToRegisterDto> itemToRegisterInfo = contents.stream()
                 .map(content -> new ItemToRegisterDto(categoryType, content, ""))
                 .collect(Collectors.toList());
-        Long countOfCategoryType = countItemUseCase.countAllCorrespondItemsByCategoryType(categoryType);
+        int countOfCategoryType = countItemUseCase.countAllCorrespondItemsByCategoryType(categoryType).intValue();
         RegisterItemRequestDtoConvertor registerItemRequestDtoConvertor =
                 new RegisterItemRequestDtoConvertor(itemToRegisterInfo, countOfCategoryType);
         registerItemUseCase.registerNewItems(registerItemRequestDtoConvertor.convert(), categoryType);

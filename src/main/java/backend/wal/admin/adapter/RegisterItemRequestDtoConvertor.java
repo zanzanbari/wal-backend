@@ -9,10 +9,10 @@ import java.util.List;
 public class RegisterItemRequestDtoConvertor {
 
     private final List<ItemToRegisterDto> approvedCensorItemInfo;
-    private final double countOfCategoryType;
+    private final int countOfCategoryType;
 
     public RegisterItemRequestDtoConvertor(List<ItemToRegisterDto> approvedCensorItemInfo,
-                                           double countOfCategoryType) {
+                                           int countOfCategoryType) {
         this.approvedCensorItemInfo = approvedCensorItemInfo;
         this.countOfCategoryType = countOfCategoryType;
     }
@@ -20,7 +20,7 @@ public class RegisterItemRequestDtoConvertor {
     public List<RegisterItemRequestDto> convert() {
         List<RegisterItemRequestDto> requestDtos = new ArrayList<>();
 
-        double categoryItemNumber = calculateStartCategoryItemNumber();
+        int categoryItemNumber = calculateStartCategoryItemNumber();
         for (ItemToRegisterDto responseDto : approvedCensorItemInfo) {
             RegisterItemRequestDto requestDto = new RegisterItemRequestDto(
                     responseDto.getContents(),
@@ -34,7 +34,7 @@ public class RegisterItemRequestDtoConvertor {
         return requestDtos;
     }
 
-    private double calculateStartCategoryItemNumber() {
+    private int calculateStartCategoryItemNumber() {
         return countOfCategoryType + 1;
     }
 }
