@@ -2,6 +2,7 @@ package backend.wal.wal.item.domain;
 
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.item.adapter.out.persistence.ItemEntity;
+import backend.wal.wal.nextwal.adapter.out.persistence.NextWalAndItem;
 
 public class Item {
 
@@ -26,6 +27,16 @@ public class Item {
                 itemEntity.getContents(),
                 itemEntity.getImageUrl(),
                 itemEntity.getCategoryItemNumber()
+        );
+    }
+
+    public static Item create(NextWalAndItem.ItemAttributes itemAttributes, WalCategoryType categoryType) {
+        return new Item(
+                itemAttributes.getId(),
+                new Category(categoryType),
+                itemAttributes.getContents(),
+                itemAttributes.getImageUrl(),
+                itemAttributes.getCategoryItemNumber()
         );
     }
 
