@@ -18,7 +18,7 @@ public class NextWal {
         this.item = item;
     }
 
-    public static NextWal from(NextWalEntity nextWalEntity, Item item) {
+    public static NextWal of(NextWalEntity nextWalEntity, Item item) {
         return new NextWal(
                 nextWalEntity.getId(),
                 nextWalEntity.getUserId(),

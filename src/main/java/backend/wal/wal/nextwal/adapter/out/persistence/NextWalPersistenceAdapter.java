@@ -59,7 +59,7 @@ public class NextWalPersistenceAdapter implements NextWalPersistencePort {
     public List<NextWal> findNextWalsByUserId(Long userId) {
         return nextWalRepository.findNextWalsByUserId(userId)
                 .stream()
-                .map(nextWalWithItem -> NextWal.from(
+                .map(nextWalWithItem -> NextWal.of(
                         nextWalWithItem.getNextWalEntity(),
                         Item.of(
                                 nextWalWithItem.getItemEntity(),
