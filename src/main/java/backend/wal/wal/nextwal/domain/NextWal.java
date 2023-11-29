@@ -3,6 +3,7 @@ package backend.wal.wal.nextwal.domain;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.item.domain.Item;
 import backend.wal.wal.nextwal.adapter.out.persistence.NextWalEntity;
+import backend.wal.wal.nextwal.adapter.out.persistence.NextWalAndItem;
 
 public class NextWal {
 
@@ -23,6 +24,17 @@ public class NextWal {
                 nextWalEntity.getId(),
                 nextWalEntity.getUserId(),
                 nextWalEntity.getCategoryType(),
+                item
+        );
+    }
+
+    public static NextWal create(NextWalAndItem.NextWalAttributes nextWalAttributes,
+                                 WalCategoryType categoryType,
+                                 Item item) {
+        return new NextWal(
+                nextWalAttributes.getId(),
+                nextWalAttributes.getUserId(),
+                categoryType,
                 item
         );
     }
