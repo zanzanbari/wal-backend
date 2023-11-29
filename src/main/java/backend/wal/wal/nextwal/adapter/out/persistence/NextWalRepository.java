@@ -16,11 +16,13 @@ public interface NextWalRepository extends JpaRepository<NextWalEntity, Long>, N
     @Query("UPDATE NextWalEntity nw SET nw.itemId = :nextItemId WHERE nw.id = :nextWalId")
     void updateNextWalItem(Long nextItemId, Long nextWalId);
 
-    @Query("SELECT new backend.wal.wal.nextwal.adapter.out.persistence.NextWalWithItem(nw, i) " +
+    @Query("SELECT new backend.wal.wal.nextwal.adapter.out.persistence" +
+            ".NextWalAndItem(nw.id, nw.userId, nw.categoryType, " +
+                "i.id, i.contents, i.imageUrl, i.categoryItemNumber) " +
             "FROM NextWalEntity nw " +
             "LEFT JOIN ItemEntity i ON nw.itemId = i.id " +
             "WHERE nw.userId = :userId")
-    List<NextWalWithItem> findNextWalsByUserId(Long userId);
+    List<NextWalAndItem> findNextWalsByUserId(Long userId);
 
     void deleteAllByUserId(Long userId);
 }
