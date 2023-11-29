@@ -1,28 +1,38 @@
-package backend.wal.wal.nextwal.domain.repository;
+package backend.wal.wal.item.adapter.out.persistence;
 
 import backend.wal.wal.common.TestItemInitializer;
-import backend.wal.wal.item.domain.aggregate.Item;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.Set;
+
 import static backend.wal.wal.common.domain.WalCategoryType.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static backend.wal.wal.common.domain.WalCategoryType.YELL;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ItemRepositoryTest extends TestItemInitializer {
 
     @DisplayName("주어진 카테고리 타입의 첫번째 아이템을 가져온다")
     @Test
-     void findFirstByCategoryType() {
+    void findFirstByCategoryType() {
         // given
         setForItemRepositoryTest();
 
         // when
-        Item firstComedyItem = itemRepository.findFirstByCategoryCategoryType(COMEDY);
+        List<ItemEntity> items = itemRepository.findFirstItemsByCategoryTypes(Set.of(COMEDY, COMFORT, YELL, FUSS));
 
         // then
-        assertThat(firstComedyItem).isEqualTo(comedyItem1);
+        for (ItemEntity item : items) {
+            switch (item.getCategoryType()) {
+                case COMEDY: assertThat(item).isEqualTo(comedyItem1); break;
+                case FUSS: assertThat(item).isEqualTo(fussItem1); break;
+                case COMFORT: assertThat(item).isEqualTo(comfortItem1); break;
+                case YELL: assertThat(item).isEqualTo(yellItem1); break;
+            }
+        }
+
     }
 
     @DisplayName("카테고리 타입을 받아 해당 카테고리 타입의 모든 아이템 개수를 가져온다")
@@ -54,10 +64,10 @@ class ItemRepositoryTest extends TestItemInitializer {
         setForItemRepositoryTest();
 
         // when
-        Item nextComedyItem = itemRepository.findByCategoryCategoryTypeAndCategoryItemNumber(COMEDY, 2);
-        Item fussComedyItem = itemRepository.findByCategoryCategoryTypeAndCategoryItemNumber(FUSS, 2);
-        Item comfortComedyItem = itemRepository.findByCategoryCategoryTypeAndCategoryItemNumber(COMFORT, 2);
-        Item yellComedyItem = itemRepository.findByCategoryCategoryTypeAndCategoryItemNumber(YELL, 2);
+        ItemEntity nextComedyItem = itemRepository.findByCategoryTypeAndCategoryItemNumber(COMEDY, 2);
+        ItemEntity fussComedyItem = itemRepository.findByCategoryTypeAndCategoryItemNumber(FUSS, 2);
+        ItemEntity comfortComedyItem = itemRepository.findByCategoryTypeAndCategoryItemNumber(COMFORT, 2);
+        ItemEntity yellComedyItem = itemRepository.findByCategoryTypeAndCategoryItemNumber(YELL, 2);
 
         // then
         assertAll(

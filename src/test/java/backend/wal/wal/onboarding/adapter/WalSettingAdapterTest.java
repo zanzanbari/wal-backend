@@ -1,14 +1,13 @@
-//package backend.wal.wal.service;
+//package backend.wal.wal.onboarding.adapter;
 //
 //import backend.wal.wal.common.domain.WalCategoryType;
 //import backend.wal.wal.common.domain.WalTimeType;
+//import backend.wal.wal.item.adapter.out.persistence.CategoryEntity;
+//import backend.wal.wal.item.adapter.out.persistence.CategoryRepository;
+//import backend.wal.wal.item.adapter.out.persistence.ItemEntity;
+//import backend.wal.wal.item.adapter.out.persistence.ItemRepository;
 //import backend.wal.wal.nextwal.domain.NextWals;
-//import backend.wal.wal.item.domain.aggregate.Category;
-//import backend.wal.wal.item.domain.aggregate.Item;
-//import backend.wal.wal.onboarding.adapter.WalSettingAdapter;
 //import backend.wal.wal.todaywal.domain.aggregate.TodayWal;
-//import backend.wal.wal.item.domain.repository.CategoryRepository;
-//import backend.wal.wal.item.domain.repository.ItemRepository;
 //import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
 //import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
@@ -76,15 +75,15 @@
 //    @MethodSource("provideTimeTypesAndExpectSize")
 //    void setTodayWals(Set<WalTimeType> timeTypes, int expectSize) {
 //        // given
-//        Category comedy = categoryRepository.findByCategoryType(COMEDY);
-//        Category fuss = categoryRepository.findByCategoryType(FUSS);
-//        Category comfort = categoryRepository.findByCategoryType(COMFORT);
-//        Category yell = categoryRepository.findByCategoryType(YELL);
+//        CategoryEntity comedy = categoryRepository.findByCategoryType(COMEDY);
+//        CategoryEntity fuss = categoryRepository.findByCategoryType(FUSS);
+//        CategoryEntity comfort = categoryRepository.findByCategoryType(COMFORT);
+//        CategoryEntity yell = categoryRepository.findByCategoryType(YELL);
 //
-//        Item comedyItem = Item.builder().category(comedy).contents("").imageUrl("").currentItemSize(0).build();
-//        Item fussItem = Item.builder().category(fuss).contents("").imageUrl("").currentItemSize(0).build();
-//        Item comfortItem = Item.builder().category(comfort).contents("").imageUrl("").currentItemSize(0).build();
-//        Item yellItem = Item.builder().category(yell).contents("").imageUrl("").currentItemSize(0).build();
+//        ItemEntity comedyItem = ItemEntity.testBuilder().category(comedy).contents("").imageUrl("").categoryItemNumber(1).build();
+//        ItemEntity fussItem = ItemEntity.testBuilder().category(fuss).contents("").imageUrl("").categoryItemNumber(1).build();
+//        ItemEntity comfortItem = ItemEntity.testBuilder().category(comfort).contents("").imageUrl("").categoryItemNumber(1).build();
+//        ItemEntity yellItem = ItemEntity.testBuilder().category(yell).contents("").imageUrl("").categoryItemNumber(1).build();
 //
 //        itemRepository.saveAll(List.of(comedyItem, fussItem, comfortItem, yellItem));
 //

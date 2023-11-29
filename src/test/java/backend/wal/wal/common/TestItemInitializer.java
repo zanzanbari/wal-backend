@@ -1,18 +1,16 @@
 package backend.wal.wal.common;
 
 import backend.wal.config.JpaRepositoryTestConfig;
-import backend.wal.wal.item.domain.aggregate.Category;
-import backend.wal.wal.item.domain.aggregate.Item;
-
-import backend.wal.wal.item.domain.repository.CategoryRepository;
-import backend.wal.wal.item.domain.repository.ItemRepository;
+import backend.wal.wal.item.adapter.out.persistence.CategoryEntity;
+import backend.wal.wal.item.adapter.out.persistence.CategoryRepository;
+import backend.wal.wal.item.adapter.out.persistence.ItemEntity;
+import backend.wal.wal.item.adapter.out.persistence.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 import static backend.wal.wal.common.domain.WalCategoryType.*;
-import static backend.wal.wal.common.domain.WalCategoryType.YELL;
 
 @JpaRepositoryTestConfig
 public abstract class TestItemInitializer {
@@ -23,22 +21,22 @@ public abstract class TestItemInitializer {
     @Autowired
     protected CategoryRepository categoryRepository;
 
-    protected Category comedy;
-    protected Category fuss;
-    protected Category comfort;
-    protected Category yell;
+    protected CategoryEntity comedy;
+    protected CategoryEntity fuss;
+    protected CategoryEntity comfort;
+    protected CategoryEntity yell;
 
-    protected Item comedyItem1;
-    protected Item comedyItem2;
+    protected ItemEntity comedyItem1;
+    protected ItemEntity comedyItem2;
 
-    protected Item fussItem1;
-    protected Item fussItem2;
+    protected ItemEntity fussItem1;
+    protected ItemEntity fussItem2;
 
-    protected Item comfortItem1;
-    protected Item comfortItem2;
+    protected ItemEntity comfortItem1;
+    protected ItemEntity comfortItem2;
 
-    protected Item yellItem1;
-    protected Item yellItem2;
+    protected ItemEntity yellItem1;
+    protected ItemEntity yellItem2;
 
     @BeforeEach
     void setUp() {
@@ -49,25 +47,17 @@ public abstract class TestItemInitializer {
     }
 
     protected void setForItemRepositoryTest() {
-        comedyItem1 = Item.testBuilder().category(comedy).contents("").imageUrl("").categoryItemNumber(1).build();
-        comedyItem2 = Item.testBuilder().category(comedy).contents("").imageUrl("").categoryItemNumber(2).build();
-        comedy.addItem(comedyItem1);
-        comedy.addItem(comedyItem2);
+        comedyItem1 = ItemEntity.testBuilder().category(comedy).contents("").imageUrl("").categoryItemNumber(1).build();
+        comedyItem2 = ItemEntity.testBuilder().category(comedy).contents("").imageUrl("").categoryItemNumber(2).build();
 
-        fussItem1 = Item.testBuilder().category(fuss).contents("").imageUrl("").categoryItemNumber(1).build();
-        fussItem2 = Item.testBuilder().category(fuss).contents("").imageUrl("").categoryItemNumber(2).build();
-        fuss.addItem(fussItem1);
-        fuss.addItem(fussItem2);
+        fussItem1 = ItemEntity.testBuilder().category(fuss).contents("").imageUrl("").categoryItemNumber(1).build();
+        fussItem2 = ItemEntity.testBuilder().category(fuss).contents("").imageUrl("").categoryItemNumber(2).build();
 
-        comfortItem1 = Item.testBuilder().category(comfort).contents("").imageUrl("").categoryItemNumber(1).build();
-        comfortItem2 = Item.testBuilder().category(comfort).contents("").imageUrl("").categoryItemNumber(2).build();
-        comfort.addItem(comfortItem1);
-        comfort.addItem(comfortItem2);
+        comfortItem1 = ItemEntity.testBuilder().category(comfort).contents("").imageUrl("").categoryItemNumber(1).build();
+        comfortItem2 = ItemEntity.testBuilder().category(comfort).contents("").imageUrl("").categoryItemNumber(2).build();
 
-        yellItem1 = Item.testBuilder().category(yell).contents("").imageUrl("").categoryItemNumber(1).build();
-        yellItem2 = Item.testBuilder().category(yell).contents("").imageUrl("").categoryItemNumber(2).build();
-        yell.addItem(yellItem1);
-        yell.addItem(yellItem2);
+        yellItem1 = ItemEntity.testBuilder().category(yell).contents("").imageUrl("").categoryItemNumber(1).build();
+        yellItem2 = ItemEntity.testBuilder().category(yell).contents("").imageUrl("").categoryItemNumber(2).build();
 
         itemRepository.save(comedyItem1);
         itemRepository.save(comedyItem2);
@@ -83,27 +73,43 @@ public abstract class TestItemInitializer {
     }
 
     protected void setForNexWalRepositoryTest() {
-        comedyItem1 = Item.testBuilder().category(comedy).contents("").imageUrl("").categoryItemNumber(1).build();
-        fussItem1 = Item.testBuilder().category(fuss).contents("").imageUrl("").categoryItemNumber(1).build();
-        comfortItem1 = Item.testBuilder().category(comfort).contents("").imageUrl("").categoryItemNumber(1).build();
-        yellItem1 = Item.testBuilder().category(yell).contents("").imageUrl("").categoryItemNumber(1).build();
+        comedyItem1 = ItemEntity.testBuilder().category(comedy).contents("").imageUrl("").categoryItemNumber(1).build();
+        fussItem1 = ItemEntity.testBuilder().category(fuss).contents("").imageUrl("").categoryItemNumber(1).build();
+        comfortItem1 = ItemEntity.testBuilder().category(comfort).contents("").imageUrl("").categoryItemNumber(1).build();
+        yellItem1 = ItemEntity.testBuilder().category(yell).contents("").imageUrl("").categoryItemNumber(1).build();
 
         itemRepository.saveAll(List.of(comedyItem1, fussItem1, comfortItem1, yellItem1));
     }
 
-    protected Item getComedyItem() {
+    protected ItemEntity getComedyItem() {
         return comedyItem1;
     }
 
-    protected Item getFussItem() {
+    protected ItemEntity getFussItem() {
         return fussItem1;
     }
 
-    protected Item getComfortItem() {
+    protected ItemEntity getComfortItem() {
         return comfortItem1;
     }
 
-    protected Item getYellItem() {
+    protected ItemEntity getYellItem() {
         return yellItem1;
+    }
+
+    protected Long getComedyItemId() {
+        return comedyItem1.getId();
+    }
+
+    protected Long getFussItemId() {
+        return fussItem1.getId();
+    }
+
+    protected Long getComfortItemId() {
+        return comfortItem1.getId();
+    }
+
+    protected Long getYellItemId() {
+        return yellItem1.getId();
     }
 }

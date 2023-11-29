@@ -19,13 +19,6 @@ public final class InitOnboardInfoRequestDto {
         this.timeTypes = timeTypes;
     }
 
-    public Onboarding toOnboardingEntity(Long userId) {
-        Onboarding onboarding = Onboarding.newInstance(userId);
-        onboarding.addCategories(categoryTypes);
-        onboarding.addTimes(timeTypes);
-        return onboarding;
-    }
-
     public String getNickname() {
         return nickname;
     }

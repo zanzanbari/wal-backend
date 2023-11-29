@@ -2,7 +2,7 @@ package backend.wal.subtitle;
 
 import backend.wal.support.annotation.Authentication;
 
-import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
+import backend.wal.wal.nextwal.domain.RandomRangeGenerator;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

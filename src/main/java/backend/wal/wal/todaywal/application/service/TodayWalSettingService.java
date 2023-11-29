@@ -1,7 +1,7 @@
 package backend.wal.wal.todaywal.application.service;
 
 import backend.wal.wal.nextwal.domain.NextWals;
-import backend.wal.wal.nextwal.domain.aggregate.NextWal;
+import backend.wal.wal.nextwal.domain.NextWal;
 import backend.wal.wal.todaywal.application.port.out.NextWalSettingPort;
 import backend.wal.wal.todaywal.application.port.in.TodayWalSettingUseCase;
 import backend.wal.wal.todaywal.domain.service.RegisterTodayWalService;
@@ -31,7 +31,7 @@ public class TodayWalSettingService implements TodayWalSettingUseCase {
         for (WalTimeType timeType : timeTypes) {
             NextWal randomNextWal = nextWalSettingPort.getRandomNextWal(nextWals);
             WalCategoryType categoryType = randomNextWal.getCategoryType();
-            registerTodayWalService.register(userId, timeType, categoryType, randomNextWal.getItemContent());
+            registerTodayWalService.register(userId, timeType, categoryType, randomNextWal.getItemContents());
             nextWalSettingPort.updateNextWal(nextWals, randomNextWal, categoryType);
         }
     }

@@ -16,7 +16,7 @@ import static backend.wal.wal.common.domain.WalCategoryType.COMEDY;
 
 class RegisterItemRequestDtoConvertorTest {
 
-    private static final double COUNT_OF_CATEGORY_TYPE = 100;
+    private static final int COUNT_OF_CATEGORY_TYPE = 100;
 
     @DisplayName("승인 처리된 검열 아이템 정보들을 아이템 등록을 위한 정보들로 변환시킨다")
     @Test
@@ -36,11 +36,10 @@ class RegisterItemRequestDtoConvertorTest {
         List<RegisterItemRequestDto> registerItemRequestInfo = convertor.convert();
 
         // then
-        List<Double> expectNumbers = IntStream.rangeClosed(start, end)
-                .asDoubleStream()
+        List<Integer> expectNumbers = IntStream.rangeClosed(start, end)
                 .boxed()
                 .collect(Collectors.toUnmodifiableList());
-        List<Double> actualNumbers = registerItemRequestInfo.stream()
+        List<Integer> actualNumbers = registerItemRequestInfo.stream()
                 .map(RegisterItemRequestDto::getCategoryItemNumber)
                 .collect(Collectors.toUnmodifiableList());
 

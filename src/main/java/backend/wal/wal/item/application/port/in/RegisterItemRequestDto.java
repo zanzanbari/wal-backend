@@ -4,9 +4,9 @@ public class RegisterItemRequestDto {
 
     private final String contents;
     private final String imageUrl;
-    private final double categoryItemNumber;
+    private final int categoryItemNumber;
 
-    public RegisterItemRequestDto(String contents, String imageUrl, double categoryItemNumber) {
+    public RegisterItemRequestDto(String contents, String imageUrl, int categoryItemNumber) {
         this.contents = contents;
         this.imageUrl = imageUrl;
         this.categoryItemNumber = categoryItemNumber;
@@ -20,7 +20,7 @@ public class RegisterItemRequestDto {
         return imageUrl;
     }
 
-    public double getCategoryItemNumber() {
+    public int getCategoryItemNumber() {
         return categoryItemNumber;
     }
 }

@@ -1,8 +1,5 @@
 package backend.wal.wal.nextwal.domain;
 
-import backend.wal.wal.nextwal.domain.aggregate.NextWal;
-import backend.wal.wal.nextwal.domain.support.RandomRangeGenerator;
-
 import java.util.List;
 
 public class NextWals {
@@ -26,15 +23,19 @@ public class NextWals {
         values.set(randomIndex, updatedNextWal);
     }
 
-    public double calculateNextItemId(NextWal nextWal, Long countOfCorrespondCategoryType) {
+    public int calculateNextItemId(NextWal nextWal, Long countOfCorrespondCategoryType) {
         double expectNextItemNumberOfCategoryType = nextWal.getCurrentCategoryItemNumber() + ONE;
         double actualNextItemNumberOfCategoryType = expectNextItemNumberOfCategoryType % countOfCorrespondCategoryType;
         if (countOfCorrespondCategoryType == ONE) {
-            return expectNextItemNumberOfCategoryType - ONE;
+            return (int) expectNextItemNumberOfCategoryType - ONE;
         }
         if (actualNextItemNumberOfCategoryType == ZERO) {
-            return expectNextItemNumberOfCategoryType;
+            return (int) expectNextItemNumberOfCategoryType;
         }
-        return actualNextItemNumberOfCategoryType;
+        return (int) actualNextItemNumberOfCategoryType;
+    }
+
+    public NextWal getCurrentNextWal() {
+        return values.get(randomIndex);
     }
 }

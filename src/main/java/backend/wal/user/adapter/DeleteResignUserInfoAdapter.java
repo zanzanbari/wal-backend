@@ -5,7 +5,7 @@ import backend.wal.notification.domain.repository.FcmTokenRepository;
 import backend.wal.reservation.domain.repository.ReservationRepository;
 import backend.wal.reservation.domain.repository.ScheduledMessageRepository;
 import backend.wal.user.application.port.out.DeleteResignUserInfoPort;
-import backend.wal.wal.nextwal.domain.repository.NextWalRepository;
+import backend.wal.wal.nextwal.adapter.out.persistence.NextWalRepository;
 import backend.wal.wal.onboarding.domain.repository.OnboardingRepository;
 import backend.wal.wal.todaywal.domain.repository.TodayWalRepository;
 
