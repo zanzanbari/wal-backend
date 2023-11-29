@@ -3,7 +3,7 @@ package backend.wal.wal.onboarding.adapter;
 import backend.wal.wal.onboarding.application.port.out.WalSettingPort;
 import backend.wal.wal.todaywal.application.port.in.TodayWalSettingUseCase;
 import backend.wal.wal.todaywal.application.port.in.UpdateTodayWalUseCase;
-import backend.wal.wal.nextwal.application.port.in.GetNextWalUseCase;
+import backend.wal.wal.nextwal.application.port.in.RetrieveNextWalUseCase;
 import backend.wal.wal.nextwal.application.port.in.NextWalSettingUseCase;
 import backend.wal.wal.common.domain.WalCategoryType;
 import backend.wal.wal.common.domain.WalTimeType;
@@ -18,16 +18,16 @@ public final class WalSettingAdapter implements WalSettingPort {
     private final TodayWalSettingUseCase todayWalSettingUseCase;
     private final UpdateTodayWalUseCase updateTodayWalUseCase;
     private final NextWalSettingUseCase nextWalSettingUseCase;
-    private final GetNextWalUseCase getNextWalUseCase;
+    private final RetrieveNextWalUseCase retrieveNextWalUseCase;
 
     public WalSettingAdapter(final TodayWalSettingUseCase todayWalSettingUseCase,
                              final UpdateTodayWalUseCase updateTodayWalUseCase,
                              final NextWalSettingUseCase nextWalSettingUseCase,
-                             final GetNextWalUseCase getNextWalUseCase) {
+                             final RetrieveNextWalUseCase retrieveNextWalUseCase) {
         this.todayWalSettingUseCase = todayWalSettingUseCase;
         this.updateTodayWalUseCase = updateTodayWalUseCase;
         this.nextWalSettingUseCase = nextWalSettingUseCase;
-        this.getNextWalUseCase = getNextWalUseCase;
+        this.retrieveNextWalUseCase = retrieveNextWalUseCase;
     }
 
     @Override
@@ -37,7 +37,7 @@ public final class WalSettingAdapter implements WalSettingPort {
 
     @Override
     public void updateTodayWalByAddTimeTypes(Set<WalTimeType> willAddAfterNow, Long userId) {
-        todayWalSettingUseCase.setTodayWals(willAddAfterNow, userId, getNextWalUseCase.getNextWalsByUserId(userId));
+        todayWalSettingUseCase.setTodayWals(willAddAfterNow, userId, retrieveNextWalUseCase.getNextWalsByUserId(userId));
     }
 
     @Override
