@@ -1,10 +1,9 @@
 package backend.wal.wal.nextwal.adapter.out.persistence;
 
-import backend.wal.wal.common.domain.WalCategoryType;
-import backend.wal.wal.item.domain.Category;
 import backend.wal.wal.nextwal.application.port.out.NextWalPersistencePort;
-import backend.wal.wal.item.domain.Item;
 import backend.wal.wal.nextwal.domain.NextWal;
+import backend.wal.wal.item.domain.Item;
+import backend.wal.wal.common.domain.WalCategoryType;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -59,13 +58,14 @@ public class NextWalPersistenceAdapter implements NextWalPersistencePort {
     public List<NextWal> findNextWalsByUserId(Long userId) {
         return nextWalRepository.findNextWalsByUserId(userId)
                 .stream()
-                .map(nextWalWithItem -> NextWal.of(
-                        nextWalWithItem.getNextWalEntity(),
-                        Item.of(
-                                nextWalWithItem.getItemEntity(),
-                                new Category(nextWalWithItem.getNextWalEntity().getCategoryType())
-                        ))
-                )
+                .map(nextWalAndItem -> NextWal.create(
+                        nextWalAndItem.getNextWalMapper(),
+                        nextWalAndItem.getCategoryType(),
+                        Item.create(
+                                nextWalAndItem.getItemMapper(),
+                                nextWalAndItem.getCategoryType()
+                        )
+                ))
                 .collect(Collectors.toList());
     }
 }

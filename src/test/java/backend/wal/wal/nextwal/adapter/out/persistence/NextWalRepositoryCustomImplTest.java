@@ -1,8 +1,6 @@
 package backend.wal.wal.nextwal.adapter.out.persistence;
 
-import backend.wal.config.JpaRepositoryTestConfig;
 import backend.wal.wal.common.TestItemInitializer;
-import backend.wal.wal.item.adapter.out.persistence.ItemEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +33,15 @@ class NextWalRepositoryCustomImplTest extends TestItemInitializer {
         ));
 
         // then
-        List<NextWalWithItem> nextWalWithItems = nextWalRepository.findNextWalsByUserId(USER_ID);
-        for (NextWalWithItem nextWalWithItem : nextWalWithItems) {
-            NextWalEntity nextWalEntity = nextWalWithItem.getNextWalEntity();
-            ItemEntity itemEntity = nextWalWithItem.getItemEntity();
-            assertThat(nextWalEntity.getItemId()).isEqualTo(itemEntity.getId());
-            assertThat(nextWalEntity.getCategoryType()).isEqualTo(itemEntity.getCategoryType());
+        List<NextWalAndItem> nextWalAndItems = nextWalRepository.findNextWalsByUserId(USER_ID);
+        for (NextWalAndItem nextWalAndItem : nextWalAndItems) {
+            NextWalAndItem.ItemAttributes itemAttributes = nextWalAndItem.getItemMapper();
+            switch (nextWalAndItem.getCategoryType()) {
+                case COMEDY: assertThat(itemAttributes.getId()).isEqualTo(getComedyItemId());
+                case FUSS: assertThat(itemAttributes.getId()).isEqualTo(getFussItemId());
+                case COMFORT: assertThat(itemAttributes.getId()).isEqualTo(getComfortItemId());
+                case YELL: assertThat(itemAttributes.getId()).isEqualTo(getYellItemId());
+            }
         }
     }
 }
