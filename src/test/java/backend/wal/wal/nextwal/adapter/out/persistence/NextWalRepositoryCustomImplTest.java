@@ -24,6 +24,17 @@ class NextWalRepositoryCustomImplTest extends TestItemInitializer {
         // given
         setForNexWalRepositoryTest();
 
+        List<NextWalEntity> all = nextWalRepository.findAll();
+        System.out.println("size : " + all.size());
+        for (NextWalEntity nextWalEntity : all) {
+            System.out.println("=============================");
+            System.out.println(nextWalEntity.getId());
+            System.out.println(nextWalEntity.getUserId());
+            System.out.println(nextWalEntity.getCategoryType());
+            System.out.println(nextWalEntity.getItemId());
+            System.out.println("=============================");
+        }
+
         // when
         nextWalRepository.saveAllInBatch(List.of(
                 new NextWalEntity(USER_ID, COMEDY, getComedyItemId()),
@@ -32,15 +43,25 @@ class NextWalRepositoryCustomImplTest extends TestItemInitializer {
                 new NextWalEntity(USER_ID, YELL, getYellItemId())
         ));
 
+        System.out.println("size : " + all.size());
+        for (NextWalEntity nextWalEntity : all) {
+            System.out.println("=============================");
+            System.out.println(nextWalEntity.getId());
+            System.out.println(nextWalEntity.getUserId());
+            System.out.println(nextWalEntity.getCategoryType());
+            System.out.println(nextWalEntity.getItemId());
+            System.out.println("=============================");
+        }
+
         // then
         List<NextWalAndItem> nextWalAndItems = nextWalRepository.findNextWalsByUserId(USER_ID);
         for (NextWalAndItem nextWalAndItem : nextWalAndItems) {
-            NextWalAndItem.ItemAttributes itemAttributes = nextWalAndItem.getItemMapper();
+            NextWalAndItem.ItemAttributes itemAttributes = nextWalAndItem.getItemAttributes();
             switch (nextWalAndItem.getCategoryType()) {
-                case COMEDY: assertThat(itemAttributes.getId()).isEqualTo(getComedyItemId());
-                case FUSS: assertThat(itemAttributes.getId()).isEqualTo(getFussItemId());
-                case COMFORT: assertThat(itemAttributes.getId()).isEqualTo(getComfortItemId());
-                case YELL: assertThat(itemAttributes.getId()).isEqualTo(getYellItemId());
+                case COMEDY: assertThat(itemAttributes.getId()).isEqualTo(getComedyItemId()); break;
+                case FUSS: assertThat(itemAttributes.getId()).isEqualTo(getFussItemId()); break;
+                case COMFORT: assertThat(itemAttributes.getId()).isEqualTo(getComfortItemId()); break;
+                case YELL: assertThat(itemAttributes.getId()).isEqualTo(getYellItemId()); break;
             }
         }
     }

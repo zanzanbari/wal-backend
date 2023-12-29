@@ -37,10 +37,10 @@ class NextWalRepositoryTest extends TestItemInitializer {
         for (NextWalAndItem nextWalAndItem : nextWalAndItems) {
             NextWalAndItem.ItemAttributes itemAttributes = nextWalAndItem.getItemAttributes();
             switch (nextWalAndItem.getCategoryType()) {
-                case COMEDY: assertThat(itemAttributes.getId()).isEqualTo(getComedyItemId());
-                case FUSS: assertThat(itemAttributes.getId()).isEqualTo(getFussItemId());
-                case COMFORT: assertThat(itemAttributes.getId()).isEqualTo(getComfortItemId());
-                case YELL: assertThat(itemAttributes.getId()).isEqualTo(getYellItemId());
+                case COMEDY: assertThat(itemAttributes.getId()).isEqualTo(getComedyItemId()); break;
+                case FUSS: assertThat(itemAttributes.getId()).isEqualTo(getFussItemId()); break;
+                case COMFORT: assertThat(itemAttributes.getId()).isEqualTo(getComfortItemId()); break;
+                case YELL: assertThat(itemAttributes.getId()).isEqualTo(getYellItemId()); break;
             }
         }
     }
