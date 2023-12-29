@@ -65,11 +65,11 @@ public class NextWalAndItem {
         }
     }
 
-    public NextWalAttributes getNextWalMapper() {
+    public NextWalAttributes getNextWalAttributes() {
         return nextWalAttributes;
     }
 
-    public ItemAttributes getItemMapper() {
+    public ItemAttributes getItemAttributes() {
         return itemAttributes;
     }
 

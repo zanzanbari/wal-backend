@@ -24,13 +24,13 @@ public class NextWals {
     }
 
     public int calculateNextItemId(NextWal nextWal, Long countOfCorrespondCategoryType) {
-        double expectNextItemNumberOfCategoryType = nextWal.getCurrentCategoryItemNumber() + ONE;
+        int expectNextItemNumberOfCategoryType = nextWal.getCurrentCategoryItemNumber() + ONE;
         double actualNextItemNumberOfCategoryType = expectNextItemNumberOfCategoryType % countOfCorrespondCategoryType;
         if (countOfCorrespondCategoryType == ONE) {
-            return (int) expectNextItemNumberOfCategoryType - ONE;
+            return expectNextItemNumberOfCategoryType - ONE;
         }
         if (actualNextItemNumberOfCategoryType == ZERO) {
-            return (int) expectNextItemNumberOfCategoryType;
+            return expectNextItemNumberOfCategoryType;
         }
         return (int) actualNextItemNumberOfCategoryType;
     }

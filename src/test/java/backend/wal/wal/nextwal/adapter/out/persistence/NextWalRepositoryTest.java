@@ -35,7 +35,7 @@ class NextWalRepositoryTest extends TestItemInitializer {
 
         // then
         for (NextWalAndItem nextWalAndItem : nextWalAndItems) {
-            NextWalAndItem.ItemAttributes itemAttributes = nextWalAndItem.getItemMapper();
+            NextWalAndItem.ItemAttributes itemAttributes = nextWalAndItem.getItemAttributes();
             switch (nextWalAndItem.getCategoryType()) {
                 case COMEDY: assertThat(itemAttributes.getId()).isEqualTo(getComedyItemId());
                 case FUSS: assertThat(itemAttributes.getId()).isEqualTo(getFussItemId());
