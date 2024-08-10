@@ -17,8 +17,8 @@
 <br>
 
 ## 문제 해결
-- [메모리 부족으로 인한 Hikari Pool thread starvation 문제 해결](https://shadow-lace-9f0.notion.site/Hikari-Pool-Thread-starvation-or-clock-leap-detected-b75a6317506a4c4f83146f5e44ca3a78?pvs=4)
-- [RabbitMQ 도입 실패와 ScheduledExecutorService 를 이용한 예약 알림 시스템 구현](https://shadow-lace-9f0.notion.site/ScheduledExecutorService-07ed4d06a40c439ea73a54b82139d32b?pvs=4)
+- [메모리 부족으로 인한 Hikari Pool thread starvation 문제 해결](https://cozo-dev.notion.site/Hikari-Pool-Thread-starvation-or-clock-leap-detected-b75a6317506a4c4f83146f5e44ca3a78?pvs=74)
+- [RabbitMQ 도입 실패와 ScheduledExecutorService 를 이용한 예약 알림 시스템 구현](https://cozo-dev.notion.site/ScheduledExecutorService-07ed4d06a40c439ea73a54b82139d32b?pvs=74)
 - [FCM 서버 에러 및 네트워크 불량으로 인한 전송 누락 문제 해결](https://shadow-lace-9f0.notion.site/FCM-bf8f5eddb6134531b477040567804c18?pvs=4)
 
 <br>
