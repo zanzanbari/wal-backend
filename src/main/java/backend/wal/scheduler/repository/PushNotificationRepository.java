@@ -13,7 +13,7 @@ public interface PushNotificationRepository extends JpaRepository<TodayWal, Long
     @Query("SELECT new backend.wal.scheduler.repository.ContentsAndFcmTokenResult(tw.message, ft.value)" +
             "FROM TodayWal tw " +
             "JOIN FETCH FcmToken ft " +
-            "ON tw.userId = ft.userId " +
+                "ON tw.userId = ft.userId " +
             "WHERE tw.timeType = :timeType " +
             "ORDER BY tw.userId")
     List<ContentsAndFcmTokenResult> findTodayWalMessageWithUserIdByTimeType(WalTimeType timeType);

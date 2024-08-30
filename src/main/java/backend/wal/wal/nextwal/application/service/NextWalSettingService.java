@@ -35,7 +35,7 @@ public class NextWalSettingService implements NextWalSettingUseCase {
         Long countOfCorrespondCategoryType = itemPersistencePort.countAllByCategoryCategoryType(categoryType);
         int nextItemId = nextWals.calculateNextItemId(randomNextWal, countOfCorrespondCategoryType);
         Item nextItem = itemPersistencePort.findByCategoryTypeAndCategoryItemNumber(categoryType, nextItemId);
-        nextWalPersistencePort.updateNextWalItem(randomNextWal.getId(), nextItem.getId());
+        nextWalPersistencePort.updateNextWalItem(randomNextWal.getId(), nextItem.getId()); // TODO: 2024/01/04 : 사실 얘 없이 한번에 update 해주는게 더 좋음
         randomNextWal.updateItem(nextItem);
         nextWals.updateNextWalInfo(randomNextWal);
     }

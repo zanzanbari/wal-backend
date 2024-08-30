@@ -12,7 +12,7 @@ public class Item {
     private final String imageUrl;
     private final Integer categoryItemNumber;
 
-    private Item(Long id, Category category, String contents, String imageUrl, Integer categoryItemNumber) {
+    public Item(Long id, Category category, String contents, String imageUrl, Integer categoryItemNumber) {
         this.id = id;
         this.category = category;
         this.contents = contents;
