@@ -53,7 +53,7 @@ class ReservationSchedulerManagerTest {
         ScheduledMessage scheduledMessage2 = new ScheduledMessage(2L, 2L, "Hi", now.plusHours(2));
         List<ScheduledMessage> scheduledMessages = List.of(scheduledMessage1, scheduledMessage2);
 
-        when(scheduledMessageRepository.findScheduledMessagesBySendDueDateAfter(any(LocalDateTime.class)))
+        when(scheduledMessageRepository.findScheduledMessagesBySendDueDateAfter())
                 .thenReturn(scheduledMessages);
 
         // when

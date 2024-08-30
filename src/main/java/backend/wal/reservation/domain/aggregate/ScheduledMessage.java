@@ -1,9 +1,6 @@
 package backend.wal.reservation.domain.aggregate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -23,6 +20,9 @@ public class ScheduledMessage {
 
     private LocalDateTime sendDueDate;
 
+    @Embedded
+    private Downtime downtime;
+
     protected ScheduledMessage() {
     }
 
@@ -34,12 +34,19 @@ public class ScheduledMessage {
         this.sendDueDate = sendDueDate;
     }
 
-    public static ScheduledMessage newInstance(final Reservation reservation) {
+    public ScheduledMessage(Long reservationId, Long userId, String message,
+                            LocalDateTime sendDueDate, Downtime downtime) {
+        this(reservationId, userId, message, sendDueDate);
+        this.downtime = downtime;
+    }
+
+    public static ScheduledMessage newInstance(final Reservation reservation, Downtime downtime) {
         return new ScheduledMessage(
                 reservation.getId(),
                 reservation.getUserId(),
                 reservation.getMessage(),
-                reservation.getSendDueDate()
+                reservation.getSendDueDate(),
+                downtime
         );
     }
 
